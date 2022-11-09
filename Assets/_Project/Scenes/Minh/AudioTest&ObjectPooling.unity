@@ -438,7 +438,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1309235178}
   - component: {fileID: 1309235177}
-  - component: {fileID: 1309235176}
   - component: {fileID: 1309235179}
   - component: {fileID: 1309235180}
   m_Layer: 0
@@ -448,14 +447,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1309235176
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309235175}
-  m_Enabled: 1
 --- !u!20 &1309235177
 Camera:
   m_ObjectHideFlags: 0
@@ -787,8 +778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - tag: Cube
-    prefab: {fileID: 6456451184510989428, guid: 40c7ff78a74b4ca4e867c44374117a82,
-      type: 3}
+    prefab: {fileID: 6456451184510989428, guid: 40c7ff78a74b4ca4e867c44374117a82, type: 3}
     amount: 500
 --- !u!4 &1604582845
 Transform:
