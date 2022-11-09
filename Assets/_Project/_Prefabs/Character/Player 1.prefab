@@ -141,7 +141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1644103618854822323}
   - component: {fileID: 1644103618854822322}
-  - component: {fileID: 1644103618854822321}
   - component: {fileID: 1644103618854822332}
   - component: {fileID: 1644103618854822333}
   m_Layer: 0
@@ -210,14 +209,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1644103618854822321
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644103618854822320}
-  m_Enabled: 1
 --- !u!114 &1644103618854822332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 500
   sensY: 500
+  getPlayerRotation: 1
   orientation: {fileID: 1644103619014005675}
 --- !u!1 &1644103619014005674
 GameObject:
@@ -382,6 +374,7 @@ MonoBehaviour:
   orientation: {fileID: 1644103619014005675}
   lastMoveDirection: {x: 0, y: 0, z: 0}
   state: 0
+  recieveInput: 1
 --- !u!1 &5813498095557866610
 GameObject:
   m_ObjectHideFlags: 0
