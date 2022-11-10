@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class EnemyMovement : MonoBehaviour
 {
-    
+    public abstract void Move();
 }

@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class EnemyBrain : MonoBehaviour
 {
-    [SerializeField] private State nullState;
+    [Header("States")]
     [SerializeField] private State initialState;
+    [SerializeField] private State nullState;
+
+    [Header("Modules")]
+    [SerializeField] private EnemyAttacker _attacker;
+    [SerializeField] private EnemyObserver _observer;
+    [SerializeField] private EnemyMovement _movement;
+
     
-    public EnemyAttacker Attacker;
-    public EnemyObserver Observer;
-    public EnemyMovement Movement;
+    public EnemyAttacker Attacker => _attacker;
+    public EnemyObserver Observer => _observer;
+    public EnemyMovement Movement => _movement;
 
     private State currentState;
     
-    public void Awake()
-    {
-        
-    }
-
     public void Start()
     {
         TransitionToState(initialState);
