@@ -10,7 +10,8 @@ public class ThrowGrenade : SkillSystem
 
     public override void Activate(GameObject parent)
     {
-        grenade.GrenadeThrow();
+        GameObject newGre = Instantiate(grenadePrefab);
+        newGre.GetComponent<Grenade>().GrenadeThrow();
     }
 
     public override void BeginCooldown(GameObject parent)
