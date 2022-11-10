@@ -9,10 +9,14 @@ public class Grenade : MonoBehaviour
     public float blastRadius = 5f;  //the radius of the explosion
     public float explosionForce = 1000f;    //the power of the explosion
     public GameObject explosionEfex;    //explosion effects
-
+    Rigidbody rb;
+    public float throwForce = 200f;
+    ThrowGrenade throwGrenade;
+    //  GameObject grenade = Instantiate(grenadePrefab, transform.position, transform.rotation);    //instantiate a grenade and store in a var
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();   //get rigidbody from grenade
         countDown = delay;
     }
 
@@ -25,6 +29,12 @@ public class Grenade : MonoBehaviour
         {
             Explosion();   
         }
+    }
+    public void GrenadeThrow()
+    {
+          GameObject grenade = Instantiate(throwGrenade.grenadePrefab, transform.position, transform.rotation);    //instantiate a grenade and store in a var
+          rb.AddForce(transform.forward * throwForce);    //add force to throw grenade
+          Debug.Log("Throwing grenade");
     }
 
     void Explosion()

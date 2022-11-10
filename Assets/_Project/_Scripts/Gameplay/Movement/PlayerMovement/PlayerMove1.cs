@@ -34,7 +34,7 @@ public class PlayerMove1 : MonoBehaviour
     [Header("Ground check")] 
     [SerializeField]private float playerHeight;
     [SerializeField]private LayerMask whatisGround;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
    
     [Header("Slope Handling")]
     [SerializeField]private float maxSlopeAngle;
