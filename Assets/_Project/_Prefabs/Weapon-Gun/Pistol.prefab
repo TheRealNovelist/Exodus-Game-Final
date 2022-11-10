@@ -124,9 +124,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2428181273360131133}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -3.6615815, y: 1.2788742, z: 46.67797}
-  m_LocalScale: {x: 0.47, y: 0.97948, z: 0.47}
+  m_LocalScale: {x: 0.26, y: 0.54184, z: 0.26}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 743576136539742492}
@@ -135,7 +135,7 @@ Transform:
   - {fileID: 8101168059788315972}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &6154506619288155829
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -212,10 +212,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: 90991f17a116a1e438bc28dd60b4258a, type: 2}
+  ammoManager: {fileID: 0}
+  MakeCameraRecoil_Script: {fileID: 0}
   fpsCam: {fileID: 0}
   muzzleFlash: {fileID: 0}
   impactEffect: {fileID: 0}
   shootKey: 323
+  reloadKey: 114
 --- !u!1 &4003865040435016268
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +472,6 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 5b3b6337d372a444e82d7da3a83990dd, type: 3}
 --- !u!4 &8101168059788315972 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400004, guid: 5b3b6337d372a444e82d7da3a83990dd,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400004, guid: 5b3b6337d372a444e82d7da3a83990dd, type: 3}
   m_PrefabInstance: {fileID: 8101168059788187584}
   m_PrefabAsset: {fileID: 0}
