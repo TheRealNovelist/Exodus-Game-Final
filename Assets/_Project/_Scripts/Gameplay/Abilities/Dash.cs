@@ -14,8 +14,6 @@ public class Dash : SkillSystem
 
        // rb.velocity = movement.transform.position.normalized * dashVelocity;
        rb.velocity = movement.lastMoveDirection.normalized * dashVelocity; 
-      
-      
     }
 
     public override void BeginCooldown(GameObject parent)

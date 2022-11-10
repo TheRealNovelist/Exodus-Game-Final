@@ -18,8 +18,6 @@ public class Grenade : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();   //get rigidbody from grenade
         countDown = delay;
-
-        Debug.Log(rb + "and" + throwForce);
     }
 
     // Update is called once per frame
@@ -31,12 +29,6 @@ public class Grenade : MonoBehaviour
         {
             Explosion();   
         }
-    }
-    public void GrenadeThrow()
-    {
-          //GameObject grenade = Instantiate(throwGrenade.grenadePrefab, transform.position, transform.rotation);    //instantiate a grenade and store in a var
-          rb.AddForce(transform.forward * throwForce);    //add force to throw grenade
-          Debug.Log("Throwing grenade");
     }
 
     void Explosion()
