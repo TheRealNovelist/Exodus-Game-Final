@@ -35,7 +35,6 @@ public class InventoryUI : MonoBehaviour
             optionPanel.gameObject.SetActive(show);
             optionPanel.GetComponent<RectTransform>().position = selectedButton.GetComponent<RectTransform>().position + offset;
             currentSelecting = itemOfSelectedSlot as EquipItem;
-            print("bruh");
         }
         else
         {
@@ -66,14 +65,17 @@ public class InventoryUI : MonoBehaviour
         {
             inventoryPanel.SetActive(true);
             //_gameEvent.Invoke(true);
-            GUIManager.Instance.InventoryPanelOn = true;
+            CursorAndCam.Instance.InventoryPanelOn = true;
+            CursorAndCam.Instance.UnlockCursor();
         } 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             inventoryPanel.SetActive(false);
             //_gameEvent.Invoke(false);
             optionPanel.SetActive(false);
-            GUIManager.Instance.InventoryPanelOn = false;
+            CursorAndCam.Instance.InventoryPanelOn = false;
+            CursorAndCam.Instance.LockCursor();
+            
         } 
     }
 }

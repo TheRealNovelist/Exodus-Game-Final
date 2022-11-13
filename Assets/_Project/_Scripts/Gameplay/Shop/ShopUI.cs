@@ -14,7 +14,6 @@ public class ShopUI : MonoBehaviour
 
     public void DefenderPurchased()
     {
-        GUIManager.Instance.ShopPanelOn = false;
-
+        CursorAndCam.Instance.ShopPanelOn = false;
     }
 }

@@ -1,17 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class GUIManager : MonoBehaviour
+public class CursorAndCam : MonoBehaviour
 {
     public bool InventoryPanelOn;
     public bool ShopPanelOn;
-    public static GUIManager Instance;
+    
+    public static CursorAndCam Instance;
 
     [SerializeField] private PlayerMove1 playerMovementScr;
     [SerializeField] private PlayerCam playerCamScr;
+
+    [SerializeField] private GameObject cameraTurret;
 
     private void Awake()
     {
@@ -28,18 +27,17 @@ public class GUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InventoryPanelOn || ShopPanelOn)
+        /*if (InventoryPanelOn)
         {
             if (Cursor.lockState != CursorLockMode.None)
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
-
             playerMovementScr.recieveInput = false;
             playerCamScr.getPlayerRotation = false;
-            Cursor.visible = true;
-            
             return;
+
         }
         
         if (Cursor.lockState != CursorLockMode.Locked)
@@ -48,6 +46,43 @@ public class GUIManager : MonoBehaviour
             playerMovementScr.recieveInput = true;
             playerCamScr.getPlayerRotation = true;
             Cursor.visible = false;
+        }*/
+
+        if (InventoryPanelOn)
+        {
+            MovePlayer(false);
+        }
+        else
+        {
+            MovePlayer(true);
         }
     }
+
+    public void UnlockCursor()
+    {
+        if (Cursor.lockState != CursorLockMode.None)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    public void MovePlayer(bool canMove)
+    {
+        playerMovementScr.recieveInput = canMove;
+        playerCamScr.getPlayerRotation = canMove;
+    }
+
+    public void LockCursor()
+    {
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+    
+    
+    
+    
 }
