@@ -12,9 +12,5 @@ public class CoinManager : MonoBehaviour
         CoinAmuont = 100;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

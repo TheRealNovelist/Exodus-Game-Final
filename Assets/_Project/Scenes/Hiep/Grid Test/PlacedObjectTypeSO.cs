@@ -44,6 +44,7 @@ public class PlacedObjectTypeSO : ScriptableObject
     public Transform visual;
     public int width;
     public int height;
+    public int price = 10;
 
     public int GetRotationAngle(Dir dir)
     {
@@ -54,9 +55,6 @@ public class PlacedObjectTypeSO : ScriptableObject
                 case  Dir.Left: return 90;
                 case  Dir.Up: return 180;
                 case  Dir.Right: return 270;
-        }
-        {
-            
         }
     }
     

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4843944728714542367
 Transform:
   m_ObjectHideFlags: 0
@@ -81,8 +81,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7959563565599981365}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.012500048, y: 0.115999915, z: 0.6225002}
-  m_LocalScale: {x: 0.14999999, y: 0.14999998, z: 0.29999998}
+  m_LocalPosition: {x: 0.01249999, y: 0.11599996, z: 0.6225001}
+  m_LocalScale: {x: 0.14999999, y: 0.15, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7959563565831178074}
@@ -260,9 +260,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7959563565764871481}
   - component: {fileID: -1732615324720248739}
-  - component: {fileID: 3108104670244020393}
   m_Layer: 0
-  m_Name: Turret-build
+  m_Name: Turret-build 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,7 +276,7 @@ Transform:
   m_GameObject: {fileID: 7959563565764871487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.32, y: 0.65, z: -2.89}
-  m_LocalScale: {x: 0.39896, y: 0.39896, z: 0.39896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5422347106617492185}
@@ -300,28 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c5ea24d64dff04087ed0f08e723799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3108104670244020393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7959563565764871487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a0eb9665f110a488cd527decc177f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 5
-  turningSpeed: 5
-  weaponPart: {fileID: 7959563566751563875}
-  projectile: {fileID: 7287224368869956021, guid: 0169febd9a260894babcec62c605250c, type: 3}
-  shootPoint: {fileID: 7959563565831178074}
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 0
-  duration: 1
-  fullHealth: 100
 --- !u!1 &7959563565831178075
 GameObject:
   m_ObjectHideFlags: 0
