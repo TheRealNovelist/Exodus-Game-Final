@@ -8,6 +8,10 @@ using System;
 public class GridBuildingSystem : MonoBehaviour
 {
    public static GridBuildingSystem Instance { get; private set; }
+   
+   public int gridWidth = 10;
+   public int gridHeight = 10;
+   public float cellSize = 10f;
 
     public event EventHandler OnSelectedChanged;
     public event EventHandler OnObjectPlaced;
@@ -18,12 +22,12 @@ public class GridBuildingSystem : MonoBehaviour
     private PlacedObjectTypeSO.Dir dir;
     [SerializeField] private CoinManager coinManager;
 
+    [SerializeField] private Camera turretCamera;
+
     private void Awake() {
         Instance = this;
 
-        int gridWidth = 10;
-        int gridHeight = 10;
-        float cellSize = 10f;
+
         grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(0, 0, 0), (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
 
       //  placedObjectTypeSO = placeObjectTypeSOList[0];//set placeObject to the first one in the list
@@ -93,7 +97,7 @@ public class GridBuildingSystem : MonoBehaviour
             }
         }
             
-        if (canBuild && coinManager.CoinAmuont >= 30)
+        if (canBuild && coinManager.CoinAmuont >= placedObjectTypeSO.price)
         {
             Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
             Vector3 placedObjectWorldPossition = grid.GetWorldPosition(x, z) +
@@ -103,7 +107,7 @@ public class GridBuildingSystem : MonoBehaviour
                 new Vector2Int(x, z), dir, placedObjectTypeSO); 
             
             //miner the amount of coin after build
-            coinManager.CoinAmuont -= 30; 
+            coinManager.CoinAmuont -= placedObjectTypeSO.price; 
             
                 
             foreach (Vector2Int gridPosition in gridPositionList)
@@ -133,9 +137,10 @@ public class GridBuildingSystem : MonoBehaviour
     private void Update() 
     { 
         //Place object on place
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if ( placedObjectTypeSO!=null && Input.GetMouseButton(0)) 
         {
             PlaceObejcts();
+            DeselectObjectType();
         }
         
         if (Input.GetKeyDown(KeyCode.R))
@@ -147,7 +152,6 @@ public class GridBuildingSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             RemovePlacedDefender();
-
         }
         
         //Deselect object
@@ -225,7 +229,7 @@ public class GridBuildingSystem : MonoBehaviour
     //return position of mouse by the camera with tag MainCamera
     public Vector3 GetMouseWorldPosition()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = turretCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 9990f))
         {
             return raycastHit.point;

@@ -10,7 +10,7 @@ public class CursorAndCam : MonoBehaviour
     [SerializeField] private PlayerMove1 playerMovementScr;
     [SerializeField] private PlayerCam playerCamScr;
 
-    [SerializeField] private GameObject cameraTurret;
+    [SerializeField] private GameObject turretCamera,playerCamera;
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class CursorAndCam : MonoBehaviour
             Cursor.visible = false;
         }*/
 
-        if (InventoryPanelOn)
+        if (InventoryPanelOn || ShopPanelOn)
         {
             MovePlayer(false);
         }
@@ -80,6 +80,12 @@ public class CursorAndCam : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    public void UseTurretCamera(bool turretCamera)
+    {
+        this.turretCamera.SetActive(turretCamera);
+        this.playerCamera.SetActive(!turretCamera);
     }
     
     
