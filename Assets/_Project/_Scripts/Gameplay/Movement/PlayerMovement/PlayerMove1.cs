@@ -16,7 +16,7 @@ public class PlayerMove1 : MonoBehaviour
     [SerializeField]private float sprintingSpeed;
     [SerializeField]private float groundDrag;
     [SerializeField]private float airDrag;
-    [SerializeField]private float jumpForce;
+    [SerializeField] private float jumpForce;
     [SerializeField]private float jumpCooldown;
     [SerializeField]private float airMultiplier;
     private bool readyToJump = true;
@@ -55,6 +55,7 @@ public class PlayerMove1 : MonoBehaviour
 
     public bool recieveInput = true;
 
+    public bool isInAir = false;    //called in jump input, also referenced in DoubleJump.cs, edited by Minh
     public enum MovementState
     {
         walking,
@@ -76,6 +77,7 @@ public class PlayerMove1 : MonoBehaviour
         MyInput();
         GroundCheck();
         StateHandler();
+        doubleJump();
       //  Debug.Log(rb.velocity.magnitude);
     }
 
@@ -89,6 +91,17 @@ public class PlayerMove1 : MonoBehaviour
         
     }
 
+    public void doubleJump()
+    {
+        if (!isGrounded) 
+        {
+            isInAir = true;
+        }
+        else
+        {
+            isInAir = false;
+        }
+    }
     void MyInput()
     {
         if(!recieveInput){return;}
@@ -100,9 +113,14 @@ public class PlayerMove1 : MonoBehaviour
         if (Input.GetKey(jumpKey) && readyToJump && isGrounded)
         {
             readyToJump = false;
-            Jump(); 
+            Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+        
+        //else
+        //{
+        //    isInAir = false;
+        //}
 
         if (horizontalInput != 0 || verticalInput != 0)
         {

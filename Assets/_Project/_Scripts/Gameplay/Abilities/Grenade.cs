@@ -11,8 +11,6 @@ public class Grenade : MonoBehaviour
     public GameObject explosionEfex;    //explosion effects
     Rigidbody rb;
     public float throwForce = 200f;
-    ThrowGrenade throwGrenade;
-    //  GameObject grenade = Instantiate(grenadePrefab, transform.position, transform.rotation);    //instantiate a grenade and store in a var
     // Start is called before the first frame update
     void Start()
     {

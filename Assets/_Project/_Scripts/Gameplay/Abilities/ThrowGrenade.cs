@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Grenade", menuName = "Ability/Grenade")]
 public class ThrowGrenade : SkillSystem
 {
-    Grenade grenade;
     public GameObject grenadePrefab;
 
     public override void Activate(GameObject parent)
