@@ -115,7 +115,7 @@ public class Turret : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-            print("dead");
+            Destroy(gameObject);
         }
     }
 }

@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum SpawnState
 {
@@ -18,27 +21,39 @@ public class EnemySpawner : MonoBehaviour
     private int spawned =0;
     
     private float waveCountDown;
-    private SpawnState state = SpawnState.Waiting;
-    private bool waiting = true;
+    private bool waiting = false;
+    public bool canSpawn = true;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        waveCountDown = randGap + Random.Range(0f,5f);
     }
 
     void Update()
     {
+        if(!canSpawn){return;}
+        if(spawned>=totalToSpawn){return;}
+        if(waiting){return;}
         if (waveCountDown <= 0)
         {
             //spawn a wave
-            
+            SpawnEnemy();
+            waveCountDown = randGap + Random.Range(0f,5f);
+            spawned++;
         }
         else
         {
             waveCountDown -= Time.deltaTime;
         }
 
+    }
+
+    private void SpawnEnemy()
+    {
+        GameObject enemyToSpawn = enemies.GetRandom();
+        Transform randSpawner = spawners[Random.Range(0, spawners.Count)];
+        Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
+        waiting = false;
     }
     
 }

@@ -51,6 +51,7 @@ public class LifeForce : MonoBehaviour , IDamagable
         timeValue += amount;
     }
 
+    //TESTING
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
