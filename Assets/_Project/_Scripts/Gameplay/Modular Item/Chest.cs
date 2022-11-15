@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] private Transform itemHolder;
-    public WeightedRandomList<Item> itemList;
-    public KeyCode openKey;
+    [SerializeField] private SpriteRenderer itemHolder;
+    [SerializeField] private WeightedRandomList<Item> itemList;
+    [SerializeField] private KeyCode openKey;
+    [SerializeField] private Inventory inventory;
+
     private bool isOpen = false;
     private bool harvested = false;
+    
     private Item lootedItem;
-    [SerializeField] private Inventory inventory;
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,12 +39,10 @@ public class Chest : MonoBehaviour
     private void OpenChest()
     {
         isOpen = true;
-        
-        //PLAY ANIMATION
 
         lootedItem = GetRandomItem();
 
-        //Instantiate(lootedItem.model, itemHolder);
+        itemHolder.sprite = lootedItem.icon;
 
         if (lootedItem is not EquipItem)
         {
@@ -52,7 +53,6 @@ public class Chest : MonoBehaviour
     private void Harvest(Item item)
     {
         harvested = true;
-        //ADD ITEM TO INVENTORY
         inventory.AddItem(item);
     }
 

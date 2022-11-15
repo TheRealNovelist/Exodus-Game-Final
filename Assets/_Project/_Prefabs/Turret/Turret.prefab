@@ -206,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7959563565764871481}
   - component: {fileID: 2896220564543230922}
+  - component: {fileID: 3990958146308585893}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -249,9 +250,21 @@ MonoBehaviour:
   shootPoint: {fileID: 7959563565831178074}
   enemyMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
   duration: 1
   fullHealth: 100
+--- !u!114 &3990958146308585893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959563565764871487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c5ea24d64dff04087ed0f08e723799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7959563565831178075
 GameObject:
   m_ObjectHideFlags: 0

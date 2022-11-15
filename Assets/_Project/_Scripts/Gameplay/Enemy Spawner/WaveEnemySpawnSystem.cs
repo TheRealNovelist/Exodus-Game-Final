@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnSystem : MonoBehaviour
+public class WaveEnemySpawnSystem : MonoBehaviour
 {
-    public List<EnemySpawner> spawners;
+    public List<WaveEnemySpawner> spawners;
     public float timeBetweenSpawners = 10f;
     private float spawnCountDown = 0;
     private bool counting = true;
@@ -34,7 +34,7 @@ public class EnemySpawnSystem : MonoBehaviour
         }
     }
 
-    private void ActiveSpawner(EnemySpawner spawner)
+    private void ActiveSpawner(WaveEnemySpawner spawner)
     {
         spawner.active = true;
         counting = true;
