@@ -1,13 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-
-/*
- 
- */
 public class PlayerMove1 : MonoBehaviour
 {
     [Header("Movement")]
@@ -34,7 +26,7 @@ public class PlayerMove1 : MonoBehaviour
     [Header("Ground check")] 
     [SerializeField]private float playerHeight;
     [SerializeField]private LayerMask whatisGround;
-    [SerializeField] private bool isGrounded;
+    public bool isGrounded;
    
     [Header("Slope Handling")]
     [SerializeField]private float maxSlopeAngle;
@@ -55,7 +47,6 @@ public class PlayerMove1 : MonoBehaviour
 
     public bool recieveInput = true;
 
-    public bool isInAir = false;    //called in jump input, also referenced in DoubleJump.cs, edited by Minh
     public enum MovementState
     {
         walking,
@@ -77,7 +68,6 @@ public class PlayerMove1 : MonoBehaviour
         MyInput();
         GroundCheck();
         StateHandler();
-        doubleJump();
       //  Debug.Log(rb.velocity.magnitude);
     }
 
@@ -91,17 +81,6 @@ public class PlayerMove1 : MonoBehaviour
         
     }
 
-    public void doubleJump()
-    {
-        if (!isGrounded) 
-        {
-            isInAir = true;
-        }
-        else
-        {
-            isInAir = false;
-        }
-    }
     void MyInput()
     {
         if(!recieveInput){return;}
@@ -255,6 +234,7 @@ public class PlayerMove1 : MonoBehaviour
         return false;
     }
 }
+
 //code bo di co the dung laij trong tuonwg lai?
 //Crouch, khong cho nguoi choi nhay
 //and change player anmation
