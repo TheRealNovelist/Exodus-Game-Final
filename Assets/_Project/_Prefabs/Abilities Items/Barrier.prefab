@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5428321403253616328}
   - component: {fileID: 9152883367103544122}
   - component: {fileID: 5175167414590224324}
+  - component: {fileID: 342552400227154837}
   m_Layer: 0
   m_Name: Barrier
   m_TagString: Untagged
@@ -97,3 +98,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &342552400227154837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930684623209588691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526ee970fa14ce149a5a782973205b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldHolderT: {fileID: 0}
+  shieldName: ShieldHolder
+  shieldHP: 100
+  shieldActiveTime: 3

@@ -21,8 +21,8 @@ public class Grenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         countDown -= Time.deltaTime;
+
         if (countDown <= 0)
         {
             Explosion();   
