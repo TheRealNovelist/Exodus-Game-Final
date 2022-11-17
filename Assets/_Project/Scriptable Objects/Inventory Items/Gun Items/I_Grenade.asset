@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f24559ecb4a883f4f9d93983124ac7cf, type: 3}
-  m_Name: Gunshot
+  m_Script: {fileID: 11500000, guid: a3ec505090b783b4086c5a565f60c381, type: 3}
+  m_Name: I_Grenade
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 21300000, guid: ee839b0a912aa4b61b2df0e7431e1a55, type: 3}
-  type: 0
+  itemName: Throw Grenade
+  icon: {fileID: 21300000, guid: 77ea13923e1074d0e928e45176023ba0, type: 3}
+  type: 1
   unlocked: 1
   equipping: 1
+  ability: {fileID: 11400000, guid: 1a00d304b9ddf0944a5324e8c21213ef, type: 2}

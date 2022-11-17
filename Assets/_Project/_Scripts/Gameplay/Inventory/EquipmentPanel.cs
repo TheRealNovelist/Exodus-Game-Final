@@ -19,16 +19,28 @@ public class EquipmentPanel : MonoBehaviour
         slot.UpdateSlotUI();
     }
 
-    public EquipSlot HasEmptySlot()
+    public bool HasEmptySlot()
     {
         foreach (var slot in equipSlots)
         {
             if (slot._item == null)
             {
-                return slot;
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    public int GetEmptySlot()
+    {
+        for (int i = 0; i < equipSlots.Length; i++)
+        {
+            if ( equipSlots[i]._item == null)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
     
     public void Unequip(EquipSlot slot,EquipItem item)
