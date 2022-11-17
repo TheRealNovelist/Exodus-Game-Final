@@ -6,18 +6,13 @@ using UnityEngine;
 public class CreateBarrier : SkillSystem
 {
     public GameObject shieldPrefab;
-    public GameObject shieldHolderT;
-    public string shieldName;
+    public GameObject shieldHolder;
+    //public Barrier barrier;
     public override void Activate(GameObject parent)
     {
-        shieldHolderT = GameObject.Find(shieldName);
         GameObject newShield = Instantiate(shieldPrefab, parent.transform.position, Quaternion.identity);
-        Debug.Log("Barrier");
-        if (activeTime <= 0)
-        {
-            Debug.Log("Shield Destroyed");
-            Destroy(newShield);
-        }
+        Debug.Log("Barrier Initialised");
+        //shieldHolder.SetActive(true);
     }
 
     public override void BeginCooldown(GameObject parent)
