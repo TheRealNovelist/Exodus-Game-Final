@@ -7,20 +7,17 @@ namespace EnemySystem.Grunt
     {
         private readonly Grunt _grunt;
         private readonly NavMeshAgent _navMeshAgent;
-
-        private readonly Transform _target;
         
-        public MoveToPlayer(Grunt grunt, NavMeshAgent navMeshAgent, Transform target)
+        
+        public MoveToPlayer(Grunt grunt, NavMeshAgent navMeshAgent)
         {
             _grunt = grunt;
             _navMeshAgent = navMeshAgent;
-            _target = target;
         }
         
         public void Update()
         {
-            _navMeshAgent.SetDestination(_target.position);
-            
+            _navMeshAgent.SetDestination(_grunt.target.position);
         }
 
         public void OnEnter()

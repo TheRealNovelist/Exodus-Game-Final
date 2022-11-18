@@ -15,8 +15,15 @@ namespace EnemySystem
 
         private static List<Transition> EmptyTransitions = new List<Transition>(0);
 
-        public void Tick()
+        public bool isStarted;
+        public bool isPaused;
+
+        //Ticking the state machine every frame
+        public void Update()
         {
+            if (isPaused || isStarted)
+                return;
+            
             var transition = GetTransition();
             if (transition != null)
                 SetState(transition.To);
@@ -24,8 +31,36 @@ namespace EnemySystem
             _currentState?.Update();
         }
 
+        //Allow to pause the state machine, cease operation and continue
+        public void Pause(bool pause)
+        {
+            if (pause)
+                _currentState.OnExit();
+            else
+                _currentState.OnEnter();
+            
+            isPaused = pause;
+        }
+        
+        //Stop the state machine, clear any transitions and reset
+        public void Stop()
+        {
+            isStarted = false;
+
+            _currentState = null;
+            
+            _transitions = new Dictionary<Type, List<Transition>>();
+            _currentTransitions = new List<Transition>();
+            _anyTransitions = new List<Transition>();
+        }
+        
+        //Transfer to next state
         public void SetState(IState state)
         {
+            if (isPaused) return;
+
+            if (!isStarted) isStarted = true;
+            
             if (state == _currentState)
                 return;
             
@@ -38,6 +73,7 @@ namespace EnemySystem
             _currentState.OnEnter();
         }
 
+        //Add new transition between state
         public void AddTransition(IState from, IState to, Func<bool> condition)
         {
             if (_transitions.TryGetValue(from.GetType(), out var transitions) == false)
@@ -49,11 +85,13 @@ namespace EnemySystem
             transitions.Add(new Transition(to, condition));
         }
 
+        //Add transition from any state
         public void AddAnyTransition(IState state, Func<bool> condition)
         {
             _anyTransitions.Add(new Transition(state, condition));
         }
         
+        //Private class for transition storage
         private class Transition
         {
             public IState To { get; }
@@ -66,6 +104,7 @@ namespace EnemySystem
             }
         }
 
+        //Get a transition. In order of any state transition first, then individual transition.
         private Transition GetTransition()
         {
             foreach(var transition in _anyTransitions)

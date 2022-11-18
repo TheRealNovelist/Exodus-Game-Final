@@ -13,25 +13,21 @@ namespace EnemySystem.Grunt
 
         [Header("Settings")]
         [SerializeField] private float attackRange = 2f;
-        
-        [SerializeField] private Transform target;
-        
-        protected override void Awake()
-        {
-            base.Awake();
 
-            var MoveToPlayer = new MoveToPlayer(this, agent, target);
-            var Attacking = new Attacking(this, target);
+        public override void StartStateMachine(float delay = 0f)
+        {
+            var MoveToPlayer = new MoveToPlayer(this, agent);
+            var Attacking = new Attacking(this);
 
             AddTransition(MoveToPlayer, Attacking, TargetInRange());
-            
             AddAnyTransition(MoveToPlayer, TargetOutRange());
 
             initialState = MoveToPlayer;
-            StartStateMachine();
-
+            
             Func<bool> TargetInRange() => () => Vector3.Distance(target.position, transform.position) <= attackRange;
             Func<bool> TargetOutRange() => () => Vector3.Distance(target.position, transform.position) > attackRange;
+            
+            base.StartStateMachine(delay);
         }
     }
 }
