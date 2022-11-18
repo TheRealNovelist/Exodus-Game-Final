@@ -27,6 +27,7 @@ namespace EnemySystem.Grunt
                 return;
             }
             
+            //Attack animation
             _targetDamage?.Damage(_grunt.damage);
             cooldown = _grunt.attackCooldown;
         }

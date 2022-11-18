@@ -10,7 +10,7 @@ public class SpawnTrigger : MonoBehaviour
 
     [SerializeField] private bool isTrue;
     
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -21,6 +21,7 @@ public class SpawnTrigger : MonoBehaviour
                 {
                     if (!baseEnemy.IsStateMachineStarted())
                     {
+                        //Start spawning enemy
                         baseEnemy.target = other.transform;
                         baseEnemy.StartStateMachine();  
                     }

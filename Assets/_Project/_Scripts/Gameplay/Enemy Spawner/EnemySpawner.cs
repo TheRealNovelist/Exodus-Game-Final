@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using EnemySystem;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -54,6 +55,10 @@ public class EnemySpawner : MonoBehaviour
         Transform randSpawner = spawners[Random.Range(0, spawners.Count)];
         Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
         waiting = false;
+
+        //BaseEnemy enemy = enemyToSpawn.GetComponent<BaseEnemy>();
+        //set player as enemy.target here
+        //enemy.StartStateMachine
     }
     
 }
