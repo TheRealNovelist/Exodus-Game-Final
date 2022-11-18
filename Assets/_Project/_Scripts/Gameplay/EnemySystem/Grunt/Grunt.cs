@@ -16,8 +16,8 @@ namespace EnemySystem.Grunt
 
         public override void StartStateMachine(float delay = 0f)
         {
-            var MoveToPlayer = new MoveToPlayer(this, agent);
-            var Attacking = new Attacking(this);
+            var MoveToPlayer = new MoveToPlayer(this, agent, target);
+            var Attacking = new Attacking(this, target);
 
             AddTransition(MoveToPlayer, Attacking, TargetInRange());
             AddAnyTransition(MoveToPlayer, TargetOutRange());
