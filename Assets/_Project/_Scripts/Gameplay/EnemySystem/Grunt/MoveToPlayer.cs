@@ -33,7 +33,5 @@ namespace EnemySystem.Grunt
             _navMeshAgent.enabled = false;
             //Stop walking animation
         }
-        
-        
     }
 }

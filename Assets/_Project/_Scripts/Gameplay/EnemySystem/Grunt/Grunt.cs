@@ -17,8 +17,15 @@ namespace EnemySystem.Grunt
         public float attackCooldown = 5f;
         public float damage = 10f;
 
+        private void Start()
+        {
+            StartStateMachine();
+        }
+
         public override void StartStateMachine(float delay = 0f)
         {
+            if (IsStateMachineStarted()) return;
+            
             var MoveToPlayer = new MoveToPlayer(this, agent, target);
             var Attacking = new Attacking(this, target);
 
