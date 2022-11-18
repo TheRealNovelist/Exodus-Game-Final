@@ -6,9 +6,9 @@ public class Enemy : MonoBehaviour, IDamageable
 {
    [SerializeField] private float health = 50f;
 
-   public void TakeDamage(float gunDamage)
+   public void Damage(float amount)
    {
-      health -= gunDamage;
+      health -= amount;
       if (health <= 0f)
       {
          Die();

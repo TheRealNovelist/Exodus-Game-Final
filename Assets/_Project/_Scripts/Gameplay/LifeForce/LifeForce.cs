@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class LifeForce : MonoBehaviour , IDamagable
+public class LifeForce : MonoBehaviour , IDamageable, IHeal
 {
     [SerializeField] private float timeValue = 60;
     private bool timerOn = false;
@@ -41,12 +41,12 @@ public class LifeForce : MonoBehaviour , IDamagable
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void Damage(int amount)
+    public void Damage(float amount)
     {
         timeValue -= amount;
     }
 
-    public void AddHeatlh(int amount)
+    public void AddHealth(float amount)
     {
         timeValue += amount;
     }

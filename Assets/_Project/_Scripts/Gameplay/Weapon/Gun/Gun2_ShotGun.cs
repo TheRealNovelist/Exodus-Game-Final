@@ -80,7 +80,7 @@ public class Gun2_ShotGun : MonoBehaviour
             
                 if (damagableObject != null)
                 {
-                    damagableObject.TakeDamage(gunData.gunDamage);
+                    damagableObject.Damage(gunData.gunDamage);
                 }
 
                 if (hit.rigidbody != null) 

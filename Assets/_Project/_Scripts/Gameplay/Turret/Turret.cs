@@ -109,13 +109,18 @@ public class Turret : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    public void TakeDamage(float gunDamage)
+    public void Damage(float amount)
     {
-        currentHealth -= gunDamage;
+        currentHealth -= amount;
 
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Damage(int amount)
+    {
+        throw new System.NotImplementedException();
     }
 }

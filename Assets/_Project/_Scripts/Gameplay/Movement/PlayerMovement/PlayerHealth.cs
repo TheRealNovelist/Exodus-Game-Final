@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : IDamagable
+public class PlayerHealth : IDamageable, IHeal
 {
-
-    public void Damage(int amount)
+    public void Damage(float amount)
     {
         throw new System.NotImplementedException();
     }
 
-    public void AddHeatlh(int amount)
+    public void AddHealth(float amount)
     {
         throw new System.NotImplementedException();
     }
