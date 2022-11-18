@@ -5,16 +5,9 @@ using UnityEngine;
 public class GunPickUp2 : MonoBehaviour
 {
     [SerializeField] private Transform shotgun;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private List<Gun1> allGuns;
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
     //This function will put the gun we pass in to the first position, SiblingIndex = 0
     public void PutToTheTop(Transform gun)
     {
@@ -24,5 +17,21 @@ public class GunPickUp2 : MonoBehaviour
     public void PutAtSecondPlace(Transform gun)
     {
         gun.transform.SetSiblingIndex(1);
+    }
+    
+
+    public void GunUpdate()
+    {
+        GunItem gunItemSlot1 = inventory.gunPanel.equippedItems[0] as GunItem;
+        GunItem gunItemSlot2 = inventory.gunPanel.equippedItems[1] as GunItem;
+
+        if (gunItemSlot1 != null)
+        {
+        }
+
+        if (gunItemSlot2 != null)
+        {
+        }
+
     }
 }

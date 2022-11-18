@@ -7,7 +7,6 @@ public class Gun2_ShotGun : MonoBehaviour
 {
     private bool isReloading;
     
-    
     [Header("Component")]
     [SerializeField] private GunData gunData; // a reference to class Gundata:ScriptableObject
     [SerializeField] private AmmoManager ammoManager; //reference to class AmmoManager

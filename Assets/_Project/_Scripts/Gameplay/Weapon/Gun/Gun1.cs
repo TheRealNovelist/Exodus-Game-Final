@@ -35,7 +35,7 @@ public class Gun1 : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("I have " + ammoManager.ammoPlayerCurrentHave + " bullets, I have " + gunData.currentAmmoInsizeGunMagazine + " bullets inside my gun" );
+       // Debug.Log("I have " + ammoManager.ammoPlayerCurrentHave + " bullets, I have " + gunData.currentAmmoInsizeGunMagazine + " bullets inside my gun" );
 
         if(isReloading)
             return;
