@@ -21,7 +21,7 @@ namespace EnemySystem
         //Ticking the state machine every frame
         public void Update()
         {
-            if (isPaused || isStarted)
+            if (isPaused || !isStarted)
                 return;
             
             var transition = GetTransition();

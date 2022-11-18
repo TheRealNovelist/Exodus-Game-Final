@@ -14,6 +14,9 @@ namespace EnemySystem.Grunt
         [Header("Settings")]
         [SerializeField] private float attackRange = 2f;
 
+        public float attackCooldown = 5f;
+        public float damage = 10f;
+
         public override void StartStateMachine(float delay = 0f)
         {
             var MoveToPlayer = new MoveToPlayer(this, agent, target);
@@ -30,4 +33,6 @@ namespace EnemySystem.Grunt
             base.StartStateMachine(delay);
         }
     }
+    
+    
 }
