@@ -4,10 +4,10 @@ public class Turret : MonoBehaviour, IDamageable
     [SerializeField] private float range = 5f;
     [SerializeField] private float turningSpeed = 5f;
 
-    public Transform weaponPart;
-    public TurretProjectile projectile;
-    public Transform shootPoint;
-    public LayerMask enemyMask;
+    [SerializeField] private Transform weaponPart;
+    [SerializeField] private TurretProjectile projectile;
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private LayerMask enemyMask;
     
     private Transform target;
     private float timer = 0;
@@ -46,6 +46,7 @@ public class Turret : MonoBehaviour, IDamageable
 
         if (waitingToShoot)
         {
+
             if (timer < duration)
             {
                 timer += Time.deltaTime;
@@ -114,7 +115,7 @@ public class Turret : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-            print("dead");
+            Destroy(gameObject);
         }
     }
 }

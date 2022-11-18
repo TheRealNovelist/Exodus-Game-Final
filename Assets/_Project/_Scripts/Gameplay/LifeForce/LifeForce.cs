@@ -1,14 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LifeForce : MonoBehaviour , IDamagable
 {
-    public float timeValue = 60;
-    public bool timerOn = false;
-    //public Text timeText;
-    public GameObject gameOverText;
+    [SerializeField] private float timeValue = 60;
+    private bool timerOn = false;
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private GameObject gameOverText;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +27,10 @@ public class LifeForce : MonoBehaviour , IDamagable
         }
         else
         {
-            Debug.Log("Time up!");
             timeValue = 0;
             timerOn = false;
             gameOverText.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -37,18 +38,25 @@ public class LifeForce : MonoBehaviour , IDamagable
     {
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        Debug.Log(minutes + ":" + seconds);
-
-        //timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void Damage(int amount)
     {
-        
+        timeValue -= amount;
     }
 
     public void AddHeatlh(int amount)
     {
-        
+        timeValue += amount;
+    }
+
+    //TESTING
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Damage(10);
+        }
     }
 }

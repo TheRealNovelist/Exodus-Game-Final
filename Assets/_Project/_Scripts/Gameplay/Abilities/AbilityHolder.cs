@@ -9,6 +9,8 @@ public class AbilityHolder : MonoBehaviour
     float activeTime;
     //FModPlayer fModPlayer;
 
+    [SerializeField] private Inventory inventory;
+
     enum AbilityState   //declare the states of the ability
     {
         ready, active, cooldown
@@ -95,5 +97,18 @@ public class AbilityHolder : MonoBehaviour
                 break;
         }
         
+    }
+
+    public void SetUsingAbility()
+    {
+        AbilityItem abilityItemSlot1 = inventory.abilityPanel.equippedItems[0] as AbilityItem;
+        AbilityItem abilityItemSlot2 = inventory.abilityPanel.equippedItems[1] as AbilityItem;
+
+        if(abilityItemSlot1!=null)
+        ability[0] = abilityItemSlot1.ability;
+        
+        if(abilityItemSlot2!=null)
+        ability[1] = abilityItemSlot2.ability;
+
     }
 }

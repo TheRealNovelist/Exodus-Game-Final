@@ -17,5 +17,6 @@ public class GunData : ScriptableObject
     public int currentAmmoInsizeGunMagazine;
     public int ammoNeedToReload;
     public float reloadTime;
+  //  public bool IsEquiped;
 
 }

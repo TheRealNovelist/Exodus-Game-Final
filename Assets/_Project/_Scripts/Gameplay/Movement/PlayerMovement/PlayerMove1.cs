@@ -1,13 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-
-/*
- 
- */
 public class PlayerMove1 : MonoBehaviour
 {
     [Header("Movement")]
@@ -16,7 +8,7 @@ public class PlayerMove1 : MonoBehaviour
     [SerializeField]private float sprintingSpeed;
     [SerializeField]private float groundDrag;
     [SerializeField]private float airDrag;
-    [SerializeField]private float jumpForce;
+    [SerializeField] private float jumpForce;
     [SerializeField]private float jumpCooldown;
     [SerializeField]private float airMultiplier;
     private bool readyToJump = true;
@@ -34,7 +26,7 @@ public class PlayerMove1 : MonoBehaviour
     [Header("Ground check")] 
     [SerializeField]private float playerHeight;
     [SerializeField]private LayerMask whatisGround;
-    [SerializeField] private bool isGrounded;
+    public bool isGrounded;
    
     [Header("Slope Handling")]
     [SerializeField]private float maxSlopeAngle;
@@ -100,9 +92,14 @@ public class PlayerMove1 : MonoBehaviour
         if (Input.GetKey(jumpKey) && readyToJump && isGrounded)
         {
             readyToJump = false;
-            Jump(); 
+            Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+        
+        //else
+        //{
+        //    isInAir = false;
+        //}
 
         if (horizontalInput != 0 || verticalInput != 0)
         {
@@ -237,6 +234,7 @@ public class PlayerMove1 : MonoBehaviour
         return false;
     }
 }
+
 //code bo di co the dung laij trong tuonwg lai?
 //Crouch, khong cho nguoi choi nhay
 //and change player anmation

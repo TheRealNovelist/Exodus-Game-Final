@@ -8,7 +8,7 @@ public enum EquipType
     Ability
 }
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Item/Equip Item/")]
 public class EquipItem : Item
 {
     public EquipType type;
