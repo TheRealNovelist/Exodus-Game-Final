@@ -1,19 +1,19 @@
 using UnityEngine;
 
-namespace EnemySystem.Grunt
+namespace EnemySystem.Brute
 {
     internal class Attacking : IState
     {
-        private readonly Grunt _grunt;
+        private readonly Brute _brute;
         private readonly Transform _target;
 
         private readonly IDamageable _targetDamage;
         
         private float cooldown = 0f;
         
-        public Attacking(Grunt grunt, Transform target)
+        public Attacking(Brute brute, Transform target)
         {
-            _grunt = grunt;
+            _brute = brute;
             _target = target;
 
             _targetDamage = _target.GetComponent<IDamageable>();
@@ -28,8 +28,8 @@ namespace EnemySystem.Grunt
             }
             
             //Attack animation
-            _targetDamage?.Damage(_grunt.damage);
-            cooldown = _grunt.attackCooldown;
+            _targetDamage?.Damage(_brute.damageDealt);
+            cooldown = _brute.attackCooldown;
         }
 
         public void OnEnter()

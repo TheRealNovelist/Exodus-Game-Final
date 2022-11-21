@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace EnemySystem.Grunt
+namespace EnemySystem.Brute
 {
-    public class Grunt : BaseEnemy
+    public class Brute : BaseEnemy
     {
         [Header("Components")]
         [SerializeField] private NavMeshAgent agent;
@@ -15,7 +15,7 @@ namespace EnemySystem.Grunt
         [SerializeField] private float attackRange = 2f;
 
         public float attackCooldown = 5f;
-        public float damage = 10f;
+        public float damageDealt = 10f;
 
         private void Start()
         {

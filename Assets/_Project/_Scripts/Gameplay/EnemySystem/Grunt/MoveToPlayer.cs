@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace EnemySystem.Grunt
+namespace EnemySystem.Brute
 {
     internal class MoveToPlayer : IState
     {
-        private readonly Grunt _grunt;
+        private readonly Brute _brute;
         private readonly NavMeshAgent _navMeshAgent;
 
         private readonly Transform _target;
         
-        public MoveToPlayer(Grunt grunt, NavMeshAgent navMeshAgent, Transform target)
+        public MoveToPlayer(Brute brute, NavMeshAgent navMeshAgent, Transform target)
         {
-            _grunt = grunt;
+            _brute = brute;
             _navMeshAgent = navMeshAgent;
             _target = target;
         }
