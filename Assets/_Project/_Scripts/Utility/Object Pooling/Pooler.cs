@@ -4,65 +4,40 @@ using UnityEngine;
 
 public class Pooler : MonoBehaviour
 {
-    public Dictionary<string, Queue<GameObject>> poolDict;
-    public List<Pool> pools;
+    [SerializeField]
+    GameObject prefab;
+    Queue<GameObject> pool = new Queue<GameObject>();
+    int poolSize = 2;
 
-    [System.Serializable]
-    public class Pool
+    private void Start()
     {
-        public string tag;
-        public GameObject prefab;
-        public int amount;
-    }
-
-    public static Pooler callInstance;
-
-    private void Awake()
-    {
-        callInstance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        poolDict = new Dictionary<string, Queue<GameObject>>();
-        foreach (Pool pool in pools)
+        for (int i = 0; i < poolSize; i++)
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-            for (int i = 0; i < pool.amount; i++)
-            {
-                GameObject gameObject = Instantiate(pool.prefab);
-                gameObject.SetActive(false);
-                objectPool.Enqueue(gameObject);
-            }
-            poolDict.Add(pool.tag, objectPool);
+            GameObject newPrefab = Instantiate(prefab);
+            pool.Enqueue(newPrefab);
+            newPrefab.SetActive(false);
         }
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 pos, Quaternion rot)
+    public GameObject LivePool()
     {
-        if (!poolDict.ContainsKey(tag))
+        if (pool.Count > 0)
         {
-            Debug.Log("Pool with tag " + tag + " does not exist.");
-            return null;
+            GameObject newPrefab = pool.Dequeue();
+            newPrefab.SetActive(true);
+            return newPrefab;
         }
-
-        GameObject spawnableObj = poolDict[tag].Dequeue();
-
-        spawnableObj.SetActive(true);
-        spawnableObj.transform.position = pos;
-        spawnableObj.transform.rotation = rot;
-
-        IPoolable poolable = spawnableObj.GetComponent<IPoolable>();
-
-        if (poolable != null)
+        else
         {
-            poolable.OnSpawn();
+            GameObject newPrefab = Instantiate(prefab);
+            return newPrefab;
         }
+    }
 
-        poolDict[tag].Enqueue(spawnableObj);
-
-        return spawnableObj;
+    public void DeadPool(GameObject newPrefab)
+    {
+        pool.Enqueue(newPrefab);
+        newPrefab.SetActive(false);
     }
     // Update is called once per frame
     void Update()
