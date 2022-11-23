@@ -28,6 +28,7 @@ namespace EnemySystem
             if (transition != null)
                 SetState(transition.To);
             
+            Debug.Log("Current State: " + _currentState);
             _currentState?.Update();
         }
 
