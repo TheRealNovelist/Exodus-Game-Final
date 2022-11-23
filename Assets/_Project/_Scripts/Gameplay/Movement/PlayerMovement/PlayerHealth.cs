@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
 {
-    [SerializeField] private float maxHealth;
+    [SerializeField] float maxHealth;
     
-    private float _playerHealth;
+    public float _playerHealth;
 
     private void Awake()
     {
@@ -28,5 +28,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
     public void AddHealth(float amount)
     {
         _playerHealth += amount;
+        if (_playerHealth > maxHealth)
+            _playerHealth = maxHealth;
     }
 }

@@ -6,12 +6,13 @@ using UnityEngine;
 public class CreateBarrier : SkillSystem
 {
     public GameObject shieldPrefab;
-    public GameObject shieldHolder;
+    Barrier barrier;
     //public Barrier barrier;
     public override void Activate(GameObject parent)
     {
-        GameObject newShield = Instantiate(shieldPrefab, parent.transform.position, Quaternion.identity);
+        Instantiate(shieldPrefab, parent.transform.position, Quaternion.identity);
         Debug.Log("Barrier Initialised");
+        
         //shieldHolder.SetActive(true);
     }
 
