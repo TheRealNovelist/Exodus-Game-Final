@@ -1161,8 +1161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability:
-  - {fileID: 11400000, guid: 1a00d304b9ddf0944a5324e8c21213ef, type: 2}
   - {fileID: 11400000, guid: 14894183fcb22df44957b0a1b63cc25f, type: 2}
+  - {fileID: 11400000, guid: 36ba78a18b4560747ae5973d36b42ce2, type: 2}
+  inventory: {fileID: 0}
   key1: 99
   key2: 118
 --- !u!4 &460619679 stripped
@@ -1170,6 +1171,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1644103619413947588, guid: 02402eb5d459fd047810216d2ab36398, type: 3}
   m_PrefabInstance: {fileID: 1667865886}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &460619681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460619675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286d73e33794962499516b49d58148ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  _playerHealth: 0
 --- !u!1 &505108305
 GameObject:
   m_ObjectHideFlags: 0

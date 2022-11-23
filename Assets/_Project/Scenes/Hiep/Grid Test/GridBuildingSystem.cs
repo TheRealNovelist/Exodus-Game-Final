@@ -9,9 +9,9 @@ public class GridBuildingSystem : MonoBehaviour
 {
    public static GridBuildingSystem Instance { get; private set; }
    
-   public int gridWidth = 10;
-   public int gridHeight = 10;
-   public float cellSize = 10f;
+   public int gridWidth = 5;
+   public int gridHeight = 5;
+   public float cellSize = 5f;
 
     public event EventHandler OnSelectedChanged;
     public event EventHandler OnObjectPlaced;

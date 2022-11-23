@@ -69,7 +69,7 @@ public class AbilityHolder : MonoBehaviour
                 if (Input.GetKeyDown(key2))
                 {
                     ability[1].Activate(gameObject); //call Active() in ability
-                    state1 = AbilityState.active;
+                    state2 = AbilityState.active;
                     activeTime = ability[1].activeTime;
                 }
                 break;
@@ -81,7 +81,7 @@ public class AbilityHolder : MonoBehaviour
                 else
                 {
                     ability[1].BeginCooldown(gameObject);
-                    state1 = AbilityState.cooldown;
+                    state2 = AbilityState.cooldown;
                     cooldownTime = ability[1].cooldownTime;
                 }
                 break;
@@ -92,7 +92,7 @@ public class AbilityHolder : MonoBehaviour
                 }
                 else
                 {
-                    state1 = AbilityState.ready;
+                    state2 = AbilityState.ready;
                 }
                 break;
         }

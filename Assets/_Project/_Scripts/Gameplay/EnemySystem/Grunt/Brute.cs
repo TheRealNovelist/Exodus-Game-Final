@@ -17,6 +17,13 @@ namespace EnemySystem.Brute
         public float attackCooldown = 5f;
         public float damageDealt = 10f;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            if (!agent)
+                agent = GetComponent<NavMeshAgent>();
+        }
+
         private void Start()
         {
             StartStateMachine();
@@ -26,7 +33,7 @@ namespace EnemySystem.Brute
         {
             if (IsStateMachineStarted()) return;
             
-            var MoveToPlayer = new MoveToPlayer(this, agent, target);
+            var MoveToPlayer = new MoveToPlayer(agent, target);
             var Attacking = new Attacking(this, target);
 
             AddTransition(MoveToPlayer, Attacking, TargetInRange());
