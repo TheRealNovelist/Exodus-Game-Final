@@ -33,4 +33,9 @@ public class Barrier : MonoBehaviour
         Debug.Log("Shield Destroyed");
         Destroy(this.gameObject);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //DestroyShield();
+    }
 }
