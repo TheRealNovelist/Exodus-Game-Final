@@ -7,7 +7,7 @@ public class CursorAndCam : MonoBehaviour
     
     public static CursorAndCam Instance;
 
-    [SerializeField] private PlayerMove1 playerMovementScr;
+    [SerializeField] private PlayerMovement playerMovementScr;
     [SerializeField] private PlayerCam playerCamScr;
 
     [SerializeField] private GameObject turretCamera,playerCamera;
@@ -69,7 +69,7 @@ public class CursorAndCam : MonoBehaviour
 
     public void MovePlayer(bool canMove)
     {
-        playerMovementScr.recieveInput = canMove;
+        playerMovementScr.receiveInput = canMove;
         playerCamScr.getPlayerRotation = canMove;
     }
 

@@ -9,7 +9,7 @@ public class Dash : SkillSystem
 
     public override void Activate(GameObject parent)
     {
-        PlayerMove1 movement = parent.GetComponent<PlayerMove1>();
+        PlayerMovement movement = parent.GetComponent<PlayerMovement>();
         Rigidbody rb = parent.GetComponent<Rigidbody>();
 
        // rb.velocity = movement.transform.position.normalized * dashVelocity;
@@ -18,7 +18,7 @@ public class Dash : SkillSystem
 
     public override void BeginCooldown(GameObject parent)
     {
-        PlayerMove1 movement = parent.GetComponent<PlayerMove1>();
+        PlayerMovement movement = parent.GetComponent<PlayerMovement>();
         base.BeginCooldown(parent);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMove1 : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -25,7 +25,7 @@ public class PlayerMove1 : MonoBehaviour
     
     [Header("Ground check")] 
     [SerializeField]private float playerHeight;
-    [SerializeField]private LayerMask whatisGround;
+    [SerializeField]private LayerMask groundLayerMask;
     public bool isGrounded;
    
     [Header("Slope Handling")]
@@ -45,7 +45,7 @@ public class PlayerMove1 : MonoBehaviour
 
     [SerializeField]private MovementState state;
 
-    public bool recieveInput = true;
+    public bool receiveInput = true;
 
     public enum MovementState
     {
@@ -83,7 +83,7 @@ public class PlayerMove1 : MonoBehaviour
 
     void MyInput()
     {
-        if(!recieveInput){return;}
+        if(!receiveInput) return;
         
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
@@ -140,7 +140,7 @@ public class PlayerMove1 : MonoBehaviour
     }
     void Move()
     {
-        if(!recieveInput){return;}
+        if(!receiveInput){return;}
         
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -177,7 +177,7 @@ public class PlayerMove1 : MonoBehaviour
     void GroundCheck()
     {
         //ground check
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatisGround);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundLayerMask);
         
        
         //apply drag

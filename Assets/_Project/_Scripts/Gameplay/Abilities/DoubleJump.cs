@@ -8,7 +8,7 @@ public class DoubleJump : SkillSystem
     public float jumpForce=100f;
     public override void Activate(GameObject parent)
     {
-        PlayerMove1 movement = parent.GetComponent<PlayerMove1>();
+        PlayerMovement movement = parent.GetComponent<PlayerMovement>();
         Rigidbody rb = parent.GetComponent<Rigidbody>();
         
         if (!movement.isGrounded)
