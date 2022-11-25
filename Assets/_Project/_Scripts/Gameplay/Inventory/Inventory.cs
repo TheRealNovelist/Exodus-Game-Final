@@ -30,6 +30,8 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public EquipItem currentSelecting;
 
     public Dictionary<Item, ItemSlot> slotsByItems = new Dictionary<Item, ItemSlot>();
+    
+    
 
     private void Start()
     {

@@ -14,13 +14,15 @@ public class ItemSlot : MonoBehaviour
     public TextMeshProUGUI quantityTMP;
     [SerializeField] private Color32 lockColor = new Color32(90, 90, 90,225);
     private Color32 unlockColor = new Color32(255, 255, 255,255);
+    private Color32 nullColor = new Color32(0, 0, 0,0);
 
 
     public void UpdateSlotUI()
     {
         if (_item == null)
         {
-            image.color = unlockColor;
+            quantityTMP.text = "";
+            image.color = nullColor;
             image.sprite = null;
             return;
         }
