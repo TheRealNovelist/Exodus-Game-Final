@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,7 +16,9 @@ public class Inventory : MonoBehaviour
     
     [Header("Items and Slots")]
     [SerializeField] private List<Item> allItemInInventory;
-    [SerializeField] private ItemSlot[] itemSlots;
+    [SerializeField] private List<ItemSlot> itemSlots;
+    
+
 
     [Header("Notification")]
     [SerializeField] private TextMeshProUGUI notiTMP;
@@ -30,8 +33,21 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public EquipItem currentSelecting;
 
     public Dictionary<Item, ItemSlot> slotsByItems = new Dictionary<Item, ItemSlot>();
-    
-    
+
+    [SerializeField] private Sprite highlightFrame,normalFrame;
+
+    /*
+    private void OnValidate()
+    {
+        for (int i = 0; i < GetComponentsInChildren<ItemSlot>().Length; i++)
+        {
+            itemSlots.Add(GetComponentsInChildren<ItemSlot>()[i]);
+        }
+    }
+    */
+
+
+
 
     private void Start()
     {
@@ -63,24 +79,28 @@ public class Inventory : MonoBehaviour
     public void SetSlotItem()
     {
         int j = 0;
-        for (; j < allItemInInventory.Count && j < itemSlots.Length; j++)
+        for (; j < allItemInInventory.Count && j < itemSlots.Count; j++)
         {
             itemSlots[j]._item = allItemInInventory[j];
             slotsByItems.Add(allItemInInventory[j], itemSlots[j]);
         }
         
-        for (; j < itemSlots.Length; j++)
+        for (; j < itemSlots.Count; j++)
         {
             itemSlots[j]._item =null;
         }
     }
 
+    /// <summary>
+    /// Called when add item from chest
+    /// </summary>
+    /// <param name="item"></param>
     public void AddItem(Item item)
     {
         var equipItem = item as EquipItem;
         if (equipItem is not null && AddEquipItem(equipItem))
         {
-            //Highlight as using item
+           // HighLightFrame(slotsByItems[item],true);
         }
 
         AddToInventory(item);
@@ -93,6 +113,11 @@ public class Inventory : MonoBehaviour
         RefreshUI(slotsByItems[item]);
     }
 
+    /// <summary>
+    /// Auto equip
+    /// </summary>
+    /// <param name="equipItem"></param>
+    /// <returns></returns>
     private bool AddEquipItem(EquipItem equipItem)
     {
         equipItem.unlocked = true;
@@ -131,12 +156,19 @@ public class Inventory : MonoBehaviour
     
     private void RefreshUI()
     {
-        for (int j = 0;j < itemSlots.Length; j++)
+        for (int j = 0;j < itemSlots.Count; j++)
         {
             if(itemSlots[j]._item is not EquipItem) itemSlots[j].UpdateSlotUI();
             else itemSlots[j].UpdateSlotUI();
         }
     }
+
+    public void HighLightFrame(ItemSlot slot, bool highLight)
+    {
+        if (highLight) slot.imageFrame.sprite = highlightFrame;
+        else slot.imageFrame.sprite = normalFrame;
+    }
+    
     #endregion
 
     #region Inventory Notification

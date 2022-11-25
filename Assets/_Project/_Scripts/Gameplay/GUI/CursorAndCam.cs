@@ -27,27 +27,6 @@ public class CursorAndCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (InventoryPanelOn)
-        {
-            if (Cursor.lockState != CursorLockMode.None)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            playerMovementScr.recieveInput = false;
-            playerCamScr.getPlayerRotation = false;
-            return;
-
-        }
-        
-        if (Cursor.lockState != CursorLockMode.Locked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            playerMovementScr.recieveInput = true;
-            playerCamScr.getPlayerRotation = true;
-            Cursor.visible = false;
-        }*/
-
         if (InventoryPanelOn || ShopPanelOn)
         {
             MovePlayer(false);
@@ -87,8 +66,5 @@ public class CursorAndCam : MonoBehaviour
         this.turretCamera.SetActive(turretCamera);
         this.playerCamera.SetActive(!turretCamera);
     }
-    
-    
-    
     
 }

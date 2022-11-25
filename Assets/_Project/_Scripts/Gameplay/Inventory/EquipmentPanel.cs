@@ -7,6 +7,8 @@ public class EquipmentPanel : MonoBehaviour
 {
     public EquipSlot[] equipSlots;
     public EquipItem[] equippedItems = new EquipItem[2];
+
+    [SerializeField] private Inventory inventory;
     public void Equip(EquipSlot slot,EquipItem item)
     {
         slot._item = item;
@@ -57,6 +59,10 @@ public class EquipmentPanel : MonoBehaviour
     
     public void Equip(int index,EquipItem item)
     {
+        Item addItem = item as Item;
+        
+        inventory.HighLightFrame(inventory.slotsByItems[addItem],true);
+        
         equipSlots[index]._item = item;
         equippedItems[index] = item;
 
@@ -67,12 +73,17 @@ public class EquipmentPanel : MonoBehaviour
     
     public void Unequip(int index)
     {
+        inventory.HighLightFrame(inventory.slotsByItems[equipSlots[index]._item as Item],false);
+        
         equipSlots[index]._item.equipping = false;
         
         equipSlots[index]._item = null;
         equippedItems[index] = null;
 
         equipSlots[index].UpdateSlotUI();
+        
+        
+
     }
     
 }
