@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Pooler : MonoBehaviour
 {
-    [SerializeField]
-    GameObject prefab;
+    [SerializeField] GameObject prefab;
     Queue<GameObject> pool = new Queue<GameObject>();
-    int poolSize = 2;
+    [SerializeField] int poolSize = 2;
 
     private void Start()
     {

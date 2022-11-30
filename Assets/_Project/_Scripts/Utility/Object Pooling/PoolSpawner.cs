@@ -7,6 +7,8 @@ public class PoolSpawner : MonoBehaviour
     float spawnTime = 5f;
     float timeToSpawn;
     Pooler pooler;
+    GameObject newPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,19 +19,16 @@ public class PoolSpawner : MonoBehaviour
     void Update()
     {
         timeToSpawn += Time.deltaTime;
+        //Debug.Log("Countdown: " + timeToSpawn);
         if (timeToSpawn >= spawnTime)
         {
-            GameObject newPrefab = pooler.LivePool();
+            newPrefab = pooler.LivePool();
             newPrefab.transform.position = this.transform.position;
         }
-        if (Input.GetKey(KeyCode.Mouse0))
+
+        if (timeToSpawn >= 7f)
         {
-
+            pooler.DeadPool(newPrefab);
         }
-        else if (Input.GetKey(KeyCode.Mouse1))
-        {
-
-        }
-
     }
 }
