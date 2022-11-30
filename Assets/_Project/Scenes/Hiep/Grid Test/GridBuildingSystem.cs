@@ -17,7 +17,9 @@ public class GridBuildingSystem : MonoBehaviour
     public event EventHandler OnObjectPlaced;
 
     private GridXZ<GridObject> grid;
-    [SerializeField] private List<PlacedObjectTypeSO> placeObjectTypeSOList = null;
+    [SerializeField] private List<PlacedObjectTypeSO> placeObjectTypeSOList = new List<PlacedObjectTypeSO>();
+    [SerializeField] private List<ShopButton> _buttons;
+    
     private PlacedObjectTypeSO placedObjectTypeSO;
     private PlacedObjectTypeSO.Dir dir;
     [SerializeField] private CoinManager coinManager;
@@ -26,12 +28,21 @@ public class GridBuildingSystem : MonoBehaviour
 
     private void Awake() {
         Instance = this;
-
+    
 
         grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(0, 0, 0), (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
 
       //  placedObjectTypeSO = placeObjectTypeSOList[0];//set placeObject to the first one in the list
         placedObjectTypeSO = null;
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < _buttons.Count; i++)
+        {
+            var index = i;
+            _buttons[index].SetupButton(placeObjectTypeSOList[index],() => ChangeToTurret(index));
+        }
     }
 
     public class GridObject {
@@ -77,9 +88,8 @@ public class GridBuildingSystem : MonoBehaviour
         }
     }
 
-    public void PlaceObejcts()
+    public void PlaceObjects()
     {
-        
         Vector3 mousePosition = GetMouseWorldPosition();
         grid.GetXZ(mousePosition, out int x, out int z);
            
@@ -137,9 +147,9 @@ public class GridBuildingSystem : MonoBehaviour
     private void Update() 
     { 
         //Place object on place
-        if ( placedObjectTypeSO!=null && Input.GetMouseButton(0)) 
+        if (placedObjectTypeSO != null && Input.GetMouseButton(0)) 
         {
-            PlaceObejcts();
+            PlaceObjects();
             DeselectObjectType();
         }
         
@@ -179,7 +189,8 @@ public class GridBuildingSystem : MonoBehaviour
     }
 
     private void DeselectObjectType() {
-        placedObjectTypeSO = null; RefreshSelectedObjectType();
+        placedObjectTypeSO = null; 
+        RefreshSelectedObjectType();
     }
 
     private void RefreshSelectedObjectType() {

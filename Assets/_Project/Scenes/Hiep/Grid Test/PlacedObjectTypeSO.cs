@@ -45,6 +45,7 @@ public class PlacedObjectTypeSO : ScriptableObject
     public int width;
     public int height;
     public int price = 10;
+    public Sprite icon;
 
     public int GetRotationAngle(Dir dir)
     {
