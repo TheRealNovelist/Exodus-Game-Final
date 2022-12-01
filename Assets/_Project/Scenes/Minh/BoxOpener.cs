@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box1Anim : MonoBehaviour
+public class BoxOpener : MonoBehaviour
 {
     public Animator anim;
     bool isOpened = false;
