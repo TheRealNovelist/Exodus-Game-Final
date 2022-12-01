@@ -81,9 +81,6 @@ public class EquipmentPanel : MonoBehaviour
         equippedItems[index] = null;
 
         equipSlots[index].UpdateSlotUI();
-        
-        
-
     }
     
 }

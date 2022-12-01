@@ -25,7 +25,6 @@ public class ShopUI : MonoBehaviour
         CursorAndCam.Instance.ShopPanelOn = false;
         CursorAndCam.Instance.LockCursor();
         CursorAndCam.Instance.UseTurretCamera(false);
-
     }
     
     public void OnShop()
