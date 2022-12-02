@@ -26,6 +26,8 @@ public class GridBuildingSystem : MonoBehaviour
 
     [SerializeField] private Camera turretCamera;
 
+    [SerializeField] private ShopUI _shopUI;
+
     private void Awake() {
         Instance = this;
     
@@ -107,7 +109,7 @@ public class GridBuildingSystem : MonoBehaviour
             }
         }
             
-        if (canBuild && coinManager.CoinAmuont >= placedObjectTypeSO.price)
+        if (canBuild && coinManager.CoinAmount >= placedObjectTypeSO.price)
         {
             Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
             Vector3 placedObjectWorldPossition = grid.GetWorldPosition(x, z) +
@@ -117,7 +119,7 @@ public class GridBuildingSystem : MonoBehaviour
                 new Vector2Int(x, z), dir, placedObjectTypeSO); 
             
             //miner the amount of coin after build
-            coinManager.CoinAmuont -= placedObjectTypeSO.price; 
+            coinManager.CoinAmount -= placedObjectTypeSO.price; 
             
                 
             foreach (Vector2Int gridPosition in gridPositionList)
@@ -125,6 +127,9 @@ public class GridBuildingSystem : MonoBehaviour
                 grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
             }
         }
+        
+        _shopUI.CloseShop();
+
     }
 
     // Rotate placeObject before place it  on grid

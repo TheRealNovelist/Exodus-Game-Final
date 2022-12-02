@@ -3,20 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class CoinManager : MonoBehaviour
 {
-    public int CoinAmuont;
-
+    public int CoinAmount =100;
+    
     [SerializeField] private TMP_Text moneyAmountText;
     // Start is called before the first frame update
-    void Start()
-    {
-        CoinAmuont = 100;
-    }
+
 
     private void Update()
     {
-        moneyAmountText.SetText("Money " + CoinAmuont.ToString());
+        moneyAmountText.SetText("Money " + CoinAmount.ToString());
     }
 }

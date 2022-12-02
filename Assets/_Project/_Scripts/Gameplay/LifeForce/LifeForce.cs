@@ -17,6 +17,11 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
         timerOn = true;
     }
 
+    public void AddTime(float time)
+    {
+        timeValue += time;
+    }
+
 
     // Update is called once per frame
     void Update()

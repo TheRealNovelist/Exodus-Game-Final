@@ -14,7 +14,9 @@ public enum SpawnState
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private WeightedRandomList<GameObject> enemies;
+    [SerializeField] private GameObject player;
+    
+    [SerializeField] private WeightedRandomList<BaseEnemy> enemies;
     [SerializeField] private List<Transform> spawners;
 
     [SerializeField] private float randGap = 5f;
@@ -51,10 +53,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject enemyToSpawn = enemies.GetRandom();
+        BaseEnemy enemyToSpawn = enemies.GetRandom();
         Transform randSpawner = spawners[Random.Range(0, spawners.Count)];
-        Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
+        BaseEnemy enemy =  Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
+        enemy.target = player.transform;
+        enemy.StartStateMachine();
         waiting = false;
+
 
         //BaseEnemy enemy = enemyToSpawn.GetComponent<BaseEnemy>();
         //set player as enemy.target here

@@ -17,6 +17,7 @@ public class ShopUI : MonoBehaviour
     {
         CursorAndCam.Instance.ShopPanelOn = false;
         CursorAndCam.Instance.UseTurretCamera(true);
+        shopPanel.SetActive(false);
     }
     
     public void CloseShop()
@@ -33,4 +34,5 @@ public class ShopUI : MonoBehaviour
         CursorAndCam.Instance.ShopPanelOn = true;
         CursorAndCam.Instance.UnlockCursor();
     }
+    
 }

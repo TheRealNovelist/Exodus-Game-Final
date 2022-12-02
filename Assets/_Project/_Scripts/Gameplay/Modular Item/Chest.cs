@@ -46,7 +46,15 @@ public class Chest : MonoBehaviour
 
         if (lootedItem is not EquipItem)
         {
-            Harvest(lootedItem);
+            ConsumableItem consumeItem = lootedItem as ConsumableItem;
+            if (consumeItem.storeInInventory)
+            {
+                Harvest(consumeItem);
+            }
+            else
+            {
+                consumeItem.effect.Invoke();
+            }
         }
     }
 
@@ -60,5 +68,6 @@ public class Chest : MonoBehaviour
     {
        return itemList.GetRandom();
     }
+    
 
 }
