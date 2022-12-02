@@ -53,11 +53,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        BaseEnemy enemyToSpawn = enemies.GetRandom();
+        GameObject enemyToSpawn = enemies.GetRandom().gameObject;
         Transform randSpawner = spawners[Random.Range(0, spawners.Count)];
-        BaseEnemy enemy =  Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
+        
+        GameObject enemyObj =  Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
+        
+        BaseEnemy enemy = enemyObj.GetComponent<BaseEnemy>();
         enemy.target = player.transform;
         enemy.StartStateMachine();
+        
         waiting = false;
 
 
