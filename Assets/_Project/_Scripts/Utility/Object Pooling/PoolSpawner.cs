@@ -1,29 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolSpawner : MonoBehaviour
 {
-    float spawnTime = 5f;
+    float spawnTime = 1f;
     float timeToSpawn;
-    GameObject newPrefab;
+    public GameObject newPrefab;
 
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        timeToSpawn += Time.deltaTime;
-        //Debug.Log("Countdown: " + timeToSpawn);
-        if (timeToSpawn >= spawnTime)
-        {
-            //newPrefab = Pooler.Instance.LivePool();
-           GameObject  newObj = Pooler.Instance.GetObject(newPrefab);
-           newObj.transform.position = this.transform.position;
-        }
+        InvokeRepeating("TestSpawn",0,0.3f);
+    }
 
-        if (timeToSpawn >= 7f)
-        {
-            Pooler.Instance.DeadPool(newPrefab);
-        }
+    private void TestSpawn()
+    {
+        GameObject newObj = Pooler.Instance.GetObject(newPrefab);
+        newObj.transform.position = this.transform.position;
+        StartCoroutine(WaitToDestroy(newObj));
+    }
+
+
+    IEnumerator WaitToDestroy(GameObject obj)
+    {
+        yield return new WaitForSeconds(1f);
+        Pooler.Instance.ReturnGameObject(obj);
     }
 }
