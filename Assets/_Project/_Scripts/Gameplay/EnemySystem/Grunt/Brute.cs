@@ -24,11 +24,6 @@ namespace EnemySystem.Brute
                 agent = GetComponent<NavMeshAgent>();
         }
 
-        private void Start()
-        {
-            StartStateMachine();
-        }
-
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;

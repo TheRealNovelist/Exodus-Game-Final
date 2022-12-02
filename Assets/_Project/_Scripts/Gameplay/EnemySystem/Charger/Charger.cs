@@ -34,11 +34,6 @@ namespace EnemySystem.Charger
                 rb = GetComponent<Rigidbody>();
         }
 
-        private void Start()
-        {
-            StartStateMachine();
-        }
-
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;
