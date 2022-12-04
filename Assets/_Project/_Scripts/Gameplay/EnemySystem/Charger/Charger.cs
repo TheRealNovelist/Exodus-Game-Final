@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,6 +35,7 @@ namespace EnemySystem.Charger
                 rb = GetComponent<Rigidbody>();
         }
 
+        [Button]
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;

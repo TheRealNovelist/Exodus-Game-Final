@@ -11,6 +11,8 @@ namespace EnemySystem.Charger
 
         public bool isCharged = false;
         
+        private Color defaultColor;
+        
         public ChargingAttack(Charger charger, Transform target)
         {
             _charger = charger;
@@ -36,12 +38,16 @@ namespace EnemySystem.Charger
             _chargeTime = _charger.chargeTime;
             isCharged = false;
             _charger.ReduceDamage(true);
+            defaultColor = _charger.GetComponent<Renderer>().material.color;
+            
+            _charger.GetComponent<Renderer>().material.color = Color.red;
         }
 
         public void OnExit()
         {
             _charger.ReduceDamage(false);
             _charger.attackDirection = _charger.transform.forward;
+            _charger.GetComponent<Renderer>().material.color = defaultColor;
         }
     }
 }
