@@ -3,24 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Gun2_ShotGun : MonoBehaviour
+public class Shotgun : GunBase
 {
-    private bool isReloading;
-    
-    [Header("Component")]
-    [SerializeField] private GunData gunData; // a reference to class Gundata:ScriptableObject
-    [SerializeField] private AmmoManager ammoManager; //reference to class AmmoManager
-     
-    private float nextTimeToFire = 0f;
-    
-    public Camera fpsCam;
-    public ParticleSystem muzzleFlash;
-    public GameObject impactEffect;
-    
-    [Header("Key Binds")] 
-    public KeyCode shootKey = KeyCode.Mouse0;
-    public KeyCode reloadKey = KeyCode.R;
-
     private void Start()
     {
         gunData.currentAmmoInsizeGunMagazine = gunData.maxMagazineAmmo; //let player start with a gun ful with ammo
@@ -46,17 +30,7 @@ public class Gun2_ShotGun : MonoBehaviour
         }    
     }
 
-    IEnumerator Reload()
-    {
-        isReloading = true;
-        Debug.Log("Is reloading");
-        gunData.ammoNeedToReload = Mathf.Min(gunData.maxMagazineAmmo - gunData.currentAmmoInsizeGunMagazine, ammoManager.ammoPlayerCurrentHave);
-        yield return new WaitForSeconds(gunData.reloadTime);
-        gunData.currentAmmoInsizeGunMagazine += gunData.ammoNeedToReload;
-        ammoManager.ammoPlayerCurrentHave -= gunData.ammoNeedToReload; 
-        isReloading = false;
-    }
-    void Shoot()
+    public override void Shoot()
     {
         muzzleFlash.Play(); //player muzzleFlash
         
@@ -103,8 +77,5 @@ public class Gun2_ShotGun : MonoBehaviour
         
         //decrease value of currentAmmo var
         gunData.currentAmmoInsizeGunMagazine--;
-        
-        
-        
     }
 }

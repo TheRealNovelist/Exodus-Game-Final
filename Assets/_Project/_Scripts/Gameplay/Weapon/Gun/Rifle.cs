@@ -5,28 +5,8 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Gun1 : MonoBehaviour
+public class Rifle : GunBase
 {
-    //Gonna put some where else later, this is still basic code
-    
-    private bool isReloading;
-    
-    
-    [Header("Component")]
-    [SerializeField] private GunData gunData; // a reference to class Gundata:ScriptableObject
-    [SerializeField] private AmmoManager ammoManager; //reference to class AmmoManager
-    [SerializeField] private MakeCameraRecoil MakeCameraRecoil_Script; // a reference to class MakeCameraRecoil
-    
-    private float nextTimeToFire = 0f;
-    
-    public Camera fpsCam;
-    public ParticleSystem muzzleFlash;
-    public GameObject impactEffect;
-    
-    [Header("Key Binds")] 
-    public KeyCode shootKey = KeyCode.Mouse0;
-    public KeyCode reloadKey = KeyCode.R;
-
     private void Start()
     {
         gunData.currentAmmoInsizeGunMagazine = gunData.maxMagazineAmmo; //let player start with a gun ful with ammo
@@ -52,20 +32,10 @@ public class Gun1 : MonoBehaviour
         }    
     }
 
-    IEnumerator Reload()
+
+    public override void Shoot()
     {
-        isReloading = true;
-        Debug.Log("Is reloading");
-        gunData.ammoNeedToReload = Mathf.Min(gunData.maxMagazineAmmo - gunData.currentAmmoInsizeGunMagazine, ammoManager.ammoPlayerCurrentHave);
-        yield return new WaitForSeconds(gunData.reloadTime);
-        gunData.currentAmmoInsizeGunMagazine += gunData.ammoNeedToReload;
-        ammoManager.ammoPlayerCurrentHave -= gunData.ammoNeedToReload; 
-        isReloading = false;
-      
-    }
-    void Shoot()
-    {
-        MakeCameraRecoil_Script.RecoilFire();
+        //MakeCameraRecoil_Script.RecoilFire();
         muzzleFlash.Play();
         
         //decrease value of currentAmmo var
@@ -89,6 +59,4 @@ public class Gun1 : MonoBehaviour
             Destroy(impactGO, 5.0f);
         }
     }
-
-    
 }

@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class GunPickUpController : MonoBehaviour
 {
-    public Gun1 gunScript; // reference to Gun1 class
-    public Gun2_ShotGun gunScript2;
+    public Rifle gunScript; // reference to Gun1 class
+    public Shotgun gunScript2;
     public Rigidbody rb;
     public BoxCollider coll;
     public Transform player, gunContainer, fpsCam;

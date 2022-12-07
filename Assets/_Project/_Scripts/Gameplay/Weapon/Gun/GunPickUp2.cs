@@ -6,7 +6,7 @@ public class GunPickUp2 : MonoBehaviour
 {
     [SerializeField] private Transform shotgun;
     [SerializeField] private Inventory inventory;
-    [SerializeField] private List<Gun1> allGuns;
+    [SerializeField] private List<Rifle> allGuns;
 
     //This function will put the gun we pass in to the first position, SiblingIndex = 0
     public void PutToTheTop(Transform gun)
