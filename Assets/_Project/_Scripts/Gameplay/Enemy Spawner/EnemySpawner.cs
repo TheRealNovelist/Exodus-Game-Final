@@ -21,7 +21,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private float randGap = 5f;
     [SerializeField] private int totalToSpawn = 20;
+    
     private int spawned =0;
+    private int defeated = 0;
     
     private float waveCountDown;
     private bool waiting = false;
@@ -68,6 +70,15 @@ public class EnemySpawner : MonoBehaviour
         //BaseEnemy enemy = enemyToSpawn.GetComponent<BaseEnemy>();
         //set player as enemy.target here
         //enemy.StartStateMachine
+    }
+
+    public void EnemyDie()
+    {
+        defeated++;
+        if (defeated == totalToSpawn)
+        {
+            //unlock room
+        }
     }
     
 }
