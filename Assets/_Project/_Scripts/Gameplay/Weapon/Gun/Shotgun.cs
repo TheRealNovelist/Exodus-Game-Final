@@ -7,13 +7,13 @@ public class Shotgun : GunBase
 {
     private void Start()
     {
-        gunData.currentAmmoInsizeGunMagazine = gunData.maxMagazineAmmo; //let player start with a gun ful with ammo
+        gunData.currentAmmo = gunData.maxMagazineAmmo; //let player start with a gun ful with ammo
         //  MakeCameraRecoil_Script = transform.Find("CamRot/CameraRecoil").GetComponent<MakeCameraRecoil>();
     }
 
     void Update()
     {
-        Debug.Log("I have " + ammoManager.ammoPlayerCurrentHave + " bullets, I have " + gunData.currentAmmoInsizeGunMagazine + " bullets inside my gun" );
+        Debug.Log("I have " + ammoManager.ammoPlayerCurrentHave + " bullets, I have " + gunData.currentAmmo + " bullets inside my gun" );
 
         if(isReloading)
             return;
@@ -23,7 +23,7 @@ public class Shotgun : GunBase
            StartCoroutine(Reload()) ;
            return;
         } 
-        if (Input.GetKey(shootKey) && Time.time >= nextTimeToFire && gunData.currentAmmoInsizeGunMagazine > 0 )
+        if (Input.GetKey(shootKey) && Time.time >= nextTimeToFire && gunData.currentAmmo > 0 )
         {
             nextTimeToFire = Time.time + 1f / gunData.fireRate;
             Shoot();
@@ -76,6 +76,6 @@ public class Shotgun : GunBase
         
         
         //decrease value of currentAmmo var
-        gunData.currentAmmoInsizeGunMagazine--;
+        gunData.currentAmmo--;
     }
 }

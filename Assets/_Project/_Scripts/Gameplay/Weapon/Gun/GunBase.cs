@@ -24,9 +24,9 @@ public abstract class GunBase : MonoBehaviour
     {
         isReloading = true;
         Debug.Log("Is reloading");
-        gunData.ammoNeedToReload = Mathf.Min(gunData.maxMagazineAmmo - gunData.currentAmmoInsizeGunMagazine, ammoManager.ammoPlayerCurrentHave);
+        gunData.ammoNeedToReload = Mathf.Min(gunData.maxMagazineAmmo - gunData.currentAmmo, ammoManager.ammoPlayerCurrentHave);
         yield return new WaitForSeconds(gunData.reloadTime);
-        gunData.currentAmmoInsizeGunMagazine += gunData.ammoNeedToReload;
+        gunData.currentAmmo += gunData.ammoNeedToReload;
         ammoManager.ammoPlayerCurrentHave -= gunData.ammoNeedToReload; 
         isReloading = false;
     }

@@ -9,7 +9,7 @@ public class Rifle : GunBase
 {
     private void Start()
     {
-        gunData.currentAmmoInsizeGunMagazine = gunData.maxMagazineAmmo; //let player start with a gun ful with ammo
+        gunData.currentAmmo = gunData.maxMagazineAmmo; //let player start with a gun ful with ammo
         //  MakeCameraRecoil_Script = transform.Find("CamRot/CameraRecoil").GetComponent<MakeCameraRecoil>();
     }
 
@@ -25,7 +25,7 @@ public class Rifle : GunBase
            StartCoroutine(Reload()) ;
            return;
         } 
-        if (Input.GetKey(shootKey) && Time.time >= nextTimeToFire && gunData.currentAmmoInsizeGunMagazine > 0 )
+        if (Input.GetKey(shootKey) && Time.time >= nextTimeToFire && gunData.currentAmmo > 0 )
         {
             nextTimeToFire = Time.time + 1f / gunData.fireRate;
             Shoot();
@@ -39,7 +39,7 @@ public class Rifle : GunBase
         muzzleFlash.Play();
         
         //decrease value of currentAmmo var
-        gunData.currentAmmoInsizeGunMagazine--;
+        gunData.currentAmmo--;
         
         RaycastHit hit; // var to save data about what we hit 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, gunData.gunRange))

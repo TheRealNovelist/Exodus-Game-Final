@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
 public class GunData : ScriptableObject
@@ -14,7 +15,7 @@ public class GunData : ScriptableObject
     public float fireRate;
     public int maxMagazineAmmo;
  //   public int ammoPlayerCurrentHave;
-    public int currentAmmoInsizeGunMagazine;
+    public int currentAmmo;
     public int ammoNeedToReload;
     public float reloadTime;
   //  public bool IsEquiped;
