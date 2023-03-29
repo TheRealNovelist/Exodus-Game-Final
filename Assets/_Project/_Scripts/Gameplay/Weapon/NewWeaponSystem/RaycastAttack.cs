@@ -2,22 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastAttack : MonoBehaviour
+namespace WeaponSystem
 {
-    public Camera fpsCam;
-    public float damage = 50;
-
-    public void Shoot()
+    public class RaycastAttack : AttackModule
     {
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit))
+        public Camera fpsCam;
+        public float damage = 50;
+
+        public override void Shoot()
         {
-            Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * 1000, Color.red, 3f);
-            
-            if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit))
             {
-                hitObject.Damage(damage);
+                Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * 1000, Color.red, 3f);
+
+                if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
+                {
+                    hitObject.Damage(damage);
+                }
             }
         }
     }
-
 }

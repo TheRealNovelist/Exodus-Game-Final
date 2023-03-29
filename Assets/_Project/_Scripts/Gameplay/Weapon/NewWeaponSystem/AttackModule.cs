@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace WeaponSystem
 {
-    public class Weapon : MonoBehaviour
+    public abstract class AttackModule : MonoBehaviour
     {
-
-
+        public abstract void Shoot();
     }
 }
