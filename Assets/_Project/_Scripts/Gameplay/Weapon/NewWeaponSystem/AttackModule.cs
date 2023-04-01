@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace WeaponSystem
 {
+    [DisallowMultipleComponent]
     public abstract class AttackModule : MonoBehaviour
     {
-        public abstract void Shoot();
+        public abstract void Attack(float damage);
     }
 }

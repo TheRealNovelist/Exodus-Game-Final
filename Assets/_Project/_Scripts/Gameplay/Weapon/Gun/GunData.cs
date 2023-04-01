@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
 public class GunData : ScriptableObject
 {
     public string gunName;
