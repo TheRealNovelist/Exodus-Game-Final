@@ -13,86 +13,146 @@ namespace WeaponSystem
         [ReadOnly] public WeaponData data;
 
         [SerializeField] private AttackModule _attackModule;
+        [SerializeField] private Renderer _debug;
 
+        private IEnumerator _reloadRoutine => ReloadRoutine();
+        private IEnumerator _equipRoutine => EquipRoutine();
+        
         private int _currentAmmo;
-        private int CurrentAmmo
+        public int CurrentAmmo
         {
             get => _currentAmmo;
-            set
+            private set
             {
                 _currentAmmo = value;
                 OnAmmoChange?.Invoke(_currentAmmo);
             }
         }
-        private bool isReloading;
-        private float nextTimeToFire;
-        private bool onTrigger;
+        private bool _isReloading;
+        private float _nextTimeToFire;
+        private bool _onTrigger;
 
-        public event Action<float> OnStartReload;
+        private PlayerWeaponHandler _weaponHandler;
+
+        private Color _debugColor;
+        
+        public bool isWeaponReady { get; private set; }
+
+        public event Action OnStartReload;
+        public event Action OnEndReload;
         public event Action<int> OnAmmoChange;
+
+        private void Awake()
+        {
+            _debugColor = _debug.material.color;
+        }
 
         private void Start()
         {
-            CurrentAmmo = data.MagazineSize;
+            data = dataSO.GetData();
+            CurrentAmmo = data.magazineSize;
         }
 
         private void Update()
         {
-            if (Time.time >= nextTimeToFire && onTrigger)
+            if (Time.time >= _nextTimeToFire && _onTrigger)
             {
-                nextTimeToFire = Time.time + 1f / data.FireRate;
+                _nextTimeToFire = Time.time + 1f / data.fireRate;
                 DealDamage();
             }    
         }
 
         public void OnTrigger()
         {
-            switch (data.FiringMode)
+            switch (data.firingMode)
             {
                 case FiringMode.SemiAuto:
                     DealDamage();
                     break;
                 case FiringMode.FullAuto:
-                    onTrigger = true;
+                    _onTrigger = true;
                     break;
             }
         }
 
         public void OffTrigger()
         {
-            onTrigger = false;
+            _onTrigger = false;
         }
         
         private void DealDamage()
         {
-            if (isReloading || _currentAmmo <= 0) return;
+            if (_isReloading || _currentAmmo <= 0) return;
             CurrentAmmo -= 1;
-            _attackModule.Attack(data.Damage);
+            _attackModule.Attack(data);
         }
-        
-        public void Reload() => StartCoroutine(ReloadRoutine());
+
+        public void StartReload()
+        {
+            if (CurrentAmmo == data.magazineSize || _weaponHandler.AmmoPool <= 0) return;
+            
+            StartCoroutine(_reloadRoutine);
+        }
+
+        public void CancelReload()
+        {
+            if (!_isReloading) return;
+            
+            StopCoroutine(_reloadRoutine);
+            
+            _isReloading = false;
+            OnEndReload?.Invoke();
+        } 
         
         private IEnumerator ReloadRoutine()
         {
-            isReloading = true;
-            OnStartReload?.Invoke(data.ReloadTime);
+            _isReloading = true;
+            var reloadTime = _currentAmmo > 0 ? data.fastReloadTime : data.normalReloadTime;
+            OnStartReload?.Invoke();
             
-            yield return new WaitForSeconds(data.ReloadTime);
-            CurrentAmmo = data.MagazineSize;
-       
-            isReloading = false;
+            yield return new WaitForSeconds(reloadTime);
+            
+            _isReloading = false;
+            CurrentAmmo = _weaponHandler.TryAddAmmo(CurrentAmmo, data);
+            OnEndReload?.Invoke();
         }
 
+        public void Equip(PlayerWeaponHandler weaponHandler)
+        {
+            _weaponHandler = weaponHandler;
+            StartCoroutine(_equipRoutine);
+        }
+
+        public IEnumerator EquipRoutine()
+        {
+            isWeaponReady = false;
+            
+            _debug.material.color = Color.red;
+
+            yield return new WaitForSeconds(data.equipTime);
+
+            _debug.material.color = _debugColor;
+            isWeaponReady = true;
+        }
+        
+        public void Unequip()
+        {
+            StopCoroutine(_equipRoutine);
+            
+            // Cancel reload if needed
+            CancelReload();
+            // Cancel trigger
+            OffTrigger();
+            
+            _debug.material.color = _debugColor;
+            
+            isWeaponReady = false;
+        }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (dataSO != null)
-            {
-                data = dataSO.data;
-            }
-
-
+            data = dataSO != null ? dataSO.GetData() : new WeaponData();
         }
 #endif
     }

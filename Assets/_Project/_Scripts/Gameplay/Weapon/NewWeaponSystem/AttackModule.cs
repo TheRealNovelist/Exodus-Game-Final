@@ -7,6 +7,6 @@ namespace WeaponSystem
     [DisallowMultipleComponent]
     public abstract class AttackModule : MonoBehaviour
     {
-        public abstract void Attack(float damage);
+        public abstract void Attack(WeaponData data);
     }
 }

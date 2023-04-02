@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10d2e447a0de434d8bbf26ecf0f14d78, type: 3}
-  m_Name: Test
+  m_Name: Rifle
   m_EditorClassIdentifier: 
   data:
-    <Damage>k__BackingField: 10
-    <FireRate>k__BackingField: 20
-    <Force>k__BackingField: 0
-    <ReloadTime>k__BackingField: 3
-    <MagazineSize>k__BackingField: 60
-    <FiringMode>k__BackingField: 1
+    damage: 30
+    fireRate: 10
+    force: 0
+    range: 0
+    bulletPerShot: 0
+    normalReloadTime: 1
+    fastReloadTime: 0.5
+    equipTime: 0.3
+    magazineSize: 20
+    ammoCostPerBullet: 0
+    firingMode: 1

@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace WeaponSystem
 {
-    public class RaycastAttackModule : AttackModule
+    public class SingleRaycastAM : AttackModule
     {
         public Camera fpsCam;
 
-        public override void Attack(float damage)
+        public override void Attack(WeaponData data)
         {
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit))
             {
                 if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
                 {
-                    hitObject.Damage(damage);
+                    hitObject.Damage(data.damage);
                 }
             }
         }
