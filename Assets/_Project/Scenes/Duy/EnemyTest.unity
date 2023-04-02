@@ -3383,7 +3383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!33 &2914171645762801230
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3802,7 +3802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d3013c28684a744acef947d0af54f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 8608718193006752856}
+  currentWeapon: {fileID: 9140412183821457943}
   weaponHolder: {fileID: 5813498094785003900}
 --- !u!33 &5926397401338789321
 MeshFilter:
@@ -3891,7 +3891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &6074487590432273458
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4497,7 +4497,7 @@ MonoBehaviour:
     fastReloadTime: 0.5
     equipTime: 0.3
     magazineSize: 20
-    ammoCostPerBullet: 0
+    ammoCostPerBullet: 1
     firingMode: 1
   _attackModule: {fileID: 8608718191991150277}
   _debug: {fileID: 845020661302039312}
@@ -4545,7 +4545,7 @@ MonoBehaviour:
     fastReloadTime: 0.5
     equipTime: 0.3
     magazineSize: 5
-    ammoCostPerBullet: 0
+    ammoCostPerBullet: 10
     firingMode: 0
   _attackModule: {fileID: 8608718193006752855}
   _debug: {fileID: 6778274064036549001}
@@ -4660,7 +4660,7 @@ MonoBehaviour:
     fastReloadTime: 0.3
     equipTime: 0.3
     magazineSize: 10
-    ammoCostPerBullet: 0
+    ammoCostPerBullet: 5
     firingMode: 0
   _attackModule: {fileID: 9140412183821457944}
   _debug: {fileID: 6074487590432273458}
