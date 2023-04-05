@@ -9,7 +9,7 @@ namespace WeaponSystem
     //Handling weapons by player
     public class PlayerWeaponHandler : MonoBehaviour
     {
-        [SerializeField] private Weapon currentWeapon;
+        [SerializeField] private Weapon _currentWeapon;
         [SerializeField] private Transform weaponHolder;
         
         public event Action<Weapon> OnSwitchingWeapon;
@@ -41,24 +41,23 @@ namespace WeaponSystem
         {
             HandleWeaponSwitching();
             
-            isWeaponReady = currentWeapon != null && currentWeapon.isWeaponReady;
+            isWeaponReady = _currentWeapon != null && _currentWeapon.isWeaponReady;
+
+            if (!isWeaponReady) return;
             
-            if (isWeaponReady)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    currentWeapon.OnTrigger();
-                }
+                _currentWeapon.OnTrigger();
+            }
 
-                if (Input.GetMouseButtonUp(0))
-                {
-                    currentWeapon.OffTrigger();
-                }
+            if (Input.GetMouseButtonUp(0))
+            {
+                _currentWeapon.OffTrigger();
+            }
 
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    currentWeapon.StartReload();
-                }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _currentWeapon.StartReload();
             }
         }
 
@@ -113,17 +112,17 @@ namespace WeaponSystem
             if (index == currentIndex && !forceChange) return;
             
             //Unequip previous weapon 
-            if (currentWeapon != null)
+            if (_currentWeapon != null)
             {
-                currentWeapon.Unequip();
-                currentWeapon = null;
+                _currentWeapon.Unequip();
+                _currentWeapon = null;
             }
 
             if (index == -1)
             {
                 isEquipped = false;
                 OnSwitchingWeapon?.Invoke(null);
-                foreach (Transform weapon in transform)
+                foreach (Transform weapon in weaponHolder)
                 {
                     weapon.gameObject.SetActive(false);
                 }
@@ -132,14 +131,14 @@ namespace WeaponSystem
             }
             
             int i = 0;
-            foreach (Transform weapon in transform)
+            foreach (Transform weapon in weaponHolder)
             {
                 if (i == index)
                 {
                     weapon.gameObject.SetActive(true);
-                    currentWeapon = weapon.GetComponent<Weapon>();
-                    currentWeapon.Equip(this);
-                    OnSwitchingWeapon?.Invoke(currentWeapon);
+                    _currentWeapon = weapon.GetComponent<Weapon>();
+                    _currentWeapon.Equip(this);
+                    OnSwitchingWeapon?.Invoke(_currentWeapon);
                     currentIndex = i;
                     isEquipped = true;
                 }

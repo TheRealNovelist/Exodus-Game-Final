@@ -123,7 +123,7 @@ namespace WeaponSystem
             StartCoroutine(_equipRoutine);
         }
 
-        public IEnumerator EquipRoutine()
+        private IEnumerator EquipRoutine()
         {
             isWeaponReady = false;
             
