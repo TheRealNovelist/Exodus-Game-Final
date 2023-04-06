@@ -13,6 +13,7 @@ namespace WeaponSystem
         [ReadOnly] public WeaponData data;
 
         [SerializeField] private AttackModule _attackModule;
+        [SerializeField] private Modifier _modifier;
         [SerializeField] private Renderer _debug;
 
         private IEnumerator _reloadRoutine => ReloadRoutine();
@@ -50,6 +51,7 @@ namespace WeaponSystem
         private void Start()
         {
             data = dataSO.GetData();
+            if (_modifier) data = _modifier.Modify(data);
             CurrentAmmo = data.magazineSize;
         }
 
@@ -66,10 +68,10 @@ namespace WeaponSystem
         {
             switch (data.firingMode)
             {
-                case FiringMode.SemiAuto:
+                case FiringMode.Single:
                     DealDamage();
                     break;
-                case FiringMode.FullAuto:
+                case FiringMode.Hold:
                     _onTrigger = true;
                     break;
             }
@@ -78,6 +80,7 @@ namespace WeaponSystem
         public void OffTrigger()
         {
             _onTrigger = false;
+            _attackModule.EndAttack();
         }
         
         private void DealDamage()
@@ -149,10 +152,15 @@ namespace WeaponSystem
             isWeaponReady = false;
         }
 
+        public void RestoreBaseData()
+        {
+            data = dataSO.GetData();
+        }
+        
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            data = dataSO != null ? dataSO.GetData() : new WeaponData();
+            //data = dataSO != null ? dataSO.GetData() : new WeaponData();
         }
 #endif
     }

@@ -21,11 +21,30 @@ namespace WeaponSystem
         
         [Space]
         public FiringMode firingMode;
+        
+        public static WeaponData operator +(WeaponData x, WeaponData y)
+        {
+            return new WeaponData
+            {
+                damage = x.damage + y.damage,
+                fireRate = x.fireRate + y.fireRate,
+                force = x.force + y.force,
+                range = x.range + y.range,
+                bulletPerShot = x.bulletPerShot + y.bulletPerShot,
+                normalReloadTime = x.normalReloadTime + y.normalReloadTime,
+                fastReloadTime = x.fastReloadTime + y.fastReloadTime,
+                equipTime = x.equipTime + y.equipTime,
+                magazineSize = x.magazineSize + y.magazineSize,
+                ammoCostPerBullet = x.ammoCostPerBullet + y.ammoCostPerBullet
+            };
+        }
     }
 
+    
+    
     public enum FiringMode
     {
-        SemiAuto,
-        FullAuto
+        Single,
+        Hold
     }
 }
