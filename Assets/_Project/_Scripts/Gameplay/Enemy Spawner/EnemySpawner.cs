@@ -12,6 +12,9 @@ public enum SpawnState
     Waiting,
 }
 
+/// <summary>
+///
+/// </summary>
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject player;
@@ -37,13 +40,22 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         if(!canSpawn){return;}
+
+        //Check if spawned enough
         if(spawned>=totalToSpawn){return;}
+
         if(waiting){return;}
+
+        //If finished counting down
         if (waveCountDown <= 0)
         {
             //spawn a wave
             SpawnEnemy();
+
+            //Choose next wave timer
             waveCountDown = randGap + Random.Range(0f,5f);
+
+            //Update spawn amount
             spawned++;
         }
         else
@@ -55,15 +67,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject enemyToSpawn = enemies.GetRandom().gameObject;
+        BaseEnemy enemyToSpawn = enemies.GetRandom();
         Transform randSpawner = spawners[Random.Range(0, spawners.Count)];
         
-        GameObject enemyObj =  Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
+        BaseEnemy enemyObj =  Instantiate(enemyToSpawn, randSpawner.position,quaternion.identity);
         
-        BaseEnemy enemy = enemyObj.GetComponent<BaseEnemy>();
-        enemy.target = player.transform;
-        enemy.StartStateMachine();
-        
+        enemyObj.target = player.transform;
+
         waiting = false;
 
 

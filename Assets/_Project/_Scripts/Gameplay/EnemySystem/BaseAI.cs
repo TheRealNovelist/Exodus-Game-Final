@@ -18,6 +18,8 @@ namespace EnemySystem
 
         public virtual void StartStateMachine(float delay = 0f)
         {
+            Debug.Log("alo");
+
             StartCoroutine(StartWithDelay(initialState, delay));
         }
 

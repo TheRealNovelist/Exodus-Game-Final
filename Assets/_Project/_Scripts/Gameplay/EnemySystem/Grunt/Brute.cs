@@ -11,6 +11,7 @@ namespace EnemySystem.Brute
         [Header("Components")]
         [SerializeField] private NavMeshAgent agent;
 
+
         [Header("Settings")]
         [SerializeField] private float attackRange = 2f;
 
@@ -20,15 +21,19 @@ namespace EnemySystem.Brute
         protected override void Awake()
         {
             base.Awake();
-            if (!agent)
-                agent = GetComponent<NavMeshAgent>();
+            /*if (!agent)
+                agent = GetComponent<NavMeshAgent>();*/
+
+            if (!collider)
+                collider = GetComponent<Collider>();
         }
 
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;
             
-            var MoveToPlayer = new MoveToPlayer(agent, target);
+            agent = gameObject.AddComponent<NavMeshAgent>();
+            var MoveToPlayer = new MoveToPlayer(agent,target);
             var Attacking = new Attacking(this, target);
 
             AddTransition(MoveToPlayer, Attacking, TargetInRange());
@@ -41,7 +46,16 @@ namespace EnemySystem.Brute
             
             base.StartStateMachine(delay);
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.gameObject.layer == 7) {
+                StartStateMachine();
+            }
+        }
     }
+
+
     
     
 }

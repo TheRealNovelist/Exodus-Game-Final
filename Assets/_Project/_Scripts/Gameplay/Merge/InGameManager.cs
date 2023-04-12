@@ -11,6 +11,7 @@ public class InGameManager : MonoBehaviour
     public CursorAndCam CursorAndCam;
     public Shop Shop;
     public Inventory Inventory;
+    public GameObject Player;
 
     private void Awake()
     {

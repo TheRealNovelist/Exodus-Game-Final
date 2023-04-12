@@ -32,6 +32,13 @@ namespace EnemySystem
             _currentState?.Update();
         }
 
+        public void FixedUpdate() {
+            if (isPaused || !isStarted)
+                return;
+
+            _currentState?.FixedUpdate();
+        }
+
         //Allow to pause the state machine, cease operation and continue
         public void Pause(bool pause)
         {

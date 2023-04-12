@@ -9,7 +9,7 @@ namespace EnemySystem.Charger
     {
         [Header("Components")] 
         [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private Rigidbody rb;
+        [HideInInspector] public Rigidbody rb;
         
         [Header("Settings")]
         [SerializeField] private float attackRange = 2f;
@@ -28,19 +28,23 @@ namespace EnemySystem.Charger
         protected override void Awake()
         {
             base.Awake();
-            if (!agent)
-                agent = GetComponent<NavMeshAgent>();
+            /*if (!agent)
+                agent = GetComponent<NavMeshAgent>();*/
 
             if (!rb)
                 rb = GetComponent<Rigidbody>();
+
+            if (!collider)
+                collider = GetComponent<Collider>();
         }
 
         [Button]
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;
-            
-            var MoveToPlayer = new MoveToPlayer(agent, target);
+
+            agent = gameObject.AddComponent<NavMeshAgent>();
+            var MoveToPlayer = new MoveToPlayer(agent,target);
             var Charging = new ChargingAttack(this, target);
             var Attacking = new Attacking(this, rb);
             var Cooldown = new Cooldown(this, attackCooldown);
@@ -79,6 +83,10 @@ namespace EnemySystem.Charger
                     collision.gameObject.GetComponent<IDamageable>().Damage(damageDealt);
                 }
                 hasCollided = true;
+            }
+
+            if (collision.collider.gameObject.layer == 7) {
+                StartStateMachine();
             }
         }
     }
