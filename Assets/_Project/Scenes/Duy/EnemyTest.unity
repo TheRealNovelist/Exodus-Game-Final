@@ -3802,7 +3802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d3013c28684a744acef947d0af54f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 9140412183821457943}
+  _currentWeapon: {fileID: 9140412183821457943}
   weaponHolder: {fileID: 5813498094785003900}
 --- !u!33 &5926397401338789321
 MeshFilter:
@@ -4500,6 +4500,7 @@ MonoBehaviour:
     ammoCostPerBullet: 1
     firingMode: 1
   _attackModule: {fileID: 8608718191991150277}
+  _modifer: {fileID: 0}
   _debug: {fileID: 845020661302039312}
 --- !u!33 &8608718193006752854
 MeshFilter:
@@ -4548,6 +4549,7 @@ MonoBehaviour:
     ammoCostPerBullet: 10
     firingMode: 0
   _attackModule: {fileID: 8608718193006752855}
+  _modifer: {fileID: 0}
   _debug: {fileID: 6778274064036549001}
 --- !u!65 &8795701233336390094
 BoxCollider:
@@ -4663,6 +4665,7 @@ MonoBehaviour:
     ammoCostPerBullet: 5
     firingMode: 0
   _attackModule: {fileID: 9140412183821457944}
+  _modifer: {fileID: 11400000, guid: 13775c27c17e3564bb7554be00a482dd, type: 2}
   _debug: {fileID: 6074487590432273458}
 --- !u!114 &9140412183821457944
 MonoBehaviour:

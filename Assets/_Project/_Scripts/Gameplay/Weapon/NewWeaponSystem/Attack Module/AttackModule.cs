@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace WeaponSystem
 {
-    [DisallowMultipleComponent]
     public abstract class AttackModule : MonoBehaviour
     {
         public abstract void Attack(WeaponData data);
+
+        public virtual void EndAttack() {}
     }
 }

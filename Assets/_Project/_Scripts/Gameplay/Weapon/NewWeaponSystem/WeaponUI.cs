@@ -14,6 +14,7 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoPoolText;
     [SerializeField] private GameObject reloadText;
 
+    //Cache in current weapon
     private Weapon _currentWeapon;
 
     private void Awake()
@@ -41,6 +42,7 @@ public class WeaponUI : MonoBehaviour
         if (weapon == null)
         {
             gunCanvas.SetActive(false);
+            _currentWeapon = null;
         }
         else
         {
