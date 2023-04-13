@@ -24,7 +24,7 @@ namespace EnemySystem
             }
         }
 
-        public virtual void Die()
+        public virtual void Die()   
         {
             _spawner.EnemyDie();
             Destroy(gameObject);

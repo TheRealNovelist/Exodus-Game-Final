@@ -21,7 +21,6 @@ namespace EnemySystem.Charger
         {
             if (cooldown > 0)
             {
-                Debug.Log("Cooling Down");
                 cooldown -= Time.deltaTime;
                 return;
             }
