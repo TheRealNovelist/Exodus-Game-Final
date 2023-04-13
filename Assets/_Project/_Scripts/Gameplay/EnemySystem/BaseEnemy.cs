@@ -9,9 +9,10 @@ namespace EnemySystem
         public float maxHealth;
         
         public Transform target;
+
         private float health;
+
         private EnemySpawner _spawner;
-        public Collider collider;
 
         public virtual void Damage(float amount)
         {
@@ -22,7 +23,6 @@ namespace EnemySystem
                 Die();
             }
         }
-
 
         public virtual void Die()
         {

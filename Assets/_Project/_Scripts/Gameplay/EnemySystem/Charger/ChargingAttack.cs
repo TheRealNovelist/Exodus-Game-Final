@@ -1,45 +1,50 @@
 using UnityEngine;
 
-namespace EnemySystem.Charger {
-    internal class ChargingAttack : IState {
+namespace EnemySystem.Charger
+{
+    internal class ChargingAttack : IState
+    {
         private readonly Charger _charger;
         private readonly Transform _target;
 
         private float _chargeTime;
 
         public bool isCharged = false;
-
+        
         private Color defaultColor;
-
-        public ChargingAttack(Charger charger, Transform target) {
+        
+        public ChargingAttack(Charger charger, Transform target)
+        {
             _charger = charger;
             _target = target;
         }
 
-        public void Update() {
+        public void Update()
+        {
             var chargerTransform = _charger.transform;
-
-            if (_chargeTime <= 0f) {
+            
+            if (_chargeTime <= 0f)
+            {
                 isCharged = true;
                 return;
             }
-
+            
             chargerTransform.LookAt(new Vector3(_target.position.x, _charger.transform.position.y, _target.position.z));
             _chargeTime -= Time.deltaTime;
         }
 
-        public void FixedUpdate() { }
-
-        public void OnEnter() {
+        public void OnEnter()
+        {
             _chargeTime = _charger.chargeTime;
             isCharged = false;
             _charger.ReduceDamage(true);
             defaultColor = _charger.GetComponent<Renderer>().material.color;
-
+            
             _charger.GetComponent<Renderer>().material.color = Color.red;
         }
 
-        public void OnExit() {
+        public void OnExit()
+        {
             _charger.ReduceDamage(false);
             _charger.attackDirection = _charger.transform.forward;
             _charger.GetComponent<Renderer>().material.color = defaultColor;
