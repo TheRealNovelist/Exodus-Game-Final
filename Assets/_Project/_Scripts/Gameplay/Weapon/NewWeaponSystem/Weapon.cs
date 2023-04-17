@@ -32,9 +32,7 @@ namespace WeaponSystem
         }
         
         private bool _isReloading;
-        private float _nextTimeToFire;
-        private bool _onTrigger;
-
+        
         private WeaponHandler _weaponHandler;
         
         public bool IsWeaponReady { get; private set; }
@@ -57,39 +55,26 @@ namespace WeaponSystem
             CurrentAmmo = data.magazineSize;
         }
 
-        private void Update()
+        public void StartAttack()
         {
-            if (Time.time >= _nextTimeToFire && _onTrigger)
-            {
-                _nextTimeToFire = Time.time + 1f / data.fireRate;
-                DealDamage();
-            }    
+            if (!CanAttack()) return;
+            _attackModule.StartAttack(this);
         }
 
-        public void OnTrigger()
+        public void HoldAttack()
         {
-            switch (data.firingMode)
-            {
-                case FiringMode.Single:
-                    DealDamage();
-                    break;
-                case FiringMode.Hold:
-                    _onTrigger = true;
-                    break;
-            }
-        }
-
-        public void OffTrigger()
-        {
-            _onTrigger = false;
-            _attackModule.EndAttack();
+            if (!CanAttack()) return;
+            _attackModule.HoldAttack(this);
         }
         
-        private void DealDamage()
+        private bool CanAttack()
         {
-            if (_isReloading || _currentAmmo <= 0) return;
+            return !_isReloading && _currentAmmo > 0;
+        }
+
+        public void ConsumeAmmo()
+        {
             CurrentAmmo -= 1;
-            _attackModule.Attack(data);
         }
 
         public void StartReload()
@@ -149,8 +134,6 @@ namespace WeaponSystem
             
             // Cancel reload if needed
             CancelReload();
-            // Cancel trigger
-            OffTrigger();
 
             IsWeaponReady = false;
         }

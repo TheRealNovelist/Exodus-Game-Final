@@ -19,8 +19,6 @@ namespace WeaponSystem
         public int magazineSize;
         public int ammoCostPerBullet;
         
-        [Space]
-        public FiringMode firingMode;
         
         public static WeaponData operator +(WeaponData x, WeaponData y)
         {

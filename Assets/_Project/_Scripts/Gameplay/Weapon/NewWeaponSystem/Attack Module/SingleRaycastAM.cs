@@ -8,15 +8,22 @@ namespace WeaponSystem
     {
         public Camera fpsCam;
 
-        public override void Attack(WeaponData data)
+        public override void StartAttack(Weapon weapon, bool consumeAmmo = true)
         {
+            ConsumeAmmo(weapon, consumeAmmo);
+
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit))
             {
                 if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
                 {
-                    hitObject.Damage(data.damage);
+                    hitObject.Damage(weapon.data.damage);
                 }
             }
+        }
+        
+        public override void HoldAttack(Weapon weapon, bool consumeAmmo = true)
+        {
+
         }
     }
 }

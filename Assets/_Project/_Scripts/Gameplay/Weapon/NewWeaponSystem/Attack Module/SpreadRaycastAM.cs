@@ -8,9 +8,11 @@ namespace WeaponSystem
     {
         public Camera fpsCam;
 
-        public override void Attack(WeaponData data)
+        public override void StartAttack(Weapon weapon, bool consumeAmmo = true)
         {
-            for (int i = 0; i < data.bulletPerShot; i++)
+            ConsumeAmmo(weapon, consumeAmmo);
+
+            for (int i = 0; i < weapon.data.bulletPerShot; i++)
             {
                 Vector3 direction = fpsCam.transform.forward; //initial aim
                 Vector3 spread = Vector3.zero; //create a angle for us to put random angle in it to make random shot for each pellets
@@ -26,7 +28,7 @@ namespace WeaponSystem
                 {
                     if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
                     {
-                        hitObject.Damage(data.damage);
+                        hitObject.Damage(weapon.data.damage);
                     }
                     
                     Debug.DrawLine(fpsCam.transform.position, hit.point, Color.green, 3f);
@@ -34,10 +36,17 @@ namespace WeaponSystem
                 else
                 {
                     Debug.DrawLine(
-                        fpsCam.transform.position, fpsCam.transform.position + direction * data.range, 
+                        fpsCam.transform.position, fpsCam.transform.position + direction * weapon.data.range, 
                         Color.red, 3f);
                 }
             }
+        }
+
+
+
+        public override void HoldAttack(Weapon weapon, bool consumeAmmo = true)
+        {
+
         }
     }
 }
