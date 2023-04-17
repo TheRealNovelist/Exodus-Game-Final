@@ -3377,6 +3377,7 @@ GameObject:
   - component: {fileID: 4237319907722903570}
   - component: {fileID: 9140412183821457943}
   - component: {fileID: 9140412183821457944}
+  - component: {fileID: 9140412183821457945}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -3864,6 +3865,7 @@ GameObject:
   - component: {fileID: 4170723485912117372}
   - component: {fileID: 8608718191991150278}
   - component: {fileID: 8608718191991150277}
+  - component: {fileID: 8608718191991150279}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -3885,6 +3887,7 @@ GameObject:
   - component: {fileID: 4170723487060906734}
   - component: {fileID: 8608718193006752856}
   - component: {fileID: 8608718193006752855}
+  - component: {fileID: 8608718193006752857}
   m_Layer: 0
   m_Name: ShotGun
   m_TagString: Untagged
@@ -4486,7 +4489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e3fbf6d6773254382918bd40b6d8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSO: {fileID: 11400000, guid: d189d467c5626954b8ac80f2ee9bb85b, type: 2}
+  dataInjector: {fileID: 8608718191991150279}
+  _attackModule: {fileID: 8608718191991150277}
+  _modifier: {fileID: 0}
   data:
     damage: 30
     fireRate: 10
@@ -4499,9 +4504,19 @@ MonoBehaviour:
     magazineSize: 20
     ammoCostPerBullet: 1
     firingMode: 1
-  _attackModule: {fileID: 8608718191991150277}
-  _modifer: {fileID: 0}
-  _debug: {fileID: 845020661302039312}
+--- !u!114 &8608718191991150279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987294645766198393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2376a7abb427bde409ad5e4ea99887da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataSO: {fileID: 11400000, guid: d189d467c5626954b8ac80f2ee9bb85b, type: 2}
 --- !u!33 &8608718193006752854
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4535,7 +4550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e3fbf6d6773254382918bd40b6d8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSO: {fileID: 11400000, guid: b793c79024d9a79458c6c4944419eb8b, type: 2}
+  dataInjector: {fileID: 8608718193006752857}
+  _attackModule: {fileID: 8608718193006752855}
+  _modifier: {fileID: 0}
   data:
     damage: 5
     fireRate: 10
@@ -4548,9 +4565,19 @@ MonoBehaviour:
     magazineSize: 5
     ammoCostPerBullet: 10
     firingMode: 0
-  _attackModule: {fileID: 8608718193006752855}
-  _modifer: {fileID: 0}
-  _debug: {fileID: 6778274064036549001}
+--- !u!114 &8608718193006752857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987294646780393195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2376a7abb427bde409ad5e4ea99887da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataSO: {fileID: 11400000, guid: b793c79024d9a79458c6c4944419eb8b, type: 2}
 --- !u!65 &8795701233336390094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4651,7 +4678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e3fbf6d6773254382918bd40b6d8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSO: {fileID: 11400000, guid: 1f48858d698e24c4987b9aee1166a167, type: 2}
+  dataInjector: {fileID: 9140412183821457945}
+  _attackModule: {fileID: 9140412183821457944}
+  _modifier: {fileID: 0}
   data:
     damage: 10
     fireRate: 5
@@ -4664,9 +4693,6 @@ MonoBehaviour:
     magazineSize: 10
     ammoCostPerBullet: 5
     firingMode: 0
-  _attackModule: {fileID: 9140412183821457944}
-  _modifer: {fileID: 11400000, guid: 13775c27c17e3564bb7554be00a482dd, type: 2}
-  _debug: {fileID: 6074487590432273458}
 --- !u!114 &9140412183821457944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4680,3 +4706,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsCam: {fileID: 1644103619629700285}
+--- !u!114 &9140412183821457945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428181272880300444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2376a7abb427bde409ad5e4ea99887da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataSO: {fileID: 11400000, guid: 1f48858d698e24c4987b9aee1166a167, type: 2}

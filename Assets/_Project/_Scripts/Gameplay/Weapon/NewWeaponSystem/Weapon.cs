@@ -9,13 +9,14 @@ namespace WeaponSystem
 {
     public class Weapon : MonoBehaviour
     {
-        [SerializeField] private WeaponDataSO dataSO;
-        [ReadOnly] public WeaponData data;
-
+        [Header("Components")]
+        [SerializeField] private WeaponDataInjector dataInjector;
         [SerializeField] private AttackModule _attackModule;
         [SerializeField] private Modifier _modifier;
-        [SerializeField] private Renderer _debug;
 
+        [Space]
+        public WeaponData data; //Internal data
+        
         private IEnumerator _reloadRoutine => ReloadRoutine();
         private IEnumerator _equipRoutine => EquipRoutine();
         
@@ -29,29 +30,30 @@ namespace WeaponSystem
                 OnAmmoChange?.Invoke(_currentAmmo);
             }
         }
+        
         private bool _isReloading;
         private float _nextTimeToFire;
         private bool _onTrigger;
 
-        private PlayerWeaponHandler _weaponHandler;
-
-        private Color _debugColor;
+        private WeaponHandler _weaponHandler;
         
-        public bool isWeaponReady { get; private set; }
+        public bool IsWeaponReady { get; private set; }
+
+        #region Events
 
         public event Action OnStartReload;
         public event Action OnEndReload;
+        public event Action OnStartEquip;
+        public event Action OnFinishEquip;
+        public event Action OnUnequip;
         public event Action<int> OnAmmoChange;
 
-        private void Awake()
-        {
-            _debugColor = _debug.material.color;
-        }
+        #endregion
 
         private void Start()
         {
-            data = dataSO.GetData();
-            if (_modifier) data = _modifier.Modify(data);
+            data = dataInjector.TryGetData();
+            
             CurrentAmmo = data.magazineSize;
         }
 
@@ -92,7 +94,7 @@ namespace WeaponSystem
 
         public void StartReload()
         {
-            if (CurrentAmmo == data.magazineSize || _weaponHandler.AmmoPool <= 0) return;
+            if (CurrentAmmo == data.magazineSize || !_weaponHandler.CanReload()) return;
             
             StartCoroutine(_reloadRoutine);
         }
@@ -120,7 +122,7 @@ namespace WeaponSystem
             OnEndReload?.Invoke();
         }
 
-        public void Equip(PlayerWeaponHandler weaponHandler)
+        public void Equip(WeaponHandler weaponHandler)
         {
             _weaponHandler = weaponHandler;
             StartCoroutine(_equipRoutine);
@@ -128,35 +130,31 @@ namespace WeaponSystem
 
         private IEnumerator EquipRoutine()
         {
-            isWeaponReady = false;
-            
-            _debug.material.color = Color.red;
+            IsWeaponReady = false;
+            OnStartEquip?.Invoke();
 
             yield return new WaitForSeconds(data.equipTime);
-
-            _debug.material.color = _debugColor;
-            isWeaponReady = true;
+            
+            IsWeaponReady = true;
+            OnFinishEquip?.Invoke();
         }
         
         public void Unequip()
         {
             StopCoroutine(_equipRoutine);
+
+            _weaponHandler = null;
+            
+            OnUnequip?.Invoke();
             
             // Cancel reload if needed
             CancelReload();
             // Cancel trigger
             OffTrigger();
-            
-            _debug.material.color = _debugColor;
-            
-            isWeaponReady = false;
+
+            IsWeaponReady = false;
         }
 
-        public void RestoreBaseData()
-        {
-            data = dataSO.GetData();
-        }
-        
 #if UNITY_EDITOR
         private void OnValidate()
         {

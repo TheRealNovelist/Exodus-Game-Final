@@ -7,9 +7,8 @@ using UnityEngine;
 namespace WeaponSystem
 {
     //Handling weapons by player
-    public class PlayerWeaponHandler : MonoBehaviour
+    public class PlayerWeaponHandler : WeaponHandler
     {
-        [SerializeField] private Weapon _currentWeapon;
         [SerializeField] private Transform weaponHolder;
         
         public event Action<Weapon> OnSwitchingWeapon;
@@ -41,7 +40,7 @@ namespace WeaponSystem
         {
             HandleWeaponSwitching();
             
-            isWeaponReady = _currentWeapon != null && _currentWeapon.isWeaponReady;
+            isWeaponReady = _currentWeapon != null && _currentWeapon.IsWeaponReady;
 
             if (!isWeaponReady) return;
             
@@ -84,7 +83,7 @@ namespace WeaponSystem
             }
         }
 
-        public int TryAddAmmo(int currentAmmo, WeaponData data)
+        public override int TryAddAmmo(int currentAmmo, WeaponData data)
         {
             int ammo = currentAmmo;
 
@@ -105,6 +104,11 @@ namespace WeaponSystem
             }
 
             return ammo;
+        }
+
+        public override bool CanReload()
+        {
+            return _ammoPool > 0;
         }
         
         private void ChangeWeapon(int index, bool forceChange = false)
