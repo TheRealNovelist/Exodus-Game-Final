@@ -7,13 +7,23 @@ using UnityEngine.Events;
 
 namespace WeaponSystem
 {
+    public enum WeaponMode
+    {
+        Primary,
+        Secondary
+    }
+    
     public class Weapon : MonoBehaviour
     {
         [Header("Components")]
         [SerializeField] private WeaponDataInjector dataInjector;
-        [SerializeField] private AttackModule _attackModule;
-        [SerializeField] private Modifier _modifier;
+        [SerializeField] private AttackModule defaultAttackModule;
 
+        private AttackModule _primaryAttack;
+        private AttackModule _secondaryAttack;
+        
+        private WeaponHandler _weaponHandler;
+        
         [Space]
         public WeaponData data; //Internal data
         
@@ -21,6 +31,9 @@ namespace WeaponSystem
         private IEnumerator _equipRoutine => EquipRoutine();
         
         private int _currentAmmo;
+        private bool _isReloading;
+        
+        #region Properties
         public int CurrentAmmo
         {
             get => _currentAmmo;
@@ -31,19 +44,19 @@ namespace WeaponSystem
             }
         }
         
-        private bool _isReloading;
-        
-        private WeaponHandler _weaponHandler;
-        
         public bool IsWeaponReady { get; private set; }
 
-        #region Events
+        #endregion
 
+        #region Events
+        
         public event Action OnStartReload;
         public event Action OnEndReload;
+        
         public event Action OnStartEquip;
         public event Action OnFinishEquip;
         public event Action OnUnequip;
+        
         public event Action<int> OnAmmoChange;
 
         #endregion
@@ -53,18 +66,36 @@ namespace WeaponSystem
             data = dataInjector.TryGetData();
             
             CurrentAmmo = data.magazineSize;
+
+            _primaryAttack = defaultAttackModule;
         }
 
-        public void StartAttack()
+        public void StartAttack(WeaponMode mode)
         {
             if (!CanAttack()) return;
-            _attackModule.StartAttack(this);
+            switch (mode)
+            {
+                case WeaponMode.Primary:
+                    _primaryAttack.StartAttack(this);
+                    break;
+                case WeaponMode.Secondary:
+                    _secondaryAttack.StartAttack(this);
+                    break;
+            }
         }
 
-        public void HoldAttack()
+        public void HoldAttack(WeaponMode mode)
         {
             if (!CanAttack()) return;
-            _attackModule.HoldAttack(this);
+            switch (mode)
+            {
+                case WeaponMode.Primary:
+                    _primaryAttack.HoldAttack(this);
+                    break;
+                case WeaponMode.Secondary:
+                    _secondaryAttack.HoldAttack(this);
+                    break;
+            }
         }
         
         private bool CanAttack()

@@ -46,12 +46,12 @@ namespace WeaponSystem
             
             if (Input.GetMouseButtonDown(0))
             {
-                _currentWeapon.StartAttack();
+                _currentWeapon.StartAttack(WeaponMode.Primary);
             }
 
             if (Input.GetMouseButton(0))
             {
-                _currentWeapon.HoldAttack();
+                _currentWeapon.HoldAttack(WeaponMode.Primary);
             }
 
             if (Input.GetKeyDown(KeyCode.R))
