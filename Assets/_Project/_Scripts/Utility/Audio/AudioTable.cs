@@ -1,61 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
-using System.Linq;
 
-#region Custom Data Types
-[System.Serializable]
+
+[System.Serializable] 
 public class AudioFile
 {
-    public AudioClip clip;
-    [Range(0.1f, 1f)] public float volume = 1f;
-    [Range(-3f, 3f)] public float pitch = 1f;
+    public string audioName;
+    
+    [BoxGroup("Settings"), Range(0f, 1f)] public float volume = 1f;
+    [BoxGroup("Settings"), Range(-3f, 3f)] public float pitch = 1f;
+    
+    [SerializeField, HideLabel, BoxGroup("Audio")] 
+    private WeightedRandomList<AudioClip> clips;
+    
+    public AudioClip GetAudioClip() => clips.GetRandom();
 }
 
-[System.Serializable]
-public class AudioCollection
-{
-    public string name;
-    public List<AudioFile> clips;
-
-    public AudioFile GetRandomClip()
-    {
-        return clips[Random.Range(0, clips.Count)];
-    }
-}
-#endregion
-
-public enum AudioType
-{
-    SFX,
-    Music
-}
-
-[CreateAssetMenu(fileName = "New Audio Object", menuName = "Utility/Audio Table")]
+[CreateAssetMenu(menuName = "System/Audio Table", fileName = "New Audio Table")]
 public class AudioTable : ScriptableObject
 {
-    public AudioMixerGroup audioGroup;
-    public AudioType type = AudioType.SFX;
-
-    [SerializeField] private List<AudioCollection> clips;  //creates a protected array of vars for audio clips
-
-    public AudioFile GetAudioClip(string name)
-    {
-        AudioCollection audioFile = clips.Where(clip => clip.name == name).SingleOrDefault();
-        if (audioFile == null)
-        {
-            return null;
-        }
-
-        return audioFile.GetRandomClip();
-    }
-
-    private void Awake()
-    {
-        if (!audioGroup)
-        {
-            Debug.LogWarning("AudioTable " + name + ": MixerGroup not assigned! Please assign one");
-        }
-    }
+    public AudioMixerGroup mixerGroup;
+    
+    [SerializeField, Searchable] private List<AudioFile> _files;
+    public AudioFile FindAudioByName(string audioName) => _files.SingleOrDefault(file => file.audioName == audioName);
 }
