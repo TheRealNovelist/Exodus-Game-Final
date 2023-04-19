@@ -12,7 +12,7 @@ namespace EnemySystem
 
         private float health;
 
-        private EnemySpawner _spawner;
+        private ESpawnerSystem _spawner;
 
         public virtual void Damage(float amount)
         {
@@ -26,12 +26,12 @@ namespace EnemySystem
 
         public virtual void Die()   
         {
-            _spawner.EnemyDie();
+            //_spawner.EnemyDie();
             Destroy(gameObject);
         }
         
 
-        public void Init(EnemySpawner spawner)
+        public void Init(ESpawnerSystem spawner)
         {
             _spawner = spawner;
         }
