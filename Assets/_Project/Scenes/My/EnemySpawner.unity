@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &159797218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +367,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &235616159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2352830349660522692, guid: 96026fbf0a80fe24894c291759ce4956, type: 3}
+  m_PrefabInstance: {fileID: 344418409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &293754546
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &593194643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1043912145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,7 +1012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1576766235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,12 +1131,39 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2352830349660522693, guid: 96026fbf0a80fe24894c291759ce4956, type: 3}
   m_PrefabInstance: {fileID: 344418409}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 235616159}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99475b0b8a7a6bd4892c2567d278ddb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1878461961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235616159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785afba1deeb8d444bd1a02acf8fd89b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+    list:
+    - item: {fileID: 1783459328231480364, guid: e86ae04574cecbf4b9c2d151cd12b0ab, type: 3}
+      weight: 1
+    - item: {fileID: 1529819396297480602, guid: 4fcc402eeee41f14ab220bdfb954e3c5, type: 3}
+      weight: 1
+  spawners:
+  - {fileID: 1576766240}
+  - {fileID: 1043912150}
+  - {fileID: 159797223}
+  - {fileID: 593194648}
+  totalToSpawn: 5
+  amountInWave: 4
+  spawnGap: 5
+  waveCountDownTime: 10
 --- !u!1 &2052376125
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,10 +10,8 @@ public class Room : MonoBehaviour
    
    public bool enemyRoom = false;
    
-   public EnemySpawner enemySpawner;
+   public ESpawnerSystem enemySpawner;
    
-   [SerializeField] private GameEvent lockRoom;
-
    public Material openMat, closeMat, lockMat;
 
    public void LockDoors()
