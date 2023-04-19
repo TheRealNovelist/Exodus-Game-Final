@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &159797218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +560,6 @@ GameObject:
   m_Component:
   - component: {fileID: 502254056}
   - component: {fileID: 502254055}
-  - component: {fileID: 502254054}
   - component: {fileID: 502254053}
   m_Layer: 0
   m_Name: Room
@@ -582,35 +581,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 14.0334, y: 3.0371144, z: 16.785336}
   m_Center: {x: -0.17978096, y: -0.21525156, z: -1.8006496}
---- !u!114 &502254054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502254052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2db640e83ea16b46800be1393a426e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: ac0dcb5e61b08c4409ea807dc3b9722e, type: 2}
-  stopListeningOnDisable: 1
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 502254055}
-        m_TargetAssemblyTypeName: DoorSystem, Assembly-CSharp
-        m_MethodName: LocKDoors
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &502254055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,9 +598,7 @@ MonoBehaviour:
   - {fileID: 1043912144}
   - {fileID: 159797217}
   - {fileID: 593194642}
-  enemyRoom: 0
   enemySpawner: {fileID: 1878461960}
-  lockRoom: {fileID: 11400000, guid: ac0dcb5e61b08c4409ea807dc3b9722e, type: 2}
   openMat: {fileID: 2100000, guid: e39fe841b41117645be824577e1dd5f1, type: 2}
   closeMat: {fileID: 2100000, guid: 8f2809b6a70412f4595e263527dd06ef, type: 2}
   lockMat: {fileID: 2100000, guid: 0fbc3fe083a91f74e96e4dd65d1b2eec, type: 2}
@@ -758,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &593194643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,7 +855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1043912145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,7 +984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1576766235
 MonoBehaviour:
   m_ObjectHideFlags: 0

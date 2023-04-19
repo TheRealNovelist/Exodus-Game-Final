@@ -13,12 +13,13 @@ public class ESpawnerSystem : BaseAI
     [SerializeField] private int totalToSpawn = 20;
     [SerializeField] private int amountInWave = 4;
     [SerializeField] private float spawnGap = 5;
+
     public WeightedRandomList<BaseEnemy> Enemies => enemies;
     public List<Transform> Spawners => spawners;
     public int TotalToSpawn => totalToSpawn;
     public int AmountInWave => amountInWave;
     public float SpawnGap=> spawnGap;
-    
+
     private int spawned =0;
     private int defeated = 0;
     

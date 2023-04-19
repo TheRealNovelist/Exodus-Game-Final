@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-
-   public bool locked = true;
+   public bool locked = false;
+    private bool _playerIn = false;
 
    private void OnTriggerEnter(Collider other)
    {
