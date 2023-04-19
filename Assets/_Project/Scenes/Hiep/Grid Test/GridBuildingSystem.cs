@@ -36,6 +36,7 @@ public class GridBuildingSystem : MonoBehaviour
 
       //  placedObjectTypeSO = placeObjectTypeSOList[0];//set placeObject to the first one in the list
         placedObjectTypeSO = null;
+        
     }
 
     private void Start()

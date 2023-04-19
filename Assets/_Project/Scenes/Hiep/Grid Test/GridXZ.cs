@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class GridXZ<TGridObject> {
 
@@ -33,23 +34,31 @@ public class GridXZ<TGridObject> {
             }
         }
 
-        bool showDebug = true;
+        CreateLine();
+        
+        
+        bool showDebug = false;
         if (showDebug) 
         {
             TextMesh[,] debugTextArray = new TextMesh[width, height];
 
             for (int x = 0; x < gridArray.GetLength(0); x++) {
                 for (int z = 0; z < gridArray.GetLength(1); z++) {
-                    //debugTextArray[x, z] = CreateWorldText(gridArray[x, z]?.ToString(), null, GetWorldPosition(x, z) + new Vector3(cellSize, 0, cellSize) * .5f, 5, Color.white, TextAnchor.MiddleCenter, TextAlignment.Center);
-                    Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x, z + 1), Color.white, 100f);
+                    debugTextArray[x, z] = CreateWorldText(gridArray[x, z]?.ToString(), null, GetWorldPosition(x, z) + new Vector3(cellSize, 0, cellSize) * .5f, 5, Color.white, TextAnchor.MiddleCenter, TextAlignment.Center);
+                   Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x, z + 1), Color.white, 100f);
                     Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x + 1, z), Color.white, 100f);
+                    
+                    
                 }
             }
+            
+            
             Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
             Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
 
-            OnGridObjectChanged += (object sender, OnGridObjectChangedEventArgs eventArgs) => {
-                debugTextArray[eventArgs.x, eventArgs.z].text = gridArray[eventArgs.x, eventArgs.z]?.ToString();
+            OnGridObjectChanged += (object sender, OnGridObjectChangedEventArgs eventArgs) => { debugTextArray[eventArgs.x, eventArgs.z].text = gridArray[eventArgs.x, eventArgs.z]?.ToString();
+                
+                
             };
         }
     }
@@ -135,5 +144,69 @@ public class GridXZ<TGridObject> {
         textMesh.color = color;
         textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
         return textMesh;
+    }
+
+    public void CreateLine()
+    {
+        // Set the width and height of the grid
+        int width = 10;
+        int height = 10;
+
+        // Set the spacing between the lines
+        float space = 2.0f;
+
+        // Create a new material
+        Material lineMaterial = new Material(Shader.Find("Sprites/Default"));
+
+        // Set the color of the material
+        lineMaterial.color = Color.red;
+
+        // Draw the horizontal lines
+        for (int i = 0; i <= height; i++)
+        {
+            // Create a new empty game object
+            GameObject gridLines = new GameObject();
+
+            // Add a Line Renderer to the game object
+            LineRenderer lr = gridLines.AddComponent<LineRenderer>();
+
+            // Set the material of the Line Renderer
+            lr.material = lineMaterial;
+
+            // Set the width of the line
+            lr.startWidth = 0.1f;
+            lr.endWidth = 0.1f;
+
+            // Set the number of points in the line
+            lr.positionCount = 2;
+
+            // Set the positions of the line
+            lr.SetPosition(0, new Vector3(0, 0, i * space));
+            lr.SetPosition(1, new Vector3(width * space, 0, i * space));
+        }
+
+        // Draw the vertical lines
+        for (int i = 0; i <= width; i++)
+        {
+            // Create a new empty game object
+            GameObject gridLines = new GameObject();
+
+            // Add a Line Renderer to the game object
+            LineRenderer lr = gridLines.AddComponent<LineRenderer>();
+
+            // Set the material of the Line Renderer
+            lr.material = lineMaterial;
+
+            // Set the width of the line
+            lr.startWidth = 0.1f;
+            lr.endWidth = 0.1f;
+
+            // Set the number of points in the line
+            lr.positionCount = 2;
+
+            // Set the positions of the line
+            lr.SetPosition(0, new Vector3(i * space, 0, 0));
+            lr.SetPosition(1, new Vector3(i * space, 0 , height * space));
+        }
     }
 }
