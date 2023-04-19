@@ -40,6 +40,6 @@ namespace EnemySystem
 
         public void Stop() => _stateMachine.Stop();
 
-        public bool IsStateMachineStarted() { return _stateMachine.isStarted; }
+        public bool IsStateMachineStarted() { return _stateMachine.IsStarted; }
     }
 }

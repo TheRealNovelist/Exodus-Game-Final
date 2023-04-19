@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnemySystem
-{
-    public class StateMachine
+public class StateMachine
     {
         private IState _currentState;
         
@@ -15,13 +13,13 @@ namespace EnemySystem
 
         private static List<Transition> EmptyTransitions = new List<Transition>(0);
 
-        public bool isStarted;
-        public bool isPaused;
+        public bool IsStarted { get; private set; }
+        public bool IsPaused { get; private set; }
 
         //Ticking the state machine every frame
         public void Update()
         {
-            if (isPaused || !isStarted)
+            if (IsPaused || !IsStarted)
                 return;
             
             var transition = GetTransition();
@@ -40,13 +38,13 @@ namespace EnemySystem
             else
                 _currentState.OnEnter();
             
-            isPaused = pause;
+            IsPaused = pause;
         }
         
         //Stop the state machine, clear any transitions and reset
         public void Stop()
         {
-            isStarted = false;
+            IsStarted = false;
 
             _currentState = null;
             
@@ -58,9 +56,9 @@ namespace EnemySystem
         //Transfer to next state
         public void SetState(IState state)
         {
-            if (isPaused) return;
+            if (IsPaused) return;
 
-            if (!isStarted) isStarted = true;
+            if (!IsStarted) IsStarted = true;
             
             if (state == _currentState)
                 return;
@@ -119,4 +117,3 @@ namespace EnemySystem
             return null;
         }
     }
-}
