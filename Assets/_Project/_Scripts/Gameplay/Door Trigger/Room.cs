@@ -12,6 +12,8 @@ public class Room : MonoBehaviour
    
    public ESpawnerSystem enemySpawner;
    
+   [SerializeField] private GameEvent lockRoom;
+
    public Material openMat, closeMat, lockMat;
 
    public void LockDoors()
