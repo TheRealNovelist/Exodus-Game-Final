@@ -48,7 +48,7 @@ public class ESpawnerSystem : BaseAI
         base.StartStateMachine(delay);
     }
 
-    public bool IsStateMachineStarted => _stateMachine.isStarted;
+    public bool IsStateMachineStarted => _stateMachine.IsStarted;
 
     private void Start()
     {
