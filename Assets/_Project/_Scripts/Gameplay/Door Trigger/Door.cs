@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Normal doors open when player enter trigger and will not close afterwards
+/// Doors in enemy rooms are locked when player enters the room
+/// and only opens when all enemies are defeated
+/// </summary>
 public class Door : MonoBehaviour
 {
    private bool Locked

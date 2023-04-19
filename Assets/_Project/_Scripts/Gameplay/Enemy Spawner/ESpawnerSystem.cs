@@ -37,7 +37,6 @@ public class ESpawnerSystem : BaseAI
 
         if (spawnOnStart) Activate();
         
-        Debug.Log(_stateMachine);
     }
 
     public void Activate()
@@ -54,8 +53,6 @@ public class ESpawnerSystem : BaseAI
 
         var waitingState = new ES_WatingState(waveCountDownTime);
         var wavingState = new ES_WavingState(this);
-        
-        Debug.Log("activate");
         
         AddTransition(waitingState, wavingState, ()=>waitingState.FinishedCounting);
         AddTransition(wavingState, waitingState, () =>  wavingState.SpawnedEnough());

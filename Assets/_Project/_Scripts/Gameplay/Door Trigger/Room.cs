@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Used in enemy spawner rooms
+/// </summary>
 public class Room : MonoBehaviour
 {
    [SerializeField] private List<Door> doors;
-
    public ESpawnerSystem enemySpawner;
-   public Material openMat, closeMat, lockMat;
-
    [HideInInspector] public bool roomLocked = false;
    public Action LockRoom,UnlockRoom;
    private void Awake()
@@ -19,7 +19,6 @@ public class Room : MonoBehaviour
        {
            door.Init(this);
        }
-       
    }
 
    private void Start()
