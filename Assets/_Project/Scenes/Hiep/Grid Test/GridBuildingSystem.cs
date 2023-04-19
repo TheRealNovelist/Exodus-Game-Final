@@ -26,7 +26,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     [SerializeField] private Camera turretCamera;
 
-    [SerializeField] private ShopUI _shopUI;
+   // [SerializeField] private ShopUI _shopUI;
 
     private void Awake() {
         Instance = this;
@@ -128,7 +128,7 @@ public class GridBuildingSystem : MonoBehaviour
             }
         }
         
-        _shopUI.CloseShop();
+       // _shopUI.CloseShop();
 
     }
 

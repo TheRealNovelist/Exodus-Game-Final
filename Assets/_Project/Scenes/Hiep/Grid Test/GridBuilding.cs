@@ -6,7 +6,7 @@ using UnityEngine;
 //NOTE dont use for now
 public class GridBuilding : MonoBehaviour
 {
-   public const int sortingOrderDefault = 5000;//for create text
+   /*public const int sortingOrderDefault = 5000;//for create text
    
    private int widthOfGrid;
    private int heightOfGrid;
@@ -37,8 +37,10 @@ public class GridBuilding : MonoBehaviour
       {
          for (int y = 0; y < gridArray.GetLength(1); y++)
          {
+            /*
             debugTextArray[x, y] =  CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSizeOfGrid, cellSizeOfGrid) *0.5f, 20, Color.white,
                TextAnchor.MiddleCenter);
+            #1#
             Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
             Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
          }
@@ -92,39 +94,9 @@ public class GridBuilding : MonoBehaviour
       int x, y;
       GetXY(worldPosition, out x, out y);
       return GetValue(x, y);
-   } 
+   } */
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   // Create Text in the World
+   /*// Create Text in the World
    public static TextMesh CreateWorldText(string text, Transform parent = null, Vector3 localPosition = default(Vector3), int fontSize = 40, Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = sortingOrderDefault) {
       if (color == null) color = Color.white;
       return CreateWorldText(parent, text, localPosition, fontSize, (Color)color, textAnchor, textAlignment, sortingOrder);
@@ -144,5 +116,5 @@ public class GridBuilding : MonoBehaviour
       textMesh.color = color;
       textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
       return textMesh;
-   }
+   }*/
 }
