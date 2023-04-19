@@ -73,7 +73,7 @@ public class EquipmentPanel : MonoBehaviour
     
     public void Unequip(int index)
     {
-        inventory.HighLightFrame(inventory.slotsByItems[equipSlots[index]._item as Item],false);
+            inventory.HighLightFrame(inventory.slotsByItems[equipSlots[index]._item as Item],false);
         
         equipSlots[index]._item.equipping = false;
         

@@ -5,6 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Equip Item/Gun Item")]
 public class GunItem : EquipItem
 {
-    public GunData gun;
-
+    //public GunData gun;
 }

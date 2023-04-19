@@ -5,7 +5,6 @@ public class Chest : MonoBehaviour
     [SerializeField] private SpriteRenderer itemHolder;
     [SerializeField] private WeightedRandomList<Item> itemList;
     [SerializeField] private KeyCode openKey;
-    [SerializeField] private Inventory inventory;
 
     private bool isOpen = false;
     private bool harvested = false;
@@ -53,7 +52,14 @@ public class Chest : MonoBehaviour
             }
             else
             {
-                consumeItem.effect.Invoke();
+                if (consumeItem.effect)
+                {
+                    consumeItem.effect.Invoke();
+                }
+                else
+                {
+                    Debug.LogWarning($"Item {consumeItem.name} has no effect event");
+                }
             }
         }
     }
@@ -61,7 +67,7 @@ public class Chest : MonoBehaviour
     private void Harvest(Item item)
     {
         harvested = true;
-        inventory.AddItem(item);
+        InGameManager.Instance.Inventory.AddItem(item);
     }
 
     private Item GetRandomItem()
