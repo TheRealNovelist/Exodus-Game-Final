@@ -62,15 +62,15 @@ public class Inventory : MonoBehaviour
         if (Input.GetKey(KeyCode.Tab))
         {
             inventoryPanel.SetActive(true);
-            CursorAndCam.Instance.InventoryPanelOn = true;
-            CursorAndCam.Instance.UnlockCursor();
+            InGameManager.Instance.CursorAndCam.InventoryPanelOn = true;
+            InGameManager.Instance.CursorAndCam.UnlockCursor();
         } 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             inventoryPanel.SetActive(false);
             optionPanel.SetActive(false);
-            CursorAndCam.Instance.InventoryPanelOn = false;
-            CursorAndCam.Instance.LockCursor();
+            InGameManager.Instance.CursorAndCam.InventoryPanelOn = false;
+            InGameManager.Instance.CursorAndCam.LockCursor();
             
         } 
     }

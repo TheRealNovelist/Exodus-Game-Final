@@ -1,28 +1,13 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CursorAndCam : MonoBehaviour
 {
     public bool InventoryPanelOn;
     public bool ShopPanelOn;
     
-    public static CursorAndCam Instance;
+    [SerializeField] private GameObject turretCamera;
 
-    [SerializeField] private PlayerMovement playerMovementScr;
-    [SerializeField] private PlayerCam playerCamScr;
-
-    [SerializeField] private GameObject turretCamera,playerCamera;
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -48,8 +33,8 @@ public class CursorAndCam : MonoBehaviour
 
     public void MovePlayer(bool canMove)
     {
-        playerMovementScr.receiveInput = canMove;
-        playerCamScr.getPlayerRotation = canMove;
+        InGameManager.Instance.Player.receiveInput = canMove;
+        InGameManager.Instance.PlayerCamera.getPlayerRotation = canMove;
     }
 
     public void LockCursor()
@@ -64,7 +49,7 @@ public class CursorAndCam : MonoBehaviour
     public void UseTurretCamera(bool turretCamera)
     {
         this.turretCamera.SetActive(turretCamera);
-        this.playerCamera.SetActive(!turretCamera);
+        InGameManager.Instance.PlayerCamera.gameObject.SetActive(!turretCamera);
     }
     
 }

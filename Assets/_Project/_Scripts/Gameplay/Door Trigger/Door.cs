@@ -3,38 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Normal doors open when player enter trigger and will not close afterwards
+/// Doors in enemy rooms are locked when player enters the room
+/// and only opens when all enemies are defeated
+/// </summary>
 public class Door : MonoBehaviour
 {
-   public bool locked = false;
+   private bool Locked
+   {
+      get
+      {
+         if (_room)
+         {
+            return _room.roomLocked;
+         }
+
+         return false;
+      }
+   }
+   
     private bool _playerIn = false;
+    private Room _room;
 
    private void OnTriggerEnter(Collider other)
    {
-      if (!locked)
+      if (!Locked)
       {
          if (other.gameObject.CompareTag("Player"))
          {
-            //open door
-
+            OpenDoor();
          }
       }
-     
-
    }
 
-   private void OpenDoor()
+   public void Init(Room room)
    {
-      
+      _room = room;
+   }
+
+   public void OpenDoor()
+   {
+      GetComponent<MeshRenderer>().material.color = Color.cyan;
    }
    
-   private void CloseDoor()
+   public void CloseDoor()
    {
-      
-   }
-
-   public void LockDoor()
-   {
-      CloseDoor();
-      locked = true;
+      GetComponent<MeshRenderer>().material.color = Color.red;
    }
 }
