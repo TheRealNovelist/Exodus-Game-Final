@@ -10,19 +10,26 @@ public class BoxOpener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     public void OpenBox()
     {
-        anim.SetTrigger("isOpened");
+        anim.SetTrigger("openTrigger");
         isOpened = true;
+        anim.SetBool("isOpen", true);
     }
 
     public void CloseBox()
     {
-        anim.SetTrigger("isClosed");
+        anim.SetTrigger("closeTrigger");
         isOpened = false;
+        anim.SetBool("isOpen", false);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     // Update is called once per frame
