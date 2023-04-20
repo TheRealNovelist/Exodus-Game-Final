@@ -12,6 +12,7 @@ public class GridBuildingSystem : MonoBehaviour
    public int gridWidth = 5;
    public int gridHeight = 5;
    public float cellSize = 5f;
+   public bool showGridLayOut;
 
     public event EventHandler OnSelectedChanged;
     public event EventHandler OnObjectPlaced;
@@ -25,6 +26,9 @@ public class GridBuildingSystem : MonoBehaviour
     [SerializeField] private CoinManager coinManager;
 
     [SerializeField] private Camera turretCamera;
+
+    private GameObject lineParent;
+    
 
    // [SerializeField] private ShopUI _shopUI;
 
@@ -46,7 +50,39 @@ public class GridBuildingSystem : MonoBehaviour
             var index = i;
             _buttons[index].SetupButton(placeObjectTypeSOList[index],() => ChangeToTurret(index));
         }
+
+        lineParent = new GameObject();
+        
+        lineParent.name = "Line Holder";
+        CreateLine(gridWidth, gridHeight, cellSize, lineParent);
     }
+    private void Update() 
+    { 
+        //Place object on place
+        if (placedObjectTypeSO != null && Input.GetMouseButton(0)) 
+        {
+            PlaceObjects();
+            DeselectObjectType();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RotateObjectBeforePlace();
+        }
+
+        //Delete object in a place
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            RemovePlacedDefender();
+        }
+        
+        //Deselect object
+        if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
+
+        lineParent.SetActive(showGridLayOut);
+        
+    }
+
 
     public class GridObject {
 
@@ -150,31 +186,7 @@ public class GridBuildingSystem : MonoBehaviour
         placedObjectTypeSO = null; 
         RefreshSelectedObjectType();
     }
-    private void Update() 
-    { 
-        //Place object on place
-        if (placedObjectTypeSO != null && Input.GetMouseButton(0)) 
-        {
-            PlaceObjects();
-            DeselectObjectType();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RotateObjectBeforePlace();
-        }
-
-        //Delete object in a place
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            RemovePlacedDefender();
-        }
-        
-        //Deselect object
-        if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
-        
-    }
-
+    
     private void RemovePlacedDefender()
     {
         GridObject gridObject = grid.GetGridObject(GetMouseWorldPosition());
@@ -241,8 +253,6 @@ public class GridBuildingSystem : MonoBehaviour
         return placedObjectTypeSO;
     }
 
-    
-    
     //return position of mouse by the camera with tag MainCamera
     public Vector3 GetMouseWorldPosition()
     {
@@ -254,6 +264,67 @@ public class GridBuildingSystem : MonoBehaviour
         else
         {
             return Vector3.zero;
+        }
+    }
+    
+    //create line for grid and also put them in to a gameobject
+    public void CreateLine(int width, int height, float space, GameObject lineParent)
+    {
+        // Create a new material
+        Material lineMaterial = new Material(Shader.Find("Sprites/Default"));
+
+        // Set the color of the material
+        lineMaterial.color = Color.red;
+
+
+        // Draw the horizontal lines
+        for (int i = 0; i <= height; i++)
+        {
+            // Create a new empty game object
+            GameObject gridLines = new GameObject();
+
+            // Add a Line Renderer to the game object
+            LineRenderer lr = gridLines.AddComponent<LineRenderer>();
+
+            // Set the material of the Line Renderer
+            lr.material = lineMaterial;
+
+            // Set the width of the line
+            lr.startWidth = 0.1f;
+            lr.endWidth = 0.1f;
+
+            // Set the number of points in the line
+            lr.positionCount = 2;
+
+            // Set the positions of the line
+            lr.SetPosition(0, new Vector3(0, 0, i * space));
+            lr.SetPosition(1, new Vector3(width * space, 0, i * space));
+            gridLines.transform.SetParent(lineParent.transform);
+        }
+
+        // Draw the vertical lines
+        for (int i = 0; i <= width; i++)
+        {
+            // Create a new empty game object
+            GameObject gridLines = new GameObject();
+
+            // Add a Line Renderer to the game object
+            LineRenderer lr = gridLines.AddComponent<LineRenderer>();
+
+            // Set the material of the Line Renderer
+            lr.material = lineMaterial;
+
+            // Set the width of the line
+            lr.startWidth = 0.1f;
+            lr.endWidth = 0.1f;
+
+            // Set the number of points in the line
+            lr.positionCount = 2;
+
+            // Set the positions of the line
+            lr.SetPosition(0, new Vector3(i * space, 0, 0));
+            lr.SetPosition(1, new Vector3(i * space, 0 , height * space));
+            gridLines.transform.SetParent(lineParent.transform);
         }
     }
 }

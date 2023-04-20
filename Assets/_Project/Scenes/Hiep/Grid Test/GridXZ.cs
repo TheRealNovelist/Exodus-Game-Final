@@ -34,7 +34,7 @@ public class GridXZ<TGridObject> {
             }
         }
 
-        CreateLine();
+       
         
         
         bool showDebug = false;
@@ -146,67 +146,5 @@ public class GridXZ<TGridObject> {
         return textMesh;
     }
 
-    public void CreateLine()
-    {
-        // Set the width and height of the grid
-        int width = 10;
-        int height = 10;
-
-        // Set the spacing between the lines
-        float space = 2.0f;
-
-        // Create a new material
-        Material lineMaterial = new Material(Shader.Find("Sprites/Default"));
-
-        // Set the color of the material
-        lineMaterial.color = Color.red;
-
-        // Draw the horizontal lines
-        for (int i = 0; i <= height; i++)
-        {
-            // Create a new empty game object
-            GameObject gridLines = new GameObject();
-
-            // Add a Line Renderer to the game object
-            LineRenderer lr = gridLines.AddComponent<LineRenderer>();
-
-            // Set the material of the Line Renderer
-            lr.material = lineMaterial;
-
-            // Set the width of the line
-            lr.startWidth = 0.1f;
-            lr.endWidth = 0.1f;
-
-            // Set the number of points in the line
-            lr.positionCount = 2;
-
-            // Set the positions of the line
-            lr.SetPosition(0, new Vector3(0, 0, i * space));
-            lr.SetPosition(1, new Vector3(width * space, 0, i * space));
-        }
-
-        // Draw the vertical lines
-        for (int i = 0; i <= width; i++)
-        {
-            // Create a new empty game object
-            GameObject gridLines = new GameObject();
-
-            // Add a Line Renderer to the game object
-            LineRenderer lr = gridLines.AddComponent<LineRenderer>();
-
-            // Set the material of the Line Renderer
-            lr.material = lineMaterial;
-
-            // Set the width of the line
-            lr.startWidth = 0.1f;
-            lr.endWidth = 0.1f;
-
-            // Set the number of points in the line
-            lr.positionCount = 2;
-
-            // Set the positions of the line
-            lr.SetPosition(0, new Vector3(i * space, 0, 0));
-            lr.SetPosition(1, new Vector3(i * space, 0 , height * space));
-        }
-    }
+    
 }
