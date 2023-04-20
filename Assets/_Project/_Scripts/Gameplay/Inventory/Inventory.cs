@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 
 
-public class Inventory : MonoBehaviour
+public class Inventory : Singleton<Inventory>
 {
     [Header("Equip Panels")]
     [SerializeField] private GameEvent equipAbilityEvent ;
@@ -62,16 +62,12 @@ public class Inventory : MonoBehaviour
         if (Input.GetKey(KeyCode.Tab))
         {
             inventoryPanel.SetActive(true);
-            InGameManager.Instance.CursorAndCam.InventoryPanelOn = true;
-            InGameManager.Instance.CursorAndCam.UnlockCursor();
         } 
         if (Input.GetKeyUp(KeyCode.Tab))
         {
             inventoryPanel.SetActive(false);
             optionPanel.SetActive(false);
-            InGameManager.Instance.CursorAndCam.InventoryPanelOn = false;
-            InGameManager.Instance.CursorAndCam.LockCursor();
-            
+
         } 
     }
 

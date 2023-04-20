@@ -67,7 +67,7 @@ public class Chest : MonoBehaviour
     private void Harvest(Item item)
     {
         harvested = true;
-        InGameManager.Instance.Inventory.AddItem(item);
+        Inventory.Instance.AddItem(item);
     }
 
     private Item GetRandomItem()

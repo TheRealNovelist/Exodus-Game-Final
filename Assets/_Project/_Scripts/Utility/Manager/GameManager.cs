@@ -5,39 +5,23 @@ using UnityEngine;
 
 public enum GameState
 {
-    LoadingMap
+    Loading,
+    Running,
+    Paused,
 }
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
-    public static GameManager Instance;
-
-    public GameState CurrentState { get; private set; }
+    private static GameState _currentState;
     
     public static event Action<GameState> OnGameStateChange;
-
-    private void Awake()
+    
+    public static void SetGameState(GameState state)
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
-
-    private void Start()
-    {
+        if (state == _currentState) return;
         
-    }
-
-    private void SetGameState(GameState state)
-    {
-        switch (state)
-        {
-            
-        }
+        _currentState = state;
+        
+        OnGameStateChange?.Invoke(state);
     }
 }

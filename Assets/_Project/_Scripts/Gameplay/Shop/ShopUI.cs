@@ -15,24 +15,24 @@ public class ShopUI : MonoBehaviour
 
     public void DefenderPurchased()
     {
-        InGameManager.Instance.CursorAndCam.ShopPanelOn = false;
-        InGameManager.Instance.CursorAndCam.UseTurretCamera(true);
+        // InGameManager.Instance.CursorAndCam.ShopPanelOn = false;
+        // InGameManager.Instance.CursorAndCam.UseTurretCamera(true);
         shopPanel.SetActive(false);
     }
     
     public void CloseShop()
     {
         shopPanel.SetActive(false);
-        InGameManager.Instance.CursorAndCam.ShopPanelOn = false;
-        InGameManager.Instance.CursorAndCam.LockCursor();
-        InGameManager.Instance.CursorAndCam.UseTurretCamera(false);
+        // InGameManager.Instance.CursorAndCam.ShopPanelOn = false;
+        // InGameManager.Instance.CursorAndCam.LockCursor();
+        // InGameManager.Instance.CursorAndCam.UseTurretCamera(false);
     }
     
     public void OnShop()
     {
         shopPanel.SetActive(true);
-        InGameManager.Instance.CursorAndCam.ShopPanelOn = true;
-        InGameManager.Instance.CursorAndCam.UnlockCursor();
+        // InGameManager.Instance.CursorAndCam.ShopPanelOn = true;
+        // InGameManager.Instance.CursorAndCam.UnlockCursor();
     }
     
 }

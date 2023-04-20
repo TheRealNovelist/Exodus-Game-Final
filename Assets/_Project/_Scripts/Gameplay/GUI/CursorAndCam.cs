@@ -33,8 +33,8 @@ public class CursorAndCam : MonoBehaviour
 
     public void MovePlayer(bool canMove)
     {
-        InGameManager.Instance.Player.receiveInput = canMove;
-        InGameManager.Instance.PlayerCamera.getPlayerRotation = canMove;
+        // InGameManager.Instance.Player.receiveInput = canMove;
+        // InGameManager.Instance.PlayerCamera.getPlayerRotation = canMove;
     }
 
     public void LockCursor()
@@ -49,7 +49,6 @@ public class CursorAndCam : MonoBehaviour
     public void UseTurretCamera(bool turretCamera)
     {
         this.turretCamera.SetActive(turretCamera);
-        InGameManager.Instance.PlayerCamera.gameObject.SetActive(!turretCamera);
     }
     
 }
