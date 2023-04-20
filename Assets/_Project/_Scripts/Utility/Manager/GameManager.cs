@@ -10,13 +10,13 @@ public enum GameState
     Paused,
 }
 
-public static class GameManager
+public class GameManager : Singleton<GameManager>
 {
-    private static GameState _currentState;
+    private GameState _currentState;
     
     public static event Action<GameState> OnGameStateChange;
     
-    public static void SetGameState(GameState state)
+    public void SetGameState(GameState state)
     {
         if (state == _currentState) return;
         
