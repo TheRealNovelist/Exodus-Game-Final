@@ -82,7 +82,7 @@ public class ESpawnerSystem : BaseAI
             
         if (spawned >= totalToSpawn)
         {
-            Debug.Log($"Spawned {spawned}/{totalToSpawn}");
+//            Debug.Log($"Spawned {spawned}/{totalToSpawn}");
             _stateMachine.Stop();
             FinishedSpawnning = true;
         }
@@ -103,6 +103,7 @@ public class ESpawnerSystem : BaseAI
     {
         _room = room;
     }
-    
+
+    public bool IsWaving => _stateMachine.GetCurrentState() == typeof(ES_WatingState);
 
 }

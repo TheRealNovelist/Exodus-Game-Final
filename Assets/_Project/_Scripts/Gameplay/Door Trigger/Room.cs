@@ -15,6 +15,10 @@ public class Room : MonoBehaviour
    public Action LockRoom,UnlockRoom;
    private void Awake()
    {
+       if (doors == null || doors.Count == 0)
+       {
+           return;
+       }
        foreach (var door in doors)
        {
            door.Init(this);
@@ -50,6 +54,11 @@ public class Room : MonoBehaviour
    private void LockDoors()
    {
        roomLocked = true;
+       
+       if (doors == null || doors.Count == 0)
+       {
+           return;
+       }
 
        foreach (var door in doors)
        {

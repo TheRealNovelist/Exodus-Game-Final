@@ -44,11 +44,12 @@ public class Door : MonoBehaviour
 
    public void OpenDoor()
    {
-      GetComponent<MeshRenderer>().material.color = Color.cyan;
+      GetComponent<MeshRenderer>().enabled = false;
    }
    
    public void CloseDoor()
    {
-      GetComponent<MeshRenderer>().material.color = Color.red;
+      GetComponent<MeshRenderer>().enabled = true;
+
    }
 }

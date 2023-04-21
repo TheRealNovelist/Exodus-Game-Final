@@ -64,7 +64,7 @@ public class ES_WavingState : IState
         
         //enemyObj.target = player.transform;
         //enemyObj.StartStateMachine();
-         //enemyObj.Init(this);
+        enemyObj.Init(_spawnerSystem);
 
       _spawnerSystem.EnemySpawned?.Invoke();
       _spawned++;

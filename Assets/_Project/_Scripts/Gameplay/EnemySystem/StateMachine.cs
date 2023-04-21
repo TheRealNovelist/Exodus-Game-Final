@@ -30,6 +30,8 @@ public class StateMachine
             _currentState?.Update();
         }
 
+        public IState GetCurrentState() => _currentState ;
+
         //Allow to pause the state machine, cease operation and continue
         public void Pause(bool pause)
         {
