@@ -1064,12 +1064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b60153cea1cb7645965539f9a14ff23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinManager: {fileID: 805828978}
-  CursorAndCam: {fileID: 420898548}
-  Shop: {fileID: 1652578593}
-  Inventory: {fileID: 8521711062070170279}
-  PlayerCamera: {fileID: 2120677520}
-  Player: {fileID: 1982938624}
 --- !u!4 &215145619
 Transform:
   m_ObjectHideFlags: 0
@@ -11190,7 +11184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataInjector: {fileID: 1725512429}
-  defaultAttackModule: {fileID: 0}
+  defaultAttackModule: {fileID: 1725512431}
   data:
     damage: 30
     fireRate: 10
@@ -11297,6 +11291,7 @@ MonoBehaviour:
   gridWidth: 10
   gridHeight: 10
   cellSize: 10
+  showGridLayOut: 0
   placeObjectTypeSOList:
   - {fileID: 11400000, guid: abacd4c3ce0baf949b3aaca7fd9804f2, type: 2}
   - {fileID: 11400000, guid: b5e43a7e779ca744fa9589fd6b7aa713, type: 2}
@@ -12816,7 +12811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataInjector: {fileID: 2001550844}
-  defaultAttackModule: {fileID: 0}
+  defaultAttackModule: {fileID: 2001550845}
   data:
     damage: 10
     fireRate: 5
@@ -12968,7 +12963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataInjector: {fileID: 2013978881}
-  defaultAttackModule: {fileID: 0}
+  defaultAttackModule: {fileID: 2013978882}
   data:
     damage: 5
     fireRate: 10

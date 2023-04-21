@@ -76,10 +76,10 @@ namespace WeaponSystem
             switch (mode)
             {
                 case WeaponMode.Primary:
-                    _primaryAttack.StartAttack(this);
+                    _primaryAttack?.StartAttack(this);
                     break;
                 case WeaponMode.Secondary:
-                    _secondaryAttack.StartAttack(this);
+                    _secondaryAttack?.StartAttack(this);
                     break;
             }
         }
@@ -90,10 +90,10 @@ namespace WeaponSystem
             switch (mode)
             {
                 case WeaponMode.Primary:
-                    _primaryAttack.HoldAttack(this);
+                    _primaryAttack?.HoldAttack(this);
                     break;
                 case WeaponMode.Secondary:
-                    _secondaryAttack.HoldAttack(this);
+                    _secondaryAttack?.HoldAttack(this);
                     break;
             }
         }
