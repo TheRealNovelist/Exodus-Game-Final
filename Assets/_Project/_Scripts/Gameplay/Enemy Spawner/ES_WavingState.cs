@@ -68,8 +68,6 @@ public class ES_WavingState : IState
 
       _spawnerSystem.EnemySpawned?.Invoke();
       _spawned++;
-      Debug.Log($"Spawn enemy {_spawned}");
-
     }
 
 }

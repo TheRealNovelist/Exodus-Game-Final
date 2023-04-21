@@ -20,7 +20,7 @@ public class ESpawnerSystem : BaseAI
     public int TotalToSpawn => totalToSpawn;
     public int AmountInWave => amountInWave;
     public float SpawnGap=> spawnGap;
-
+    public int Spawned => spawned;
     private int spawned =0;
     private int defeated = 0;
     private Room _room;
@@ -104,6 +104,6 @@ public class ESpawnerSystem : BaseAI
         _room = room;
     }
 
-    public bool IsWaving => _stateMachine.GetCurrentState() == typeof(ES_WatingState);
+    public bool IsWaving() => _stateMachine.GetCurrentState() is ES_WavingState;
 
 }

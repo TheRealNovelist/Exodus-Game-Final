@@ -9,7 +9,23 @@ public class MainRoomTrigger : MonoBehaviour
     [SerializeField] private MainRoomUI _mainRoomUI;
 
     public Action<bool> PlayerInMainRoom;
-    
+    private bool _waving;
+
+    public bool Waving
+    {
+        get => _waving;
+        set
+        {
+            _waving = value;
+
+            if (value)
+            {
+                _mainRoomUI.WarningActivate();
+                _mainRoomUI.UpdateWaveStats(_spawnerSystem);
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -36,11 +52,16 @@ public class MainRoomTrigger : MonoBehaviour
     {
         PlayerInMainRoom += PlayerInRoom;
         
-       // PlayerInMainRoom?.Invoke(false);
+       PlayerInMainRoom?.Invoke(false);
     }
 
     private void OnDisable()
     {
         PlayerInMainRoom -= PlayerInRoom;
+    }
+
+    private void Update()
+    {
+        Waving = _spawnerSystem.IsWaving();
     }
 }
