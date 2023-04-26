@@ -4,35 +4,25 @@ using UnityEngine;
 
 public class ShopUI : MonoBehaviour
 {
-    [SerializeField] private Shop shop;
+    private Shop _shop;
     [SerializeField] private GameObject shopPanel;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Init(Shop shop)
     {
-        shopPanel.SetActive(false);
+        _shop = shop;
     }
 
     public void DefenderPurchased()
     {
-        // InGameManager.Instance.CursorAndCam.ShopPanelOn = false;
-        // InGameManager.Instance.CursorAndCam.UseTurretCamera(true);
         shopPanel.SetActive(false);
     }
-    
+
     public void CloseShop()
     {
-        shopPanel.SetActive(false);
-        // InGameManager.Instance.CursorAndCam.ShopPanelOn = false;
-        // InGameManager.Instance.CursorAndCam.LockCursor();
-        // InGameManager.Instance.CursorAndCam.UseTurretCamera(false);
+        _shop.ShopToggle?.Invoke(false);
     }
     
-    public void OnShop()
-    {
-        shopPanel.SetActive(true);
-        // InGameManager.Instance.CursorAndCam.ShopPanelOn = true;
-        // InGameManager.Instance.CursorAndCam.UnlockCursor();
-    }
+    
+    public void ToggleShopPanel(bool show) => shopPanel.SetActive(show);
     
 }

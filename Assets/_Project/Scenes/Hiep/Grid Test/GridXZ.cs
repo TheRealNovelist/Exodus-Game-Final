@@ -34,7 +34,6 @@ public class GridXZ<TGridObject> {
             }
         }
 
-       
         
         
         bool showDebug = false;

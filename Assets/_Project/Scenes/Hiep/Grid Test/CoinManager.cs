@@ -5,16 +5,39 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
 
-public class CoinManager : MonoBehaviour
+public class CoinManager : Singleton<CoinManager>
 {
-    public int CoinAmount =100;
-    
-    [SerializeField] private TMP_Text moneyAmountText;
-    // Start is called before the first frame update
+    private int _coinAmount = 100;
 
+    public int CoinAmount
+    {
+        get { return _coinAmount; }
+        set
+        {
+            if (value < 0)
+            {
+                _coinAmount = 0;
+                return;
+            }
+            _coinAmount = value;
+        }
+    }
+
+    [SerializeField] private TMP_Text moneyAmountText;
+
+    public void SpendCoin(int amount)
+    {
+        CoinAmount -= amount;
+        moneyAmountText.SetText("Money " + _coinAmount.ToString());
+    }
+
+    public void GainCoin(int amount)
+    {
+        CoinAmount += amount;
+        moneyAmountText.SetText("Money " + _coinAmount.ToString());
+    }
 
     private void Update()
     {
-        moneyAmountText.SetText("Money " + CoinAmount.ToString());
     }
 }

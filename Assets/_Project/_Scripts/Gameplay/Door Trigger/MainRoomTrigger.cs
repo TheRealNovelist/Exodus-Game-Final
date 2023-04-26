@@ -20,8 +20,12 @@ public class MainRoomTrigger : MonoBehaviour
 
             if (value)
             {
-                _mainRoomUI.WarningActivate();
+                _mainRoomUI.WarningActivate(true);
                 _mainRoomUI.UpdateWaveStats(_spawnerSystem);
+            }
+            else
+            {
+                _mainRoomUI.WarningActivate(false);
             }
         }
     }

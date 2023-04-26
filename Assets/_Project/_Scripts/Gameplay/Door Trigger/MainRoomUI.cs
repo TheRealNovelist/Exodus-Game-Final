@@ -20,12 +20,12 @@ public class MainRoomUI : MonoBehaviour
         waveWarning.SetActive(show);
     }
 
-    public void WarningActivate()
+    public void WarningActivate(bool show)
     {
         if(!waveWarning.gameObject.activeSelf) {return;}
         
         //PLACE HOLDER
-        waveWarning.GetComponent<Image>().enabled = true;
+        waveWarning.GetComponent<Image>().enabled = show;
     }
 
     public void UpdateWaveStats(ESpawnerSystem spawnerSystem)

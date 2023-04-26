@@ -4,6 +4,8 @@ using System.ComponentModel.Design.Serialization;
 using UnityEditor;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
+
 
 public class GridBuildingSystem : MonoBehaviour
 {
@@ -23,20 +25,23 @@ public class GridBuildingSystem : MonoBehaviour
     
     private PlacedObjectTypeSO placedObjectTypeSO;
     private PlacedObjectTypeSO.Dir dir;
-    [SerializeField] private CoinManager coinManager;
 
     [SerializeField] private Camera turretCamera;
 
     private GameObject lineParent;
-    
+    private Shop _shop;
 
-   // [SerializeField] private ShopUI _shopUI;
 
     private void Awake() {
         Instance = this;
+        
+        _shop = FindObjectOfType(typeof(Shop)).GetComponent<Shop>();
+        if (!_shop)
+        {
+            Debug.Log("No Shop Found");
+        }
     
-
-        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(0, 0, 0), (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
+        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, this.transform.position, (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
 
       //  placedObjectTypeSO = placeObjectTypeSOList[0];//set placeObject to the first one in the list
         placedObjectTypeSO = null;
@@ -54,7 +59,9 @@ public class GridBuildingSystem : MonoBehaviour
         lineParent = new GameObject();
         
         lineParent.name = "Line Holder";
-        CreateLine(gridWidth, gridHeight, cellSize, lineParent);
+        lineParent.transform.parent = transform;
+        lineParent.transform.localPosition = Vector3.zero;
+        CreateLine(gridWidth, gridHeight, cellSize,this.transform.position, lineParent);
     }
     private void Update() 
     { 
@@ -146,27 +153,31 @@ public class GridBuildingSystem : MonoBehaviour
             }
         }
             
-        if (canBuild && coinManager.CoinAmount >= placedObjectTypeSO.price)
+        if (canBuild && CoinManager.Instance.CoinAmount >= placedObjectTypeSO.price)
         {
             Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
             Vector3 placedObjectWorldPossition = grid.GetWorldPosition(x, z) +
                                                  new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
 
             PlacedObject placedObject = PlacedObject.Create(placedObjectWorldPossition,
-                new Vector2Int(x, z), dir, placedObjectTypeSO); 
-            
-            //miner the amount of coin after build
-            coinManager.CoinAmount -= placedObjectTypeSO.price; 
-            
-                
+                new Vector2Int(x, z), dir, placedObjectTypeSO);
+
+
             foreach (Vector2Int gridPosition in gridPositionList)
             {
                 grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
             }
+            
+            _shop.PurchasedItem?.Invoke(placedObjectTypeSO);
+        }
+        else
+        {
+            _shop.shopUI.ToggleShopPanel(true);
         }
         
        // _shopUI.CloseShop();
-
+       
+       
     }
 
     // Rotate placeObject before place it  on grid
@@ -268,7 +279,7 @@ public class GridBuildingSystem : MonoBehaviour
     }
     
     //create line for grid and also put them in to a gameobject
-    public void CreateLine(int width, int height, float space, GameObject lineParent)
+    public void CreateLine(int width, int height, float space, Vector3 origin, GameObject lineParent)
     {
         // Create a new material
         Material lineMaterial = new Material(Shader.Find("Sprites/Default"));
@@ -282,10 +293,8 @@ public class GridBuildingSystem : MonoBehaviour
         {
             // Create a new empty game object
             GameObject gridLines = new GameObject();
-
             // Add a Line Renderer to the game object
             LineRenderer lr = gridLines.AddComponent<LineRenderer>();
-
             // Set the material of the Line Renderer
             lr.material = lineMaterial;
 
@@ -297,8 +306,9 @@ public class GridBuildingSystem : MonoBehaviour
             lr.positionCount = 2;
 
             // Set the positions of the line
-            lr.SetPosition(0, new Vector3(0, 0, i * space));
-            lr.SetPosition(1, new Vector3(width * space, 0, i * space));
+            lr.SetPosition(0, new Vector3(origin.x, origin.y, origin.z +i * space) );
+            lr.SetPosition(1, new Vector3(origin.x + width * space,  origin.y, origin.z +i * space));
+            
             gridLines.transform.SetParent(lineParent.transform);
         }
 
@@ -322,8 +332,8 @@ public class GridBuildingSystem : MonoBehaviour
             lr.positionCount = 2;
 
             // Set the positions of the line
-            lr.SetPosition(0, new Vector3(i * space, 0, 0));
-            lr.SetPosition(1, new Vector3(i * space, 0 , height * space));
+            lr.SetPosition(0, new Vector3(i * space + origin.x, origin.y, origin.z));
+            lr.SetPosition(1, new Vector3(i * space+ origin.x,  origin.y, height * space +origin.z));
             gridLines.transform.SetParent(lineParent.transform);
         }
     }

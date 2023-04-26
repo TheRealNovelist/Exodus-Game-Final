@@ -8,6 +8,8 @@ using Unity.VisualScripting;
 
 public class ESpawnerSystem : BaseAI
 {
+    [SerializeField] private Transform _player;
+    public Transform Player => _player;
     [SerializeField] private bool spawnOnStart;
     
     [SerializeField] private WeightedRandomList<BaseEnemy> enemies;
