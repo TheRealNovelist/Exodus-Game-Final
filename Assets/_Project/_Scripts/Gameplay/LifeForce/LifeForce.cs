@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class LifeForce : MonoBehaviour , IDamageable, IHeal
 {
-    public float timeValue = 60;
-    public bool timerOn = false;
+    [SerializeField] private float timeValue = 60;
+    private bool timerOn = false;
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private GameObject gameOverText;
 
@@ -26,6 +26,7 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
     // Update is called once per frame
     void Update()
     {
+        if(!timerOn) {return;}
         if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
@@ -34,6 +35,7 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
         else
         {
             timeValue = 0;
+            DisplayTime(timeValue);
             timerOn = false;
             gameOverText.SetActive(true);
             Time.timeScale = 0;

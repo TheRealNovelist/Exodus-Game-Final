@@ -26,7 +26,7 @@ public class StateMachine
             if (transition != null)
                 SetState(transition.To);
             
-            Debug.Log("Current State: " + _currentState);
+//            Debug.Log("Current State: " + _currentState);
             _currentState?.Update();
         }
 
