@@ -17,7 +17,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
                 {
                     name = typeof(T).Name,
                     //hideFlags = HideFlags.HideAndDontSave
-                    
                 };
                 _instance = obj.AddComponent<T>();
                 Debug.Log("I got spawned in!");
@@ -33,6 +32,21 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
         {
             _instance = null;
         }
+    }
+
+    public virtual void Awake()
+    {
+        T[] tComponents = FindObjectsOfType<T>();
+        if (tComponents.Length >= 1)
+        {
+            _instance = tComponents[0];
+
+            for (int i = 1; i < tComponents.Length; i++)
+            {
+                Destroy(tComponents[i].gameObject);
+            }
+        }
+           
     }
 }
 
@@ -50,7 +64,6 @@ public abstract class SingletonPersistent<T> : MonoBehaviour where T : Component
         }
         else
         {
-            
         }
     }
 
@@ -62,4 +75,3 @@ public abstract class SingletonPersistent<T> : MonoBehaviour where T : Component
         }
     }
 }
-
