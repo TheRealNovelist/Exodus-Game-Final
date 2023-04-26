@@ -19,8 +19,11 @@ namespace WeaponSystem
         
         private int currentIndex;
 
-        private int _ammoPool = 100;
 
+        [SerializeField] private int maxAmmo = 100;
+
+        private int _ammoPool;
+        
         public int AmmoPool
         {
             get => _ammoPool;
@@ -33,6 +36,7 @@ namespace WeaponSystem
 
         public void Start()
         {
+            AmmoPool = maxAmmo;
             ChangeWeapon(0, true);
         }
 
@@ -151,6 +155,18 @@ namespace WeaponSystem
                     weapon.gameObject.SetActive(false);
                 }
                 i++;
+            }
+        }
+
+        public void AddAmmoOnPool()
+        {
+            if (AmmoPool == maxAmmo)
+                return;
+            
+            AmmoPool += 100;
+            if (AmmoPool >= maxAmmo)
+            {
+                AmmoPool = maxAmmo;
             }
         }
     }

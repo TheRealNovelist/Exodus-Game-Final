@@ -1290,19 +1290,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975390274}
   m_CullTransparentMesh: 1
---- !u!114 &1184491716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644103618547739270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1c7ca6df8a03b64d886275753937609, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _crateData: {fileID: 0}
 --- !u!114 &1196917113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3003,7 +2990,6 @@ GameObject:
   - component: {fileID: 1644103618547739269}
   - component: {fileID: 1644103618547739258}
   - component: {fileID: 1644103618547739259}
-  - component: {fileID: 1184491716}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -4491,8 +4477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataInjector: {fileID: 8608718191991150279}
-  _attackModule: {fileID: 8608718191991150280}
-  _modifier: {fileID: 0}
+  defaultAttackModule: {fileID: 0}
   data:
     damage: 30
     fireRate: 10
@@ -4564,8 +4549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataInjector: {fileID: 8608718193006752857}
-  _attackModule: {fileID: 8608718193006752855}
-  _modifier: {fileID: 0}
+  defaultAttackModule: {fileID: 0}
   data:
     damage: 5
     fireRate: 10
@@ -4691,8 +4675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataInjector: {fileID: 9140412183821457945}
-  _attackModule: {fileID: 9140412183821457944}
-  _modifier: {fileID: 0}
+  defaultAttackModule: {fileID: 0}
   data:
     damage: 10
     fireRate: 5
