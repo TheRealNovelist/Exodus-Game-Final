@@ -52,6 +52,8 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
     public void Damage(float amount)
     {
         timeValue -= amount;
+        
+        //ADD EFFECT AND SOUND
     }
 
     public void AddHealth(float amount)
