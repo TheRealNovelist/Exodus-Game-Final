@@ -31,7 +31,7 @@ namespace EnemySystem
         }
         
 
-        public void Init(ESpawnerSystem spawner)
+        public void BindSpawner(ESpawnerSystem spawner)
         {
             _spawner = spawner;
         }

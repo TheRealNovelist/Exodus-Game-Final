@@ -25,7 +25,7 @@ public class ES_WavingState : IState
     }
     
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (currentTimer <= 0)
         {
@@ -49,11 +49,6 @@ public class ES_WavingState : IState
     public void OnExit()
     {
     }
-
-    void IState.Update()
-    {
-        Update();
-    }
     
     private void SpawnEnemy()
     {
@@ -64,7 +59,7 @@ public class ES_WavingState : IState
         
         enemyObj.target = _spawnerSystem.Player.transform;
         enemyObj.StartStateMachine();
-        enemyObj.Init(_spawnerSystem);
+        enemyObj.BindSpawner(_spawnerSystem);
 
       _spawnerSystem.EnemySpawned?.Invoke();
       _spawned++;
