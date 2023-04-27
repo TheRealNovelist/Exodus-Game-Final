@@ -29,7 +29,7 @@ public class ESpawnerSystem : BaseAI
     
     [SerializeField]  private float waveCountDownTime =10;
 
-    public bool FinishedSpawnning { get; private set; }
+    public bool FinishedSpawning { get; private set; }
 
     public Action EnemySpawned, EnemyDefeated;
 
@@ -53,7 +53,7 @@ public class ESpawnerSystem : BaseAI
     {
         if (IsStateMachineStarted()) return;
 
-        var waitingState = new ES_WatingState(waveCountDownTime);
+        var waitingState = new ES_WaitingState(waveCountDownTime);
         var wavingState = new ES_WavingState(this);
         
         AddTransition(waitingState, wavingState, ()=>waitingState.FinishedCounting);
@@ -86,7 +86,7 @@ public class ESpawnerSystem : BaseAI
         {
 //            Debug.Log($"Spawned {spawned}/{totalToSpawn}");
             _stateMachine.Stop();
-            FinishedSpawnning = true;
+            FinishedSpawning = true;
         }
     }
 

@@ -26,12 +26,13 @@ namespace EnemySystem
 
         public virtual void Die()   
         {
-            _spawner.EnemyDefeated?.Invoke();
+            if (_spawner) _spawner.EnemyDefeated?.Invoke();
+            
             Destroy(gameObject);
         }
         
 
-        public void Init(ESpawnerSystem spawner)
+        public void BindSpawner(ESpawnerSystem spawner)
         {
             _spawner = spawner;
         }

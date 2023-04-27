@@ -45,7 +45,7 @@ public class Room : MonoBehaviour
 
    private void OnTriggerEnter(Collider other)
    {
-      if (other.gameObject.CompareTag("Player") && !enemySpawner.FinishedSpawnning)
+      if (other.gameObject.CompareTag("Player") && !enemySpawner.FinishedSpawning)
       {
           LockRoom?.Invoke();
       }  
