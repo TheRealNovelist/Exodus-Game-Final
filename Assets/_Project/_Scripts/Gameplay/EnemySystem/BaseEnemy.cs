@@ -26,7 +26,8 @@ namespace EnemySystem
 
         public virtual void Die()   
         {
-            _spawner.EnemyDefeated?.Invoke();
+            if (_spawner) _spawner.EnemyDefeated?.Invoke();
+            
             Destroy(gameObject);
         }
         
