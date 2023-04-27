@@ -1,9 +1,8 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Cursor : MonoBehaviour
+public class PlayerCursor : MonoBehaviour
 {
     public bool InventoryPanelOn;
     public bool ShopPanelOn;
@@ -31,10 +30,10 @@ public class Cursor : MonoBehaviour
 
     public void UnlockCursor()
     {
-        if (UnityEngine.Cursor.lockState != CursorLockMode.None)
+        if (Cursor.lockState != CursorLockMode.None)
         {
-            UnityEngine.Cursor.lockState = CursorLockMode.None;
-            UnityEngine.Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -46,10 +45,10 @@ public class Cursor : MonoBehaviour
 
     public void LockCursor()
     {
-        if (UnityEngine.Cursor.lockState != CursorLockMode.Locked)
+        if (Cursor.lockState != CursorLockMode.Locked)
         {
-            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            UnityEngine.Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
@@ -69,7 +68,7 @@ public class Cursor : MonoBehaviour
 
     private void Start()
     {
-        _shop = FindObjectOfType(typeof(Shop)).GetComponent<Shop>();
+        _shop = FindObjectOfType<Shop>();
 
         if (_shop)
             _shop.ShopToggle += ToggleCursor;

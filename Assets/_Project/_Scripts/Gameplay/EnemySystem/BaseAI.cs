@@ -15,7 +15,7 @@ namespace EnemySystem
         {
             _stateMachine = new StateMachine();
         }
-
+        
         public virtual void StartStateMachine(float delay = 0f)
         {
             StartCoroutine(StartWithDelay(initialState, delay));
