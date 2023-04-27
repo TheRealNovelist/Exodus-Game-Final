@@ -54,6 +54,7 @@ public class Chest : MonoBehaviour
             {
                 if (consumeItem.effect)
                 {
+                    Debug.Log("hhhh");
                     consumeItem.effect.Invoke();
                 }
                 else
