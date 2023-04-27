@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using EnemySystem;
 using UnityEngine;
 
-public class ES_WatingState : IState
+public class ES_WaitingState : IState
 {
     private float currentTimer;
     private bool waiting = false;
 
-    public ES_WatingState(float timeCountDown)
+    public ES_WaitingState(float timeCountDown)
     {
         currentTimer = timeCountDown;
     }
