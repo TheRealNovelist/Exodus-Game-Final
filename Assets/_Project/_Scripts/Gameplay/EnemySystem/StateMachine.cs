@@ -7,11 +7,11 @@ public class StateMachine
     {
         private IState _currentState;
         
-        private Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>();
-        private List<Transition> _currentTransitions = new List<Transition>();
-        private List<Transition> _anyTransitions = new List<Transition>();
+        private Dictionary<Type, List<Transition>> _transitions = new();
+        private List<Transition> _currentTransitions = new();
+        private List<Transition> _anyTransitions = new();
 
-        private static List<Transition> EmptyTransitions = new List<Transition>(0);
+        private static readonly List<Transition> EmptyTransitions = new(0);
 
         public bool IsStarted { get; private set; }
         public bool IsPaused { get; private set; }
@@ -30,7 +30,7 @@ public class StateMachine
             _currentState?.Update();
         }
 
-        public IState GetCurrentState() => _currentState ;
+        public IState GetCurrentState() => _currentState;
 
         //Allow to pause the state machine, cease operation and continue
         public void Pause(bool pause)
@@ -77,12 +77,15 @@ public class StateMachine
         //Add new transition between state
         public void AddTransition(IState from, IState to, Func<bool> condition)
         {
+            //Get transitions from dictionary and assigning a local list to add new transition 
             if (_transitions.TryGetValue(from.GetType(), out var transitions) == false)
             {
+                //If the dictionary does not have the current type, create new key type for dict.
                 transitions = new List<Transition>();
                 _transitions[from.GetType()] = transitions;
             }
             
+            //Add the transition to the dictionary.
             transitions.Add(new Transition(to, condition));
         }
 

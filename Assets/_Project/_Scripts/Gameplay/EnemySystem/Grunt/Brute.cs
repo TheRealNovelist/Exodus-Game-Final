@@ -20,6 +20,7 @@ namespace EnemySystem.Brute
         protected override void Awake()
         {
             base.Awake();
+            
             if (!agent)
                 agent = GetComponent<NavMeshAgent>();
         }
@@ -31,13 +32,13 @@ namespace EnemySystem.Brute
             var MoveToPlayer = new MoveToPlayer(agent, target);
             var Attacking = new Attacking(this, target);
 
-            AddTransition(MoveToPlayer, Attacking, TargetInRange());
-            AddAnyTransition(MoveToPlayer, TargetOutRange());
+            AddTransition(MoveToPlayer, Attacking, TargetInRange(attackRange));
+            AddAnyTransition(MoveToPlayer, TargetOutRange(attackRange));
 
             initialState = MoveToPlayer;
             
-            Func<bool> TargetInRange() => () => Vector3.Distance(target.position, transform.position) <= attackRange;
-            Func<bool> TargetOutRange() => () => Vector3.Distance(target.position, transform.position) > attackRange;
+            Func<bool> TargetInRange(float range) => () => Vector3.Distance(target.position, transform.position) <= range;
+            Func<bool> TargetOutRange(float range) => () => Vector3.Distance(target.position, transform.position) > range;
             
             base.StartStateMachine(delay);
         }
