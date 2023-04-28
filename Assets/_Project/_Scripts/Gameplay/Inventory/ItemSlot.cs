@@ -9,16 +9,22 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     public Item _item;
-    public Image imageItem;
-    public Image imageFrame;
+    private Image imageItem;
+    private Image imageFrame;
     public int amount = 0;
-    public TextMeshProUGUI quantityTMP;
+    private TextMeshProUGUI quantityTMP;
     
     [SerializeField] private Color32 lockColor = new Color32(90, 90, 90,225);
     private Color32 unlockColor = new Color32(255, 255, 255,255);
     private Color32 nullColor = new Color32(0, 0, 0,0);
 
 
+    private void Awake()
+    {
+        imageItem = transform.GetChild(0).GetComponent<Image>();
+        imageFrame = transform.GetComponent<Image>();
+        quantityTMP = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+    }
 
     public void UpdateSlotUI()
     {
@@ -47,5 +53,10 @@ public class ItemSlot : MonoBehaviour
                 imageItem.color = unlockColor;
                 break;
         }
+    }
+
+    public void SetFrameIMG(Sprite sprite)
+    {
+        imageFrame.sprite = sprite;
     }
 }

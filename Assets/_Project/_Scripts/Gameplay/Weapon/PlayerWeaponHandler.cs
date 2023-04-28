@@ -10,7 +10,6 @@ namespace WeaponSystem
     public class PlayerWeaponHandler : WeaponHandler
     {
         [SerializeField] private Transform weaponHolder;
-        
         public event Action<Weapon> OnSwitchingWeapon;
         public event Action<int> OnAmmoChange;
 

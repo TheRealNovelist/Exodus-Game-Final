@@ -25,8 +25,8 @@ namespace Old
 
         public void GunUpdate()
         {
-            GunItem gunItemSlot1 = inventory.gunPanel.equippedItems[0] as GunItem;
-            GunItem gunItemSlot2 = inventory.gunPanel.equippedItems[1] as GunItem;
+            GunItem gunItemSlot1 =  Inventory.Instance.equippedGuns[0] as GunItem;
+            GunItem gunItemSlot2 =  Inventory.Instance.equippedGuns[1] as GunItem;
 
             if (gunItemSlot1 != null)
             {
