@@ -15,14 +15,14 @@ namespace WeaponSystem
 
         private bool isWeaponReady = true;
         private bool isEquipped = false;
-        
+
         private int currentIndex;
 
 
         [SerializeField] private int maxAmmo = 100;
 
         private int _ammoPool;
-        
+
         public int AmmoPool
         {
             get => _ammoPool;
@@ -37,16 +37,26 @@ namespace WeaponSystem
         {
             AmmoPool = maxAmmo;
             ChangeWeapon(0, true);
+
+            Inventory.Instance.OnGunEquiped += ReorderGunChildren;
+        }
+
+        private void ReorderGunChildren(WeaponDataSO data, int index)
+        {
+            foreach (SOInjector injector in transform.GetComponentsInChildren<SOInjector>())
+            {
+                Debug.Log(injector.gameObject);
+            }
         }
 
         private void Update()
         {
             HandleWeaponSwitching();
-            
+
             isWeaponReady = _currentWeapon != null && _currentWeapon.IsWeaponReady;
 
             if (!isWeaponReady) return;
-            
+
             if (Input.GetMouseButtonDown(0))
             {
                 _currentWeapon.StartAttack(WeaponMode.Primary);
@@ -75,7 +85,7 @@ namespace WeaponSystem
                 ChangeWeapon(1);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            /*if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 ChangeWeapon(2);
             }
@@ -83,7 +93,7 @@ namespace WeaponSystem
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 ChangeWeapon(-1);
-            }
+            }*/
         }
 
         public override int TryAddAmmo(int currentAmmo, WeaponData data)
@@ -113,11 +123,11 @@ namespace WeaponSystem
         {
             return _ammoPool > 0;
         }
-        
+
         private void ChangeWeapon(int index, bool forceChange = false)
         {
             if (index == currentIndex && !forceChange) return;
-            
+
             //Unequip previous weapon 
             if (_currentWeapon != null)
             {
@@ -136,7 +146,7 @@ namespace WeaponSystem
 
                 return;
             }
-            
+
             int i = 0;
             foreach (Transform weapon in weaponHolder)
             {
@@ -153,6 +163,7 @@ namespace WeaponSystem
                 {
                     weapon.gameObject.SetActive(false);
                 }
+
                 i++;
             }
         }
@@ -161,7 +172,7 @@ namespace WeaponSystem
         {
             if (AmmoPool == maxAmmo)
                 return;
-            
+
             AmmoPool += 100;
             if (AmmoPool >= maxAmmo)
             {

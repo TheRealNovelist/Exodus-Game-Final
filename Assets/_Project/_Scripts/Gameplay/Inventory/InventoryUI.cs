@@ -79,7 +79,7 @@ public class InventoryUI : MonoBehaviour
     
     public void EquipOption(int index)
     {
-        switch (currentSelecting.type)
+        switch (currentSelecting.Type)
         {
             case (EquipType.Ability):
                 Inventory.Instance.UnEquip(index,EquipType.Ability);

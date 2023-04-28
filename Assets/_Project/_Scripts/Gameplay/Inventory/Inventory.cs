@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.Serialization;
-
+using WeaponSystem;
 
 public class Inventory : Singleton<Inventory>
 {
@@ -18,7 +18,9 @@ public class Inventory : Singleton<Inventory>
     public Dictionary<Item, ItemSlot> slotsByItems = new Dictionary<Item, ItemSlot>();
 
     [Header("Equip Panels")] public GameEvent equipAbilityEvent;
-    public GameEvent equipGunEvent;
+
+    public Action<WeaponDataSO, int> OnGunEquiped;
+    //public GameEvent equipGunEvent;
 
     [FormerlySerializedAs("equippedItems")] public EquipItem[] equippedGuns = new EquipItem[2];
     [FormerlySerializedAs("equippedItems")] public EquipItem[] equippedAbilities = new EquipItem[2];
@@ -103,7 +105,7 @@ public class Inventory : Singleton<Inventory>
     {
         equipItem.unlocked = true;
 
-        switch (equipItem.type)
+        switch (equipItem.Type)
         {
             case (EquipType.Ability):
                 if (HasEmptySlot(equippedAbilities))
@@ -132,7 +134,7 @@ public class Inventory : Singleton<Inventory>
     {
         item.equipping = true;
 
-        switch (item.type)
+        switch (item.Type)
         {
             case (EquipType.Ability):
                 equippedAbilities[index] = item;
@@ -143,8 +145,8 @@ public class Inventory : Singleton<Inventory>
             case (EquipType.Gun):
                 equippedGuns[index] = item;
                 _inventoryUI.gunPanel.Equip(index, item);
-
-                equipGunEvent.Invoke();
+                GunItem gun = item as GunItem;
+                OnGunEquiped?.Invoke(gun.gunData,index);
                 break;
         }
     }

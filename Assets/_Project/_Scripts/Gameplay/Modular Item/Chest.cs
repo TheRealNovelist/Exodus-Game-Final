@@ -68,6 +68,7 @@ public class Chest : MonoBehaviour
     private void Harvest(Item item)
     {
         harvested = true;
+        Debug.Log("harvested");
         Inventory.Instance.AddItem(item);
     }
 
