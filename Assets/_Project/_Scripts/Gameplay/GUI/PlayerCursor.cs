@@ -8,7 +8,7 @@ public class PlayerCursor : MonoBehaviour
     public bool ShopPanelOn;
 
     private Shop _shop;
-    private static bool _unlocking = false;
+    private bool _unlocking = false;
 
     // Update is called once per frame
     void Update()
@@ -28,7 +28,7 @@ public class PlayerCursor : MonoBehaviour
         }
     }
 
-    private static void UnlockCursor()
+    public void UnlockCursor()
     {
         if (Cursor.lockState != CursorLockMode.None)
         {
@@ -37,13 +37,13 @@ public class PlayerCursor : MonoBehaviour
         }
     }
 
-    private void MovePlayer(bool canMove)
+    public void MovePlayer(bool canMove)
     {
         // InGameManager.Instance.Player.receiveInput = canMove;
         // InGameManager.Instance.PlayerCamera.getPlayerRotation = canMove;
     }
 
-    private static void LockCursor()
+    public void LockCursor()
     {
         if (Cursor.lockState != CursorLockMode.Locked)
         {
@@ -52,7 +52,7 @@ public class PlayerCursor : MonoBehaviour
         }
     }
 
-    public static void ToggleCursor(bool unlock)
+    private void ToggleCursor(bool unlock)
     {
         if (unlock)
         {
