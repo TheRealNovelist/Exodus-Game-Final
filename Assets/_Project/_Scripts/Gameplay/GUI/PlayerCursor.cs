@@ -17,15 +17,15 @@ public class PlayerCursor : MonoBehaviour
         {
             UnlockCursor();
         }
-
-        if (InventoryPanelOn || ShopPanelOn)
+        
+        /*if (InventoryPanelOn || ShopPanelOn)
         {
             MovePlayer(false);
         }
         else
         {
             MovePlayer(true);
-        }
+        }*/
     }
 
     private static void UnlockCursor()
@@ -35,12 +35,6 @@ public class PlayerCursor : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-    }
-
-    private void MovePlayer(bool canMove)
-    {
-        // InGameManager.Instance.Player.receiveInput = canMove;
-        // InGameManager.Instance.PlayerCamera.getPlayerRotation = canMove;
     }
 
     private static void LockCursor()

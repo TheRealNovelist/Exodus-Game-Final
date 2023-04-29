@@ -43,9 +43,18 @@ namespace WeaponSystem
 
         private void ReorderGunChildren(WeaponDataSO data, int index)
         {
-            foreach (SOInjector injector in transform.GetComponentsInChildren<SOInjector>())
+            foreach (SOInjector injector in transform.GetComponentsInChildren<SOInjector>(true))
             {
-                Debug.Log(injector.gameObject);
+                if (injector.DataSO == data)
+                {
+                    injector.gameObject.transform.SetSiblingIndex(index);
+                }
+
+                if (index == 0)
+                {
+                    currentIndex = 1;
+                    ChangeWeapon(0,true);
+                }
             }
         }
 
