@@ -29,8 +29,10 @@ public class Inventory : Singleton<Inventory>
     private void Start()
     {
         SetSlotItem();
+        CheckEquipmentOnStart(equippedGuns);
         _inventoryUI.RefreshUI();
         _inventoryUI.gameObject.SetActive(false);
+
     }
 
     private void Update()
@@ -108,22 +110,19 @@ public class Inventory : Singleton<Inventory>
         switch (equipItem.Type)
         {
             case (EquipType.Ability):
-                if (HasEmptySlot(equippedAbilities))
+                if (TryGetEmptySlot(equippedAbilities, out int index))
                 {
-                    int emptySlotIndex = GetEmptySlot(equippedAbilities);
-                    Equip(emptySlotIndex, equipItem);
+                    Equip(index, equipItem);
                     return true;
                 }
 
                 break;
             case (EquipType.Gun):
-                if (HasEmptySlot(equippedGuns))
+                if (TryGetEmptySlot(equippedGuns, out index))
                 {
-                    int emptySlotIndex = GetEmptySlot(equippedGuns);
-                    Equip(emptySlotIndex, equipItem);
+                    Equip(index, equipItem);
                     return true;
                 }
-
                 break;
         }
 
@@ -170,28 +169,32 @@ public class Inventory : Singleton<Inventory>
         }
     }
     
-    public bool HasEmptySlot(EquipItem[] items)
+    public bool TryGetEmptySlot(EquipItem[] items, out int index)
     {
-        foreach (var slot in items)
+        index = -1;
+        for (int i = 0; i < items.Length; i++)
         {
-            if (slot == null)
-            {
+            if (items[i] == null) {
+                index = i;
                 return true;
             }
         }
         return false;
     }
 
-    public int GetEmptySlot(EquipItem[] items)
+    private void CheckEquipmentOnStart(EquipItem[] items)
     {
-        for (int i = 0; i < items.Length; i++)
+        for (var index = 0; index < items.Length; index++)
         {
-            if ( items[i] == null)
+            var i = items[index];
+            if (i != null)
             {
-                return i;
+                var item = i;
+                items[index]= null;
+
+                AddEquipItem(item);
             }
         }
-        return 0;
     }
     
 

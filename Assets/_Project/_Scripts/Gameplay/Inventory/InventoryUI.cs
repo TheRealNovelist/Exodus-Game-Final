@@ -66,7 +66,7 @@ public class InventoryUI : MonoBehaviour
         notification.PopUp($"Added {item} to inventory", notiDuration);
     }
 
-    private void Start()
+    private void Awake()
     {
         optionPanel.SetActive(false);
     }
