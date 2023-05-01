@@ -37,13 +37,11 @@ namespace WeaponSystem
         {
             AmmoPool = maxAmmo;
             ChangeWeapon(0, true);
-
         }
 
         private void Awake()
         {
             Inventory.Instance.OnGunEquiped += ReorderGunChildren;
-
         }
 
         private void ReorderGunChildren(WeaponDataSO data, int index)
@@ -58,7 +56,7 @@ namespace WeaponSystem
                 if (index == 0)
                 {
                     currentIndex = 1;
-                    ChangeWeapon(0,true);
+                    ChangeWeapon(0, true);
                 }
             }
         }
@@ -141,6 +139,7 @@ namespace WeaponSystem
         private void ChangeWeapon(int index, bool forceChange = false)
         {
             if (index == currentIndex && !forceChange) return;
+            if (index > Inventory.Instance.EquipedGunsQuantity()-1)  return;
 
             //Unequip previous weapon 
             if (_currentWeapon != null)

@@ -9,7 +9,6 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
     [SerializeField] private float timeValue = 60;
     private bool timerOn = false;
     [SerializeField] private TextMeshProUGUI timeText;
-    [SerializeField] private GameObject gameOverText;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +36,7 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
             timeValue = 0;
             DisplayTime(timeValue);
             timerOn = false;
-            gameOverText.SetActive(true);
-            Time.timeScale = 0;
+            WinLoseCondition.OnGameLose?.Invoke();
         }
     }
 

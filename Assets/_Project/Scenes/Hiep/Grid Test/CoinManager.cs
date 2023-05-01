@@ -37,7 +37,4 @@ public class CoinManager : Singleton<CoinManager>
         moneyAmountText.SetText("Money " + _coinAmount.ToString());
     }
 
-    private void Update()
-    {
-    }
 }

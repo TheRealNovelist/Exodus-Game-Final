@@ -196,6 +196,25 @@ public class Inventory : Singleton<Inventory>
             }
         }
     }
+
+    public int EquipedGunsQuantity()
+    {
+        int i = 0;
+
+        foreach (EquipItem gun in equippedGuns)
+        {
+            if (gun != null)
+            {
+                i++;
+            }
+            else
+            {
+                return i;
+            }
+        }
+
+        return i;
+    }
     
 
     #endregion

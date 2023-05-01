@@ -4,8 +4,6 @@ using UnityEngine.Serialization;
 
 public class PlayerCursor : MonoBehaviour
 {
-    public bool InventoryPanelOn;
-    public bool ShopPanelOn;
 
     private Shop _shop;
     private static bool _unlocking = false;
@@ -17,15 +15,6 @@ public class PlayerCursor : MonoBehaviour
         {
             UnlockCursor();
         }
-        
-        /*if (InventoryPanelOn || ShopPanelOn)
-        {
-            MovePlayer(false);
-        }
-        else
-        {
-            MovePlayer(true);
-        }*/
     }
 
     private static void UnlockCursor()

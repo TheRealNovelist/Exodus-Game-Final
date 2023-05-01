@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //This script is responsible for respawning the player
@@ -6,7 +8,7 @@ using UnityEngine;
 
 /// <summary>
 /// UI fade screen is adapted from SpeedTutor
-/// Call Respawn() when plaeyr dies to respawn player
+/// Call StartRespawn() when plaeyr dies to respawn player
 /// </summary>
 public class RespawnPlayer : MonoBehaviour
 {
@@ -15,18 +17,24 @@ public class RespawnPlayer : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] CanvasGroup deadScreenUI;
 
-    [Header("Respawn setting")]
+    [Header("StartRespawn setting")]
     [SerializeField] float respawnTime = 3f;
     [SerializeField] float spawnYAxis =10;
 
     private bool fadeIn = false;
     private bool fadeOut = false;
 
+    public static Action OnPlayerFinishedRespawn;
+    public static Action OnPlayerStartRespawn;
+
 
     // Start is called before the first frame update
     void Start()
     {
         deadScreenUI.alpha = 0;
+
+        OnPlayerFinishedRespawn += FinsihedRespawn;
+        OnPlayerStartRespawn += StartRespawn;
     }
 
     public void fadeInUI()
@@ -41,10 +49,18 @@ public class RespawnPlayer : MonoBehaviour
     //Calls by OnTriggerEnter()
     //Calls by Update()
     //Calls IEnumerator RespawnDelay() to start couroutine
-    public void Respawn()
+    public void StartRespawn()
     {
         fadeInUI(); //call fadeOutUI() to set fade out to true
         StartCoroutine(RespawnDelay()); //start couroutine for a dynamic respawn mechanic
+    }
+
+    private void FinsihedRespawn()
+    {
+        player.transform.position = spawnPoint.position;
+        
+        // InverseTransformPoint equivalent:
+        fadeOutUI();
     }
 
     //disable mesh renderer
@@ -55,17 +71,16 @@ public class RespawnPlayer : MonoBehaviour
     IEnumerator RespawnDelay()
     {
         yield return new WaitForSeconds(respawnTime); //respawn delay
-        transform.position = spawnPoint.position;   //brings player's position to spawnPoint's position
-        fadeOutUI();    //call fadeOutUI() to set fade out to true
+        OnPlayerFinishedRespawn?.Invoke();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.y < -spawnYAxis)  //respawn on out of bounds (y axis)
+        /*if (player.transform.position.y < -spawnYAxis)  //respawn on out of bounds (y axis)
         {
-            Respawn();
-        }
+            StartRespawn();
+        }*/
 
         //gradually fade in the ui by Time.deltaTime
         if (fadeIn)
@@ -93,5 +108,11 @@ public class RespawnPlayer : MonoBehaviour
             }
         }
         
+    }
+
+    private void OnDisable()
+    {
+        OnPlayerFinishedRespawn -= FinsihedRespawn;
+        OnPlayerStartRespawn -= StartRespawn;
     }
 }

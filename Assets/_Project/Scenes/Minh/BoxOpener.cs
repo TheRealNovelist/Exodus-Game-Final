@@ -26,23 +26,4 @@ public class BoxOpener : MonoBehaviour
         isOpened = false;
         anim.SetBool("isOpen", false);
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && !isOpened)
-        {
-            OpenBox();
-        }
-
-        else if (Input.GetKeyDown(KeyCode.E) && isOpened)
-        {
-            CloseBox();
-        }
-    }
 }
