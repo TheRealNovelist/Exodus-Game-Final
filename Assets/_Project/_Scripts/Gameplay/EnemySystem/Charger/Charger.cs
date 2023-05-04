@@ -70,16 +70,15 @@ namespace EnemySystem.Charger
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (isAttacking)
+            if (!isAttacking) return;
+            
+            //Stop completely when collided
+            rb.velocity = Vector3.zero;
+            if (collision.gameObject.GetComponent<IDamageable>() != null)
             {
-                //Stop completely when collided
-                rb.velocity = Vector3.zero;
-                if (collision.gameObject.GetComponent<IDamageable>() != null)
-                {
-                    collision.gameObject.GetComponent<IDamageable>().Damage(damageDealt);
-                }
-                hasCollided = true;
+                collision.gameObject.GetComponent<IDamageable>().Damage(damageDealt);
             }
+            hasCollided = true;
         }
     }
 }

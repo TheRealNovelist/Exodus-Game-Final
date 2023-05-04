@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StateMachine
@@ -28,6 +29,11 @@ public class StateMachine
             
 //            Debug.Log("Current State: " + _currentState);
             _currentState?.Update();
+        }
+
+        public void FixedUpdate()
+        {
+            
         }
 
         public IState GetCurrentState() => _currentState;
@@ -111,13 +117,15 @@ public class StateMachine
         //Get a transition. In order of any state transition first, then individual transition.
         private Transition GetTransition()
         {
-            foreach(var transition in _anyTransitions)
-                if (transition.Condition())
-                    return transition;
-            
-            foreach(var transition in _currentTransitions)
-                if (transition.Condition())
-                    return transition;
+            if (_anyTransitions.Count > 0)
+            {
+                return _anyTransitions.FirstOrDefault(transition => transition.Condition());
+            }
+
+            if (_currentTransitions.Count > 0)
+            {
+                return _currentTransitions.FirstOrDefault(transition => transition.Condition());
+            }
 
             return null;
         }

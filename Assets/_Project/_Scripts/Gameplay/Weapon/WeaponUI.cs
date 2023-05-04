@@ -7,7 +7,7 @@ using WeaponSystem;
 
 public class WeaponUI : MonoBehaviour
 {
-    [SerializeField] private PlayerWeaponHandler _weaponHandler;
+    [SerializeField] private WeaponHandler _weaponHandler;
 
     [SerializeField] private GameObject gunCanvas;
     [SerializeField] private TextMeshProUGUI ammoText;

@@ -61,8 +61,8 @@ public class ES_WavingState : IState
         enemyObj.StartStateMachine();
         enemyObj.BindSpawner(_spawnerSystem);
 
-      _spawnerSystem.EnemySpawned?.Invoke();
-      _spawned++;
+        _spawnerSystem.EnemySpawned?.Invoke();
+        _spawned++;
     }
 
 }

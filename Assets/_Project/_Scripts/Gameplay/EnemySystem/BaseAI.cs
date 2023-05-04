@@ -25,10 +25,12 @@ namespace EnemySystem
         {
             yield return new WaitForSeconds(delay);
             
-            _stateMachine.SetState(state);
+            SetState(state);
         }
         
         private void Update() => _stateMachine.Update();
+
+        protected void SetState(IState state) => _stateMachine.SetState(state);
 
         protected void AddAnyTransition(IState to, Func<bool> condition) =>
             _stateMachine.AddAnyTransition(to, condition);

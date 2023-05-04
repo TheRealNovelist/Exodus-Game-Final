@@ -7,12 +7,23 @@ namespace EnemySystem
     {
         [Header("Base Settings")] 
         public float maxHealth;
+        [SerializeField] private bool startOnAwake;
         
         public Transform target;
 
         private float health;
 
         private ESpawnerSystem _spawner;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (startOnAwake)
+            {
+                StartStateMachine();
+            }
+        }
 
         public virtual void Damage(float amount)
         {
