@@ -109,7 +109,7 @@ public class Turret : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    public void Damage(float amount)
+    public void Damage(float amount, Transform source = null)
     {
         currentHealth -= amount;
 

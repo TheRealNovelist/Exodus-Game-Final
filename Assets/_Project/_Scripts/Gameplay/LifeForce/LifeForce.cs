@@ -49,7 +49,7 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void Damage(float amount)
+    public void Damage(float amount, Transform source = null)
     {
         timeValue -= amount;
         

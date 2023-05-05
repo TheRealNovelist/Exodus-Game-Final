@@ -16,7 +16,7 @@ public class Dummy : MonoBehaviour, IDamageable
         
     }
 
-    public void Damage(float amount)
+    public void Damage(float amount, Transform source = null)
     {
         Debug.Log("Got hit " + amount);
     }

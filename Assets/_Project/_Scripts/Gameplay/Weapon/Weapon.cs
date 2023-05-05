@@ -76,10 +76,24 @@ namespace WeaponSystem
             switch (mode)
             {
                 case WeaponMode.Primary:
-                    _primaryAttack?.StartAttack(this);
+                    try
+                    {
+                        _primaryAttack.StartAttack(this);
+                    }
+                    catch
+                    {
+                        Debug.Log("Primary Attack not found");
+                    }
                     break;
                 case WeaponMode.Secondary:
-                    _secondaryAttack?.StartAttack(this);
+                    try
+                    {
+                        _secondaryAttack.StartAttack(this);
+                    }
+                    catch
+                    {
+                        Debug.Log("Secondary Attack not found");
+                    }
                     break;
             }
         }
@@ -90,10 +104,24 @@ namespace WeaponSystem
             switch (mode)
             {
                 case WeaponMode.Primary:
-                    _primaryAttack?.HoldAttack(this);
+                    try
+                    {
+                        _primaryAttack.HoldAttack(this);
+                    }
+                    catch
+                    {
+                        Debug.Log("Primary Attack not found");
+                    }
                     break;
                 case WeaponMode.Secondary:
-                    _secondaryAttack?.HoldAttack(this);
+                    try
+                    {
+                        _secondaryAttack.HoldAttack(this);
+                    }
+                    catch
+                    {
+                        Debug.Log("Secondary Attack not found");
+                    }
                     break;
             }
         }

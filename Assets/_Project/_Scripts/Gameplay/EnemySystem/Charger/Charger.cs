@@ -59,11 +59,11 @@ namespace EnemySystem.Charger
 
         public void ReduceDamage(bool isReducing) => painMultiplier = isReducing ? chargingMultiplier : 1f;
         
-        public override void Damage(float amount)
+        public override void Damage(float amount, Transform source = null)
         {
             float chargerDamage = amount * painMultiplier;
             
-            base.Damage(chargerDamage);
+            base.Damage(chargerDamage, source);
         }
 
         public void ResetCollision() => hasCollided = false;

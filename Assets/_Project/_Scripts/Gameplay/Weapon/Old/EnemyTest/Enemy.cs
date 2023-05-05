@@ -8,7 +8,7 @@ namespace Old
    {
       [SerializeField] private float health = 50f;
 
-      public void Damage(float amount)
+      public void Damage(float amount, Transform source = null)
       {
          health -= amount;
          if (health <= 0f)

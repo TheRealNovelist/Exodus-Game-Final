@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public interface IDamageable 
 {
-    public void Damage(float amount);
+    public void Damage(float amount, Transform source = null);
 }
 
 public interface IHeal

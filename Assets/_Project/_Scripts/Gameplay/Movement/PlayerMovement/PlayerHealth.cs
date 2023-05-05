@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
         _playerHealth = maxHealth;
     }
     
-    public void Damage(float amount)
+    public void Damage(float amount, Transform source = null)
     {
         if (_playerHealth <= 0f)
         {

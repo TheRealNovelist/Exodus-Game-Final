@@ -10,7 +10,6 @@ namespace EnemySystem
         [SerializeField] private bool startOnAwake;
         
         public Transform target;
-
         private float health;
 
         private ESpawnerSystem _spawner;
@@ -27,7 +26,7 @@ namespace EnemySystem
             }
         }
 
-        public virtual void Damage(float amount)
+        public virtual void Damage(float amount, Transform source = null)
         {
             health -= amount;
             Debug.Log("Enemy taken " + amount + " damage");

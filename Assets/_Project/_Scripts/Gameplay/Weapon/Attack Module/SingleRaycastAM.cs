@@ -20,10 +20,5 @@ namespace WeaponSystem
                 }
             }
         }
-        
-        public override void HoldAttack(Weapon weapon, bool consumeAmmo = true)
-        {
-
-        }
     }
 }
