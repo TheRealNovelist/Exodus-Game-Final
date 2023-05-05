@@ -17,6 +17,8 @@ namespace EnemySystem
 
         protected override void Awake()
         {
+            health = maxHealth;
+            
             base.Awake();
 
             if (startOnAwake)
@@ -28,6 +30,8 @@ namespace EnemySystem
         public virtual void Damage(float amount)
         {
             health -= amount;
+            Debug.Log("Enemy taken " + amount + " damage");
+            Debug.Log("Enemy health " + health);
 
             if (health <= 0)
             {
