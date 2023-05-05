@@ -5,7 +5,6 @@ namespace EnemySystem.Gunner
     internal class Attacking : IState
     {
         private readonly Gunner _gunner;
-        private readonly Transform _target;
 
         private float _nextTimeToFire;
         private int _ammoCount = 3;
@@ -13,18 +12,18 @@ namespace EnemySystem.Gunner
         private int _currentAmmo;
         private float _cooldown;
 
-        public Attacking(Gunner gunner, Transform target)
+        public Attacking(Gunner gunner)
         {
             _gunner = gunner;
-            _target = target;
-            
+
             _currentAmmo = _ammoCount;
             _cooldown = _gunner.attackCooldown;
         }
         
         public void Update()
         {
-            _gunner.transform.LookAt(new Vector3(_target.position.x, _gunner.transform.position.y, _target.position.z));
+            var target = _gunner.target.position;
+            _gunner.transform.LookAt(new Vector3(target.x, _gunner.transform.position.y, target.z));
             if (_currentAmmo > 0)
             {
                 if (!(Time.time >= _nextTimeToFire)) return;

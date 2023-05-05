@@ -5,18 +5,14 @@ namespace EnemySystem.Brute
     internal class Attacking : IState
     {
         private readonly Brute _brute;
-        private readonly Transform _target;
-
-        private readonly IDamageable _targetDamage;
+        
         
         private float cooldown = 0f;
         
-        public Attacking(Brute brute, Transform target)
+        public Attacking(Brute brute)
         {
             _brute = brute;
-            _target = target;
-
-            _targetDamage = _target.GetComponent<IDamageable>();
+            
         }
         
         public void Update()
@@ -27,9 +23,12 @@ namespace EnemySystem.Brute
                 return;
             }
             
-            //Attack animation
-            _targetDamage?.Damage(_brute.damageDealt);
             cooldown = _brute.attackCooldown;
+            
+            if (_brute.target.TryGetComponent(out IDamageable targetDamage))
+            {
+                targetDamage.Damage(_brute.damageDealt);
+            }
         }
 
         public void OnEnter()

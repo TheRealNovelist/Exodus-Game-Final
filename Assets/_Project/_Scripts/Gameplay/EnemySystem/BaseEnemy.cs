@@ -6,16 +6,20 @@ namespace EnemySystem
     public abstract class BaseEnemy : BaseAI, IDamageable
     {
         [Header("Base Settings")] 
-        public float maxHealth;
+        [SerializeField] private float maxHealth;
         [SerializeField] private bool startOnAwake;
+        [SerializeField] private Transform primaryTarget;
+        [SerializeField] private Transform player;
+        [SerializeField] private bool switchOnAggression;
         
-        public Transform target;
+        [HideInInspector] public Transform target;
+        
         private float health;
-
         private ESpawnerSystem _spawner;
 
         protected override void Awake()
         {
+            target = primaryTarget;
             health = maxHealth;
             
             base.Awake();
@@ -36,6 +40,12 @@ namespace EnemySystem
             {
                 Die();
             }
+
+            if (!switchOnAggression || target == player) return;
+            
+            Stop();
+            StartStateMachine();
+            target = player;
         }
 
         public virtual void Die()   

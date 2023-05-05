@@ -5,19 +5,19 @@ namespace EnemySystem
 {
     internal class MoveToPlayer : IState
     {
+        private readonly BaseEnemy _enemy;
         private readonly NavMeshAgent _navMeshAgent;
-
-        private readonly Transform _target;
         
-        public MoveToPlayer(NavMeshAgent navMeshAgent, Transform target)
+        
+        public MoveToPlayer(BaseEnemy enemy, NavMeshAgent navMeshAgent)
         {
+            _enemy = enemy;
             _navMeshAgent = navMeshAgent;
-            _target = target;
         }
         
         public void Update()
         {
-            _navMeshAgent.SetDestination(_target.position);
+            _navMeshAgent.SetDestination(_enemy.target.position);
         }
 
         public void OnEnter()

@@ -5,7 +5,6 @@ namespace EnemySystem.Charger
     internal class ChargingAttack : IState
     {
         private readonly Charger _charger;
-        private readonly Transform _target;
 
         private float _chargeTime;
 
@@ -13,10 +12,9 @@ namespace EnemySystem.Charger
         
         private Color defaultColor;
         
-        public ChargingAttack(Charger charger, Transform target)
+        public ChargingAttack(Charger charger)
         {
             _charger = charger;
-            _target = target;
         }
 
         public void Update()
@@ -28,8 +26,9 @@ namespace EnemySystem.Charger
                 isCharged = true;
                 return;
             }
-            
-            chargerTransform.LookAt(new Vector3(_target.position.x, _charger.transform.position.y, _target.position.z));
+
+            var target = _charger.target.position;
+            chargerTransform.LookAt(new Vector3(target.x, _charger.transform.position.y, target.z));
             _chargeTime -= Time.deltaTime;
         }
 

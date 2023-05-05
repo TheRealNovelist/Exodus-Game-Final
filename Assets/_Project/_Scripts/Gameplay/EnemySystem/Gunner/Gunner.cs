@@ -34,8 +34,8 @@ namespace EnemySystem.Gunner
         {
             if (IsStateMachineStarted()) return;
                     
-            var MoveToPlayer = new MoveToPlayer(agent, target);
-            var Attacking = new Attacking(this, target);
+            var MoveToPlayer = new MoveToPlayer(this, agent);
+            var Attacking = new Attacking(this);
 
             AddTransition(MoveToPlayer, Attacking, TargetInRange(detectionRange));
             AddAnyTransition(MoveToPlayer, TargetOutRange(detectionRange));
