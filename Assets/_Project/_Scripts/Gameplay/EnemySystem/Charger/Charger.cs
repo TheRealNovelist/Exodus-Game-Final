@@ -40,7 +40,7 @@ namespace EnemySystem.Charger
         {
             if (IsStateMachineStarted()) return;
             
-            var MoveToPlayer = new MoveToPlayer(this, agent);
+            var MoveToPlayer = new MoveToTarget(this, agent);
             var Charging = new ChargingAttack(this);
             var Attacking = new Attacking(this, rb);
             var Cooldown = new Cooldown(this, attackCooldown);

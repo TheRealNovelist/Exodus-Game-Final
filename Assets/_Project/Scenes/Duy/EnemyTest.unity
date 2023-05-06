@@ -306,6 +306,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 780646179}
+  - {fileID: 807515148}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -345,16 +346,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startOnAwake: 1
+  primaryTarget: {fileID: 1648508341}
+  player: {fileID: 1648508341}
+  switchOnAggression: 0
   target: {fileID: 1648508341}
   agent: {fileID: 52128155}
-  bulletSpawnOffset: {x: 0, y: 1, z: 0}
+  bulletSpawnPoint: {fileID: 807515148}
   detectionRadius: 4
-  detectionRange: 10
+  detectionRange: 20
   detectionMask:
     serializedVersion: 2
     m_Bits: 8
+  bulletPrefab: {fileID: 7918630981265262807, guid: f59adb43f77694748ba7fca8876e8eec, type: 3}
+  fireRate: 10
   attackCooldown: 5
   damageDealt: 10
+  bulletSpeed: 40
 --- !u!43 &671011131
 Mesh:
   m_ObjectHideFlags: 0
@@ -664,6 +671,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780646178}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &807515147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807515148}
+  m_Layer: 6
+  m_Name: BulletSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &807515148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807515147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 52128154}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &831171123
 GameObject:
   m_ObjectHideFlags: 0

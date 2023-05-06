@@ -29,7 +29,7 @@ namespace EnemySystem.Brute
         {
             if (IsStateMachineStarted()) return;
             
-            var MoveToPlayer = new MoveToPlayer(this, agent);
+            var MoveToPlayer = new MoveToTarget(this, agent);
             var Attacking = new Attacking(this);
 
             AddTransition(MoveToPlayer, Attacking, TargetInRange(attackRange));

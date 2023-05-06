@@ -22,6 +22,8 @@ namespace EnemySystem.Gunner
         public float damageDealt = 10f;
         public float bulletSpeed = 40f;
 
+        private float _timeSinceLastDetect;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -34,16 +36,19 @@ namespace EnemySystem.Gunner
         {
             if (IsStateMachineStarted()) return;
                     
-            var MoveToPlayer = new MoveToPlayer(this, agent);
+            var MoveToTarget = new MoveToTarget(this, agent);
+            var RotateToTarget = new RotateToTarget(this);
             var Attacking = new Attacking(this);
-
-            AddTransition(MoveToPlayer, Attacking, TargetInRange(detectionRange));
-            AddAnyTransition(MoveToPlayer, TargetOutRange(detectionRange));
-
-            initialState = MoveToPlayer;
             
-            Func<bool> TargetInRange(float range) => () => Vector3.Distance(target.position, transform.position) <= range;
-            Func<bool> TargetOutRange(float range) => () => Vector3.Distance(target.position, transform.position) > range;
+            AddAnyTransition(Attacking, () => Detect(target));
+            AddAnyTransition(RotateToTarget, () => !Detect(target));
+
+            //Enemy will move to a different location if the player is not in range, or cannot detect them for more than 5 seconds
+            AddAnyTransition(MoveToTarget, () => !TargetInRange(detectionRange) || _timeSinceLastDetect > 5);
+
+            initialState = MoveToTarget;
+            
+            bool TargetInRange(float range) => Vector3.Distance(target.position, transform.position) <= range;
 
             base.StartStateMachine(delay);
         }
@@ -59,16 +64,18 @@ namespace EnemySystem.Gunner
         private bool Detect(Transform desiredTarget)
         {
             if (Physics.SphereCast(bulletSpawnPoint.position, detectionRadius,
-                    desiredTarget.position - bulletSpawnPoint.position.normalized, 
+                    (desiredTarget.position - bulletSpawnPoint.position).normalized, 
                     out RaycastHit hit, detectionRange, detectionMask))
             {
                 Debug.DrawLine(transform.position, hit.point, Color.red);
                 Debug.Log($"{hit.collider.gameObject.name}");
 
+                _timeSinceLastDetect = 0;
                 return hit.transform == desiredTarget;
             }
-            
-            Debug.DrawLine(transform.position, transform.forward * 10000, Color.green);
+
+            _timeSinceLastDetect += Time.deltaTime;
+            Debug.DrawLine(transform.position, transform.forward * detectionRange, Color.green);
             return false;
         }
 
