@@ -17,7 +17,7 @@ public class RespawnPlayer : MonoBehaviour
 
     [Header("Respawn setting")]
     [SerializeField] float respawnTime = 3f;
-    [SerializeField] float spawnYAxis =10;
+    [SerializeField] float spawnYAxis = 10;
 
     private bool fadeIn = false;
     private bool fadeOut = false;
@@ -55,13 +55,14 @@ public class RespawnPlayer : MonoBehaviour
     IEnumerator RespawnDelay()
     {
         yield return new WaitForSeconds(respawnTime); //respawn delay
-        transform.position = spawnPoint.position;   //brings player's position to spawnPoint's position
+        player.transform.position = spawnPoint.position;   //brings player's position to spawnPoint's position
         fadeOutUI();    //call fadeOutUI() to set fade out to true
     }
 
     // Update is called once per frame
     void Update()
     {
+        ForceDie();
         if (player.transform.position.y < -spawnYAxis)  //respawn on out of bounds (y axis)
         {
             Respawn();
@@ -93,5 +94,12 @@ public class RespawnPlayer : MonoBehaviour
             }
         }
         
+        void ForceDie()
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Respawn();
+            }
+        }
     }
 }
