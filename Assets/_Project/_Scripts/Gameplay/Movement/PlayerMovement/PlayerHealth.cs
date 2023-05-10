@@ -5,23 +5,25 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
 {
     [SerializeField] float maxHealth;
+    private float _playerHealth;
     
-    public float _playerHealth;
-
     private void Awake()
     {
-        _playerHealth = maxHealth;
+        PlayerFullHealth();
+        RespawnPlayer.OnPlayerFinishedRespawn += PlayerFullHealth;
     }
     
     public void Damage(float amount, Transform source = null)
     {
+        _playerHealth -= amount;
+
         if (_playerHealth <= 0f)
         {
             Debug.Log("Player Died!");
+            RespawnPlayer.OnPlayerStartRespawn?.Invoke();
             return;
         }
         
-        _playerHealth -= amount;
         Debug.Log("Player Health: " + _playerHealth);
     }
 
@@ -30,5 +32,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
         _playerHealth += amount;
         if (_playerHealth > maxHealth)
             _playerHealth = maxHealth;
+    }
+
+    private void PlayerFullHealth()
+    {
+        _playerHealth = maxHealth;
     }
 }

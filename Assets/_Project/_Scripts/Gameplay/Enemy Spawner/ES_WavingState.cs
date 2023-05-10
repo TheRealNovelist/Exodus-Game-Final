@@ -44,6 +44,7 @@ public class ES_WavingState : IState
     public void OnEnter()
     {
         _spawned = 0;
+        currentTimer = _gap ;
     }
 
     public void OnExit()

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Chest : MonoBehaviour
@@ -5,6 +6,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private SpriteRenderer itemHolder;
     [SerializeField] private WeightedRandomList<Item> itemList;
     [SerializeField] private KeyCode openKey;
+    [SerializeField] private Animator _chestAnimator;
 
     private bool isOpen = false;
     private bool harvested = false;
@@ -18,6 +20,7 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             OpenChest();
+            
         }
     }
 
@@ -39,9 +42,27 @@ public class Chest : MonoBehaviour
     {
         isOpen = true;
 
+        OpenAnimation();
+
+        StartCoroutine(WaitToGenerateIte());
+    }
+
+    IEnumerator WaitToGenerateIte()
+    {
         lootedItem = GetRandomItem();
 
-        itemHolder.sprite = lootedItem.icon;
+        yield return new WaitForSeconds(0.5f);
+
+        if (lootedItem.model)
+        {
+          GameObject go =  Instantiate(lootedItem.model, itemHolder.transform);
+          go.transform.parent = itemHolder.transform;
+          go.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        }
+        else
+        {
+            itemHolder.sprite = lootedItem.icon;
+        }
 
         if (lootedItem is not EquipItem)
         {
@@ -54,7 +75,6 @@ public class Chest : MonoBehaviour
             {
                 if (consumeItem.effect)
                 {
-                    Debug.Log("hhhh");
                     consumeItem.effect.Invoke();
                 }
                 else
@@ -74,6 +94,18 @@ public class Chest : MonoBehaviour
     private Item GetRandomItem()
     {
        return itemList.GetRandom();
+    }
+    
+    public void OpenAnimation()
+    {
+        _chestAnimator.SetTrigger("openTrigger");
+        _chestAnimator.SetBool("isOpen", true);
+    }
+
+    public void CloseAnimation()
+    {
+        _chestAnimator.SetTrigger("closeTrigger");
+        _chestAnimator.SetBool("isOpen", false);
     }
     
 

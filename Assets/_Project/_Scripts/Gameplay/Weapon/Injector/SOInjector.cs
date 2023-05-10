@@ -7,6 +7,7 @@ namespace WeaponSystem
     public class SOInjector : WeaponDataInjector
     {
         [SerializeField] private WeaponDataSO dataSO;
+        public WeaponDataSO DataSO => dataSO;
 
         public override WeaponData TryGetData()
         {

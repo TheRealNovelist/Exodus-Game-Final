@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public enum EquipType
 {
     Gun,
@@ -11,7 +11,9 @@ public enum EquipType
 [CreateAssetMenu(menuName = "Item/Equip Item/")]
 public class EquipItem : Item
 {
-    public EquipType type;
+    [HideInInspector] public EquipType Type;
     public bool unlocked = false;
     public bool equipping = false;
+
+   
 }

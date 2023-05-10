@@ -60,5 +60,20 @@ namespace EnemySystem
         {
             _spawner = spawner;
         }
+
+        private void Start()
+        {
+            RespawnPlayer.OnPlayerStartRespawn += PauseStateMachine;
+            RespawnPlayer.OnPlayerFinishedRespawn += ContinueStateMachine;
+        }
+
+        private void OnDisable()
+        {
+            RespawnPlayer.OnPlayerStartRespawn -= PauseStateMachine;
+            RespawnPlayer.OnPlayerFinishedRespawn -= ContinueStateMachine;
+        }
+
+        private void PauseStateMachine() => _stateMachine.Pause(true);
+        private void ContinueStateMachine() => _stateMachine.Pause(false);
     }
 }

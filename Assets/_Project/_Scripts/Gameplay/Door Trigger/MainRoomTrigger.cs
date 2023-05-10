@@ -25,6 +25,7 @@ public class MainRoomTrigger : MonoBehaviour
             }
             else
             {
+                _mainRoomUI.UpdateWaveStats();
                 _mainRoomUI.WarningActivate(false);
             }
         }

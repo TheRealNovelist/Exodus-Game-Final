@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ES_WaitingState : IState
 {
-    private float currentTimer;
+    private float currentTimer, timerDuration;
     private bool waiting = false;
 
     public ES_WaitingState(float timeCountDown)
     {
-        currentTimer = timeCountDown;
+        timerDuration = timeCountDown;
     }
 
     // Update is called once per frame
@@ -23,6 +23,7 @@ public class ES_WaitingState : IState
 
     public void OnEnter()
     {
+        currentTimer = timerDuration;
     }
 
     public void OnExit()

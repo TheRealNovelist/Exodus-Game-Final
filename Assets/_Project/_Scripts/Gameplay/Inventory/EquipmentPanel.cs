@@ -69,6 +69,8 @@ public class EquipmentPanel : MonoBehaviour
         item.equipping = true;
         
         equipSlots[index].UpdateSlotUI();
+        
+        Inventory.Instance._inventoryUI.RefreshUI();
     }
     
     public void Unequip(int index)

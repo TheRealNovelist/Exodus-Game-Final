@@ -19,7 +19,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
                     //hideFlags = HideFlags.HideAndDontSave
                 };
                 _instance = obj.AddComponent<T>();
-                Debug.Log("I got spawned in!");
+                Debug.Log($"  {typeof(T).Name} got spawned in!");
             }
 
             return _instance;

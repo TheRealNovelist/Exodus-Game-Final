@@ -33,4 +33,9 @@ public class MainRoomUI : MonoBehaviour
         waveStatText.text = $"{spawnerSystem.Spawned}/{spawnerSystem.TotalToSpawn}";
     }
     
+    public void UpdateWaveStats()
+    {
+        waveStatText.text = $"";
+    }
+    
 }

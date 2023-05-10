@@ -5,7 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
-
+using UnityEngine.Serialization;
+using WeaponSystem;
 
 public class Inventory : Singleton<Inventory>
 {
@@ -34,17 +35,13 @@ public class Inventory : Singleton<Inventory>
 
     public Dictionary<Item, ItemSlot> slotsByItems = new Dictionary<Item, ItemSlot>();
 
-    [SerializeField] private Sprite highlightFrame,normalFrame;
+    [Header("Equip Panels")] public GameEvent equipAbilityEvent;
 
-    /*
-    private void OnValidate()
-    {
-        for (int i = 0; i < GetComponentsInChildren<ItemSlot>().Length; i++)
-        {
-            itemSlots.Add(GetComponentsInChildren<ItemSlot>()[i]);
-        }
-    }
-    */
+    public Action<WeaponDataSO, int> OnGunEquiped;
+    //public GameEvent equipGunEvent;
+
+    [FormerlySerializedAs("equippedItems")] public EquipItem[] equippedGuns = new EquipItem[2];
+    [FormerlySerializedAs("equippedItems")] public EquipItem[] equippedAbilities = new EquipItem[2];
 
 
 
@@ -52,9 +49,10 @@ public class Inventory : Singleton<Inventory>
     private void Start()
     {
         SetSlotItem();
-        RefreshUI();
-        optionPanel.SetActive(false);
-        inventoryPanel.SetActive(false);
+        CheckEquipmentOnStart(equippedGuns);
+        _inventoryUI.RefreshUI();
+        _inventoryUI.gameObject.SetActive(false);
+
     }
     
     private void Update()
@@ -117,24 +115,20 @@ public class Inventory : Singleton<Inventory>
     private bool AddEquipItem(EquipItem equipItem)
     {
         equipItem.unlocked = true;
-        
-        switch (equipItem.type)
+
+        switch (equipItem.Type)
         {
-            case(EquipType.Ability):
-                if (abilityPanel.HasEmptySlot())
+            case (EquipType.Ability):
+                if (TryGetEmptySlot(equippedAbilities, out int index))
                 {
-                    abilityPanel.Equip(abilityPanel.GetEmptySlot(), equipItem);
-                    equipAbilityEvent.Invoke();
-                    RefreshUI();
+                    Equip(index, equipItem);
                     return true;
                 }
                 break;
-            case(EquipType.Gun):
-                if (gunPanel.HasEmptySlot())
+            case (EquipType.Gun):
+                if (TryGetEmptySlot(equippedGuns, out index))
                 {
-                    gunPanel.Equip(gunPanel.GetEmptySlot(), equipItem);
-                    equipGunEvent.Invoke();
-                    RefreshUI();
+                    Equip(index, equipItem);
                     return true;
                 }
                 break;
@@ -147,31 +141,22 @@ public class Inventory : Singleton<Inventory>
     #region Slot UI
     private void RefreshUI(ItemSlot slot)
     {
-        slot.UpdateSlotUI();
-    }
-    
-    private void RefreshUI()
-    {
-        for (int j = 0;j < itemSlots.Count; j++)
+        item.equipping = true;
+
+        switch (item.Type)
         {
             if(itemSlots[j]._item is not EquipItem) itemSlots[j].UpdateSlotUI();
             else itemSlots[j].UpdateSlotUI();
         }
     }
 
-    public void HighLightFrame(ItemSlot slot, bool highLight)
-    {
-        if (highLight) slot.imageFrame.sprite = highlightFrame;
-        else slot.imageFrame.sprite = normalFrame;
-    }
-    
-    #endregion
-
-    #region Inventory Notification
-    private void PopUpNoti(Item itemAdded)
-    {
-        notiTMP.text = itemAdded.name + " added to inventory";
-        StartCoroutine(WaitToHideNoti());
+            case (EquipType.Gun):
+                equippedGuns[index] = item;
+                _inventoryUI.gunPanel.Equip(index, item);
+                GunItem gun = item as GunItem;
+                OnGunEquiped?.Invoke(gun.gunData,index);
+                break;
+        }
     }
 
     IEnumerator WaitToHideNoti()
@@ -197,29 +182,52 @@ public class Inventory : Singleton<Inventory>
             optionPanel.GetComponent<RectTransform>().position = selectedButton.GetComponent<RectTransform>().position + offset;
             currentSelecting = itemOfSelectedSlot as EquipItem;
         }
-        else
+    }
+    
+    public bool TryGetEmptySlot(EquipItem[] items, out int index)
+    {
+        index = -1;
+        for (int i = 0; i < items.Length; i++)
         {
-            optionPanel.gameObject.SetActive(!show);
+            if (items[i] == null) {
+                index = i;
+                return true;
+            }
         }
     }
 
-    public void EquipOption(int index)
+    private void CheckEquipmentOnStart(EquipItem[] items)
     {
-        switch (currentSelecting.type)
+        for (var index = 0; index < items.Length; index++)
         {
-            case (EquipType.Ability):
-                abilityPanel.Unequip(index);
-                abilityPanel.Equip(index,currentSelecting);
-                equipAbilityEvent.Invoke();
-                break;
-            case (EquipType.Gun):
-                gunPanel.Unequip(index);
-                gunPanel.Equip(index,currentSelecting);
-                equipGunEvent.Invoke();
-                break;
+            var i = items[index];
+            if (i != null)
+            {
+                var item = i;
+                items[index]= null;
+
+                AddEquipItem(item);
+            }
         }
-        
-        optionPanel.SetActive(false);
+    }
+
+    public int EquipedGunsQuantity()
+    {
+        int i = 0;
+
+        foreach (EquipItem gun in equippedGuns)
+        {
+            if (gun != null)
+            {
+                i++;
+            }
+            else
+            {
+                return i;
+            }
+        }
+
+        return i;
     }
 
     #endregion
