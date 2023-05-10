@@ -6,7 +6,7 @@ public class PlayerCursor : MonoBehaviour
 {
 
     private Shop _shop;
-    private bool _unlocking = false;
+    private static bool _unlocking = false;
 
     // Update is called once per frame
     void Update()
@@ -17,7 +17,7 @@ public class PlayerCursor : MonoBehaviour
         }
     }
 
-    public void UnlockCursor()
+    private static void UnlockCursor()
     {
         if (Cursor.lockState != CursorLockMode.None)
         {
@@ -35,7 +35,7 @@ public class PlayerCursor : MonoBehaviour
         }
     }
 
-    private void ToggleCursor(bool unlock)
+    public static void ToggleCursor(bool unlock)
     {
         if (unlock)
         {
