@@ -28,12 +28,17 @@ namespace EnemySystem.Brute
             if (_brute.target.TryGetComponent(out IDamageable targetDamage))
             {
                 targetDamage.Damage(_brute.damageDealt);
+                
+                if (_brute.EnemyAnimator)
+                {
+                    _brute.EnemyAnimator.SetTrigger("Attacking");
+                }
             }
         }
 
         public void OnEnter()
         {
-            
+           
         }
 
         public void OnExit()

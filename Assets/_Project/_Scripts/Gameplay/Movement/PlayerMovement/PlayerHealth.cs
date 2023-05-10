@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
             return;
         }
         
-        Debug.Log("Player Health: " + _playerHealth);
+//        Debug.Log("Player Health: " + _playerHealth);
     }
 
     public void AddHealth(float amount)

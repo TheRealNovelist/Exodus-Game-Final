@@ -11487,7 +11487,7 @@ Transform:
   - {fileID: 1030599032}
   - {fileID: 1301973441}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &2000397408
 PrefabInstance:
@@ -12235,7 +12235,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1561874466940340098, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1561874466940340098, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12261,6 +12261,10 @@ PrefabInstance:
       propertyPath: deadScreenUI
       value: 
       objectReference: {fileID: 8521711063214884350}
+    - target: {fileID: 3056408821999278326, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3301725827337555995, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.4300003
@@ -12351,13 +12355,13 @@ MonoBehaviour:
     - item: {fileID: 1783459328231480364, guid: e86ae04574cecbf4b9c2d151cd12b0ab, type: 3}
       weight: 1
     - item: {fileID: 1529819396297480602, guid: 4fcc402eeee41f14ab220bdfb954e3c5, type: 3}
-      weight: 1
+      weight: 0
   spawners:
   - {fileID: 48545849}
   - {fileID: 1602005115}
   - {fileID: 1399935783}
   - {fileID: 543190878}
-  totalToSpawn: 55
+  totalToSpawn: 1
   amountInWave: 2
   spawnGap: 1
   waveCountDownTime: 5

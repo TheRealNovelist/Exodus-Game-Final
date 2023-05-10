@@ -23,7 +23,13 @@ namespace EnemySystem
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
+            
             //Start walking animation
+            if (_enemy.EnemyAnimator)
+            {
+                _enemy.EnemyAnimator.SetTrigger("MoveToTarget");
+                Debug.Log("Move to target");
+            }
         }
 
         public void OnExit()

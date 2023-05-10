@@ -40,6 +40,9 @@ namespace EnemySystem.Charger
             defaultColor = _charger.GetComponent<Renderer>().material.color;
             
             _charger.GetComponent<Renderer>().material.color = Color.red;
+            
+            if( _charger.EnemyAnimator)
+            _charger.EnemyAnimator.SetTrigger("ChargingAttack");
         }
 
         public void OnExit()
