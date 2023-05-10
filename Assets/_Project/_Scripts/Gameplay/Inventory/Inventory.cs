@@ -10,28 +10,10 @@ using WeaponSystem;
 
 public class Inventory : Singleton<Inventory>
 {
-    [Header("Equip Panels")]
-    [SerializeField] private GameEvent equipAbilityEvent ;
-    [SerializeField] private GameEvent equipGunEvent ;
-    public EquipmentPanel gunPanel, abilityPanel;
-    
-    [Header("Items and Slots")]
-    [SerializeField] private List<Item> allItemInInventory;
-    [SerializeField] private List<ItemSlot> itemSlots;
-    
+    [Header("Items and Slots")] [SerializeField]
+    private List<Item> allItemInInventory;
 
-
-    [Header("Notification")]
-    [SerializeField] private TextMeshProUGUI notiTMP;
-    [SerializeField] private float notiDuration = 2;
-    
-    [Header("Equip Options")]
-    [SerializeField] private GameObject optionPanel;
-    [SerializeField] private Vector3 offset;
-
-    [SerializeField] private GameObject inventoryPanel;
-    
-    [HideInInspector] public EquipItem currentSelecting;
+    public InventoryUI _inventoryUI;
 
     public Dictionary<Item, ItemSlot> slotsByItems = new Dictionary<Item, ItemSlot>();
 
@@ -44,8 +26,6 @@ public class Inventory : Singleton<Inventory>
     [FormerlySerializedAs("equippedItems")] public EquipItem[] equippedAbilities = new EquipItem[2];
 
 
-
-
     private void Start()
     {
         SetSlotItem();
@@ -54,34 +34,45 @@ public class Inventory : Singleton<Inventory>
         _inventoryUI.gameObject.SetActive(false);
 
     }
-    
+
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            inventoryPanel.SetActive(true);
-        } 
+            _inventoryUI.gameObject.SetActive(true);
+            PlayerCursor.ToggleCursor(true);
+        }
+
         if (Input.GetKeyUp(KeyCode.Tab))
         {
-            inventoryPanel.SetActive(false);
-            optionPanel.SetActive(false);
-
-        } 
+            _inventoryUI.gameObject.SetActive(false);
+            _inventoryUI.OptionPanelVisible(false);
+            PlayerCursor.ToggleCursor(false);
+        }
     }
 
     #region Inventory
+
     public void SetSlotItem()
     {
         int j = 0;
-        for (; j < allItemInInventory.Count && j < itemSlots.Count; j++)
+        for (; j < allItemInInventory.Count && j < _inventoryUI.itemSlots.Count; j++)
         {
-            itemSlots[j]._item = allItemInInventory[j];
-            slotsByItems.Add(allItemInInventory[j], itemSlots[j]);
+            EquipItem e = allItemInInventory[j] as EquipItem;
+
+            if (e)
+            {
+                e.equipping = false;
+                e.unlocked = false;
+            }
+
+            _inventoryUI.itemSlots[j]._item = allItemInInventory[j];
+            slotsByItems.Add(allItemInInventory[j], _inventoryUI.itemSlots[j]);
         }
-        
-        for (; j < itemSlots.Count; j++)
+
+        for (; j < _inventoryUI.itemSlots.Count; j++)
         {
-            itemSlots[j]._item =null;
+            _inventoryUI.itemSlots[j]._item = null;
         }
     }
 
@@ -94,17 +85,17 @@ public class Inventory : Singleton<Inventory>
         var equipItem = item as EquipItem;
         if (equipItem is not null && AddEquipItem(equipItem))
         {
-           // HighLightFrame(slotsByItems[item],true);
+            // HighLightFrame(slotsByItems[item],true);
         }
 
         AddToInventory(item);
-        PopUpNoti(item);
+        _inventoryUI.PopUpNoti(item);
     }
 
     private void AddToInventory(Item item)
     {
         slotsByItems[item].amount++;
-        RefreshUI(slotsByItems[item]);
+        _inventoryUI.RefreshUI(slotsByItems[item]);
     }
 
     /// <summary>
@@ -124,6 +115,7 @@ public class Inventory : Singleton<Inventory>
                     Equip(index, equipItem);
                     return true;
                 }
+
                 break;
             case (EquipType.Gun):
                 if (TryGetEmptySlot(equippedGuns, out index))
@@ -136,19 +128,18 @@ public class Inventory : Singleton<Inventory>
 
         return false;
     }
-    #endregion
 
-    #region Slot UI
-    private void RefreshUI(ItemSlot slot)
+    public void Equip(int index, EquipItem item)
     {
         item.equipping = true;
 
         switch (item.Type)
         {
-            if(itemSlots[j]._item is not EquipItem) itemSlots[j].UpdateSlotUI();
-            else itemSlots[j].UpdateSlotUI();
-        }
-    }
+            case (EquipType.Ability):
+                equippedAbilities[index] = item;
+                _inventoryUI.abilityPanel.Equip(index, item);
+                equipAbilityEvent.Invoke();
+                break;
 
             case (EquipType.Gun):
                 equippedGuns[index] = item;
@@ -159,28 +150,22 @@ public class Inventory : Singleton<Inventory>
         }
     }
 
-    IEnumerator WaitToHideNoti()
+    public void UnEquip(int index, EquipType type)
     {
-        yield return new WaitForSeconds(notiDuration);
-        notiTMP.text = "";
-    }
-    #endregion   
-
-    #region Equip Option Panel
-
-    public void EquipItemSlotSelected(bool show = true)
-    { 
-        var selectedButton = EventSystem.current.currentSelectedGameObject;
-
-        var selectedSlot = selectedButton.GetComponent<ItemSlot>();
-        var itemOfSelectedSlot = slotsByItems.FirstOrDefault(item => item.Value == selectedSlot).Key;
-        EquipItem selectedEquipment = itemOfSelectedSlot as EquipItem;
-
-        if (selectedEquipment != null && selectedEquipment.unlocked && selectedEquipment.equipping == false)
+        switch (type)
         {
-            optionPanel.gameObject.SetActive(show);
-            optionPanel.GetComponent<RectTransform>().position = selectedButton.GetComponent<RectTransform>().position + offset;
-            currentSelecting = itemOfSelectedSlot as EquipItem;
+            case (EquipType.Ability):
+                equippedAbilities[index].equipping = false;
+                equippedAbilities[index] = null;
+                _inventoryUI.abilityPanel.Unequip(index);
+
+                break;
+            case (EquipType.Gun):
+                equippedGuns[index].equipping = false;
+                equippedGuns[index] = null;
+                _inventoryUI.gunPanel.Unequip(index);
+
+                break;
         }
     }
     
@@ -194,6 +179,7 @@ public class Inventory : Singleton<Inventory>
                 return true;
             }
         }
+        return false;
     }
 
     private void CheckEquipmentOnStart(EquipItem[] items)
@@ -229,7 +215,7 @@ public class Inventory : Singleton<Inventory>
 
         return i;
     }
+    
 
     #endregion
-
 }
