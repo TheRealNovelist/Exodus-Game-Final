@@ -11,11 +11,11 @@ namespace EnemySystem
         [SerializeField] private Transform primaryTarget;
         [SerializeField] private Transform player;
         [SerializeField] private bool switchOnAggression;
-        
         [HideInInspector] public Transform target;
         
         private float health;
         private ESpawnerSystem _spawner;
+        public Animator EnemyAnimator;
 
         protected override void Awake()
         {
