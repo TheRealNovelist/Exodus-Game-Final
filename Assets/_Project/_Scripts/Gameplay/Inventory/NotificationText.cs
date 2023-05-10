@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NotificationText : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TextMeshProUGUI notiTMP;
+    
+    public void PopUp(string text, float duration)
     {
-        
+        notiTMP.text = text;
+        StartCoroutine(WaitToHideNoti(duration));
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator WaitToHideNoti( float duration)
     {
-        
+        yield return new WaitForSeconds(duration);
+        notiTMP.text = "";
     }
+
 }
