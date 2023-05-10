@@ -4,8 +4,6 @@ using UnityEngine.Serialization;
 
 public class PlayerCursor : MonoBehaviour
 {
-    public bool InventoryPanelOn;
-    public bool ShopPanelOn;
 
     private Shop _shop;
     private bool _unlocking = false;
@@ -16,15 +14,6 @@ public class PlayerCursor : MonoBehaviour
         if (_unlocking)
         {
             UnlockCursor();
-        }
-
-        if (InventoryPanelOn || ShopPanelOn)
-        {
-            MovePlayer(false);
-        }
-        else
-        {
-            MovePlayer(true);
         }
     }
 
@@ -37,13 +26,7 @@ public class PlayerCursor : MonoBehaviour
         }
     }
 
-    public void MovePlayer(bool canMove)
-    {
-        // InGameManager.Instance.Player.receiveInput = canMove;
-        // InGameManager.Instance.PlayerCamera.getPlayerRotation = canMove;
-    }
-
-    public void LockCursor()
+    private static void LockCursor()
     {
         if (Cursor.lockState != CursorLockMode.Locked)
         {

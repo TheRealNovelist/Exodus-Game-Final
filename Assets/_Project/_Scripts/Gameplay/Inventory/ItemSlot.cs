@@ -27,6 +27,7 @@ public class ItemSlot : MonoBehaviour
             quantityTMP.text = "";
             imageItem.color = nullColor;
             imageItem.sprite = null;
+
             return;
         }
 

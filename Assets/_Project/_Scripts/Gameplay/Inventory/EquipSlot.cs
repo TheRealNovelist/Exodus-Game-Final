@@ -23,6 +23,7 @@ public class EquipSlot:MonoBehaviour
             _image.sprite = null;
             nameTMP.text = "";
         }
+
     }
 
     private void Start()

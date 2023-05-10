@@ -95,7 +95,7 @@ public class ESpawnerSystem : BaseAI
         defeated++;
 
         //Defeated all
-        if (defeated >= totalToSpawn)
+        if (defeated >= totalToSpawn && _room)
         {
             _room.UnlockRoom?.Invoke();
         }

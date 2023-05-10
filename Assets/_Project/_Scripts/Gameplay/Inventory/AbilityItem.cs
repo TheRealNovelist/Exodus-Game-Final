@@ -6,4 +6,10 @@ using UnityEngine;
 public class AbilityItem : EquipItem
 {
     public SkillSystem ability;
+    
+    private void Awake()
+    {
+        Type = EquipType.Ability;
+    }
+    
 }

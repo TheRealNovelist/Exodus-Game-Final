@@ -101,8 +101,8 @@ public class AbilityHolder : MonoBehaviour
 
     public void SetUsingAbility()
     {
-        AbilityItem abilityItemSlot1 = inventory.abilityPanel.equippedItems[0] as AbilityItem;
-        AbilityItem abilityItemSlot2 = inventory.abilityPanel.equippedItems[1] as AbilityItem;
+        AbilityItem abilityItemSlot1 = Inventory.Instance.equippedAbilities[0] as AbilityItem;
+        AbilityItem abilityItemSlot2 =  Inventory.Instance.equippedAbilities[1] as AbilityItem;
 
         if(abilityItemSlot1!=null)
         ability[0] = abilityItemSlot1.ability;
