@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using UnityEditor;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 
 public class GridBuildingSystem : MonoBehaviour
@@ -34,11 +31,12 @@ public class GridBuildingSystem : MonoBehaviour
 
     private void Awake() {
         Instance = this;
-        
-        _shop = FindObjectOfType(typeof(Shop)).GetComponent<Shop>();
+
+        _shop = FindObjectOfType<Shop>();
         if (!_shop)
         {
             Debug.Log("No Shop Found");
+            Debug.Break();
         }
     
         grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, this.transform.position, (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
