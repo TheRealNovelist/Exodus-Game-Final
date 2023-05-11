@@ -13,6 +13,7 @@ public class AudioFile
     
     [BoxGroup("Settings"), Range(0f, 1f)] public float volume = 1f;
     [BoxGroup("Settings"), Range(-3f, 3f)] public float pitch = 1f;
+    [BoxGroup("Settings")] public bool looping;
     
     [SerializeField, HideLabel, BoxGroup("Audio")] 
     private WeightedRandomList<AudioClip> clips;
