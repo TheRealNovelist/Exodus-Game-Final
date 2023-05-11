@@ -28,8 +28,8 @@ namespace EnemySystem
             if (_enemy.EnemyAnimator)
             {
                 _enemy.EnemyAnimator.SetTrigger("MoveToTarget");
-                Debug.Log("Move to target");
             }
+            
         }
 
         public void OnExit()

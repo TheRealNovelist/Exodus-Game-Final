@@ -22,6 +22,12 @@ namespace EnemySystem.Charger
         {
             _charger.isAttacking = true;
             _rigidbody.AddForce(_charger.attackDirection * 100f, ForceMode.Impulse);
+
+            if (_charger.EnemyAnimator)
+            {
+                _charger.EnemyAnimator.SetTrigger("MoveToTarget");
+            }
+
         }
 
         public void OnExit()

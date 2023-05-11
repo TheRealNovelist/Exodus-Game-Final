@@ -33,11 +33,17 @@ namespace EnemySystem.Charger
             cooldown = _cooldownTime;
             _charger.ResetCollision();
             isCoolingDown = true;
+            
+            
+            if (_charger.EnemyAnimator)
+            {
+                _charger.EnemyAnimator.SetTrigger("Cooldown");
+            }
+
         }
 
         public void OnExit()
         {
-            
         }
     }
 }

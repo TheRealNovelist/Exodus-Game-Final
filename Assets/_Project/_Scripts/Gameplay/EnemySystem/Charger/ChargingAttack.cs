@@ -9,9 +9,9 @@ namespace EnemySystem.Charger
         private float _chargeTime;
 
         public bool isCharged = false;
-        
+
         private Color defaultColor;
-        
+
         public ChargingAttack(Charger charger)
         {
             _charger = charger;
@@ -20,10 +20,15 @@ namespace EnemySystem.Charger
         public void Update()
         {
             var chargerTransform = _charger.transform;
-            
+
             if (_chargeTime <= 0f)
             {
                 isCharged = true;
+                
+                if (_charger.EnemyAnimator)
+                {
+                    _charger.EnemyAnimator.SetTrigger("FinishedCharging");
+                }
                 return;
             }
 
@@ -37,19 +42,23 @@ namespace EnemySystem.Charger
             _chargeTime = _charger.chargeTime;
             isCharged = false;
             _charger.ReduceDamage(true);
-            defaultColor = _charger.GetComponent<Renderer>().material.color;
-            
-            _charger.GetComponent<Renderer>().material.color = Color.red;
-            
-            if( _charger.EnemyAnimator)
-            _charger.EnemyAnimator.SetTrigger("ChargingAttack");
+            // defaultColor = _charger.GetComponent<Renderer>().material.color;
+
+            //_charger.GetComponent<Renderer>().material.color = Color.red;
+
+            if (_charger.EnemyAnimator)
+            {
+                _charger.EnemyAnimator.SetTrigger("ChargingAttack");
+            }
+
         }
 
         public void OnExit()
         {
             _charger.ReduceDamage(false);
             _charger.attackDirection = _charger.transform.forward;
-            _charger.GetComponent<Renderer>().material.color = defaultColor;
+            //            _charger.GetComponent<Renderer>().material.color = defaultColor;
+
         }
     }
 }
