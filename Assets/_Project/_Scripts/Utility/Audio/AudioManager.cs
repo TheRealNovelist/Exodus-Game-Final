@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
     }
     
     [TabGroup("Testing"), Button(ButtonStyle.CompactBox, Expanded = true)]
-    public void Play(string audioName)
+    public void Play(string audioName, bool isLooping)
     {
         AudioFile file = audioTable.FindAudioByName(audioName);
         
@@ -42,6 +42,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        source.loop = isLooping || file.looping;
         source.volume = file.volume;
         source.pitch = file.pitch;
         source.clip = file.GetAudioClip();

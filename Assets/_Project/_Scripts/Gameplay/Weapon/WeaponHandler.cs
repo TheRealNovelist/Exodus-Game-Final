@@ -39,12 +39,10 @@ namespace WeaponSystem
         {
             AmmoPool = maxAmmo;
             ChangeWeapon(0, true);
+            Inventory.Instance.OnGunEquiped += ReorderGunChildren;
+
         }
 
-        private void Awake()
-        {
-            Inventory.Instance.OnGunEquiped += ReorderGunChildren;
-        }
 
         private void ReorderGunChildren(WeaponDataSO data, int index)
         {
