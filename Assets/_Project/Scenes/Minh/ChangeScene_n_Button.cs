@@ -23,6 +23,7 @@ public class ChangeScene_n_Button : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             pauseMenued = true;
+            Time.timeScale = 0f;
         }
     }
 
@@ -32,15 +33,18 @@ public class ChangeScene_n_Button : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         pauseMenued = false;
+        Time.timeScale = 1f;
     }
 
     public void ExitButton(string name)
     {
         SceneManager.LoadScene(name);
+        Time.timeScale = 1f;
     }
 
     public void SceneChange(string name)
     {
         SceneManager.LoadScene(name);
+        Time.timeScale = 1f;
     }
 }

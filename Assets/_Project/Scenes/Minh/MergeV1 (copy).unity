@@ -767,10 +767,10 @@ RectTransform:
   m_Father: {fileID: 1505128630}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 233.95, y: -82.28}
-  m_SizeDelta: {x: 467.9, y: 164.56}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &73788973
 MonoBehaviour:
@@ -2140,7 +2140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &408397764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3355,7 +3355,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 607906855}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1581361686}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   betterTransitions: []
 --- !u!114 &607906855
 MonoBehaviour:
@@ -9830,10 +9842,10 @@ RectTransform:
   m_Father: {fileID: 1505128630}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 233.95, y: -237.84}
-  m_SizeDelta: {x: 467.9, y: 164.56}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201423034
 MonoBehaviour:
@@ -10385,10 +10397,10 @@ RectTransform:
   m_Father: {fileID: 1505128630}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 233.95, y: -548.95996}
-  m_SizeDelta: {x: 467.9, y: 164.56}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1249938194
 MonoBehaviour:
@@ -12529,10 +12541,10 @@ RectTransform:
   m_Father: {fileID: 1505128630}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 233.95, y: -393.4}
-  m_SizeDelta: {x: 467.9, y: 164.56}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1618257780
 MonoBehaviour:
@@ -12577,7 +12589,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1618257781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1581361686}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   betterTransitions: []
 --- !u!114 &1618257781
 MonoBehaviour:
@@ -15040,7 +15064,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2038130875}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8521711063724119023}
+        m_TargetAssemblyTypeName: ChangeScene_n_Button, Assembly-CSharp
+        m_MethodName: SceneChange
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MergeV1 (copy)
+          m_BoolArgument: 0
+        m_CallState: 2
   betterTransitions: []
 --- !u!114 &2038130875
 MonoBehaviour:
@@ -16198,7 +16234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062903341810}
+  imageFrame: {fileID: 8521711061678676830}
   amount: 0
+  quantityTMP: {fileID: 8521711062027270258}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -18187,7 +18226,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062672192495}
+  imageFrame: {fileID: 8521711062200007953}
   amount: 0
+  quantityTMP: {fileID: 8521711062983170870}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -18532,7 +18574,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062803463575}
+  imageFrame: {fileID: 8521711062327112702}
   amount: 0
+  quantityTMP: {fileID: 8521711063724763828}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -19235,7 +19280,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711061788066521}
+  imageFrame: {fileID: 8521711062402486194}
   amount: 0
+  quantityTMP: {fileID: 8521711062629591925}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -19538,7 +19586,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711061620392901}
+  imageFrame: {fileID: 8521711062418013926}
   amount: 0
+  quantityTMP: {fileID: 8521711062383430033}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -19593,7 +19644,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063663935116}
+  imageFrame: {fileID: 8521711062441328888}
   amount: 0
+  quantityTMP: {fileID: 8521711063125483521}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -20044,7 +20098,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062608260344}
+  imageFrame: {fileID: 8521711062493608162}
   amount: 0
+  quantityTMP: {fileID: 8521711062111588498}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -21191,7 +21248,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062781098398}
+  imageFrame: {fileID: 8521711062700597695}
   amount: 0
+  quantityTMP: {fileID: 8521711062952525381}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -22486,7 +22546,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062860523642}
+  imageFrame: {fileID: 8521711062809977995}
   amount: 0
+  quantityTMP: {fileID: 8521711062384099436}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -22755,7 +22818,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063028467175}
+  imageFrame: {fileID: 8521711062846707511}
   amount: 0
+  quantityTMP: {fileID: 8521711063340321492}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -22913,7 +22979,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063392900676}
+  imageFrame: {fileID: 8521711062858332778}
   amount: 0
+  quantityTMP: {fileID: 8521711062592336204}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -23555,7 +23624,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063198589507}
+  imageFrame: {fileID: 8521711062869493789}
   amount: 0
+  quantityTMP: {fileID: 8521711062664438048}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -23776,7 +23848,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062817229748}
+  imageFrame: {fileID: 8521711062897427840}
   amount: 0
+  quantityTMP: {fileID: 8521711062354512469}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -25259,7 +25334,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063236135865}
+  imageFrame: {fileID: 8521711063181445986}
   amount: 0
+  quantityTMP: {fileID: 8521711063562616850}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -25698,7 +25776,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063706013320}
+  imageFrame: {fileID: 8521711063202608703}
   amount: 0
+  quantityTMP: {fileID: 8521711063062244470}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -25953,7 +26034,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062038906584}
+  imageFrame: {fileID: 8521711063226094062}
   amount: 0
+  quantityTMP: {fileID: 8521711063587226331}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -26412,7 +26496,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711061998224634}
+  imageFrame: {fileID: 8521711063258391051}
   amount: 0
+  quantityTMP: {fileID: 8521711063578325854}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -26766,7 +26853,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062790090343}
+  imageFrame: {fileID: 8521711063279717015}
   amount: 0
+  quantityTMP: {fileID: 8521711061759724325}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -26903,7 +26993,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063601987076}
+  imageFrame: {fileID: 8521711063294423109}
   amount: 0
+  quantityTMP: {fileID: 8521711061690412310}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -27472,7 +27565,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711061675351018}
+  imageFrame: {fileID: 8521711063389036215}
   amount: 0
+  quantityTMP: {fileID: 8521711062260199809}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -27545,7 +27641,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711062759188107}
+  imageFrame: {fileID: 8521711063391464953}
   amount: 0
+  quantityTMP: {fileID: 8521711062471108366}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -28276,7 +28375,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063554799579}
+  imageFrame: {fileID: 8521711063515012184}
   amount: 0
+  quantityTMP: {fileID: 8521711062747762807}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -29318,7 +29420,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063232167904}
+  imageFrame: {fileID: 8521711063676236787}
   amount: 0
+  quantityTMP: {fileID: 8521711063327661161}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
@@ -29489,7 +29594,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 0}
+  imageItem: {fileID: 8521711063279230828}
+  imageFrame: {fileID: 8521711063698815429}
   amount: 0
+  quantityTMP: {fileID: 8521711062727414158}
   lockColor:
     serializedVersion: 2
     rgba: 3780794970
