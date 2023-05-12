@@ -46,10 +46,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1.8255816
+  m_Height: 4.066137
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.5073383, z: 0.058634758}
 --- !u!54 &1529819396297480605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bb5dfb70d7ba4194d921d7b2cd0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 100
   startOnAwake: 0
   primaryTarget: {fileID: 0}
   player: {fileID: 0}

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using KinematicCharacterController;
-using Unity.VisualScripting;
 using UnityEngine;
 
 //This script is responsible for respawning the player
