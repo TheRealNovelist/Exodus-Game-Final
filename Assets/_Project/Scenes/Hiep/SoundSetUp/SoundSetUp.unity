@@ -180,7 +180,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 8e7d2426e516b91439848f5f85bb2bef, type: 2}
-  m_audioClip: {fileID: 8300000, guid: c07a069f897d1564d957ae4e41c1ce0b, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -276,6 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839336315}
   - component: {fileID: 839336314}
+  - component: {fileID: 839336316}
   m_Layer: 0
   m_Name: HoldScriptForPlaySound
   m_TagString: Untagged
@@ -295,12 +296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943690b0f65f487499e707fa211f9efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playShootingSound: 0
+  audioManager: {fileID: 207855641}
   shootingSoundName: GunShots
-  playReloadingSound: 0
   reloadingSoundName: Reloads
-  isRunning: 0
   runningSoundName: Runs
+  gunEmptyClickSoundName: EmptyGunClicks
 --- !u!4 &839336315
 Transform:
   m_ObjectHideFlags: 0
@@ -316,6 +316,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839336316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839336313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7191e9c2a3b3945b60d3ee96511b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundTest: {fileID: 839336314}
+  isShooting: 0
+  shootKey: 100
 --- !u!1 &1518545383
 GameObject:
   m_ObjectHideFlags: 0
