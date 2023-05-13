@@ -30,6 +30,34 @@ namespace EnemySystem
         
         private void Update() => _stateMachine.Update();
 
+        protected virtual void OnEnable()
+        {
+            try
+            {
+                Pause(false);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            try
+            {
+                Pause(true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        protected virtual void OnDestroy() => Stop();
+
         protected void SetState(IState state) => _stateMachine.SetState(state);
 
         protected void AddAnyTransition(IState to, Func<bool> condition) =>

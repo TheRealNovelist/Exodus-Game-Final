@@ -72,8 +72,10 @@ public class ESpawnerSystem : BaseAI
         if(_room)_room.LockRoom+= Activate;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+        
         EnemySpawned -= SpawnedEnemy;
         EnemyDefeated -= DefeatedEnemy;
     }
