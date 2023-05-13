@@ -12,6 +12,7 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private GameObject turretCamera;
     [SerializeField] private GameObject playerCamera;
+    [SerializeField] private AudioManager audioManager;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -27,12 +28,25 @@ public class Shop : MonoBehaviour
         playerCamera.SetActive(!cameraTurret);
     }
 
+    private void PlaySound(bool toggle)
+    {
+        if (toggle)
+        {
+            audioManager.PlayOneShot("TingIns");
+        }
+        else
+        {
+            audioManager.PlayOneShot("TingOuts");
+        }
+    }
+
     private void Start()
     {
         ShopToggle += ToggleCamera;
         ShopToggle += shopUI.ToggleShopPanel;
         ShopToggle?.Invoke(false);
         PurchasedItem += Purchased;
+        ShopToggle += PlaySound;
         PurchasedItem += so => {ShopToggle?.Invoke(false);};
     }
 
@@ -40,7 +54,6 @@ public class Shop : MonoBehaviour
     {
         ShopToggle -= ToggleCamera;
         ShopToggle -= shopUI.ToggleShopPanel;
-
     }
 
     private void Awake()

@@ -33,6 +33,8 @@ public class Chest : MonoBehaviour
                 if (Input.GetKeyDown(openKey))
                 {
                     Harvest(lootedItem);
+                    
+
                 }
             }
         }
@@ -43,6 +45,8 @@ public class Chest : MonoBehaviour
         isOpen = true;
 
         OpenAnimation();
+        
+        //Play sound
 
         StartCoroutine(WaitToGenerateIte());
     }
@@ -87,6 +91,8 @@ public class Chest : MonoBehaviour
 
     private void Harvest(Item item)
     {
+        //Play sound
+
         harvested = true;
         Inventory.Instance.AddItem(item);
     }

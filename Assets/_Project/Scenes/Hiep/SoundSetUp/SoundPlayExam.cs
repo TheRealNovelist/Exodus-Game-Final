@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class SoundPlayExam : MonoBehaviour
 {
@@ -16,62 +14,39 @@ public class SoundPlayExam : MonoBehaviour
     private bool isRunning;
     private bool isGunEmptyClicking;
     private bool runningSoundPlaying;
-
-    private float shootingTime;
-    private float reloadingTime;
+    
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
             isShooting = true;
-            shootingTime = Time.time;
+            PlayShootingSound();
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            isGunEmptyClicking = true;
-            PlayGunEmptyClickingSound();
-        }
-
         if (Input.GetMouseButtonUp(1))
         {
             isShooting = false;
         }
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            isGunEmptyClicking = true;
+            
+            PlayGunEmptyClickingSound();
+        }
         if (Input.GetMouseButtonUp(0))
         {
             isGunEmptyClicking = false;
         }
         if (Input.GetKeyDown(KeyCode.R))
-        { 
-            Debug.Log("here");
+        {
             isReloading = true;
-            reloadingTime = Time.time + 0.5f;
+            PlayReloadingSound();
         }
         else if (Input.GetKeyUp(KeyCode.R))
         {
             isReloading = false;
         }
-
-        if (isShooting)
-        {
-            if (Time.time >= shootingTime)
-            {
-                PlayShootingSound();
-                shootingTime = Time.time + 0.2f;
-            }
-        }
-
-        if (isReloading)
-        {
-            if (Time.time >= reloadingTime)
-            {
-                PlayReloadingSound();
-                reloadingTime = Time.time + 0.2f;
-                isReloading = false;
-            }
-        }
+        
 
         if (isRunning && !runningSoundPlaying)
         {

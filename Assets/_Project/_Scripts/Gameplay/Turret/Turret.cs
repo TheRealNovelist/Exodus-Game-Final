@@ -55,6 +55,9 @@ public class Turret : MonoBehaviour, IDamageable
             {
                 waitingToShoot = false;
                 timer = 0;
+                
+                
+                
                 Shoot(dir);
             }
         }
@@ -64,7 +67,9 @@ public class Turret : MonoBehaviour, IDamageable
     {
         TurretProjectile newOb = Instantiate(projectile, shootPoint.position,Quaternion.identity);
         newOb.SetDirect(direct);
+        //Play sound
         waitingToShoot = true;
+        
     }
     
     private void RotateYTo(Transform rotateObj,Quaternion angle, float speed)
