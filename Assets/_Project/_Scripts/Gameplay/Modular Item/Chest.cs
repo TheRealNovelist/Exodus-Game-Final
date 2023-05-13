@@ -20,7 +20,7 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             OpenChest();
-            
+            Debug.Log("open");
         }
     }
 

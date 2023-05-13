@@ -41,11 +41,16 @@ namespace EnemySystem
                 Die();
             }
 
-            if (!switchOnAggression || target == player) return;
-            
-            Stop();
-            StartStateMachine();
-            target = player;
+            if (switchOnAggression && source == player)
+            {
+                Debug.Log(source);
+                if (target == player)
+                    return;
+                
+                Stop();
+                StartStateMachine();
+                target = player;
+            }
         }
 
         public virtual void Die()   
@@ -67,8 +72,12 @@ namespace EnemySystem
             RespawnPlayer.OnPlayerFinishedRespawn += ContinueStateMachine;
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
+            
+            EnemyAnimator.SetTrigger("Disable");
+            
             RespawnPlayer.OnPlayerStartRespawn -= PauseStateMachine;
             RespawnPlayer.OnPlayerFinishedRespawn -= ContinueStateMachine;
         }

@@ -2734,7 +2734,6 @@ GameObject:
   - component: {fileID: 3056408821999278327}
   - component: {fileID: 3056408821999278326}
   - component: {fileID: 3056408821999278321}
-  - component: {fileID: 3056408821999278320}
   - component: {fileID: 3056408821999278323}
   m_Layer: 0
   m_Name: Character
@@ -2893,24 +2892,6 @@ MonoBehaviour:
   respawnTime: 10
   spawnYAxis: 10
   motor: {fileID: 9099723944862406201}
---- !u!114 &3056408821999278320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9211053750693939531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdaef0beeca01d548b5e1c974efe2d48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ability:
-  - {fileID: 0}
-  - {fileID: 0}
-  inventory: {fileID: 0}
-  key1: 99
-  key2: 118
 --- !u!114 &3056408821999278323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2928,7 +2909,7 @@ MonoBehaviour:
   _response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3056408821999278320}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AbilityHolder, Assembly-CSharp
         m_MethodName: SetUsingAbility
         m_Mode: 1

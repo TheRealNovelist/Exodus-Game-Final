@@ -30,28 +30,29 @@ public class StateMachine
 //            Debug.Log("Current State: " + _currentState);
             _currentState?.Update();
         }
-
-        public void FixedUpdate()
-        {
-            
-        }
-
+        
         public IState GetCurrentState() => _currentState;
 
         //Allow to pause the state machine, cease operation and continue
-        public void Pause(bool pause)
+        public bool Pause(bool pause)
         {
+            if (!IsStarted) return false;
+            
             if (pause)
                 _currentState.OnExit();
             else
                 _currentState.OnEnter();
             
             IsPaused = pause;
+
+            return true;
         }
         
         //Stop the state machine, clear any transitions and reset
         public void Stop()
         {
+            if (!IsStarted) return;
+            
             IsStarted = false;
 
             _currentState = null;

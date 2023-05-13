@@ -5,8 +5,7 @@ namespace EnemySystem.Brute
     internal class Attacking : IState
     {
         private readonly Brute _brute;
-        
-        
+
         private float cooldown = 0f;
         
         public Attacking(Brute brute)

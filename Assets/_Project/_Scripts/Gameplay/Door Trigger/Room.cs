@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class Room : MonoBehaviour
 {
-   [SerializeField] private List<Door> doors;
+   [SerializeField] private List<DoorDoubleSlide> doors;
    public ESpawnerSystem enemySpawner;
    [HideInInspector] public bool roomLocked = false;
    public Action LockRoom,UnlockRoom;
@@ -48,6 +48,7 @@ public class Room : MonoBehaviour
       if (other.gameObject.CompareTag("Player") && !enemySpawner.FinishedSpawning)
       {
           LockRoom?.Invoke();
+          Debug.Log(gameObject.name);
       }  
    }
 
@@ -55,15 +56,6 @@ public class Room : MonoBehaviour
    {
        roomLocked = true;
        
-       if (doors == null || doors.Count == 0)
-       {
-           return;
-       }
-
-       foreach (var door in doors)
-       {
-           door.CloseDoor();
-       }
    }
 
    private void UnlockDoors()
