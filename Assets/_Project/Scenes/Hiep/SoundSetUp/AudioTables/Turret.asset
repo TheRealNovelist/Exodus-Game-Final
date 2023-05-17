@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cc808193205194fa7cf9e34b8fbf59, type: 3}
+  m_Name: Turret
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  _files:
+  - audioName: TurretShoot
+    volume: 0.622
+    pitch: 1
+    looping: 0
+    clips:
+      list:
+      - item: {fileID: 8300000, guid: 7e082c3f3a22ff84ebde18836e69b3cf, type: 3}
+        weight: 2
+      - item: {fileID: 8300000, guid: 97cdbb551591efc48abc8a317c1f65ed, type: 3}
+        weight: 2
+      - item: {fileID: 8300000, guid: e115f5575585f42408970a50737ddf15, type: 3}
+        weight: 2
+      - item: {fileID: 8300000, guid: 2c6b520738e834341b58e56974b67682, type: 3}
+        weight: 2

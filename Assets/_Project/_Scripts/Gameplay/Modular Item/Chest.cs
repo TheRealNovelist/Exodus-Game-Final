@@ -8,7 +8,9 @@ public class Chest : MonoBehaviour
     [SerializeField] private KeyCode openKey;
     [SerializeField] private Animator _chestAnimator;
 
-    private bool isOpen = false;
+    [SerializeField] private AudioManager audioManager;
+
+private bool isOpen = false;
     private bool harvested = false;
     
     private Item lootedItem;
@@ -47,7 +49,7 @@ public class Chest : MonoBehaviour
         OpenAnimation();
         
         //Play sound
-
+        audioManager.PlayOneShot("ChestOpen");
         StartCoroutine(WaitToGenerateIte());
     }
 
@@ -92,7 +94,7 @@ public class Chest : MonoBehaviour
     private void Harvest(Item item)
     {
         //Play sound
-
+        audioManager.PlayOneShot("ChestHarvest");
         harvested = true;
         Inventory.Instance.AddItem(item);
     }

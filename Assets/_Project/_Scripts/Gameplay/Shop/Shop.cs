@@ -14,6 +14,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private AudioManager audioManager;
     
+    
+    public delegate void BackgroundMusicChange(bool toggle);
+    public event BackgroundMusicChange OnBackgroundMusicChange;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

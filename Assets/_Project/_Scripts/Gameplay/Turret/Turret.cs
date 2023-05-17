@@ -8,7 +8,7 @@ public class Turret : MonoBehaviour, IDamageable
     [SerializeField] private TurretProjectile projectile;
     [SerializeField] private Transform shootPoint;
     [SerializeField] private LayerMask enemyMask;
-    
+    [SerializeField] private AudioManager audioManager;
     private Transform target;
     private float timer = 0;
     [SerializeField] private float duration = 3f;
@@ -68,6 +68,7 @@ public class Turret : MonoBehaviour, IDamageable
         TurretProjectile newOb = Instantiate(projectile, shootPoint.position,Quaternion.identity);
         newOb.SetDirect(direct);
         //Play sound
+        audioManager.PlayOneShot("TurretShoot");
         waitingToShoot = true;
         
     }
