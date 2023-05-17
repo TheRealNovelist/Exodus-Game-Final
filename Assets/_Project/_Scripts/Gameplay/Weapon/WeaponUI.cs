@@ -68,7 +68,7 @@ public class WeaponUI : MonoBehaviour
         weapon.OnEndReload -= UpdateEndReloadText;
     }
 
-    private void UpdateAmmoText(int ammo) => ammoText.text = "Ammo: " + ammo;
+    private void UpdateAmmoText(int ammo) => ammoText.text = ": " + ammo;
     
     private void UpdateAmmoPoolText(int ammo) => ammoPoolText.text = "Pool: " + ammo;
 
