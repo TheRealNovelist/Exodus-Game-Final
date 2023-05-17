@@ -10,7 +10,7 @@ public class SplashScreenTest : MonoBehaviour
     public RawImage rawImg; //reference to raw image
     public VideoPlayer videoPlayer; //reference to video player
     public string screenToLoad; //reference to name of screen to load string
-
+    [SerializeField] private ASyncLoader _aSyncLoader;
 
     //Call PlayVideo() below to play video
     //Activate LoadScene() below after done plaing video 
@@ -52,6 +52,8 @@ public class SplashScreenTest : MonoBehaviour
         //SceneManager.LoadScene("Loading Screen");
 
         //Call ScenesManager.LoadLoadGameSceneInTime() to load screen after time
-        SceneManager.LoadScene(screenToLoad);
+        //SceneManager.LoadScene(screenToLoad);
+        
+        _aSyncLoader.LoadSceneASync(screenToLoad);
     }
 }
