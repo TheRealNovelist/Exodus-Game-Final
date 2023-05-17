@@ -54,12 +54,12 @@ public class PlayerCursor : MonoBehaviour
         _shop = FindObjectOfType<Shop>();
 
         if (_shop)
-            _shop.ShopToggle += ToggleCursor;
+            Shop.ShopToggle += ToggleCursor;
     }
 
     private void OnDisable()
     {
         if (_shop)
-            _shop.ShopToggle -= ToggleCursor;
+            Shop.ShopToggle -= ToggleCursor;
     }
 }

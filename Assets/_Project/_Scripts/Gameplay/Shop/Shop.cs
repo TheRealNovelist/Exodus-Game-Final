@@ -7,14 +7,14 @@ using UnityEngine.Serialization;
 public class Shop : MonoBehaviour
 {
     public ShopUI shopUI;
-    public  Action<bool> ShopToggle;
+    public static Action<bool> ShopToggle;
     public Action<PlacedObjectTypeSO> PurchasedItem;
 
     [SerializeField] private GameObject turretCamera;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private BackGroundMusic backGroundMusic;//the object that have the script referenced is on player name AudioHole
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -50,7 +50,8 @@ public class Shop : MonoBehaviour
         ShopToggle?.Invoke(false);
         PurchasedItem += Purchased;
         ShopToggle += PlaySound;
-        PurchasedItem += so => {ShopToggle?.Invoke(false);};
+        
+      //  PurchasedItem += so => {ShopToggle?.Invoke(false);};
     }
 
     private void OnDisable()
@@ -66,7 +67,10 @@ public class Shop : MonoBehaviour
 
     private void Purchased(PlacedObjectTypeSO item)
     {
-        CoinManager.Instance.SpendCoin(item.price) ; 
+        if (CoinManager.Instance.SpendCoin(item.price))
+        {
+            shopUI.shopPanel.SetActive(false);
+        }
     }
     
     

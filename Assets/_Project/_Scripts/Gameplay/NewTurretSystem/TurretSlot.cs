@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TurretSlot : MonoBehaviour
+public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   private PlacedObjectTypeSO _holdingTurret;
+   public bool CanPlace => _holdingTurret == null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   public void OnPointerEnter(PointerEventData eventData)
+   {
+      if(!CanPlace) {return;}
+      //Show preview
+      TurretBuildingSystem.SetPreviewVisual(this);
+   }
+
+   public void OnPointerExit(PointerEventData eventData)
+   {
+      if(!CanPlace) {return;}
+      //Hide preview
+      TurretBuildingSystem.ResetPreview();
+   }
+
+   public void OnPointerClick(PointerEventData eventData)
+   {
+      if(!CanPlace) {return;}
+      //Hide preview
+      TurretBuildingSystem.ResetPreview();
+
+      //Place gameobject
+      TurretBuildingSystem.PlaceTurret(this);
+   }
 }

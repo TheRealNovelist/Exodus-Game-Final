@@ -5,21 +5,21 @@ using UnityEngine;
 public class ShopUI : MonoBehaviour
 {
     private Shop _shop;
-    [SerializeField] private GameObject shopPanel;
+    public GameObject shopPanel;
 
     public void Init(Shop shop)
     {
         _shop = shop;
     }
 
-    public void DefenderPurchased()
+    public void DefenderPurchased(PlacedObjectTypeSO placedObjectTypeSo)
     {
-        shopPanel.SetActive(false);
+        _shop.PurchasedItem?.Invoke(placedObjectTypeSo);
     }
 
     public void CloseShop()
     {
-        _shop.ShopToggle?.Invoke(false);
+        Shop.ShopToggle?.Invoke(false);
     }
     
     

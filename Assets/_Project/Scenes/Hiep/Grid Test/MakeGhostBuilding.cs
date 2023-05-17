@@ -9,7 +9,6 @@ public class MakeGhostBuilding : MonoBehaviour
 
     private void Start() {
         RefreshVisual();
-
         GridBuildingSystem.Instance.OnSelectedChanged += Instance_OnSelectedChanged;
     }
 

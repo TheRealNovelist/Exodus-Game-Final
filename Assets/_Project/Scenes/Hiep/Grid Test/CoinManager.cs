@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class CoinManager : Singleton<CoinManager>
 {
-    private int _coinAmount = 100;
+   [SerializeField] private int _coinAmount = 100;
 
     public int CoinAmount
     {
@@ -25,16 +25,28 @@ public class CoinManager : Singleton<CoinManager>
 
     [SerializeField] private TMP_Text moneyAmountText;
 
-    public void SpendCoin(int amount)
+    public bool SpendCoin(int amount)
     {
-        CoinAmount -= amount;
-        moneyAmountText.SetText("Money " + _coinAmount.ToString());
+        if (CoinAmount - amount > 0)
+        {
+            CoinAmount -= amount;
+            moneyAmountText.SetText( _coinAmount.ToString());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void GainCoin(int amount)
     {
         CoinAmount += amount;
-        moneyAmountText.SetText("Money " + _coinAmount.ToString());
+        moneyAmountText.SetText( _coinAmount.ToString());
     }
 
+    private void Start()
+    {
+        moneyAmountText.SetText( _coinAmount.ToString());
+    }
 }

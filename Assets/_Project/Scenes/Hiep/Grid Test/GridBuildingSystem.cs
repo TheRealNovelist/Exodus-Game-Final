@@ -166,7 +166,7 @@ public class GridBuildingSystem : MonoBehaviour
                 grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
             }
             
-            _shop.PurchasedItem?.Invoke(placedObjectTypeSO);
+            //_shop.PurchasedItem?.Invoke(placedObjectTypeSO);
         }
         else
         {

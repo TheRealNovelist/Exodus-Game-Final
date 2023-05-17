@@ -6,9 +6,6 @@ using System;
 //Attach to placedObject(turret, building)
 public class PlacedObject : MonoBehaviour
 {
-    
-    
-    
     public static PlacedObject Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir,
         PlacedObjectTypeSO placedObjectTypeSO)
     {
