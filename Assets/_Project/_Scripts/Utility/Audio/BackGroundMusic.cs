@@ -9,15 +9,9 @@ public class BackGroundMusic : MonoBehaviour
 
     void Start()
     {
-        shop.OnBackgroundMusicChange += PlayBackBroundMusic;
+        audioManager.Play("BackGround", true);
     }
-
-    void OnDestroy()
-    {
-        shop.OnBackgroundMusicChange -= PlayBackBroundMusic;
-    }
-
-    void PlayBackBroundMusic(bool toggle)
+    public void PlayBackBroundMusic(bool toggle)
     {
         if (!toggle)
         {

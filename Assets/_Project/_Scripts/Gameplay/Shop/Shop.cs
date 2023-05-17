@@ -13,10 +13,8 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject turretCamera;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private BackGroundMusic backGroundMusic;//the object that have the script referenced is on player name AudioHole
     
-    
-    public delegate void BackgroundMusicChange(bool toggle);
-    public event BackgroundMusicChange OnBackgroundMusicChange;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -36,9 +34,11 @@ public class Shop : MonoBehaviour
         if (toggle)
         {
             audioManager.PlayOneShot("TingIns");
+            backGroundMusic.PlayBackBroundMusic(toggle);
         }
         else
         {
+            backGroundMusic.PlayBackBroundMusic(toggle);
             audioManager.PlayOneShot("TingOuts");
         }
     }
