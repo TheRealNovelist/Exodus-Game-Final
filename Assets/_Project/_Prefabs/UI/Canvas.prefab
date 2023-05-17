@@ -2089,7 +2089,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26b14323ea8dad4e98d786e784783ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shop: {fileID: 0}
   shopPanel: {fileID: 422446696985204765}
 --- !u!1 &422446695635412950
 GameObject:
@@ -3727,10 +3726,6 @@ MonoBehaviour:
   equipSlots:
   - {fileID: 422446697172902076}
   - {fileID: 422446696307980209}
-  equippedItems:
-  - {fileID: 0}
-  - {fileID: 0}
-  inventory: {fileID: 422446697229257712}
 --- !u!1 &422446695727649517
 GameObject:
   m_ObjectHideFlags: 0
@@ -11680,10 +11675,6 @@ MonoBehaviour:
   equipSlots:
   - {fileID: 422446696702223853}
   - {fileID: 422446697339957413}
-  equippedItems:
-  - {fileID: 0}
-  - {fileID: 0}
-  inventory: {fileID: 422446697229257712}
 --- !u!1 &422446696426688841
 GameObject:
   m_ObjectHideFlags: 0
@@ -18677,10 +18668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7d4a0ffd4b35641b17080c6bbaf71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipAbilityEvent: {fileID: 11400000, guid: 714a49a94b5fed448903a60432957b52, type: 2}
-  equipGunEvent: {fileID: 11400000, guid: 2010b68ef487dee46a769f459c1727af, type: 2}
-  gunPanel: {fileID: 422446695726965637}
-  abilityPanel: {fileID: 422446696426004629}
   allItemInInventory:
   - {fileID: 11400000, guid: c925a923153ddf64c944af856295e9dd, type: 2}
   - {fileID: 11400000, guid: 32d65af8fa512484da76de50a229ed08, type: 2}
@@ -18689,39 +18676,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a938fe81b09cac42a4811e92c9c3baa, type: 2}
   - {fileID: 11400000, guid: 58f582f17f908da40afc789240afb550, type: 2}
   - {fileID: 11400000, guid: bc1a8d13df2c1db41a84d7455db0e965, type: 2}
-  itemSlots:
-  - {fileID: 422446696968006317}
-  - {fileID: 422446696478779314}
-  - {fileID: 422446696386530917}
-  - {fileID: 422446696260155629}
-  - {fileID: 422446695840773331}
-  - {fileID: 422446695664459927}
-  - {fileID: 422446695623076518}
-  - {fileID: 422446696426688844}
-  - {fileID: 422446695839123426}
-  - {fileID: 422446696464784601}
-  - {fileID: 422446695769373534}
-  - {fileID: 422446695748162498}
-  - {fileID: 422446695444546865}
-  - {fileID: 422446696351972830}
-  - {fileID: 422446696184992311}
-  - {fileID: 422446696830870600}
-  - {fileID: 422446696489998055}
-  - {fileID: 422446696604377527}
-  - {fileID: 422446695694184298}
-  - {fileID: 422446695734642875}
-  - {fileID: 422446697349202443}
-  - {fileID: 422446696442192703}
-  - {fileID: 422446695804610836}
-  - {fileID: 422446696518359505}
-  notiTMP: {fileID: 422446696937565826}
-  notiDuration: 2
-  optionPanel: {fileID: 422446696300931532}
-  offset: {x: 0, y: 50, z: 0}
-  inventoryPanel: {fileID: 422446697428072476}
-  currentSelecting: {fileID: 0}
-  highlightFrame: {fileID: 21300000, guid: a281a2c2c3e624c56b4e1f3f70e4951a, type: 3}
-  normalFrame: {fileID: 21300000, guid: 8bd8be26fc85c43059c44937d2f8f2a3, type: 3}
+  _inventoryUI: {fileID: 0}
+  equipAbilityEvent: {fileID: 11400000, guid: 714a49a94b5fed448903a60432957b52, type: 2}
+  equippedGuns:
+  - {fileID: 0}
+  - {fileID: 0}
+  equippedAbilities:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &422446697229257715
 MonoBehaviour:
   m_ObjectHideFlags: 0
