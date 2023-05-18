@@ -20,9 +20,7 @@ public class ASyncLoader : MonoBehaviour
       AsyncOperation loadOperation = SceneManager.LoadSceneAsync(scene);
       while (!loadOperation.isDone)
       {
-         float loadingValue = Mathf.Clamp01(loadOperation.progress / 0.9f);
-         _loader.value = loadingValue;
-         Debug.Log(_loader.value);
+         _loader.value = loadOperation.progress;
          yield return null;
       }
    }
