@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cc808193205194fa7cf9e34b8fbf59, type: 3}
+  m_Name: ShopButton
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  _files:
+  - audioName: ShopHoldOver
+    volume: 1
+    pitch: 1
+    looping: 0
+    clips:
+      list:
+      - item: {fileID: 8300000, guid: 67340165d08b6ad48978d202eeaf3d70, type: 3}
+        weight: 2
+  - audioName: ShopClick
+    volume: 1
+    pitch: 1
+    looping: 0
+    clips:
+      list:
+      - item: {fileID: 8300000, guid: 980da1d26f42d794e8695aea43859213, type: 3}
+        weight: 2
