@@ -19,10 +19,5 @@ namespace WeaponSystem
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
             Destroy(bullet, 10f);
         }
-
-        public override void HoldAttack(Weapon weapon, bool consumeAmmo = true)
-        {
-
-        }
     }
 }

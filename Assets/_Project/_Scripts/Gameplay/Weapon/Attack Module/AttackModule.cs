@@ -11,15 +11,19 @@ namespace WeaponSystem
 
         }
 
-        public virtual void HoldAttack(Weapon weapon, bool consumeAmmo = true)
+        public virtual void StopAttack()
         {
             
         }
         
-        protected static void ConsumeAmmo(Weapon weapon, bool consumeAmmo)
+        protected void ConsumeAmmo(Weapon weapon, bool consumeAmmo)
         {
             if (consumeAmmo)
-                weapon.ConsumeAmmo();
+                if (!weapon.TryConsumeAmmo())
+                {
+                    StopAttack();
+                }
+                
         }
     }
 }

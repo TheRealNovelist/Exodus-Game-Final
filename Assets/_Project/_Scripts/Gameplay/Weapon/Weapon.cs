@@ -105,16 +105,14 @@ namespace WeaponSystem
             }
         }
 
-        public void HoldAttack(WeaponMode mode)
+        public void StopAttack(WeaponMode mode)
         {
-            if (!CanAttack()) return;
-            
             switch (mode)
             {
                 case WeaponMode.Primary:
                     try
                     {
-                        _primaryAttack.HoldAttack(this);
+                        _primaryAttack.StopAttack();
                     }
                     catch
                     {
@@ -124,7 +122,7 @@ namespace WeaponSystem
                 case WeaponMode.Secondary:
                     try
                     {
-                        _secondaryAttack.HoldAttack(this);
+                        _secondaryAttack.StopAttack();
                     }
                     catch
                     {
@@ -133,21 +131,49 @@ namespace WeaponSystem
                     break;
             }
         }
+
+        public void StopAllAttack()
+        {
+            try
+            {
+                _primaryAttack.StopAttack();
+            }
+            catch
+            {
+                Debug.Log("Primary Attack not found");
+            }
+            
+            try
+            {
+                _secondaryAttack.StopAttack();
+            }
+            catch
+            {
+                Debug.Log("Secondary Attack not found");
+            }
+        }
         
         private bool CanAttack()
         {
-            return !_isReloading && _currentAmmo > 0;
+            return !_isReloading && _currentAmmo > 0 && IsWeaponReady;
         }
 
-        public void ConsumeAmmo()
+        public bool TryConsumeAmmo()
         {
+            if (CurrentAmmo <= 0) return false;
+            
             CurrentAmmo -= 1;
+            return true;
+
         }
 
         public void StartReload()
         {
             if (CurrentAmmo == data.magazineSize || !_weaponHandler.CanReload()) return;
             audioManager.PlayOneShot("Reloads");
+            
+            StopAllAttack();
+            
             StartCoroutine(_reloadRoutine);
         }
 
@@ -194,12 +220,13 @@ namespace WeaponSystem
         public void Unequip()
         {
             StopCoroutine(_equipRoutine);
-
+            
             _weaponHandler = null;
             
             OnUnequip?.Invoke();
             
-            // Cancel reload if needed
+            // Cancel any weapon action
+            StopAllAttack();
             CancelReload();
 
             IsWeaponReady = false;
