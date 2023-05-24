@@ -26,7 +26,14 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     private void SetUpSource()
     {
-        source.outputAudioMixerGroup = audioTable.mixerGroup;
+        if(source)
+        {
+            source.outputAudioMixerGroup = audioTable.mixerGroup;
+        }
+        else
+        {
+            Debug.LogWarning($"Audio manager of {gameObject.name} is missing");
+        }
     }
     
     [TabGroup("Testing"), Button(ButtonStyle.CompactBox, Expanded = true)]

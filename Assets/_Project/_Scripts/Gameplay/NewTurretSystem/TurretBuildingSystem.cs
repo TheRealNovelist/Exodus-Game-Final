@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class TurretBuildingSystem : MonoBehaviour
 {
-    [SerializeField] private List<PlacedObjectTypeSO> placeObjectTypeSOList = new List<PlacedObjectTypeSO>();
-    [SerializeField] private Camera turretCamera;
     [SerializeField] private Shop _shop;
     
     public static PlacedObjectTypeSO placedObjectTypeSO;

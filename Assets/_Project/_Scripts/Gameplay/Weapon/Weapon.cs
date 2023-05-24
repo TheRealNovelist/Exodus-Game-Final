@@ -79,7 +79,14 @@ namespace WeaponSystem
                 return; 
             }
                 
-            audioManager.PlayOneShot("GunShots");
+          if(audioManager)
+          {
+              audioManager.PlayOneShot("GunShots");
+          }
+          else
+          {
+              Debug.LogWarning($"Audio manager of {gameObject.name} is missing");
+          }
             switch (mode)
             {
                 case WeaponMode.Primary:
