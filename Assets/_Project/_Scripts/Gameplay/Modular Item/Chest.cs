@@ -22,7 +22,6 @@ private bool isOpen = false;
         if (other.gameObject.CompareTag("Player"))
         {
             OpenChest();
-            Debug.Log("open");
         }
     }
 

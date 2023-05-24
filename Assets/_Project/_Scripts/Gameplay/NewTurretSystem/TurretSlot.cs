@@ -12,6 +12,7 @@ public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
    public void OnPointerEnter(PointerEventData eventData)
    {
+      Debug.Log("Pointer entered");
       if(!CanPlace) {return;}
       //Show preview
       TurretBuildingSystem.SetPreviewVisual(this);

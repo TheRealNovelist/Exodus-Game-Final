@@ -1,71 +1,43 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-/// <summary>
-/// Used in enemy spawner rooms
-/// </summary>
 public class Room : MonoBehaviour
 {
-    [Header("Lock Conditions")]
-   [SerializeField] private List<DoorDoubleSlide> doors;
-   public ESpawnerSystem enemySpawner;
-   [HideInInspector] public bool roomLocked = false;
-   public Action LockRoom,UnlockRoom;
+    [SerializeField] private List<GameObject> connectedGO = new List<GameObject>();
+    private static List<GameObject> previousConnection = new List<GameObject>();
 
-   [Header("Show Rooms")] [SerializeField]
-   private List<GameObject> enableRooms;
-   private void Awake()
-   {
-       if (doors == null || doors.Count == 0)
-       {
-           return;
-       }
-       foreach (var door in doors)
-       {
-           door.Init(this);
-       }
-   }
+     [SerializeField] private bool disableOnStart;
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (previousConnection.Count > 0)
+            {
+               var roomsToDisable = previousConnection.Except(connectedGO);
 
-   private void Start()
-   {
-       enemySpawner.Init(this);
+               foreach (GameObject room in roomsToDisable)
+               {
+                   if (room != gameObject)
+                   {
+                       room.SetActive(false);
 
-       roomLocked = false;
+                   }
+               }
+            }
 
-       LockRoom += LockDoors;
-       UnlockRoom += UnlockDoors;
-       
-   }
+            foreach (GameObject room in connectedGO)
+            {
+                room.SetActive(true);
+            }
 
-   private void OnDisable()
-   {
-       LockRoom -= LockDoors;
-       UnlockRoom -= UnlockDoors;
-
-   }
-
-   private void OnTriggerEnter(Collider other)
-   {
-      if (other.gameObject.CompareTag("Player") && !enemySpawner.FinishedSpawning)
-      {
-          LockRoom?.Invoke();
-          Debug.Log(gameObject.name);
-      }  
-   }
-
-   private void LockDoors()
-   {
-       roomLocked = true;
-       
-   }
-
-   private void UnlockDoors()
-   {
-       roomLocked = false;
-   }
+            previousConnection = connectedGO;
+        }
+    }
 
 
 }

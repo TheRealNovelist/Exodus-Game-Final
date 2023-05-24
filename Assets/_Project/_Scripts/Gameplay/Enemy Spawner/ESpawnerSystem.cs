@@ -25,7 +25,7 @@ public class ESpawnerSystem : BaseAI
     public int Spawned => spawned;
     private int spawned =0;
     private int defeated = 0;
-    private Room _room;
+    private EnemyRoom _enemyRoom;
     
     [SerializeField]  private float waveCountDownTime =10;
 
@@ -69,7 +69,7 @@ public class ESpawnerSystem : BaseAI
         EnemySpawned += SpawnedEnemy;
         EnemyDefeated += DefeatedEnemy;
         
-        if(_room)_room.LockRoom+= Activate;
+        if(_enemyRoom)_enemyRoom.LockRoom+= Activate;
     }
 
     protected override void OnDisable()
@@ -97,15 +97,15 @@ public class ESpawnerSystem : BaseAI
         defeated++;
 
         //Defeated all
-        if (defeated >= totalToSpawn && _room)
+        if (defeated >= totalToSpawn && _enemyRoom)
         {
-            _room.UnlockRoom?.Invoke();
+            _enemyRoom.UnlockRoom?.Invoke();
         }
     }
 
-    public void Init(Room room)
+    public void Init(EnemyRoom enemyRoom)
     {
-        _room = room;
+        _enemyRoom = enemyRoom;
     }
 
     public bool IsWaving() => _stateMachine.GetCurrentState() is ES_WavingState;

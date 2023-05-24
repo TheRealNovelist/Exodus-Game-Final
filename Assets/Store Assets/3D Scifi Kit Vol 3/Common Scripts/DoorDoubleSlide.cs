@@ -37,16 +37,16 @@ public class DoorDoubleSlide : MonoBehaviour
     {
         get
         {
-            if (_room)
+            if (_enemyRoom)
             {
-                return _room.roomLocked;
+                return _enemyRoom.roomLocked;
             }
 
             return false;
         }
     }
 
-    private Room _room;
+    private EnemyRoom _enemyRoom;
 
     //Record initial positions
     void Start()
@@ -89,9 +89,9 @@ public class DoorDoubleSlide : MonoBehaviour
             }
         }
         
-        public void Init(Room room)
+        public void Init(EnemyRoom enemyRoom)
         {
-            _room = room;
+            _enemyRoom = enemyRoom;
         }
 
 
