@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
-    public float totalTime = 10f; // Thời gian tổng để chuyển màu
+    
 
     private Renderer rend;
     private Color startColor;
@@ -12,33 +12,31 @@ public class ColorChanger : MonoBehaviour
 
     private void Start()
     {
-        timer = totalTime;
+        LifeForce.OnLifeTimerChangeMoreHalf += HandleLifeTimerChangeMoreHalf;
+        LifeForce.OnLifeTimerChangeToHalf += HandleLifeTimerChangeToHalf;
+        LifeForce.OnLifeTimerAlmostRunOut += HandleLifeTimerChangeRunOut;
         rend = GetComponent<Renderer>();
         startColor = Color.green;
         middleColor = Color.yellow;
         endColor = Color.red;
     }
-
-    private void Update()
+    private void OnDestroy()
     {
-        timer -= Time.deltaTime;
-        Debug.Log(timer);
-        if (timer <= 0f)
-        {
-            timer = totalTime; // Đặt lại timer
-            rend.material.color = startColor; // Đặt lại màu ban đầu
-        }
-        if (timer <= totalTime * 0.5f)
-        {
-            rend.material.color = middleColor; // Chuyển sang màu vàng
-        }
-        if (timer < totalTime * 0.2f)
-        {
-            rend.material.color = endColor; // Chuyển sang màu đỏ
-        }
-        if(timer > totalTime * 0.5f)
-        {
-            rend.material.color = startColor; // Màu ban đầu
-        }
+        LifeForce.OnLifeTimerChangeMoreHalf -= HandleLifeTimerChangeMoreHalf;
+        LifeForce.OnLifeTimerChangeToHalf -= HandleLifeTimerChangeToHalf;
+        LifeForce.OnLifeTimerAlmostRunOut -= HandleLifeTimerChangeRunOut;
+    }
+
+    private void HandleLifeTimerChangeMoreHalf()
+    {
+        rend.material.color = startColor;
+    }
+    private void HandleLifeTimerChangeToHalf()
+    {
+        rend.material.color = middleColor;
+    }
+    private void HandleLifeTimerChangeRunOut()
+    {
+        rend.material.color = endColor;
     }
 }

@@ -9,11 +9,18 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
     [SerializeField] private float timeValue = 60;
     private bool timerOn = false;
     [SerializeField] private TextMeshProUGUI timeText;
+    
+    public static Action OnLifeTimerChangeMoreHalf;
+    public static Action OnLifeTimerChangeToHalf;
+    public static Action OnLifeTimerAlmostRunOut;
+    
+    private float maxTime;
 
     // Start is called before the first frame update
     void Start()
     {
         timerOn = true;
+        maxTime = timeValue;
     }
 
     public void AddTime(float time)
@@ -30,6 +37,19 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
         {
             timeValue -= Time.deltaTime;
             DisplayTime(timeValue);
+            if (timeValue > maxTime * 0.5f)
+            {
+                OnLifeTimerChangeMoreHalf?.Invoke();
+            }
+            if (timeValue <= maxTime * 0.5f)
+            {
+                OnLifeTimerChangeToHalf?.Invoke();
+            }
+
+            if (timeValue <= maxTime * 0.3f)
+            {
+                OnLifeTimerAlmostRunOut?.Invoke();
+            }
         }
         else
         {
