@@ -5,7 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// Normal doors open when player enter trigger and will not close afterwards
-/// Doors in enemy rooms are locked when player enters the room
+/// Doors in enemy rooms are locked when player enters the enemyRoom
 /// and only opens when all enemies are defeated
 /// </summary>
 public class Door : MonoBehaviour
@@ -14,9 +14,9 @@ public class Door : MonoBehaviour
    {
       get
       {
-         if (_room)
+         if (_enemyRoom)
          {
-            return _room.roomLocked;
+            return _enemyRoom.roomLocked;
          }
 
          return false;
@@ -24,7 +24,7 @@ public class Door : MonoBehaviour
    }
    
     private bool _playerIn = false;
-    private Room _room;
+    private EnemyRoom _enemyRoom;
 
    private void OnTriggerEnter(Collider other)
    {
@@ -37,9 +37,9 @@ public class Door : MonoBehaviour
       }
    }
 
-   public void Init(Room room)
+   public void Init(EnemyRoom enemyRoom)
    {
-      _room = room;
+      _enemyRoom = enemyRoom;
    }
 
    public void OpenDoor()

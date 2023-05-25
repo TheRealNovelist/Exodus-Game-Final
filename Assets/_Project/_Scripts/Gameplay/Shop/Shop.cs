@@ -34,7 +34,8 @@ public class Shop : MonoBehaviour
         if (toggle)
         {
             audioManager.PlayOneShot("TingIns");
-            backGroundMusic.PlayBackBroundMusic(toggle);
+          if(backGroundMusic){  backGroundMusic.PlayBackBroundMusic(toggle);}
+          else{ Debug.LogWarning($"backGroundMusic of {gameObject.name} is missing");}
         }
         else
         {
@@ -47,7 +48,9 @@ public class Shop : MonoBehaviour
     {
         ShopToggle += ToggleCamera;
         ShopToggle += shopUI.ToggleShopPanel;
+        
         ShopToggle?.Invoke(false);
+        
         PurchasedItem += Purchased;
         ShopToggle += PlaySound;
         

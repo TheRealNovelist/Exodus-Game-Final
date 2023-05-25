@@ -19,7 +19,7 @@ public class Inventory : Singleton<Inventory>
 
     [Header("Equip Panels")] public GameEvent equipAbilityEvent;
 
-    public Action<WeaponDataSO, int> OnGunEquiped;
+    public Action<WeaponDataSO, int> OnGunEquipped;
     //public GameEvent equipGunEvent;
 
     [FormerlySerializedAs("equippedItems")] public EquipItem[] equippedGuns = new EquipItem[2];
@@ -41,6 +41,7 @@ public class Inventory : Singleton<Inventory>
         {
             _inventoryUI.gameObject.SetActive(true);
             PlayerCursor.ToggleCursor(true);
+            PlayerInputManager.Input.Disable();
         }
 
         if (Input.GetKeyUp(KeyCode.Tab))
@@ -48,6 +49,7 @@ public class Inventory : Singleton<Inventory>
             _inventoryUI.gameObject.SetActive(false);
             _inventoryUI.OptionPanelVisible(false);
             PlayerCursor.ToggleCursor(false);
+            PlayerInputManager.Input.Enable();
         }
     }
 
@@ -145,7 +147,7 @@ public class Inventory : Singleton<Inventory>
                 equippedGuns[index] = item;
                 _inventoryUI.gunPanel.Equip(index, item);
                 GunItem gun = item as GunItem;
-                OnGunEquiped?.Invoke(gun.gunData,index);
+                OnGunEquipped?.Invoke(gun.gunData,index);
                 break;
         }
     }
@@ -197,7 +199,7 @@ public class Inventory : Singleton<Inventory>
         }
     }
 
-    public int EquipedGunsQuantity()
+    public int EquippedGunsQuantity()
     {
         int i = 0;
 

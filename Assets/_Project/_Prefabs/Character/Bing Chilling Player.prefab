@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1561874466940340098}
-  - component: {fileID: 1561874466940340099}
+  - component: {fileID: 3999750415514411763}
   m_Layer: 0
   m_Name: Bing Chilling Player
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1561874466940340099
+--- !u!114 &3999750415514411763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,11 +120,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1561874466940340101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461cd396e3fc7cc4eb9c92bde05c1b9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 85a395264cd0e5b4b8fe9711c6bf906d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Character: {fileID: 9099454684007754681}
   CharacterCamera: {fileID: 3190921827981887643}
+  WeaponHandler: {fileID: 2614123735741579024}
 --- !u!1 &1561874466953690769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3028,7 +3029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286d73e33794962499516b49d58148ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
 --- !u!114 &3056408821999278321
 MonoBehaviour:
   m_ObjectHideFlags: 0

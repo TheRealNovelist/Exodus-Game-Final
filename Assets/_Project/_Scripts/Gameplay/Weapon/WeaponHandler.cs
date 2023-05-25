@@ -7,21 +7,17 @@ using UnityEngine;
 namespace WeaponSystem
 {
     //Handling weapons by player
-    public class WeaponHandler : MonoBehaviour
+    public class WeaponHandler : MonoBehaviour, IPlayerInputSubscriber
     {
         [SerializeField] private Weapon _currentWeapon;
         [SerializeField] private Transform weaponHolder;
+        [SerializeField] private int maxAmmo = 100;
         
         public event Action<Weapon> OnSwitchingWeapon;
         public event Action<int> OnAmmoChange;
 
-        private bool isWeaponReady = true;
-        private bool isEquipped = false;
-        
+        private bool isWeaponReady => _currentWeapon != null && _currentWeapon.IsWeaponReady;
         private int currentIndex;
-
-
-        [SerializeField] private int maxAmmo = 100;
 
         private int _ammoPool;
 
@@ -39,10 +35,33 @@ namespace WeaponSystem
         {
             AmmoPool = maxAmmo;
             ChangeWeapon(0, true);
-            Inventory.Instance.OnGunEquiped += ReorderGunChildren;
-
+            Inventory.Instance.OnGunEquipped += ReorderGunChildren;
         }
-
+        
+        public void Init()
+        {
+            PlayerInputManager.Input.Weapon.PrimaryAttack.performed += 
+                (ctx) => StartAttack(WeaponMode.Primary);
+            PlayerInputManager.Input.Weapon.PrimaryAttack.canceled += 
+                (ctx) => StopAttack(WeaponMode.Primary);
+            
+            PlayerInputManager.Input.Weapon.SecondaryAttack.performed += 
+                (ctx) => StartAttack(WeaponMode.Secondary);
+            PlayerInputManager.Input.Weapon.SecondaryAttack.canceled += 
+                (ctx) => StopAttack(WeaponMode.Secondary);
+            
+            PlayerInputManager.Input.Weapon.Reload.performed += 
+                (ctx) => Reload();
+            
+            PlayerInputManager.Input.General.ChangeWeapon.performed += 
+                (ctx) => ScrollChangeWeapon();
+            
+            PlayerInputManager.Input.General.Weapon1.performed += 
+                (ctx) => ChangeWeapon(0);
+            
+            PlayerInputManager.Input.General.Weapon2.performed +=
+                (ctx) => ChangeWeapon(1);
+        }
 
         private void ReorderGunChildren(WeaponDataSO data, int index)
         {
@@ -60,52 +79,37 @@ namespace WeaponSystem
                 }
             }
         }
+        
 
-        private void Update()
+        private void StartAttack(WeaponMode mode)
         {
-            HandleWeaponSwitching();
-
-            isWeaponReady = _currentWeapon != null && _currentWeapon.IsWeaponReady;
-
             if (!isWeaponReady) return;
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                _currentWeapon.StartAttack(WeaponMode.Primary);
-            }
-
-            if (Input.GetMouseButton(0))
-            {
-                _currentWeapon.HoldAttack(WeaponMode.Primary);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                _currentWeapon.StartReload();
-            }
+            _currentWeapon.StartAttack(mode);
         }
 
-        private void HandleWeaponSwitching()
+        private void StopAttack(WeaponMode mode)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                ChangeWeapon(0);
-            }
+            if (!isWeaponReady) return;
+            _currentWeapon.StopAttack(mode);
+        }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+        private void Reload()
+        {
+            if (!isWeaponReady) return;
+            _currentWeapon.StartReload();
+        }
+        
+        private void ScrollChangeWeapon()
+        {
+            switch (currentIndex)
             {
-                ChangeWeapon(1);
+                case 0:
+                    ChangeWeapon(1);
+                    break;
+                case 1:
+                    ChangeWeapon(0);
+                    break;
             }
-
-            /*if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                ChangeWeapon(2);
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                ChangeWeapon(-1);
-            }*/
         }
 
         public int TryAddAmmo(int currentAmmo, WeaponData data)
@@ -139,7 +143,7 @@ namespace WeaponSystem
         private void ChangeWeapon(int index, bool forceChange = false)
         {
             if (index == currentIndex && !forceChange) return;
-            if (index > Inventory.Instance.EquipedGunsQuantity()-1)  return;
+            if (index > Inventory.Instance.EquippedGunsQuantity()-1)  return;
 
             //Unequip previous weapon 
             if (_currentWeapon != null)
@@ -150,7 +154,6 @@ namespace WeaponSystem
 
             if (index == -1)
             {
-                isEquipped = false;
                 OnSwitchingWeapon?.Invoke(null);
                 foreach (Transform weapon in weaponHolder)
                 {
@@ -170,7 +173,6 @@ namespace WeaponSystem
                     _currentWeapon.Equip(this);
                     OnSwitchingWeapon?.Invoke(_currentWeapon);
                     currentIndex = i;
-                    isEquipped = true;
                 }
                 else
                 {
