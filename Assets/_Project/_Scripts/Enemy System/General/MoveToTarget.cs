@@ -8,7 +8,6 @@ namespace EnemySystem
         private readonly BaseEnemy _enemy;
         private readonly NavMeshAgent _navMeshAgent;
         
-        
         public MoveToTarget(BaseEnemy enemy, NavMeshAgent navMeshAgent)
         {
             _enemy = enemy;
@@ -17,7 +16,10 @@ namespace EnemySystem
         
         public void Update()
         {
-            _navMeshAgent.SetDestination(_enemy.target.position);
+            if (!_navMeshAgent.SetDestination(_enemy.target.position))
+            {
+                _enemy.enabled = false;
+            }
         }
 
         public void OnEnter()
