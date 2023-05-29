@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnemySystem
+public class BossGunner : MonoBehaviour
 {
-    public class BossGunner : BaseEnemy
-    {
-        
-    }
+
+    
 }
