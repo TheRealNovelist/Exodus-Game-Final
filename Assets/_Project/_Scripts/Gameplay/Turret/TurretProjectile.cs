@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,5 +22,12 @@ public class TurretProjectile : MonoBehaviour
     public void ShootDirect(Vector3 direct, float speed = 10f)
     {
         transform.position += direct * speed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+        }
     }
 }

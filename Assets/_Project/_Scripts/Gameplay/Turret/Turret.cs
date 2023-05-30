@@ -66,6 +66,8 @@ public class Turret : MonoBehaviour, IDamageable
     void Shoot(Vector3 direct)
     {
         TurretProjectile newOb = Instantiate(projectile, shootPoint.position,Quaternion.identity);
+       // newOb.GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
+
         newOb.SetDirect(direct);
         //Play sound
         audioManager.PlayOneShot("TurretShoot");
