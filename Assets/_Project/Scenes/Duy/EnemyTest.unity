@@ -268,12 +268,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentBlackboard: {fileID: 0}
   _serializedBlackboard: '{"_variables":{"Health":{"_propertyPath":"EnemyHealth.Health","_name":"Health","_id":"7e7c3e5e-8c26-4fca-8be1-88fe064f1a15","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}'
-  _objectReferences: []
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"beamEmitterWeapon":{"_value":1,"_name":"beamEmitterWeapon","_id":"7af69ecd-a776-44b2-b9dd-bc48298514d5","$type":"NodeCanvas.Framework.Variable`1[[BossDoubleBeamEmitter,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
+  _objectReferences:
+  - {fileID: 0}
+  - {fileID: 1054791637}
   _serializedVariables:
   - _json: '{"_propertyPath":"EnemyHealth.Health","_name":"Health","_id":"7e7c3e5e-8c26-4fca-8be1-88fe064f1a15","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
     _references: []
+  - _json: '{"_value":1,"_name":"beamEmitterWeapon","_id":"7af69ecd-a776-44b2-b9dd-bc48298514d5","$type":"NodeCanvas.Framework.Variable`1[[BossDoubleBeamEmitter,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references:
+    - {fileID: 0}
+    - {fileID: 1054791637}
 --- !u!114 &52128158
 MonoBehaviour:
   m_ObjectHideFlags: 0
