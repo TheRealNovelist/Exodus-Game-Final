@@ -70,7 +70,6 @@ public class Turret : MonoBehaviour, IDamageable
         //Play sound
         audioManager.PlayOneShot("TurretShoot");
         waitingToShoot = true;
-        
     }
     
     private void RotateYTo(Transform rotateObj,Quaternion angle, float speed)
