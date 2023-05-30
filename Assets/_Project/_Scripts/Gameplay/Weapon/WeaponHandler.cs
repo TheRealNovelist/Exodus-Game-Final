@@ -7,7 +7,7 @@ using UnityEngine;
 namespace WeaponSystem
 {
     //Handling weapons by player
-    public class WeaponHandler : MonoBehaviour, IPlayerInputSubscriber
+    public class WeaponHandler : MonoBehaviour
     {
         [SerializeField] private Weapon _currentWeapon;
         [SerializeField] private Transform weaponHolder;
@@ -35,7 +35,7 @@ namespace WeaponSystem
         {
             AmmoPool = maxAmmo;
             ChangeWeapon(0, true);
-            Inventory.Instance.OnGunEquipped += ReorderGunChildren;
+            //if (Inventory.Instance != null) Inventory.Instance.OnGunEquipped += ReorderGunChildren;
         }
         
         public void Init()
@@ -143,7 +143,7 @@ namespace WeaponSystem
         private void ChangeWeapon(int index, bool forceChange = false)
         {
             if (index == currentIndex && !forceChange) return;
-            if (index > Inventory.Instance.EquippedGunsQuantity()-1)  return;
+            //if (index > Inventory.Instance.EquippedGunsQuantity()-1)  return;
 
             //Unequip previous weapon 
             if (_currentWeapon != null)

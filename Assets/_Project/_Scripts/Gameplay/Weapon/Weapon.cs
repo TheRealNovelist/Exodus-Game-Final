@@ -78,16 +78,7 @@ namespace WeaponSystem
                 audioManager.PlayOneShot("EmptyGunClicks");
                 return; 
             }
-                
-            if(audioManager)
-            {
-                audioManager.PlayOneShot("GunShots");
-            }
-            else
-            {
-                Debug.LogWarning($"Audio manager of {gameObject.name} is missing");
-            }
-            
+
             switch (mode)
             {
                 case WeaponMode.Primary:
@@ -170,9 +161,10 @@ namespace WeaponSystem
         {
             if (CurrentAmmo <= 0) return false;
             
+            audioManager.PlayOneShot("GunShots");
+            
             CurrentAmmo -= 1;
             return true;
-
         }
 
         public void StartReload()

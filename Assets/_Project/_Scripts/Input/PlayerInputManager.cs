@@ -7,11 +7,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using WeaponSystem;
 
-public interface IPlayerInputSubscriber
-{
-    public void Init();
-}
-
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInput Input { get; private set; }

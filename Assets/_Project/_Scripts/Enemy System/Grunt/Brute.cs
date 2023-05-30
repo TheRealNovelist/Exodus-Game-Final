@@ -32,15 +32,21 @@ namespace EnemySystem.Brute
             var MoveToPlayer = new MoveToTarget(this, agent);
             var Attacking = new Attacking(this);
 
-            AddTransition(MoveToPlayer, Attacking, TargetInRange(attackRange));
-            AddAnyTransition(MoveToPlayer, TargetOutRange(attackRange));
+            AddTransition(MoveToPlayer, Attacking, TargetInRange());
+            AddAnyTransition(MoveToPlayer, TargetOutRange());
 
             initialState = MoveToPlayer;
             
-            Func<bool> TargetInRange(float range) => () => Vector3.Distance(target.position, transform.position) <= range;
-            Func<bool> TargetOutRange(float range) => () => Vector3.Distance(target.position, transform.position) > range;
+            Func<bool> TargetInRange() => () => Vector3.Distance(target.position, transform.position) <= attackRange;
+            Func<bool> TargetOutRange() => () => Vector3.Distance(target.position, transform.position) > attackRange;
             
             base.StartStateMachine(delay);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
         }
     }
     
