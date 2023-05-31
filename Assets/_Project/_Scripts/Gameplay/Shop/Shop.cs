@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 public class Shop : MonoBehaviour
 {
     public ShopUI shopUI;
+    public List<PlacedObjectTypeSO> AllItems = new List<PlacedObjectTypeSO>();
     public static Action<bool> ShopToggle;
     public Action<PlacedObjectTypeSO> PurchasedItem;
 
@@ -51,7 +52,7 @@ public class Shop : MonoBehaviour
         
         ShopToggle?.Invoke(false);
         
-        PurchasedItem += Purchased;
+        PurchasedItem += CoinPurchased;
         ShopToggle += PlaySound;
         
       //  PurchasedItem += so => {ShopToggle?.Invoke(false);};
@@ -68,7 +69,7 @@ public class Shop : MonoBehaviour
         shopUI.Init(this);
     }
 
-    private void Purchased(PlacedObjectTypeSO item)
+    private void CoinPurchased(PlacedObjectTypeSO item)
     {
         if (CoinManager.Instance.SpendCoin(item.price))
         {

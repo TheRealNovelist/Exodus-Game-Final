@@ -51,7 +51,7 @@ public class GridBuildingSystem : MonoBehaviour
         for (int i = 0; i < _buttons.Count; i++)
         {
             var index = i;
-            _buttons[index].SetupButton(placeObjectTypeSOList[index],() => ChangeToTurret(index));
+            //_buttons[index].SetupButton(placeObjectTypeSOList[index],() => ChangeToTurret(index));
         }
 
         lineParent = new GameObject();

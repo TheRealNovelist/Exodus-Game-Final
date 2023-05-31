@@ -64,7 +64,7 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
     {
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        //timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void Damage(float amount, Transform source = null)

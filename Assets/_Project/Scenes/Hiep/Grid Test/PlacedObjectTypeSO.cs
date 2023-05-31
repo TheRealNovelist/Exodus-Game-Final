@@ -40,12 +40,15 @@ public class PlacedObjectTypeSO : ScriptableObject
 
     }
     public string nameString;
-    public Transform prefab;
+    public Turret prefab;
     public Transform visual;
-    public int width;
-    public int height;
     public int price = 10;
     public Sprite icon;
+    public int Damage = 10;
+    
+    [Header("Size")]
+    public int width;
+    public int height;
 
     public int GetRotationAngle(Dir dir)
     {

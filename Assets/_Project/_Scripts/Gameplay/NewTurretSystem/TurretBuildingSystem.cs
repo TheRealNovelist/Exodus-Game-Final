@@ -48,7 +48,7 @@ public class TurretBuildingSystem : MonoBehaviour
             visual = null;
         }
     }
-
+    
     private static void SetLayerRecursive(GameObject targetGameObject, int layer) {
         targetGameObject.layer = layer;
         foreach (Transform child in targetGameObject.transform) {
@@ -61,11 +61,15 @@ public class TurretBuildingSystem : MonoBehaviour
         if (placedObjectTypeSO != null) 
         {
             var newTurret = Instantiate(placedObjectTypeSO.prefab, slot.gameObject.transform.position, Quaternion.identity);
-            newTurret.parent = slot.transform;
-            newTurret.localPosition = Vector3.zero;
-            newTurret.localEulerAngles = Vector3.zero;
-            SetLayerRecursive(newTurret.gameObject, 7);
+            newTurret.gameObject.transform.parent = slot.transform;
+            newTurret.gameObject.transform.localPosition = Vector3.zero;
+            newTurret.gameObject.transform.localEulerAngles = Vector3.zero;
+            newTurret.Init(slot);
             
+            SetLayerRecursive(newTurret.gameObject, 7);
+            slot._holdingTurret = placedObjectTypeSO;
+            placedObjectTypeSO = null;
+
             Shop.ShopToggle?.Invoke(false); 
         }
     }

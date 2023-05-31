@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 public class Turret : MonoBehaviour, IDamageable
 {
@@ -55,12 +56,10 @@ public class Turret : MonoBehaviour, IDamageable
             {
                 waitingToShoot = false;
                 timer = 0;
-                
-                
-                
                 Shoot(dir);
             }
         }
+        
     }
 
     void Shoot(Vector3 direct)
@@ -119,15 +118,17 @@ public class Turret : MonoBehaviour, IDamageable
     public void Damage(float amount, Transform source = null)
     {
         currentHealth -= amount;
-
         if (currentHealth <= 0)
         {
+            _turretSlot._holdingTurret = null;
             Destroy(gameObject);
         }
     }
 
-    public void Damage(int amount)
+    private TurretSlot _turretSlot;
+
+    public void Init(TurretSlot slot)
     {
-        throw new System.NotImplementedException();
+        _turretSlot = slot;
     }
 }

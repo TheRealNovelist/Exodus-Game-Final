@@ -15,12 +15,14 @@ public class EquipSlot:MonoBehaviour
     {
         if (_item != null)
         {
+            _image.color += new Color(0,0,0,255);
             _image.sprite = _item.icon;
             nameTMP.text = _item.name;
         }
         else
         {
             _image.sprite = null;
+            _image.color -= new Color(0,0,0,255);
             nameTMP.text = "";
         }
 
@@ -29,5 +31,7 @@ public class EquipSlot:MonoBehaviour
     private void Start()
     {
         keyTMP.text = key.ToString();
+
+        UpdateSlotUI();
     }
 }

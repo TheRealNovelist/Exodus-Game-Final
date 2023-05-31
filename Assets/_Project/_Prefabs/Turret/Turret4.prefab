@@ -366,6 +366,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1559322455018746531}
   - component: {fileID: 6767849085698611289}
+  - component: {fileID: 2842880854334739255}
+  - component: {fileID: 8164270540826642484}
   m_Layer: 0
   m_Name: Turret4
   m_TagString: Untagged
@@ -401,3 +403,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c5ea24d64dff04087ed0f08e723799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2842880854334739255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559322455018746530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a0eb9665f110a488cd527decc177f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  turningSpeed: 5
+  weaponPart: {fileID: 1562158075402137326}
+  projectile: {fileID: 7287224368869956021, guid: 0169febd9a260894babcec62c605250c, type: 3}
+  shootPoint: {fileID: 1562158082038780902}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  audioManager: {fileID: 8164270540826642484}
+  duration: 3
+  fullHealth: 100
+--- !u!114 &8164270540826642484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559322455018746530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cf575ed31085546b72e1cd0f025da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  audioTable: {fileID: 0}

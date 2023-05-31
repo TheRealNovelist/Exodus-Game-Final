@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,5 +19,6 @@ public class NotificationText : MonoBehaviour
         yield return new WaitForSeconds(duration);
         notiTMP.text = "";
     }
+
 
 }

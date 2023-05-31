@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-   private PlacedObjectTypeSO _holdingTurret;
+   public PlacedObjectTypeSO _holdingTurret;
    public bool CanPlace => _holdingTurret == null;
 
    public void OnPointerEnter(PointerEventData eventData)
@@ -33,5 +33,6 @@ public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
       //Place gameobject
       TurretBuildingSystem.PlaceTurret(this);
+      
    }
 }
