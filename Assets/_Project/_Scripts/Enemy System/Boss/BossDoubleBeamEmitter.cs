@@ -13,6 +13,7 @@ public class BossDoubleBeamEmitter : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private int spinAttackTurns = 3;
     [SerializeField] private float spinRate = 1f;
+    [SerializeField] private float damage = 5f;
 
     float currentAngle = 0;
 
@@ -22,16 +23,16 @@ public class BossDoubleBeamEmitter : MonoBehaviour
         gameObject.SetActive(true);
     }
     
-    public bool SpinAttack()
+    public bool SpinAttack(bool isClockwise = true)
     {
         float totalAngle = spinAttackTurns * 360f;
         
         if (currentAngle < totalAngle)
         {
-            transform.Rotate(0, spinRate, 0);
+            transform.Rotate(0, isClockwise ? spinRate : -spinRate, 0);
 
-            leftWeapon.Attack();
-            rightWeapon.Attack();
+            leftWeapon.Attack(damage);
+            rightWeapon.Attack(damage);
 
             currentAngle += spinRate;
             return false;
