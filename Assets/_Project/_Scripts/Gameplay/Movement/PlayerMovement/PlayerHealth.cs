@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
 {
     [SerializeField] float maxHealth;
-    private float _playerHealth;
+    public float _playerHealth;
     
     private void Awake()
     {
