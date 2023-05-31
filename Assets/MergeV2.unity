@@ -2006,6 +2006,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9999995, y: 3.4156933, z: 1.3328514}
   m_Center: {x: -0.0000001937151, y: 1.7078466, z: 0.66642535}
+--- !u!198 &96959183 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198792769130808804, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+  m_PrefabInstance: {fileID: 312030204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &107826349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4461,10 +4466,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bing Chilling Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2614123734917537507, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614123734917537508, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: impacEffect
+      value: 
+      objectReference: {fileID: 100002, guid: 2f9348d6583cde14eb0d82bb9732647e, type: 3}
+    - target: {fileID: 2614123734917537508, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: muzzleFlash
+      value: 
+      objectReference: {fileID: 96959183}
     - target: {fileID: 2614123734917537510, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 256677238}
+    - target: {fileID: 2614123735032481815, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2614123735032481816, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: impacEffect
+      value: 
+      objectReference: {fileID: 100002, guid: 0b24f31f464fa614a84acdeac974ed6b, type: 3}
+    - target: {fileID: 2614123735032481816, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: muzzleFlash
+      value: 
+      objectReference: {fileID: 1198400128}
     - target: {fileID: 3056408821999278321, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -6233,6 +6262,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304992855}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &312030204
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 321071563}
+    m_Modifications:
+    - target: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_Name
+      value: VFX_M4 Muzzle Flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.6600018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
 --- !u!1001 &319727510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6464,6 +6550,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320489531}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &321071563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2614123734917537506, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+  m_PrefabInstance: {fileID: 256677234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &325097297
 GameObject:
   m_ObjectHideFlags: 0
@@ -16917,6 +17008,8 @@ MonoBehaviour:
       right: 1000
       top: 1000
       bottom: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
     ModLeft:
       ExponentialScale: 1
       SizeModifiers:
@@ -16944,6 +17037,8 @@ MonoBehaviour:
     OptimizedSize: 0
     MinSize: 0
     MaxSize: 300
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -21093,6 +21188,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197410179}
   m_CullTransparentMesh: 1
+--- !u!198 &1198400128 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198792769130808804, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+  m_PrefabInstance: {fileID: 1311683676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1201013014
 GameObject:
   m_ObjectHideFlags: 0
@@ -22633,6 +22733,63 @@ MonoBehaviour:
   width: 10
   height: 10
   baseCubePrefab: {fileID: 7327984615500375132, guid: f0d4f53e3ce97a84ead92986283f89cd, type: 3}
+--- !u!1001 &1311683676
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1416894867}
+    m_Modifications:
+    - target: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_Name
+      value: VFX_M4 Muzzle Flash (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639870034382688, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
 --- !u!1 &1318206267
 GameObject:
   m_ObjectHideFlags: 0
@@ -22868,6 +23025,8 @@ MonoBehaviour:
       right: 1000
       top: 1000
       bottom: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
     ModLeft:
       ExponentialScale: 1
       SizeModifiers:
@@ -22895,6 +23054,8 @@ MonoBehaviour:
     OptimizedSize: 0
     MinSize: 0
     MaxSize: 300
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
@@ -24902,6 +25063,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408644060}
   m_CullTransparentMesh: 1
+--- !u!4 &1416894867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2614123735032481814, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+  m_PrefabInstance: {fileID: 256677234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1422405003
 GameObject:
   m_ObjectHideFlags: 0
@@ -27447,6 +27613,8 @@ MonoBehaviour:
     OptimizedSize: {x: 1, y: 1}
     MinSize: {x: 0, y: 0}
     MaxSize: {x: 3, y: 3}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -29626,6 +29794,8 @@ MonoBehaviour:
     OptimizedSize: {x: 1, y: 1}
     MinSize: {x: 0, y: 0}
     MaxSize: {x: 3, y: 3}
+    UseMinSize: 0
+    UseMaxSize: 0
     ModX:
       ExponentialScale: 1
       SizeModifiers:
@@ -34701,6 +34871,8 @@ MonoBehaviour:
       right: 1000
       top: 1000
       bottom: 1000
+    UseMinSize: 0
+    UseMaxSize: 0
     ModLeft:
       ExponentialScale: 1
       SizeModifiers:
@@ -34728,6 +34900,8 @@ MonoBehaviour:
     OptimizedSize: 120.3
     MinSize: 0
     MaxSize: 300
+    UseMinSize: 0
+    UseMaxSize: 0
     Mod:
       ExponentialScale: 1
       SizeModifiers:
