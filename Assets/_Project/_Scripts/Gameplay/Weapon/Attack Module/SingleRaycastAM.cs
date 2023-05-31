@@ -7,9 +7,13 @@ namespace WeaponSystem
     public class SingleRaycastAM : AttackModule
     {
         public Camera fpsCam;
+        public ParticleSystem muzzleFlash;
+        public GameObject impacEffect;
 
         public override void StartAttack(Weapon weapon, bool consumeAmmo = true)
         {
+            //play partical effect
+            muzzleFlash.Play();
             ConsumeAmmo(weapon, consumeAmmo);
 
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit))
@@ -18,6 +22,7 @@ namespace WeaponSystem
                 {
                     hitObject.Damage(weapon.data.damage);
                 }
+                Instantiate(impacEffect, hit.point, Quaternion.LookRotation(hit.normal));
             }
         }
     }

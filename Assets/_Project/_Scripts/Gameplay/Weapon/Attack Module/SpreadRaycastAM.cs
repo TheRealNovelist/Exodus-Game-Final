@@ -7,9 +7,13 @@ namespace WeaponSystem
     public class SpreadRaycastAM : AttackModule
     {
         public Camera fpsCam;
+        public ParticleSystem muzzleFlash;
+        public GameObject impacEffect;
 
         public override void StartAttack(Weapon weapon, bool consumeAmmo = true)
         {
+            //play partical effect 
+            muzzleFlash.Play();
             ConsumeAmmo(weapon, consumeAmmo);
 
             for (int i = 0; i < weapon.data.bulletPerShot; i++)
@@ -30,7 +34,7 @@ namespace WeaponSystem
                     {
                         hitObject.Damage(weapon.data.damage);
                     }
-                    
+                    Instantiate(impacEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     Debug.DrawLine(fpsCam.transform.position, hit.point, Color.green, 3f);
                 }
                 else
