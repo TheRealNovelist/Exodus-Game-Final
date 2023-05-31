@@ -15,6 +15,8 @@ namespace WeaponSystem
             //play partical effect 
             muzzleFlash.Play();
             ConsumeAmmo(weapon, consumeAmmo);
+            
+            List<GameObject> impactObjects = new List<GameObject>(); // List to store impact objects
 
             for (int i = 0; i < weapon.data.bulletPerShot; i++)
             {
@@ -28,13 +30,17 @@ namespace WeaponSystem
                 //change direction with the new spread angle 
                 direction += spread.normalized * Random.Range(0, 0.2f);
                 
+                Debug.Log("call");
                 if (Physics.Raycast(fpsCam.transform.position, direction, out RaycastHit hit))
                 {
                     if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
                     {
                         hitObject.Damage(weapon.data.damage);
                     }
-                    Instantiate(impacEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    // Instantiate impact effect at hit point
+                    GameObject impactObj = Instantiate(impacEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    
+                    impactObjects.Add(impactObj);
                     Debug.DrawLine(fpsCam.transform.position, hit.point, Color.green, 3f);
                 }
                 else
