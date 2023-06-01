@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace WeaponSystem
 {
@@ -10,12 +12,16 @@ namespace WeaponSystem
         public ParticleSystem muzzleFlash;
         public GameObject impacEffect;
 
+
         public override void StartAttack(Weapon weapon, bool consumeAmmo = true)
         {
+
             //play partical effect 
             muzzleFlash.Play();
+
             ConsumeAmmo(weapon, consumeAmmo);
-            
+
+
             List<GameObject> impactObjects = new List<GameObject>(); // List to store impact objects
 
             for (int i = 0; i < weapon.data.bulletPerShot; i++)
@@ -30,7 +36,8 @@ namespace WeaponSystem
                 //change direction with the new spread angle 
                 direction += spread.normalized * Random.Range(0, 0.2f);
                 
-                Debug.Log("call");
+                Debug.Log("call 1");
+
                 if (Physics.Raycast(fpsCam.transform.position, direction, out RaycastHit hit))
                 {
                     if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
