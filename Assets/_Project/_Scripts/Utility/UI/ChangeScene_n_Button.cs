@@ -25,6 +25,15 @@ public class ChangeScene_n_Button : MonoBehaviour
             pauseMenued = true;
             Time.timeScale = 0f;
         }
+
+        else if (Input.GetKeyDown(KeyCode.P) && pauseMenued)
+        {
+            pauseMenu.gameObject.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            pauseMenued = false;
+            Time.timeScale = 1f;
+        }
     }
 
     public void ContinueGame()

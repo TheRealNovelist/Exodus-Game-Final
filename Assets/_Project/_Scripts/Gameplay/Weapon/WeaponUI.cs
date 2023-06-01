@@ -70,7 +70,7 @@ public class WeaponUI : MonoBehaviour
 
     private void UpdateAmmoText(int ammo) => ammoText.text = " " + ammo;
     
-    private void UpdateAmmoPoolText(int ammo) => ammoPoolText.text = " " + ammo;
+    private void UpdateAmmoPoolText(int ammo) => ammoPoolText.text = "/" + ammo;
 
     private void UpdateStartReloadText()
     {
