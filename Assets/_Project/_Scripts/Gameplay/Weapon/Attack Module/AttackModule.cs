@@ -21,6 +21,7 @@ namespace WeaponSystem
             if (consumeAmmo)
                 if (!weapon.TryConsumeAmmo())
                 {
+                    Debug.Log("tried");
                     StopAttack();
                 }
                 
