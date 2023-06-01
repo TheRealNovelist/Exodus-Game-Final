@@ -47,4 +47,9 @@ public class ChangeScene_n_Button : MonoBehaviour
         SceneManager.LoadScene(name);
         Time.timeScale = 1f;
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
