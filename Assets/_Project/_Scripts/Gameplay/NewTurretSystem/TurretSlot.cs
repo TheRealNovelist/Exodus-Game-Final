@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,7 +8,6 @@ public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
    public void OnPointerEnter(PointerEventData eventData)
    {
-      Debug.Log("Pointer entered");
       if(!CanPlace) {return;}
       //Show preview
       TurretBuildingSystem.SetPreviewVisual(this);
@@ -33,6 +28,5 @@ public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
       //Place gameobject
       TurretBuildingSystem.PlaceTurret(this);
-      
    }
 }
