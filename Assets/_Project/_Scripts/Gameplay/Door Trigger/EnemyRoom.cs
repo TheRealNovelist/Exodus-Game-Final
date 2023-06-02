@@ -50,7 +50,6 @@ public class EnemyRoom : MonoBehaviour
       if (other.gameObject.CompareTag("Player") && !enemySpawner.FinishedSpawning)
       {
           LockRoom?.Invoke();
-          Debug.Log(gameObject.name);
       }  
    }
 

@@ -44,7 +44,6 @@ public class PlacedObjectTypeSO : ScriptableObject
     public Transform visual;
     public int price = 10;
     public Sprite icon;
-    public int Damage = 10;
     
     [Header("Size")]
     public int width;

@@ -6,28 +6,41 @@ using UnityEngine;
 public class TurretProjectile : MonoBehaviour
 {
     private Vector3 shootDirect;
-    public float speed = 10f;
-
-    public void SetDirect(Vector3 direct)
-    {
-        this.shootDirect = direct;
-    }
+    private int _damage = 10;
+    
     
     // Update is called once per frame
     void Update()
     {
-        ShootDirect(shootDirect,speed);
+       // ShootDirect(shootDirect);
     }
 
-    public void ShootDirect(Vector3 direct, float speed = 10f)
+    public void ShootDirect(Vector3 direct)
     {
-        transform.position += direct * speed * Time.deltaTime;
+        transform.position += direct * 100 * Time.deltaTime;
+    }
+
+    public void Init(Vector3 direct,int damage)
+    {
+        _damage = damage;
+        this.shootDirect = direct;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("in");
+
+            if (collision.gameObject.TryGetComponent(out IDamageable idamageable))
+            {
+                Debug.Log("damage");
+
+                idamageable.Damage(_damage);
+            }
         }
+        
+        
+        Destroy(gameObject);
     }
 }

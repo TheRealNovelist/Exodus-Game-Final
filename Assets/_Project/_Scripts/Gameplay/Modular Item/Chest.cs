@@ -48,7 +48,7 @@ private bool isOpen = false;
         OpenAnimation();
         
         //Play sound
-        audioManager.PlayOneShot("ChestOpen");
+       // audioManager?.PlayOneShot("ChestOpen");
         StartCoroutine(WaitToGenerateIte());
     }
 
@@ -93,9 +93,10 @@ private bool isOpen = false;
     private void Harvest(Item item)
     {
         //Play sound
-        audioManager.PlayOneShot("ChestHarvest");
+        audioManager?.PlayOneShot("ChestHarvest");
         harvested = true;
         Inventory.Instance.AddItem(item);
+        itemHolder.gameObject.SetActive(false);
     }
 
     private Item GetRandomItem()
@@ -106,6 +107,7 @@ private bool isOpen = false;
     public void OpenAnimation()
     {
         _chestAnimator.SetTrigger("openTrigger");
+        itemHolder.gameObject.SetActive(true);
         _chestAnimator.SetBool("isOpen", true);
     }
 

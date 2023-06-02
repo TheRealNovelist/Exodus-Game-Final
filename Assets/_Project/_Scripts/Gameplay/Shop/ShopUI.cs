@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class ShopUI : MonoBehaviour
 {
-    private Shop _shop;
+    public Shop _shop;
     public GameObject shopPanel;
     private List<PlacedObjectTypeSO> _allItems => _shop.AllItems;
    [SerializeField] private List<ShopButton> _shopButtons = new List<ShopButton>();
 
-    public void Init(Shop shop)
-    {
-        _shop = shop;
-    }
-
-    public void DefenderPurchased(ShopButton button)
+   public void DefenderPurchased(ShopButton button)
     {
         _shop.PurchasedItem?.Invoke(button.Item);
     }

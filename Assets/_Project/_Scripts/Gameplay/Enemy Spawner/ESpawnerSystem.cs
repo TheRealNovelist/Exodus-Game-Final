@@ -83,10 +83,9 @@ public class ESpawnerSystem : BaseAI
     private void SpawnedEnemy()
     {
         spawned++;
-            
+
         if (spawned >= totalToSpawn)
         {
-//            Debug.Log($"Spawned {spawned}/{totalToSpawn}");
             _stateMachine.Stop();
             FinishedSpawning = true;
         }

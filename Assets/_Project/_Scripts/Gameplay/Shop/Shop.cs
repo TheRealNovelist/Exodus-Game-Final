@@ -63,11 +63,7 @@ public class Shop : MonoBehaviour
         ShopToggle -= ToggleCamera;
         ShopToggle -= shopUI.ToggleShopPanel;
     }
-
-    private void Awake()
-    {
-        shopUI.Init(this);
-    }
+    
 
     private void CoinPurchased(PlacedObjectTypeSO item)
     {

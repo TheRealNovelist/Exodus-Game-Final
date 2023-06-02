@@ -43,6 +43,8 @@ public class CoinManager : Singleton<CoinManager>
     {
         CoinAmount += amount;
         moneyAmountText.SetText( _coinAmount.ToString());
+        
+        //Play Audio gain coin
     }
 
     private void Start()

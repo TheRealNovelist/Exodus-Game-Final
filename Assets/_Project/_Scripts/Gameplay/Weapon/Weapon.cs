@@ -19,6 +19,7 @@ namespace WeaponSystem
         [SerializeField] private WeaponDataInjector dataInjector;
         [SerializeField] private AttackModule defaultAttackModule;
         [SerializeField] private AudioManager audioManager;
+        public Animator _animator;
 
         private AttackModule _primaryAttack;
         private AttackModule _secondaryAttack;
@@ -69,6 +70,8 @@ namespace WeaponSystem
             CurrentAmmo = data.magazineSize;
 
             _primaryAttack = defaultAttackModule;
+            
+            _animator?.SetTrigger("Switch");
         }
 
         public void StartAttack(WeaponMode mode)
@@ -79,6 +82,7 @@ namespace WeaponSystem
                 return; 
             }
 
+            _animator?.SetTrigger("Shoot");
             switch (mode)
             {
                 case WeaponMode.Primary:
@@ -171,6 +175,7 @@ namespace WeaponSystem
         {
             if (CurrentAmmo == data.magazineSize || !_weaponHandler.CanReload()) return;
             audioManager.PlayOneShot("Reloads");
+            _animator?.SetTrigger("Reload");
             
             StopAllAttack();
             

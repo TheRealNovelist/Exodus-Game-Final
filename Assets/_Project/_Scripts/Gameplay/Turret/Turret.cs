@@ -1,18 +1,24 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 public class Turret : MonoBehaviour, IDamageable
 {
     [SerializeField] private float range = 5f;
     [SerializeField] private float turningSpeed = 5f;
+     [FormerlySerializedAs("ShootGap")] [SerializeField] private float shootGap = 3f;
+     [SerializeField] private float scanGap = 3f;
+     [SerializeField] private int damage = 10;
 
     [SerializeField] private Transform weaponPart;
     [SerializeField] private TurretProjectile projectile;
-    [SerializeField] private Transform shootPoint;
+    [SerializeField] private List<Transform> shootPoint = new List<Transform>();
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private AudioManager audioManager;
+    
     private Transform target;
     private float timer = 0;
-    [SerializeField] private float duration = 3f;
     private bool waitingToShoot = false;
     
     private GameObject nearestEnemy = null;
@@ -23,7 +29,7 @@ public class Turret : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        InvokeRepeating(nameof(UpdateTarget),0f,0.5f);
+        InvokeRepeating(nameof(UpdateTarget),0f,scanGap);
         currentHealth = fullHealth;
     }
     
@@ -32,13 +38,14 @@ public class Turret : MonoBehaviour, IDamageable
     void Update()
     {
         //if there is no target
-        if (target == null)
+        if (target == null )
         {
             //turret rotates to orginal rotation
             if(weaponPart.rotation == Quaternion.identity) {return;}
+            
             RotateYTo(weaponPart, Quaternion.identity, turningSpeed);
             return;
-        } ;
+        } 
         
         //rotate to target
         Vector3 dir = (target.position - transform.position).normalized;
@@ -47,8 +54,7 @@ public class Turret : MonoBehaviour, IDamageable
 
         if (waitingToShoot)
         {
-
-            if (timer < duration)
+            if (timer < shootGap)
             {
                 timer += Time.deltaTime;
             }
@@ -64,13 +70,16 @@ public class Turret : MonoBehaviour, IDamageable
 
     void Shoot(Vector3 direct)
     {
-        TurretProjectile newOb = Instantiate(projectile, shootPoint.position,Quaternion.identity);
-       // newOb.GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
-
-        newOb.SetDirect(direct);
+        foreach (Transform point in shootPoint)
+        {
+            TurretProjectile newOb = Instantiate(projectile, point.position,Quaternion.identity);
+            newOb.GetComponent<Rigidbody>().AddForce(point.forward * 100, ForceMode.Impulse);
+            newOb.Init(direct,damage);
+        }
+     
         //Play sound
-        audioManager.PlayOneShot("TurretShoot");
         waitingToShoot = true;
+        // audioManager?.PlayOneShot("TurretShoot");
     }
     
     private void RotateYTo(Transform rotateObj,Quaternion angle, float speed)
@@ -83,7 +92,7 @@ public class Turret : MonoBehaviour, IDamageable
     {
         Collider[] enemyInRange = Physics.OverlapSphere(transform.position, range,enemyMask);
         float shortestDist = Mathf.Infinity;
-        
+
         foreach (var enemy in enemyInRange)
         {
             float distToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -120,7 +129,7 @@ public class Turret : MonoBehaviour, IDamageable
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-            _turretSlot._holdingTurret = null;
+         if(_turretSlot)   _turretSlot._holdingTurret = null;
             Destroy(gameObject);
         }
     }
