@@ -11,7 +11,6 @@ public class BossGunner : MonoBehaviour
     
     public void OnDeath()
     {
-        
         gameObject.SetActive(false);
     }
 }
