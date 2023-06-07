@@ -142,6 +142,8 @@ namespace WeaponSystem
 
         private void ChangeWeapon(int index, bool forceChange = false)
         {
+
+
             if (index == currentIndex && !forceChange) return;
             if (index > Inventory.Instance.EquippedGunsQuantity()-1)  return;
 
@@ -149,6 +151,7 @@ namespace WeaponSystem
             if (_currentWeapon != null)
             {
                 _currentWeapon.Unequip();
+                _currentWeapon._animator?.SetTrigger("Unequip");
                 _currentWeapon = null;
             }
 
@@ -171,6 +174,7 @@ namespace WeaponSystem
                     weapon.gameObject.SetActive(true);
                     _currentWeapon = weapon.GetComponent<Weapon>();
                     _currentWeapon.Equip(this);
+                    _currentWeapon._animator?.SetTrigger("Equip");
                     OnSwitchingWeapon?.Invoke(_currentWeapon);
                     currentIndex = i;
                 }
