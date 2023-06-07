@@ -48,7 +48,7 @@ private bool isOpen = false;
         OpenAnimation();
         
         //Play sound
-       // audioManager?.PlayOneShot("ChestOpen");
+        audioManager?.PlayOneShot("ChestOpen");
         StartCoroutine(WaitToGenerateIte());
     }
 
