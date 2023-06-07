@@ -59,6 +59,8 @@ namespace EnemySystem
         {
             if (_spawner) _spawner.EnemyDefeated?.Invoke();
             CoinManager.Instance.GainCoin(reward);
+            //Audio
+            
             Destroy(gameObject);
         }
         

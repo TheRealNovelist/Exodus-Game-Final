@@ -81,7 +81,8 @@ namespace WeaponSystem
                 audioManager.PlayOneShot("EmptyGunClicks");
                 return; 
             }
-
+            
+            
             _animator?.SetTrigger("Shoot");
             switch (mode)
             {
@@ -207,6 +208,7 @@ namespace WeaponSystem
 
         public void Equip(WeaponHandler weaponHandler)
         {
+            audioManager.PlayOneShot("ChangeGunSound");
             _weaponHandler = weaponHandler;
             StartCoroutine(_equipRoutine);
         }
