@@ -12,7 +12,7 @@ namespace EnemySystem
         [SerializeField] private Transform player;
         [SerializeField] private bool switchOnAggression;
         [HideInInspector] public Transform target;
-
+        [SerializeField] private AudioManager audioManager;
         [SerializeField] private int reward = 20;
         
         private float health;
@@ -60,7 +60,7 @@ namespace EnemySystem
             if (_spawner) _spawner.EnemyDefeated?.Invoke();
             CoinManager.Instance.GainCoin(reward);
             //Audio
-            
+            audioManager.PlayOneShot("EnemyCoinCollect");
             Destroy(gameObject);
         }
         
