@@ -34,8 +34,8 @@ namespace WeaponSystem
         public void Start()
         {
             AmmoPool = maxAmmo;
-           // ChangeWeapon(0, true);
-            if (Inventory.Instance != null) Inventory.Instance.OnGunEquipped += ReorderGunChildren;
+            ChangeWeapon(0, true);
+            //if (Inventory.Instance != null) Inventory.Instance.OnGunEquipped += ReorderGunChildren;
         }
         
         public void Init()
@@ -142,10 +142,8 @@ namespace WeaponSystem
 
         private void ChangeWeapon(int index, bool forceChange = false)
         {
-
-
             if (index == currentIndex && !forceChange) return;
-            if (index > Inventory.Instance.EquippedGunsQuantity()-1)  return;
+            //if (index > Inventory.Instance.EquippedGunsQuantity()-1)  return;
 
             //Unequip previous weapon 
             if (_currentWeapon != null)

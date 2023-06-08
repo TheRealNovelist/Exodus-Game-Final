@@ -1,15 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Pillar : MonoBehaviour, IDamageable
 {
     [SerializeField] private float baseHealth = 100f;
+    [SerializeField] private BossProjectileShooter shooter;
+    [SerializeField] private float fireRate;
 
-    private float _currentHealth;
+    private Animator _animator => GetComponent<Animator>();
+    private TargetLocator _targetLocator => GetComponentInParent<TargetLocator>();
     
+    private float _currentHealth;
     private bool _isDamageable;
+    private float _nextTimeToFire;
     
     public void OnEnable()
     {
@@ -24,17 +30,34 @@ public class Pillar : MonoBehaviour, IDamageable
 
         if (_currentHealth <= 0)
         {
-            gameObject.SetActive(false);
+            DisablePillar();
         }
+    }
+
+    private void Update()
+    {
+        shooter.transform.LookAt(_targetLocator.Target.transform);
+        
+        if (!_isDamageable) return;
+        
+        if (!(Time.time >= _nextTimeToFire)) return;
+        _nextTimeToFire = Time.time + 1f / fireRate;
+        shooter.Attack();
     }
 
     public void StartDamageable()
     {
         _isDamageable = true;
     }
-    
-    private void OnDisable()
+
+    public void DisablePillar()
     {
-        
+        gameObject.SetActive(false);
+    }
+    
+    public void StartDisablePillar()
+    {
+        _isDamageable = false;
+        _animator.SetTrigger("Disable");
     }
 }
