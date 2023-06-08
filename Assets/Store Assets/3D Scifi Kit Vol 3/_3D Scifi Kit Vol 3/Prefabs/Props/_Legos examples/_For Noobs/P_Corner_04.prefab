@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 2180791444725498715}
   - component: {fileID: 5664610037365755820}
   - component: {fileID: 1143489637634780863}
-  - component: {fileID: 8961858331123772323}
   m_Layer: 0
   m_Name: Floor_Fence_02
   m_TagString: Untagged
@@ -223,20 +222,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8961858331123772323
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626235845024962758}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 3bf8cf5f55d294421a8c997ee8f75afc, type: 3}
 --- !u!1 &631968353887446049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,7 +1612,6 @@ GameObject:
   - component: {fileID: 8953662323309993435}
   - component: {fileID: 974635584674100658}
   - component: {fileID: 8296760507670943235}
-  - component: {fileID: 524583088500247861}
   m_Layer: 0
   m_Name: Wall_Fence_02
   m_TagString: Untagged
@@ -1701,19 +1685,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &524583088500247861
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4188239791820745719}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.44491437, y: 3.236779, z: 0.18140751}
-  m_Center: {x: 0.69764864, y: 2.080135, z: -0.0000012218952}
 --- !u!1 &4451601197702628916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,7 +1936,6 @@ GameObject:
   - component: {fileID: 7228348769595310706}
   - component: {fileID: 8700732773697462343}
   - component: {fileID: 1398201749937780441}
-  - component: {fileID: 7228868694921894162}
   m_Layer: 0
   m_Name: Floor_Border_Line_02
   m_TagString: Untagged
@@ -2039,19 +2009,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7228868694921894162
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4685345925035416934}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1.0000052, z: 2}
-  m_Center: {x: -0.99999976, y: -0.5000019, z: 1}
 --- !u!1 &4738980875677660372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3500,7 +3457,6 @@ GameObject:
   - component: {fileID: 6740654731753481736}
   - component: {fileID: 1862720313469751192}
   - component: {fileID: 693623431882084684}
-  - component: {fileID: 5586653302907595187}
   m_Layer: 0
   m_Name: Wall_Fence_02
   m_TagString: Untagged
@@ -3574,19 +3530,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5586653302907595187
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7441421421822662292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.44491437, y: 3.236779, z: 0.18140751}
-  m_Center: {x: 0.69764864, y: 2.080135, z: -0.0000012218952}
 --- !u!1 &7543764751885463637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4000,7 +3943,6 @@ GameObject:
   - component: {fileID: 3476846860129165199}
   - component: {fileID: 6215968348202163073}
   - component: {fileID: 4663097145891621787}
-  - component: {fileID: 3240780467086537703}
   m_Layer: 0
   m_Name: Floor_Border_Line_01
   m_TagString: Untagged
@@ -4074,19 +4016,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3240780467086537703
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8452970839755317900}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1.0000052, z: 6}
-  m_Center: {x: -0.99999976, y: -0.5000019, z: 3}
 --- !u!1 &8527279888029531239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4327,7 +4256,6 @@ GameObject:
   - component: {fileID: 5205492914355371683}
   - component: {fileID: 4407565754050572642}
   - component: {fileID: 6000250423434921173}
-  - component: {fileID: 5185102948123251029}
   m_Layer: 0
   m_Name: Floor_Border_Line_02
   m_TagString: Untagged
@@ -4401,19 +4329,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5185102948123251029
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8759948849959332590}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1.0000052, z: 2}
-  m_Center: {x: -0.99999976, y: -0.5000019, z: 1}
 --- !u!1 &8801347406740845845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4599,7 +4514,6 @@ GameObject:
   - component: {fileID: 7274986100119533715}
   - component: {fileID: 3896119421045106981}
   - component: {fileID: 5066820851973446913}
-  - component: {fileID: 476571491762856712}
   m_Layer: 0
   m_Name: Floor_Fence_02
   m_TagString: Untagged
@@ -4673,17 +4587,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &476571491762856712
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9214716970515939957}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 3bf8cf5f55d294421a8c997ee8f75afc, type: 3}

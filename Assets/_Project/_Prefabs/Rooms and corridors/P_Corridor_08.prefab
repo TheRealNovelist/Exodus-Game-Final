@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1584896393839256, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_Name
-      value: Corridor_2
+      value: P_Corridor_08
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_RootOrder
@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.018411636
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0000009536743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4315836654555184, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -55,55 +55,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65872875568356802, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
+    - {fileID: 65665057352986074, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
+    - {fileID: 7689876233825138003, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
+    - {fileID: 65552615339296678, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
+    - {fileID: 64072516029067760, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
+    - {fileID: 65837096096246532, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
---- !u!1 &8169894787693795937 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1874047034579180, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
-  m_PrefabInstance: {fileID: 8171751190976266893}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7441342872025118073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8169894787693795937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
---- !u!1 &8170040693470707699 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1746921136504190, guid: f13677f7d0a95464097e3acc6cbb31a5, type: 3}
-  m_PrefabInstance: {fileID: 8171751190976266893}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4934763091907362442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8170040693470707699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
