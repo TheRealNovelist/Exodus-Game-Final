@@ -16,7 +16,7 @@ namespace EnemySystem
         [SerializeField] private int reward = 20;
         
         private float health;
-        private ESpawnerSystem _spawner;
+        private EnemySpawnerSystem _spawner;
         public Animator EnemyAnimator;
 
         protected override void Awake()
@@ -65,7 +65,7 @@ namespace EnemySystem
         }
         
 
-        public void BindSpawner(ESpawnerSystem spawner)
+        public void BindSpawner(EnemySpawnerSystem spawner)
         {
             _spawner = spawner;
         }

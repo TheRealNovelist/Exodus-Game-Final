@@ -28,7 +28,7 @@ public class MainRoomUI : MonoBehaviour
         waveWarning.GetComponent<Image>().enabled = show;
     }
 
-    public void UpdateWaveStats(ESpawnerSystem spawnerSystem)
+    public void UpdateWaveStats(EnemySpawnerSystem spawnerSystem)
     {
         waveStatText.text = $"{spawnerSystem.Spawned}/{spawnerSystem.TotalToSpawn}";
     }

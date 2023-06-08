@@ -40,7 +40,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            backGroundMusic.PlayBackBroundMusic(toggle);
+            if(backGroundMusic) backGroundMusic.PlayBackBroundMusic(toggle);
             audioManager.PlayOneShot("TingOuts");
         }
     }

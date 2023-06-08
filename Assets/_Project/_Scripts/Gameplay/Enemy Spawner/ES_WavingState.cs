@@ -13,9 +13,9 @@ public class ES_WavingState : IState
 
     private int _spawned = 0;
 
-    private ESpawnerSystem _spawnerSystem;
+    private EnemySpawnerSystem _spawnerSystem;
     
-    public ES_WavingState(ESpawnerSystem spawnerSystem)
+    public ES_WavingState(EnemySpawnerSystem spawnerSystem)
     {
         _totalInWave = spawnerSystem.AmountInWave;
         currentTimer = _gap = spawnerSystem.SpawnGap;

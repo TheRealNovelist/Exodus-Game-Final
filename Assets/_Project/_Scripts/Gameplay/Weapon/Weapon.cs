@@ -71,7 +71,7 @@ namespace WeaponSystem
 
             _primaryAttack = defaultAttackModule;
             
-            _animator?.SetTrigger("Switch");
+           // _animator?.SetTrigger("Switch");
         }
 
         public void StartAttack(WeaponMode mode)

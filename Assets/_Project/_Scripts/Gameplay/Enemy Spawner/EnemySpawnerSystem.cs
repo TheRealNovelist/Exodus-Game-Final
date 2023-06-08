@@ -6,7 +6,7 @@ using System;
 using Unity.VisualScripting;
 
 
-public class ESpawnerSystem : BaseAI
+public class EnemySpawnerSystem : BaseAI
 {
     [SerializeField] private Transform _player;
     public Transform Player => _player;

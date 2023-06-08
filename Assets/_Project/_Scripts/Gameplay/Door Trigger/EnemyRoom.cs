@@ -11,7 +11,7 @@ public class EnemyRoom : MonoBehaviour
 {
     [Header("Lock Conditions")]
    [SerializeField] private List<DoorDoubleSlide> doors;
-   public ESpawnerSystem enemySpawner;
+   public EnemySpawnerSystem enemySpawner;
    [HideInInspector] public bool roomLocked = false;
    public Action LockRoom,UnlockRoom;
 

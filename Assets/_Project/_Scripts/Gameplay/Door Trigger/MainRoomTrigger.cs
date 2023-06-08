@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MainRoomTrigger : MonoBehaviour
 {
-    [SerializeField] private ESpawnerSystem _spawnerSystem;
+    [SerializeField] private EnemySpawnerSystem _spawnerSystem;
     [SerializeField] private MainRoomUI _mainRoomUI;
 
     public Action<bool> PlayerInMainRoom;
