@@ -8,7 +8,7 @@ public class BossProjectileShooter : MonoBehaviour
     public Transform spawnPosition;
     public float speed;
     public float damage;
-    
+
     public void Attack()
     {
         var bullet = Instantiate(bulletPrefab, spawnPosition.transform.position, spawnPosition.transform.rotation);
