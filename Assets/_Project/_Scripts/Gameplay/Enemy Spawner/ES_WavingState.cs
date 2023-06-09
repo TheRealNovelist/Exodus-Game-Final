@@ -14,6 +14,8 @@ public class ES_WavingState : IState
     private int _spawned = 0;
 
     private EnemySpawnerSystem _spawnerSystem;
+
+    private bool countingdown = true;
     
     public ES_WavingState(EnemySpawnerSystem spawnerSystem)
     {
@@ -27,6 +29,7 @@ public class ES_WavingState : IState
     // Update is called once per frame
     public void Update()
     {
+        if(!countingdown) {return;}
         if (currentTimer <= 0)
         {
             SpawnEnemy();
@@ -45,10 +48,15 @@ public class ES_WavingState : IState
     {
         _spawned = 0;
         currentTimer = _gap ;
+        countingdown = true;
+        RespawnPlayer.OnPlayerStartRespawn += (() => { countingdown = false;});
+        RespawnPlayer.OnPlayerFinishedRespawn += (() => { countingdown = true;});
     }
 
     public void OnExit()
     {
+        RespawnPlayer.OnPlayerStartRespawn -= (() => { countingdown = false;});
+        RespawnPlayer.OnPlayerFinishedRespawn -= (() => { countingdown = true;});
     }
     
     private void SpawnEnemy()
@@ -62,7 +70,7 @@ public class ES_WavingState : IState
         enemyObj.StartStateMachine();
         enemyObj.BindSpawner(_spawnerSystem);
 
-        _spawnerSystem.EnemySpawned?.Invoke();
+        _spawnerSystem.EnemySpawned?.Invoke(enemyObj);
         _spawned++;
     }
 

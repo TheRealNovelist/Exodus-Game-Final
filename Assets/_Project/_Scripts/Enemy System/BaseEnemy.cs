@@ -57,7 +57,7 @@ namespace EnemySystem
 
         public virtual void Die()   
         {
-            if (_spawner) _spawner.EnemyDefeated?.Invoke();
+            if (_spawner) _spawner.EnemyDefeated?.Invoke(this);
             CoinManager.Instance.GainCoin(reward);
             //Audio
             audioManager.PlayOneShot("EnemyCoinCollect");
@@ -72,8 +72,8 @@ namespace EnemySystem
 
         private void Start()
         {
-            RespawnPlayer.OnPlayerStartRespawn += PauseStateMachine;
-            RespawnPlayer.OnPlayerFinishedRespawn += ContinueStateMachine;
+          //  RespawnPlayer.OnPlayerStartRespawn += PauseStateMachine;
+          //  RespawnPlayer.OnPlayerFinishedRespawn += ContinueStateMachine;
         }
 
         protected override void OnDisable()
@@ -82,8 +82,8 @@ namespace EnemySystem
             
             EnemyAnimator.SetTrigger("Disable");
             
-            RespawnPlayer.OnPlayerStartRespawn -= PauseStateMachine;
-            RespawnPlayer.OnPlayerFinishedRespawn -= ContinueStateMachine;
+          //  RespawnPlayer.OnPlayerStartRespawn -= PauseStateMachine;
+          //  RespawnPlayer.OnPlayerFinishedRespawn -= ContinueStateMachine;
         }
 
         private void PauseStateMachine() => _stateMachine.Pause(true);

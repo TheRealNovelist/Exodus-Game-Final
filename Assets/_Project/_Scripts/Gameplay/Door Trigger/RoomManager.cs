@@ -7,7 +7,7 @@ public class RoomManager : MonoBehaviour
 {
     private void Start()
     {
-      var allRooms =   FindObjectsOfType<Room>();
+      var allRooms =   FindObjectsOfType<RoomVisibility>();
 
       
     }

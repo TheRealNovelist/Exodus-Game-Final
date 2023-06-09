@@ -30,7 +30,7 @@ public class MainRoomUI : MonoBehaviour
 
     public void UpdateWaveStats(EnemySpawnerSystem spawnerSystem)
     {
-        waveStatText.text = $"{spawnerSystem.Spawned}/{spawnerSystem.TotalToSpawn}";
+        waveStatText.text = $"{spawnerSystem.Spawned}/{spawnerSystem.AmountInWave}";
     }
     
     public void UpdateWaveStats()

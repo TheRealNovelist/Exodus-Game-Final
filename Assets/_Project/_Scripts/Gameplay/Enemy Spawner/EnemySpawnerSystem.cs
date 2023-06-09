@@ -25,13 +25,16 @@ public class EnemySpawnerSystem : BaseAI
     public int Spawned => spawned;
     private int spawned =0;
     private int defeated = 0;
-    private EnemyRoom _enemyRoom;
+    private Room room;
     
     [SerializeField]  private float waveCountDownTime =10;
 
+    public List<BaseEnemy> EnemiesInRoom = new List<BaseEnemy>();
+
     public bool FinishedSpawning { get; private set; }
 
-    public Action EnemySpawned, EnemyDefeated;
+    public Action<BaseEnemy> EnemySpawned, EnemyDefeated;
+
 
     protected override void Awake()
     {
@@ -68,8 +71,16 @@ public class EnemySpawnerSystem : BaseAI
     {
         EnemySpawned += SpawnedEnemy;
         EnemyDefeated += DefeatedEnemy;
-        
-        if(_enemyRoom)_enemyRoom.LockRoom+= Activate;
+
+        if (room)
+        {
+            EnemyRoom enemyRoom = room as EnemyRoom;
+
+            if (enemyRoom)
+            {
+                enemyRoom.LockRoom+= Activate;
+            }
+        }
     }
 
     protected override void OnDisable()
@@ -80,7 +91,7 @@ public class EnemySpawnerSystem : BaseAI
         EnemyDefeated -= DefeatedEnemy;
     }
 
-    private void SpawnedEnemy()
+    private void SpawnedEnemy(BaseEnemy enemy)
     {
         spawned++;
 
@@ -89,24 +100,50 @@ public class EnemySpawnerSystem : BaseAI
             _stateMachine.Stop();
             FinishedSpawning = true;
         }
+        
+        EnemiesInRoom.Add(enemy);
     }
 
-    private void DefeatedEnemy()
+    private void DefeatedEnemy(BaseEnemy enemy)
     {
         defeated++;
 
         //Defeated all
-        if (defeated >= totalToSpawn && _enemyRoom)
+        if (defeated >= totalToSpawn && room)
         {
-            _enemyRoom.UnlockRoom?.Invoke();
+            EnemyRoom enemyRoom = room as EnemyRoom;
+
+            if (enemyRoom)
+            {
+                enemyRoom.UnlockRoom?.Invoke();
+            }
         }
+        
+        EnemiesInRoom.Remove(enemy);
+
     }
 
-    public void Init(EnemyRoom enemyRoom)
+    public void Init(Room room)
     {
-        _enemyRoom = enemyRoom;
+        this.room = room;
     }
 
     public bool IsWaving() => _stateMachine.GetCurrentState() is ES_WavingState;
+
+    public void DisableAllEnemiesInRoom()
+    {
+        foreach (BaseEnemy enemy in EnemiesInRoom)
+        {
+            enemy.gameObject.SetActive(false);
+        }
+    }
+
+    public void EnableAllEnemiesInRoom()
+    {
+        foreach (BaseEnemy enemy in EnemiesInRoom)
+        {
+            enemy.gameObject.SetActive(true);
+        }
+    }
 
 }

@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainRoomTrigger : MonoBehaviour
+public class MainRoom : Room
 {
-    [SerializeField] private EnemySpawnerSystem _spawnerSystem;
     [SerializeField] private MainRoomUI _mainRoomUI;
 
     public Action<bool> PlayerInMainRoom;
@@ -21,7 +20,7 @@ public class MainRoomTrigger : MonoBehaviour
             if (value)
             {
                 _mainRoomUI.WarningActivate(true);
-                _mainRoomUI.UpdateWaveStats(_spawnerSystem);
+                _mainRoomUI.UpdateWaveStats(EnemySpawner);
             }
             else
             {
@@ -35,7 +34,10 @@ public class MainRoomTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            PlayerCurrentAt = EnemySpawner;
+
             PlayerInMainRoom?.Invoke(true);
+
         }
     }
 
@@ -53,10 +55,10 @@ public class MainRoomTrigger : MonoBehaviour
         _mainRoomUI.ToggleWarning(!inRoom);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         PlayerInMainRoom += PlayerInRoom;
-        
        PlayerInMainRoom?.Invoke(false);
     }
 
@@ -67,6 +69,6 @@ public class MainRoomTrigger : MonoBehaviour
 
     private void Update()
     {
-        Waving = _spawnerSystem.IsWaving();
+        Waving = EnemySpawner.IsWaving();
     }
 }

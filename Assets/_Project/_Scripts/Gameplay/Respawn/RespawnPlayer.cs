@@ -14,6 +14,7 @@ public class RespawnPlayer : MonoBehaviour
     [Header("References")] [SerializeField]
     Transform spawnPoint;
 
+    public EnemySpawnerSystem StartRoom;
     [SerializeField] CanvasGroup deadScreenUI;
 
     [Header("StartRespawn setting")] [SerializeField]
@@ -29,6 +30,8 @@ public class RespawnPlayer : MonoBehaviour
 
     [SerializeField] private KinematicCharacterMotor motor;
 
+    [SerializeField] private Transform player;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,17 +41,8 @@ public class RespawnPlayer : MonoBehaviour
         OnPlayerFinishedRespawn += FinsihedRespawn;
         OnPlayerStartRespawn += StartRespawn;
 
-        if (!gameObject.CompareTag("Player"))
-        {
-            Debug.Log($"Respawn Player must be added to Player Character game object");
-        }
     }
 
-    private void SetPlayerPosition(Vector3 pos)
-    {
-        transform.parent.transform.position = pos;
-
-    }
 
     public void fadeInUI()
     {
@@ -67,15 +61,16 @@ public class RespawnPlayer : MonoBehaviour
     public void StartRespawn()
     {
         fadeInUI(); //call fadeOutUI() to set fade out to true
-        motor.enabled = false;
+        PlayerInputManager.Input.Disable();
 
         StartCoroutine(RespawnDelay()); //start couroutine for a dynamic respawn mechanic
     }
 
     private void FinsihedRespawn()
     {
-        SetPlayerPosition(spawnPoint.position);
-        
+        motor.SetPosition(spawnPoint.position);
+        PlayerInputManager.Input.Enable();
+
         // InverseTransformPoint equivalent:
         fadeOutUI();
     }

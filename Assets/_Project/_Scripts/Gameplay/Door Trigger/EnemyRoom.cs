@@ -1,68 +1,66 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using EnemySystem;
 using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
 /// Used in enemy spawner rooms
 /// </summary>
-public class EnemyRoom : MonoBehaviour
+public class EnemyRoom : Room
 {
-    [Header("Lock Conditions")]
-   [SerializeField] private List<DoorDoubleSlide> doors;
-   public EnemySpawnerSystem enemySpawner;
-   [HideInInspector] public bool roomLocked = false;
-   public Action LockRoom,UnlockRoom;
+    [Header("Lock Conditions")] [SerializeField]
+    private List<DoorDoubleSlide> doors;
 
-   private void Awake()
-   {
-       if (doors == null || doors.Count == 0)
-       {
-           return;
-       }
-       foreach (var door in doors)
-       {
-           door.Init(this);
-       }
-   }
+    [HideInInspector] public bool roomLocked = false;
+    public Action LockRoom, UnlockRoom;
 
-   private void Start()
-   {
-       enemySpawner.Init(this);
+    private void Awake()
+    {
+        if (doors == null || doors.Count == 0)
+        {
+            return;
+        }
 
-       roomLocked = false;
+        foreach (var door in doors)
+        {
+            door.Init(this);
+        }
+    }
 
-       LockRoom += LockDoors;
-       UnlockRoom += UnlockDoors;
-       
-   }
+    protected override void Start()
+    {
+        base.Start();
+        roomLocked = false;
 
-   private void OnDisable()
-   {
-       LockRoom -= LockDoors;
-       UnlockRoom -= UnlockDoors;
+        LockRoom += LockDoors;
+        UnlockRoom += UnlockDoors;
+    }
 
-   }
+    private void OnDisable()
+    {
+        LockRoom -= LockDoors;
+        UnlockRoom -= UnlockDoors;
+    }
 
-   private void OnTriggerEnter(Collider other)
-   {
-      if (other.gameObject.CompareTag("Player") && !enemySpawner.FinishedSpawning)
-      {
-          LockRoom?.Invoke();
-      }  
-   }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player") && !EnemySpawner.FinishedSpawning)
+        {
+            PlayerCurrentAt = EnemySpawner;
 
-   private void LockDoors()
-   {
-       roomLocked = true;
-       
-   }
+            LockRoom?.Invoke();
+        }
+    }
 
-   private void UnlockDoors()
-   {
-       roomLocked = false;
-   }
+    private void LockDoors()
+    {
+        roomLocked = true;
+    }
 
-
+    private void UnlockDoors()
+    {
+        roomLocked = false;
+    }
 }
