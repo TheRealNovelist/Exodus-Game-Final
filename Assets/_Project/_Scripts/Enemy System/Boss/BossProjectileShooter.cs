@@ -13,7 +13,7 @@ public class BossProjectileShooter : MonoBehaviour
     {
         var bullet = Instantiate(bulletPrefab, spawnPosition.transform.position, spawnPosition.transform.rotation);
         bullet.GetComponent<Bullet>().Init(damage);
-        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(spawnPosition.transform.forward * speed, ForceMode.Impulse);
         Destroy(bullet, 10f);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace WeaponSystem
 {
@@ -8,7 +9,7 @@ namespace WeaponSystem
     {
         public Camera fpsCam;
         public ParticleSystem muzzleFlash;
-        public GameObject impacEffect;
+        [FormerlySerializedAs("impacEffect")] public GameObject impactEffect;
 
         public override void StartAttack(Weapon weapon, bool consumeAmmo = true)
         {
@@ -22,7 +23,15 @@ namespace WeaponSystem
                 {
                     hitObject.Damage(weapon.data.damage);
                 }
-                Instantiate(impacEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                else
+                {
+                    hitObject = hit.collider.gameObject.GetComponentInParent<IDamageable>();
+                    
+                    if (hitObject != null)
+                        hitObject.Damage(weapon.data.damage);
+                }
+
+                Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             }
         }
     }
