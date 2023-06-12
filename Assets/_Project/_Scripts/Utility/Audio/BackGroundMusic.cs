@@ -18,7 +18,6 @@ public class BackGroundMusic : MonoBehaviour
             audioManager.Stop();
             audioManager.Play("BackGround", true);
         }
-        // Ngược lại, chơi nhạc nền ShopBackGround
         else
         {
             audioManager.Stop();

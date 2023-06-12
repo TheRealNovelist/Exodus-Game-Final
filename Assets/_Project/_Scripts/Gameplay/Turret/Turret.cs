@@ -16,7 +16,8 @@ public class Turret : MonoBehaviour, IDamageable
     [SerializeField] private List<Transform> shootPoint = new List<Transform>();
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private AudioManager audioManager;
-    
+    [SerializeField] private ParticleSystem shootingParticles;
+
     private Transform target;
     private float timer = 0;
     private bool waitingToShoot = false;
@@ -31,6 +32,7 @@ public class Turret : MonoBehaviour, IDamageable
     {
         InvokeRepeating(nameof(UpdateTarget),0f,scanGap);
         currentHealth = fullHealth;
+        shootingParticles.Stop();
     }
     
 
@@ -78,10 +80,13 @@ public class Turret : MonoBehaviour, IDamageable
         }
      
         //Play sound
-        waitingToShoot = true;
         // audioManager?.PlayOneShot("TurretShoot");
+        // Play shooting particles
+        //shootingParticles.Play();
+
+        waitingToShoot = true;
     }
-    
+
     private void RotateYTo(Transform rotateObj,Quaternion angle, float speed)
     {
         Vector3 rotation = Quaternion.Lerp(rotateObj.rotation,angle,Time.deltaTime * speed).eulerAngles;

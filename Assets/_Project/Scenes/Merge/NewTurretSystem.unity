@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63963192f5868cd428ccacde7d2746f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemySpawner: {fileID: 301347667}
+  _spawnerSystem: {fileID: 301347667}
   _mainRoomUI: {fileID: 583007619}
 --- !u!65 &7605632
 BoxCollider:
@@ -591,46 +591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1995009866}
     m_Modifications:
-    - target: {fileID: 3034511595707539706, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511595707539706, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511595707539706, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511596602328572, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511596602328572, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511597196816600, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511597196816600, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511597564884668, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511597564884668, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3034511597564884668, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3440773412453642608, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -726,10 +686,6 @@ PrefabInstance:
     - target: {fileID: 3440773412766112811, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
       propertyPath: m_Name
       value: 'Option Panel '
-      objectReference: {fileID: 0}
-    - target: {fileID: 3440773412766112811, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab7e053cadcd2748bc8d9f39e4b1a57, type: 3}
@@ -5399,7 +5355,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301347665}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 785afba1deeb8d444bd1a02acf8fd89b, type: 3}
   m_Name: 
@@ -5423,7 +5379,6 @@ MonoBehaviour:
   amountInWave: 4
   spawnGap: 30
   waveCountDownTime: 4
-  EnemiesInRoom: []
 --- !u!1 &312499243
 GameObject:
   m_ObjectHideFlags: 0
@@ -15891,10 +15846,6 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4681193864474844120, guid: a3ab83c05628648479524929ca901399, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4681193864474844120, guid: a3ab83c05628648479524929ca901399, type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
@@ -23099,10 +23050,6 @@ PrefabInstance:
     - target: {fileID: 5320960665619779825, guid: 719d3a4980b758b4bb61dbe5e8ec7a36, type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320960665619779825, guid: 719d3a4980b758b4bb61dbe5e8ec7a36, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5320960665619779825, guid: 719d3a4980b758b4bb61dbe5e8ec7a36, type: 3}
       propertyPath: m_TagString

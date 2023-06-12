@@ -7,7 +7,7 @@ public class TurretProjectile : MonoBehaviour
 {
     private Vector3 shootDirect;
     private int _damage = 10;
-    
+    public GameObject particleSystemPrefab;
     
     // Update is called once per frame
     void Update()
@@ -28,6 +28,10 @@ public class TurretProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Vector3 contactPoint = collision.contacts[0].point;
+        Quaternion rotation = Quaternion.LookRotation(collision.contacts[0].normal);
+
+        GameObject particleSystem = Instantiate(particleSystemPrefab, contactPoint, rotation);
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("in");

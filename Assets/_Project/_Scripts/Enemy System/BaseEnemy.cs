@@ -57,6 +57,7 @@ namespace EnemySystem
 
         public virtual void Die()   
         {
+            audioManager.PlayOneShot("EnemyDieSound");
             if (_spawner) _spawner.EnemyDefeated?.Invoke(this);
             CoinManager.Instance.GainCoin(reward);
             //Audio
