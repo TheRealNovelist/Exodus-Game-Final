@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossGunner : MonoBehaviour
+public class BossGunner : BossEnemy
 {
     public IEnumerator Initialize()
     {

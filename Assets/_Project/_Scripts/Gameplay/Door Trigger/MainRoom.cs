@@ -10,6 +10,8 @@ public class MainRoom : Room
     public Action<bool> PlayerInMainRoom;
     private bool _waving;
 
+    [SerializeField] private float startTime = 300f;
+
     public bool Waving
     {
         get => _waving;
@@ -37,7 +39,6 @@ public class MainRoom : Room
             PlayerCurrentAt = EnemySpawner;
 
             PlayerInMainRoom?.Invoke(true);
-
         }
     }
 
@@ -59,7 +60,18 @@ public class MainRoom : Room
     {
         base.Start();
         PlayerInMainRoom += PlayerInRoom;
-       PlayerInMainRoom?.Invoke(false);
+        PlayerInMainRoom?.Invoke(false);
+
+        StartCoroutine(WaitToActiveSpawner());
+    }
+
+    private IEnumerator WaitToActiveSpawner()
+    {
+        EnemySpawner.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(300f);
+        
+        EnemySpawner.gameObject.SetActive(true);
     }
 
     private void OnDisable()

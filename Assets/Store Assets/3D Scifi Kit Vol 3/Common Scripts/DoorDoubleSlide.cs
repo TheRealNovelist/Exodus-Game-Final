@@ -42,6 +42,11 @@ public class DoorDoubleSlide : MonoBehaviour
                 return _enemyRoom.roomLocked;
             }
 
+            if (_bossRoom)
+            {
+                return _bossRoom.Locked;
+            }
+
             return false;
         }
     }
@@ -92,6 +97,12 @@ public class DoorDoubleSlide : MonoBehaviour
         public void Init(EnemyRoom enemyRoom)
         {
             _enemyRoom = enemyRoom;
+        }
+
+        private BossRoom _bossRoom;
+        public void Init(BossRoom bossRoom)
+        {
+            _bossRoom = bossRoom;
         }
 
 
