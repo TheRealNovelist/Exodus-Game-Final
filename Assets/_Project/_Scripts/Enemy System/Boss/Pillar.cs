@@ -4,46 +4,44 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Pillar : MonoBehaviour, IDamageable
+public class Pillar : BossEnemy
 {
-    [SerializeField] private float baseHealth = 100f;
-    [SerializeField] private Transform pillarRootRotate;
+    [SerializeField] private Transform pillarRootRotate, baseTower;
     [SerializeField] private BossProjectileShooter shooter;
     [SerializeField] private float fireRate;
     [SerializeField] private float turnSpeed;
 
     private Transform shooterTransform => shooter.transform;
     
-    private Animator _animator => GetComponent<Animator>();
     private TargetLocator _targetLocator => GetComponentInParent<TargetLocator>();
     private Transform _target => _targetLocator.Target.transform;
     
-    private float _currentHealth;
-    private bool _isDamageable;
     private float _nextTimeToFire;
-    
-    public void OnEnable()
+     
+    protected override void OnEnable()
     {
-        _currentHealth = baseHealth;
+        _enemyHealth.IsDamagable = false;
+        
+        baseTower.transform.position = new Vector3(baseTower.transform.position.x,-17, baseTower.transform.position.z);
+        baseTower.transform.DOMoveY(0, 7, false).OnComplete(() => {  _enemyHealth.IsDamagable =  true;});
+
+        _enemyHealth.OnDied += DisablePillar;
+        
+        base.OnEnable();
     }
 
-    public void Damage(float amount, Transform source = null)
+    protected override void OnDisable()
     {
-        if (!_isDamageable) return;
-
-        _currentHealth -= amount;
-
-        if (_currentHealth <= 0)
-        {
-            DisablePillar();
-        }
+        _enemyHealth.OnDied -= DisablePillar;
+        
+        base.OnDisable();
     }
 
     private void Update()
     {
         UpdateTurretRotation();
         
-        if (!_isDamageable) return;
+        if (!_enemyHealth.IsDamagable) return;
         
         if (!(Time.time >= _nextTimeToFire)) return;
         _nextTimeToFire = Time.time + 1f / fireRate;
@@ -56,11 +54,6 @@ public class Pillar : MonoBehaviour, IDamageable
         shooterTransform.RotateTowards(_target, freezeY: true, freezeZ: true);
     }
     
-    public void StartDamageable()
-    {
-        _isDamageable = true;
-    }
-
     public void DisablePillar()
     {
         gameObject.SetActive(false);
@@ -68,7 +61,8 @@ public class Pillar : MonoBehaviour, IDamageable
     
     public void StartDisablePillar()
     {
-        _isDamageable = false;
-        _animator.SetTrigger("Disable");
+        _enemyHealth.IsDamagable = false;
+        baseTower.transform.DOMoveY(-17, 7, false);
     }
+
 }

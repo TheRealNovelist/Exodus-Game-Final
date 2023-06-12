@@ -9,12 +9,13 @@ public class BossPillarController : MonoBehaviour
     [SerializeField] private List<Pillar> pillars;
     [SerializeField] private GameObject shield;
 
-    private void Awake()
+    private void Start()
     {
         shield.gameObject.SetActive(false);
         
         foreach (var pillar in pillars)
         {
+            if(pillar.gameObject.activeSelf)
             pillar.gameObject.SetActive(false);
         }
     }

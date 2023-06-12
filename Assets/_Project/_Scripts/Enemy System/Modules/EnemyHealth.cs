@@ -7,9 +7,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [SerializeField] private float baseHealth;
 
+    public bool IsDamagable;
+    
     public float Health { get; private set; }
     
     public event Action<float> OnDamaged;
+    public event Action OnDied;
 
     private void Awake()
     {
@@ -18,11 +21,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Damage(float amount, Transform source = null)
     {
+        if (!IsDamagable) return;
+        
         OnDamaged?.Invoke(amount);
         
         if (Health - amount < 0f)
         {
             Health = 0;
+            OnDied?.Invoke();
             return;
         }
         

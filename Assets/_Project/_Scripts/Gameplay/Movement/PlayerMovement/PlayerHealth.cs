@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
 {
     [SerializeField] float maxHealth;
     public float _playerHealth;
+
+    [SerializeField] private GameEventListener addHealth;
     
     private void Awake()
     {

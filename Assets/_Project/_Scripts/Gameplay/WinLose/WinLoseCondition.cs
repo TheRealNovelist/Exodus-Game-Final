@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,6 +15,7 @@ public class WinLoseCondition : MonoBehaviour
    [SerializeField] private GameObject gameWinScreen;
    [SerializeField] private int totalBoss =2;
    private int _defeatedBoss = 0;
+   [SerializeField] private TextMeshProUGUI defeatedTmp;
 
    private void PopUpGameOver()
    {
@@ -43,6 +45,7 @@ public class WinLoseCondition : MonoBehaviour
    private void DefeatedBoss()
    {
       _defeatedBoss++;
+      defeatedTmp.text = $"{_defeatedBoss}/{totalBoss}";
       if (_defeatedBoss >= totalBoss)
       {
          OnGameWon?.Invoke();
