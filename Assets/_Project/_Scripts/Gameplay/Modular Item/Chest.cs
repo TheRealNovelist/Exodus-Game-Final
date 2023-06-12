@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,6 +15,16 @@ private bool isOpen = false;
     private bool harvested = false;
     
     private Item lootedItem;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (itemList != null && itemList.Count > 0)
+        {
+            gameObject.name = $"Chest {itemList.GetRandom().itemName}";
+        }
+    }
+#endif
     
 
     private void OnTriggerEnter(Collider other)
@@ -34,8 +45,6 @@ private bool isOpen = false;
                 if (Input.GetKeyDown(openKey))
                 {
                     Harvest(lootedItem);
-                    
-
                 }
             }
         }
@@ -54,6 +63,7 @@ private bool isOpen = false;
 
     IEnumerator WaitToGenerateIte()
     {
+        Debug.Log("yo");
         lootedItem = GetRandomItem();
 
         yield return new WaitForSeconds(0.5f);
@@ -86,6 +96,8 @@ private bool isOpen = false;
                 {
                     Debug.LogWarning($"Item {consumeItem.name} has no effect event");
                 }
+                
+                harvested = true;
             }
         }
     }
