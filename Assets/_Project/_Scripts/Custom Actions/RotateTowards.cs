@@ -3,13 +3,12 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace CustomActions {
+namespace CustomNode {
 
 	[Category("Custom/Movement")]
 	[Description("Rotate toward target with Lerping")]
-	public class RotateTowards : ActionTask
+	public class RotateTowards : ActionTask<Transform>
 	{
-		[RequiredField] public BBParameter<Transform> body;
 		[RequiredField] public BBParameter<Transform> target;
 		public BBParameter<float> turnSpeed = 1f;
 		public BBParameter<bool> useDeltaTime = true;
@@ -35,7 +34,7 @@ namespace CustomActions {
 		protected override void OnUpdate()
 		{
 			var turn = useDeltaTime.value ? turnSpeed.value * Time.deltaTime : turnSpeed.value;
-			body.value.RotateTowards(target.value, turn, freezeX.value, freezeY.value, freezeZ.value);
+			agent.RotateTowards(target.value, turn, freezeX.value, freezeY.value, freezeZ.value);
 		}
 
 		//Called when the task is disabled.

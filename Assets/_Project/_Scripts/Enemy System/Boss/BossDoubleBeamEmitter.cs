@@ -16,11 +16,12 @@ public class BossDoubleBeamEmitter : MonoBehaviour
     [SerializeField] private float damage = 5f;
 
     float currentAngle = 0;
+    private Vector3 initialRotation;
 
     public void StartSpinAttack()
     {
+        initialRotation = transform.localRotation.eulerAngles;
         currentAngle = 0;
-        gameObject.SetActive(true);
     }
     
     public bool SpinAttack(bool isClockwise = true)
@@ -43,11 +44,9 @@ public class BossDoubleBeamEmitter : MonoBehaviour
 
     public void EndSpinAttack()
     {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.DOLocalRotate(initialRotation, 1f);
         
         leftWeapon.StopAttack();
         rightWeapon.StopAttack();
-        
-        gameObject.SetActive(false);
     }
 }
