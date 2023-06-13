@@ -11,9 +11,9 @@ public class ShopUI : MonoBehaviour
    [SerializeField] private List<ShopButton> _shopButtons = new List<ShopButton>();
 
    public void DefenderPurchased(ShopButton button)
-    {
-        _shop.PurchasedItem?.Invoke(button.Item);
-    }
+   {
+       _shop.CoinPurchased(button.Item);
+   }
 
     public void CloseShop()
     {

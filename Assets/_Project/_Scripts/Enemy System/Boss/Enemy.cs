@@ -17,16 +17,19 @@ public class Enemy : MonoBehaviour
     {
         if (_bossRoom)
         {
-            _bossRoom.OnResetRoom += _enemyHealth.ResetHealth;
             _enemyHealth.OnDied += _bossRoom.OnEnemyDied;
         }
+    }
+
+    public void Reset()
+    {
+        _enemyHealth.ResetHealth();
     }
 
     protected virtual void OnDisable()
     {
         if (_bossRoom)
         {
-            _bossRoom.OnResetRoom -= _enemyHealth.ResetHealth;
             _enemyHealth.OnDied -= _bossRoom.OnEnemyDied;
         }
     }

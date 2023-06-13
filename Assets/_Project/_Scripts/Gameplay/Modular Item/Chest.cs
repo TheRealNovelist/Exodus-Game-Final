@@ -23,12 +23,12 @@ private bool isOpen = false;
         {
             gameObject.name = $"Chest {itemList.GetRandom().itemName}";
         }
-    }
+    } 
 #endif
     
 
     private void OnTriggerEnter(Collider other)
-    {
+    { 
         if(isOpen){return;}
         if (other.gameObject.CompareTag("Player"))
         {
@@ -63,7 +63,6 @@ private bool isOpen = false;
 
     IEnumerator WaitToGenerateIte()
     {
-        Debug.Log("yo");
         lootedItem = GetRandomItem();
 
         yield return new WaitForSeconds(0.5f);

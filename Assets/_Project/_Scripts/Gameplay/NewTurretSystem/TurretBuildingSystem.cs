@@ -9,7 +9,7 @@ public class TurretBuildingSystem : MonoBehaviour
     private static Transform visual;
     
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         _shop.PurchasedItem += SetPlaceObject;
     }

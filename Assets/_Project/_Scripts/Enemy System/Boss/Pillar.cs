@@ -18,11 +18,6 @@ public class Pillar : Enemy
 
     private float _nextTimeToFire;
 
-    private void Reset()
-    {
-        _nextTimeToFire = 0;
-    }
-
     protected override void OnEnable()
     {
         _enemyHealth.IsDamagable = false;
@@ -31,17 +26,12 @@ public class Pillar : Enemy
         baseTower.transform.DOMoveY(0, 7, false).OnComplete(() => { _enemyHealth.IsDamagable = true; });
 
         _enemyHealth.OnDied += DisablePillar;
-        if (_bossRoom) _bossRoom.OnResetRoom += Reset;
-
         base.OnEnable();
     }
 
     protected override void OnDisable()
     {
         _enemyHealth.OnDied -= DisablePillar;
-        if (_bossRoom) _bossRoom.OnResetRoom -= Reset;
-
-
         base.OnDisable();
     }
 

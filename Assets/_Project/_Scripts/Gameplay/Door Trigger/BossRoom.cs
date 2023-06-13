@@ -33,8 +33,10 @@ public class BossRoom : MonoBehaviour
         if (Locked)
         {
             Debug.Log("reloafd");
+          
+            ResetAllEnemies();
+            
             Start();
-            OnResetRoom?.Invoke();
         }
     }
 
@@ -46,7 +48,6 @@ public class BossRoom : MonoBehaviour
 
         RespawnPlayer.OnPlayerStartRespawn += OffAllEnemies;
         
-        RespawnPlayer.OnPlayerFinishedRespawn += OnAllEnemies;
         RespawnPlayer.OnPlayerFinishedRespawn += ResetRoom;
     }
 
@@ -57,7 +58,6 @@ public class BossRoom : MonoBehaviour
         OnRoomPassed -= UnlockRoom;
         
         RespawnPlayer.OnPlayerStartRespawn -= OffAllEnemies;
-        RespawnPlayer.OnPlayerFinishedRespawn -= OnAllEnemies;
         RespawnPlayer.OnPlayerFinishedRespawn -= ResetRoom;
 
      //   RespawnPlayer.OnPlayerFinishedRespawn -= ReloadScene;
@@ -111,11 +111,16 @@ public class BossRoom : MonoBehaviour
         }
     }
 
-    private void OnAllEnemies()
+    private void ResetAllEnemies()
     {
         foreach (GameObject e in enemies)
         {
             e.SetActive(true);
+            
+            if (e.TryGetComponent(out Enemy enemy))
+            {
+                enemy.Reset();
+            }
         }
     }
 

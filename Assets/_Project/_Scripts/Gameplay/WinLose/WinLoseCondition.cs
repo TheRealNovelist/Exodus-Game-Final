@@ -34,6 +34,8 @@ public class WinLoseCondition : MonoBehaviour
       OnGameLose += PopUpGameOver;
       OnGameWon += PopUpGameWin;
       OnBossDefeated += DefeatedBoss;
+      
+      defeatedTmp.text = $"{_defeatedBoss}/{totalBoss}";
    }
 
    private void OnDisable()

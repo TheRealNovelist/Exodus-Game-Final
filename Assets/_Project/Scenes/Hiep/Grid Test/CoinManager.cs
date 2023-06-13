@@ -33,10 +33,7 @@ public class CoinManager : Singleton<CoinManager>
             moneyAmountText.SetText( _coinAmount.ToString());
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public void GainCoin(int amount)
