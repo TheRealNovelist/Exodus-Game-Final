@@ -25,6 +25,10 @@ public class Shop : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ShopToggle?.Invoke(false);
+    }
 
     private void ToggleCamera(bool cameraTurret)
     {
@@ -51,18 +55,19 @@ public class Shop : MonoBehaviour
     {
         ShopToggle += ToggleCamera;
         ShopToggle += shopUI.ToggleShopPanel;
-        ShopToggle += (b) =>
-        {
-            if (b == false)
-            {
-                canvasUI.SetActive(true);
-            }
-        };
-        ShopToggle?.Invoke(false);
+
         
         PurchasedItem += CoinPurchased;
         PurchasedItem += (c)=>{canvasUI.SetActive(false);};
         ShopToggle += PlaySound;
+        
+        /*ShopToggle += (b) =>
+       {
+           if (b == false)
+           {
+               canvasUI.SetActive(true);
+           }
+       };*/
         
       //  PurchasedItem += so => {ShopToggle?.Invoke(false);};
     }
@@ -74,14 +79,6 @@ public class Shop : MonoBehaviour
         PurchasedItem -= (c)=>{canvasUI.SetActive(false);};
         ShopToggle -= PlaySound;
         PurchasedItem -= CoinPurchased;
-        
-        ShopToggle -= (b) =>
-        {
-            if (b == false)
-            {
-                canvasUI.SetActive(true);
-            }
-        };
     }
     
 
@@ -91,6 +88,7 @@ public class Shop : MonoBehaviour
         {
             shopUI.shopPanel.SetActive(false);
             PurchasedItem?.Invoke(item);
+            canvasUI.SetActive(false);
         }
     }
     

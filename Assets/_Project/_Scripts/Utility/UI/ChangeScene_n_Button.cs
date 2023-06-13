@@ -9,10 +9,6 @@ public class ChangeScene_n_Button : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] bool pauseMenued = false;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -24,6 +20,8 @@ public class ChangeScene_n_Button : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             pauseMenued = true;
             Time.timeScale = 0f;
+            
+            PlayerInputManager.Input.Disable();
         }
 
         else if (Input.GetKeyDown(KeyCode.P) && pauseMenued)
@@ -43,6 +41,8 @@ public class ChangeScene_n_Button : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         pauseMenued = false;
         Time.timeScale = 1f;
+
+        PlayerInputManager.Input.Enable();
     }
 
     public void ExitButton(string name)

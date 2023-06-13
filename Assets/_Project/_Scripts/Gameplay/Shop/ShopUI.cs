@@ -18,6 +18,7 @@ public class ShopUI : MonoBehaviour
     public void CloseShop()
     {
         Shop.ShopToggle?.Invoke(false);
+        _shop.canvasUI.SetActive(true);
     }
 
     private void Awake()

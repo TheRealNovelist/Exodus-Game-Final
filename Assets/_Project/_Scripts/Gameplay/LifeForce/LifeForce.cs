@@ -4,23 +4,24 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class LifeForce : MonoBehaviour , IDamageable, IHeal
+public class LifeForce : MonoBehaviour, IDamageable, IHeal
 {
-    [SerializeField] private float timeValue = 60;
+     private static float timeValue;
+    public static float TimeRemaining => timeValue;
     private bool timerOn = false;
     [SerializeField] private TextMeshProUGUI timeText;
-    
+
     public static Action OnLifeTimerChangeMoreHalf;
     public static Action OnLifeTimerChangeToHalf;
     public static Action OnLifeTimerAlmostRunOut;
-    
-    private float maxTime;
+
+    [SerializeField]  private float maxTime;
 
     // Start is called before the first frame update
     void Start()
     {
         timerOn = true;
-        maxTime = timeValue;
+        timeValue = maxTime;
     }
 
     public void AddTime(float time)
@@ -32,7 +33,11 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
     // Update is called once per frame
     void Update()
     {
-        if(!timerOn) {return;}
+        if (!timerOn)
+        {
+            return;
+        }
+
         if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
@@ -41,6 +46,7 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
             {
                 OnLifeTimerChangeMoreHalf?.Invoke();
             }
+
             if (timeValue <= maxTime * 0.5f)
             {
                 OnLifeTimerChangeToHalf?.Invoke();
@@ -70,7 +76,7 @@ public class LifeForce : MonoBehaviour , IDamageable, IHeal
     public void Damage(float amount, Transform source = null)
     {
         timeValue -= amount;
-        
+
         //ADD EFFECT AND SOUND
     }
 

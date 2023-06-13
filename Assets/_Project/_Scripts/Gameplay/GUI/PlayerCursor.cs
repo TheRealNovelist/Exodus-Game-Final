@@ -23,6 +23,7 @@ public class PlayerCursor : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            PlayerInputManager.Input.Disable();
         }
     }
 
@@ -32,6 +33,8 @@ public class PlayerCursor : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
+            PlayerInputManager.Input.Enable();
         }
     }
 
@@ -51,6 +54,8 @@ public class PlayerCursor : MonoBehaviour
 
     private void Start()
     {
+        ToggleCursor(false);
+
         _shop = FindObjectOfType<Shop>();
 
         if (_shop)
