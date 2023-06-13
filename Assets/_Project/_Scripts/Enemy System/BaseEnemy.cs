@@ -38,6 +38,7 @@ namespace EnemySystem
             
             if (health <= 0)
             {
+                health = 0;
                 Die();
             }
 
@@ -53,8 +54,12 @@ namespace EnemySystem
             }
         }
 
-        public virtual void Die()   
+        public virtual void Die()
         {
+            EnemyAnimator.SetTrigger("Death");
+            GetComponent<Collider>().enabled = false;
+            Stop();
+            
             audioManager.PlayOneShot("EnemyDieSound");
             if (_spawner) _spawner.EnemyDefeated?.Invoke(this);
             CoinManager.Instance.GainCoin(reward);
