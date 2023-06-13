@@ -15,7 +15,6 @@ public class BossPillarController : MonoBehaviour
         
         foreach (var pillar in pillars)
         {
-            if(pillar.gameObject.activeSelf)
             pillar.gameObject.SetActive(false);
         }
     }
