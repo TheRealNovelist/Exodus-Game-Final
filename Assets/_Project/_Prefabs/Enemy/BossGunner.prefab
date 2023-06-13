@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 100
+  IsDamagable: 1
 --- !u!114 &3238602008426480966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d00e3c36645ac48bfd9d6fda3ab294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fsmOwner: {fileID: 0}
 --- !u!1 &3238602009230873620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,6 +1345,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right_Beam
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1884,6 +1898,18 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
       propertyPath: m_Name
       value: Left_Beam
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d78cf231a32370746aae6b40ac6cdeb6, type: 3}
       propertyPath: m_RootOrder
