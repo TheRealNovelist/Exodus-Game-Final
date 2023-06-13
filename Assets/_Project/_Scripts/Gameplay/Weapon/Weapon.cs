@@ -144,7 +144,6 @@ namespace WeaponSystem
             }
             catch
             {
-                Debug.Log("Primary Attack not found");
             }
             
             try
@@ -153,7 +152,6 @@ namespace WeaponSystem
             }
             catch
             {
-                Debug.Log("Secondary Attack not found");
             }
         }
         

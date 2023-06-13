@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using EnemySystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BossRoom : MonoBehaviour
 {
     [SerializeField] private string sceneName;
-    [SerializeField] private List<BossEnemy> enemies = new List<BossEnemy>();
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private List<DoorDoubleSlide> doors = new List<DoorDoubleSlide>();
 
     public Action OnEnemyDied;
     public Action<bool> OnEnemyActivated;
     public Action OnRoomPassed;
+    public Action OnResetRoom;
 
     private int _defeatedEnemies = 0;
     private int _totalEnemies;
@@ -22,34 +24,17 @@ public class BossRoom : MonoBehaviour
         _defeatedEnemies = 0;
         _totalEnemies = enemies.Count;
         Locked = false;
-        
-        Debug.Log("start");
-   
-        foreach (DoorDoubleSlide door in doors)
-        {
-            door.Init(this);
-        }
 
         OnEnemyActivated?.Invoke(false);
     }
 
-    private void ReloadScene()
+    private void ResetRoom()
     {
         if (Locked)
         {
             Debug.Log("reloafd");
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        }
-    }
-
-    private void UnLoadScene()
-    {
-        if (Locked)
-        {
-            if (SceneManager.GetActiveScene().name == sceneName)
-            {
-                SceneManager.UnloadSceneAsync(sceneName);
-            }
+            Start();
+            OnResetRoom?.Invoke();
         }
     }
 
@@ -61,8 +46,8 @@ public class BossRoom : MonoBehaviour
 
         RespawnPlayer.OnPlayerStartRespawn += OffAllEnemies;
         
-        RespawnPlayer.OnPlayerStartRespawn += UnLoadScene;
-        RespawnPlayer.OnPlayerFinishedRespawn += ReloadScene;
+        RespawnPlayer.OnPlayerFinishedRespawn += OnAllEnemies;
+        RespawnPlayer.OnPlayerFinishedRespawn += ResetRoom;
     }
 
     private void OnDisable()
@@ -72,9 +57,10 @@ public class BossRoom : MonoBehaviour
         OnRoomPassed -= UnlockRoom;
         
         RespawnPlayer.OnPlayerStartRespawn -= OffAllEnemies;
-        
-        RespawnPlayer.OnPlayerStartRespawn -= UnLoadScene;
-        RespawnPlayer.OnPlayerFinishedRespawn -= ReloadScene;
+        RespawnPlayer.OnPlayerFinishedRespawn -= OnAllEnemies;
+        RespawnPlayer.OnPlayerFinishedRespawn -= ResetRoom;
+
+     //   RespawnPlayer.OnPlayerFinishedRespawn -= ReloadScene;
     }
 
     private void UnlockRoom() => Locked = false;
@@ -91,25 +77,45 @@ public class BossRoom : MonoBehaviour
 
     private void Awake()
     {
-        foreach (BossEnemy e in enemies)
+        foreach (GameObject e in enemies)
         {
-            e.Init(this);
+            if (e.TryGetComponent(out Enemy enemy))
+            {
+                enemy.Init(this);
+            }
+            else if(e.TryGetComponent(out Juggernaut juggernaut))
+            {
+                juggernaut.Init(this);
+            }
+        }
+        
+        foreach (DoorDoubleSlide door in doors)
+        {
+            door.Init(this);
         }
     }
 
     private void ToggleAllEnemies(bool activate)
     {
-        foreach (BossEnemy e in enemies)
+        foreach (GameObject e in enemies)
         {
-            e.enabled = activate;
+            e.SetActive(activate);
         }
     }
     
     private void OffAllEnemies()
     {
-        foreach (BossEnemy e in enemies)
+        foreach (GameObject e in enemies)
         {
-            e.enabled = false;
+            e.SetActive(false);
+        }
+    }
+
+    private void OnAllEnemies()
+    {
+        foreach (GameObject e in enemies)
+        {
+            e.SetActive(true);
         }
     }
 

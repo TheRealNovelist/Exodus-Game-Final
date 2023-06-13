@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [SerializeField] private float baseHealth;
 
-    public bool IsDamagable;
+ [HideInInspector]   public bool IsDamagable = true;
     
     public float Health { get; private set; }
     
@@ -33,5 +33,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
         
         Health -= amount;
+    }
+
+    public void ResetHealth()
+    {
+        Health = baseHealth;
     }
 }

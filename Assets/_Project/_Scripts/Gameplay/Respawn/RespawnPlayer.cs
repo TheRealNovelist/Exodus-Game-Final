@@ -40,8 +40,9 @@ public class RespawnPlayer : MonoBehaviour
 
         OnPlayerFinishedRespawn += FinsihedRespawn;
         OnPlayerStartRespawn += StartRespawn;
-
     }
+    
+    
 
 
     public void fadeInUI()

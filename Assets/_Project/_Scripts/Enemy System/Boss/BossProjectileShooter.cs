@@ -20,6 +20,7 @@ public class BossProjectileShooter : MonoBehaviour
 
     public void Attack()
     {
+       // Instantiate(impactEffect, spawnPosition.position, Quaternion.LookRotation(spawnPosition.forward));
         var bullet = Instantiate(bulletPrefab, spawnPosition.transform.position, spawnPosition.transform.rotation);
         bullet.GetComponent<Bullet>().Init(damage);
         bullet.GetComponent<Rigidbody>().AddForce(spawnPosition.transform.forward * speed, ForceMode.Impulse);

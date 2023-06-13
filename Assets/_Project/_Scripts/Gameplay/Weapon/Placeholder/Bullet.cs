@@ -14,8 +14,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+
         if (collision.gameObject.TryGetComponent(out IDamageable hitObject))
         {
+            Debug.Log(collision.gameObject);
+
             hitObject.Damage(_damage, transform);
         }
         
