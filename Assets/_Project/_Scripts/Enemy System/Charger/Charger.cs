@@ -57,15 +57,12 @@ namespace EnemySystem.Charger
             base.StartStateMachine(delay);
         }
 
-        public void ReduceDamage(bool isReducing) => painMultiplier = isReducing ? chargingMultiplier : 1f;
-        
-        public override void Damage(float amount, Transform source = null)
+        public void ReduceDamage(bool isReducing)
         {
-            float chargerDamage = amount * painMultiplier;
-            
-            base.Damage(chargerDamage, source);
+            float damageMultiplier = isReducing ? chargingMultiplier : 1f;
+            Health.SetDamageMultiplier(damageMultiplier);
         }
-
+        
         public void ResetCollision() => hasCollided = false;
 
         private void OnCollisionEnter(Collision collision)

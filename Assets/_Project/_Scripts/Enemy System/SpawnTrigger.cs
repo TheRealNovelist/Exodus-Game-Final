@@ -21,8 +21,6 @@ public class SpawnTrigger : MonoBehaviour
                 {
                     if (!baseEnemy.IsStateMachineStarted())
                     {
-                        //Start spawning enemy
-                        baseEnemy.target = other.transform;
                         baseEnemy.StartStateMachine();  
                     }
                     else

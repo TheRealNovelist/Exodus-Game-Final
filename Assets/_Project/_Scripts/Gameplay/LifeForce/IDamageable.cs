@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public interface IDamageable 
+public interface IDamageable
 {
+    Transform transform { get; }
+
     void Damage(float amount, Transform source = null);
 }
 

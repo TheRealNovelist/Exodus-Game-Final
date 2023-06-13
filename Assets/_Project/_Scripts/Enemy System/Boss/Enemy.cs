@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     {
         if (_bossRoom)
         {
-            _enemyHealth.OnDied += _bossRoom.OnEnemyDied;
+            _enemyHealth.OnDeath += _bossRoom.OnEnemyDied;
         }
     }
 
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     {
         if (_bossRoom)
         {
-            _enemyHealth.OnDied -= _bossRoom.OnEnemyDied;
+            _enemyHealth.OnDeath -= _bossRoom.OnEnemyDied;
         }
     }
 }

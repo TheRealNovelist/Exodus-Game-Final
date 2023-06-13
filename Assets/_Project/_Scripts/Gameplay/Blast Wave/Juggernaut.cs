@@ -27,13 +27,13 @@ public class Juggernaut : BaseEnemy
         _bossRoom = room;
     }
 
-    public override void Die()
+    public override void OnDeath()
     {
         if (_bossRoom)
         {
            _bossRoom.OnEnemyDied?.Invoke();
         }
-        base.Die();
+        base.OnDeath();
     }
 
     public override void StartStateMachine(float delay = 0f)

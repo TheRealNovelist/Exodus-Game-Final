@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5433860827178499720, guid: 02ab46ef7501bec47a006d5bb22f0f93, type: 3}
       propertyPath: m_Name
-      value: Rapax_Red Variant
+      value: Brute
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02ab46ef7501bec47a006d5bb22f0f93, type: 3}
@@ -204,12 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22768dfe9ea82904b9a627bd744bc30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   startOnAwake: 1
-  primaryTarget: {fileID: 0}
-  player: {fileID: 0}
-  switchOnAggression: 0
-  target: {fileID: 0}
   audioManager: {fileID: 4961110774204253262}
   reward: 20
   EnemyAnimator: {fileID: 6701638088901526123}
@@ -253,6 +248,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   audioTable: {fileID: 11400000, guid: 047e2889a2ca55b42a63cb7a91df965c, type: 2}
+--- !u!114 &7474357724998068175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48128019901547179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preferredTargetType: 0
+  switchOnAggression: 1
+  usePulseSearch: 1
+  searchPulseTime: 10
+  searchRadius: 5
+  maxTargetCheck: 10
+  searchMask:
+    serializedVersion: 2
+    m_Bits: 1544
+--- !u!114 &7510913002539303084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48128019901547179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a19fc19cdd16044aa2995773bf3fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 100
+  baseDamageMultiplier: 1
+  isDamageable: 1
 --- !u!95 &6701638088901526123 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1640172118088875592, guid: 02ab46ef7501bec47a006d5bb22f0f93, type: 3}

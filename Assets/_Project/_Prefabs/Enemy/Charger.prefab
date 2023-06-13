@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1529819396297480603}
   - component: {fileID: -600175269993259998}
   - component: {fileID: 635705000732444248}
+  - component: {fileID: 1638243323709753035}
+  - component: {fileID: 9217370875045394358}
   m_Layer: 6
   m_Name: Charger
   m_TagString: Enemy
@@ -80,12 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716bb5dfb70d7ba4194d921d7b2cd0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   startOnAwake: 0
-  primaryTarget: {fileID: 0}
-  player: {fileID: 0}
-  switchOnAggression: 0
-  target: {fileID: 0}
   audioManager: {fileID: -600175269993259998}
   reward: 20
   EnemyAnimator: {fileID: 7206278896761223061}
@@ -230,6 +227,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1638243323709753035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529819396297480601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a19fc19cdd16044aa2995773bf3fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 100
+  baseDamageMultiplier: 1
+  isDamageable: 1
+--- !u!114 &9217370875045394358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529819396297480601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preferredTargetType: 0
+  switchOnAggression: 0
+  usePulseSearch: 1
+  searchPulseTime: 10
+  searchRadius: 2
+  maxTargetCheck: 10
+  searchMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1189708087
 PrefabInstance:
   m_ObjectHideFlags: 0

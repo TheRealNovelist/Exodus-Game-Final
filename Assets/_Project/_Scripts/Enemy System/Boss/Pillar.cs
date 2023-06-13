@@ -20,18 +20,19 @@ public class Pillar : Enemy
 
     protected override void OnEnable()
     {
-        _enemyHealth.IsDamagable = false;
+        _enemyHealth.isDamageable = false;
 
         baseTower.transform.position = new Vector3(baseTower.transform.position.x, -17, baseTower.transform.position.z);
-        baseTower.transform.DOMoveY(0, 7, false).OnComplete(() => { _enemyHealth.IsDamagable = true; });
+        baseTower.transform.DOMoveY(0, 7, false).OnComplete(() => { _enemyHealth.isDamageable = true; });
 
-        _enemyHealth.OnDied += DisablePillar;
+        
+        _enemyHealth.OnDeath += DisablePillar;
         base.OnEnable();
     }
 
     protected override void OnDisable()
     {
-        _enemyHealth.OnDied -= DisablePillar;
+        _enemyHealth.OnDeath -= DisablePillar;
         base.OnDisable();
     }
 
@@ -39,7 +40,7 @@ public class Pillar : Enemy
     {
         UpdateTurretRotation();
 
-        if (!_enemyHealth.IsDamagable) return;
+        if (!_enemyHealth.isDamageable) return;
 
         if (!(Time.time >= _nextTimeToFire)) return;
         _nextTimeToFire = Time.time + 1f / fireRate;
@@ -59,7 +60,7 @@ public class Pillar : Enemy
 
     public void StartDisablePillar()
     {
-        _enemyHealth.IsDamagable = false;
+        _enemyHealth.isDamageable = false;
         baseTower.transform.DOMoveY(-17, 7, false).OnComplete(DisablePillar);
     }
 }

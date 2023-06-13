@@ -66,7 +66,6 @@ public class ES_WavingState : IState
         
         BaseEnemy enemyObj =  GameObject.Instantiate(enemyToSpawn, randSpawner.position,Quaternion.identity);
         
-        enemyObj.target = _spawnerSystem.Player.transform;
         enemyObj.StartStateMachine();
         enemyObj.BindSpawner(_spawnerSystem);
 

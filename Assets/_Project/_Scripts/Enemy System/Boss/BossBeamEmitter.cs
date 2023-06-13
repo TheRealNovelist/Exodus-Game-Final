@@ -10,8 +10,6 @@ public class BossBeamEmitter : MonoBehaviour
     [SerializeField] private LineRenderer beam;
     [SerializeField] private LayerMask mask;
 
-    [SerializeField] private float fireRate = 2f;
-    
     private float _nextTimeToFire;
     
     public void Attack(float damage)
@@ -21,6 +19,8 @@ public class BossBeamEmitter : MonoBehaviour
         if (Physics.Raycast(firePoint.position, firePoint.forward, out RaycastHit hit, Mathf.Infinity, mask))
         {
             beam.SetPosition(1, hit.point);
+
+            if (!hit.collider.gameObject.CompareTag("Player")) return;
             
             if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
             {

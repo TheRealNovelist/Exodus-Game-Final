@@ -19,16 +19,9 @@ namespace WeaponSystem
 
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit))
             {
-                if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
+                if (hit.collider.gameObject.TryGetComponent(SearchComponentMode.IncludeParent, out IDamageable hitObject))
                 {
-                    hitObject.Damage(weapon.data.damage);
-                }
-                else
-                {
-                    hitObject = hit.collider.gameObject.GetComponentInParent<IDamageable>();
-                    
-                    if (hitObject != null)
-                        hitObject.Damage(weapon.data.damage);
+                    hitObject.Damage(weapon.data.damage, TargetLocator.Player);
                 }
 
                 Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));

@@ -39,16 +39,22 @@ namespace EnemySystem.Brute
         {
             if (IsStateMachineStarted()) return;
             
-            var MoveToPlayer = new MoveToTarget(this, agent);
+            var MoveToTarget = new MoveToTarget(this, agent);
             var Attacking = new Attacking(this);
+            var Idle = new Idle(this);
 
-            AddTransition(MoveToPlayer, Attacking, TargetInRange());
-            AddTransition(Attacking, MoveToPlayer, TargetOutRange());
-
-            initialState = MoveToPlayer;
+            AddTransition(MoveToTarget, Attacking, TargetInRange);
+            AddTransition(Attacking, MoveToTarget, TargetOutRange);
             
-            Func<bool> TargetInRange() => () => Vector3.Distance(target.position, transform.position) <= attackRange;
-            Func<bool> TargetOutRange() => () => Vector3.Distance(target.position, transform.position) > attackRange;
+            AddAnyTransition(Idle, () => target == null);
+            
+            AddTransition(Idle, MoveToTarget, () => target != null && TargetOutRange());
+            AddTransition(Idle, Attacking, () => target != null && TargetInRange());
+
+            initialState = MoveToTarget;
+            
+            bool TargetInRange() => Vector3.Distance(target.position, transform.position) <= attackRange;
+            bool TargetOutRange() => Vector3.Distance(target.position, transform.position) > attackRange;
             
             base.StartStateMachine(delay);
         }

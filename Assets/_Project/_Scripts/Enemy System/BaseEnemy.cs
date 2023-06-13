@@ -3,58 +3,36 @@ using UnityEngine;
 
 namespace EnemySystem
 {
-    public abstract class BaseEnemy : BaseAI, IDamageable
+    [RequireComponent(typeof(EnemyHealth))]
+    [RequireComponent(typeof(TargetLocator))]
+    public abstract class BaseEnemy : BaseAI
     {
-        [Header("Base Settings")] 
-        [SerializeField] private float maxHealth;
+        [Header("Base Settings")]
         [SerializeField] private bool startOnAwake;
-        [SerializeField] private Transform primaryTarget;
-        [SerializeField] private Transform player;
-        [SerializeField] private bool switchOnAggression;
-        [HideInInspector] public Transform target;
+        
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private int reward = 20;
         
-        private float health;
-        private EnemySpawnerSystem _spawner;
+        protected EnemyHealth Health => GetComponent<EnemyHealth>();
+        protected TargetLocator TargetLocator => GetComponent<TargetLocator>();
+        public Transform target => TargetLocator.Target;
+        
         public Animator EnemyAnimator;
-
+        private EnemySpawnerSystem _spawner;
+        
         protected override void Awake()
         {
-            target = primaryTarget;
-            health = maxHealth;
-            
             base.Awake();
 
             if (startOnAwake)
             {
                 StartStateMachine();
             }
+
+            Health.OnDeath += OnDeath;
         }
-
-        public virtual void Damage(float amount, Transform source = null)
-        {
-            health -= amount;
-            
-            if (health <= 0)
-            {
-                health = 0;
-                Die();
-            }
-
-            if (switchOnAggression && source == player)
-            {
-                Debug.Log(source);
-                if (target == player)
-                    return;
-                
-                Stop();
-                StartStateMachine();
-                target = player;
-            }
-        }
-
-        public virtual void Die()
+        
+        public virtual void OnDeath()
         {
             EnemyAnimator.SetTrigger("Death");
             GetComponent<Collider>().enabled = false;
