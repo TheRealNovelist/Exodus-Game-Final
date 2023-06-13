@@ -35,9 +35,7 @@ namespace EnemySystem
         public virtual void Damage(float amount, Transform source = null)
         {
             health -= amount;
-//            Debug.Log("Enemy taken " + amount + " damage");
- //           Debug.Log("Enemy health " + health);
-
+            
             if (health <= 0)
             {
                 Die();

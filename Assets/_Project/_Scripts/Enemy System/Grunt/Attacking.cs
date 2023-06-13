@@ -16,6 +16,8 @@ namespace EnemySystem.Brute
         
         public void Update()
         {
+            _brute.transform.RotateTowards(_brute.target);
+            
             if (cooldown > 0f)
             {
                 cooldown -= Time.deltaTime;
@@ -30,19 +32,25 @@ namespace EnemySystem.Brute
                 
                 if (_brute.EnemyAnimator)
                 {
-                    _brute.EnemyAnimator.SetTrigger("Attacking");
+                    _brute.EnemyAnimator.SetTrigger("Attack");
                 }
             }
         }
 
         public void OnEnter()
         {
-           
+            if (_brute.EnemyAnimator)
+            {
+                _brute.EnemyAnimator.SetBool("IsAttacking", true);
+            }
         }
 
         public void OnExit()
         {
-            
+            if (_brute.EnemyAnimator)
+            {
+                _brute.EnemyAnimator.SetBool("IsAttacking", false);
+            }
         }
     }
 }

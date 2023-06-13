@@ -25,6 +25,16 @@ namespace EnemySystem.Brute
                 agent = GetComponent<NavMeshAgent>();
         }
 
+        private void OnAnimatorMove()
+        {
+            Vector3 rootPosition = EnemyAnimator.rootPosition;
+            rootPosition.y = agent.nextPosition.y;
+            
+            transform.position = rootPosition;
+            transform.rotation = EnemyAnimator.rootRotation;
+            agent.nextPosition = rootPosition;
+        }
+
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;
@@ -33,7 +43,7 @@ namespace EnemySystem.Brute
             var Attacking = new Attacking(this);
 
             AddTransition(MoveToPlayer, Attacking, TargetInRange());
-            AddAnyTransition(MoveToPlayer, TargetOutRange());
+            AddTransition(Attacking, MoveToPlayer, TargetOutRange());
 
             initialState = MoveToPlayer;
             
