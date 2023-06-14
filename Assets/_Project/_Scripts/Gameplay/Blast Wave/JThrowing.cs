@@ -37,7 +37,6 @@ public class JThrowing : IState
 
     public void OnExit()
     {
-        throw new System.NotImplementedException();
     }
 
 }

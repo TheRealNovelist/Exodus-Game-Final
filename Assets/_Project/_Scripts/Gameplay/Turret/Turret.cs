@@ -32,7 +32,6 @@ public class Turret : MonoBehaviour, IDamageable
     {
         InvokeRepeating(nameof(UpdateTarget),0f,scanGap);
         currentHealth = fullHealth;
-        shootingParticles.Stop();
     }
     
 
@@ -74,6 +73,7 @@ public class Turret : MonoBehaviour, IDamageable
     {
         foreach (Transform point in shootPoint)
         {
+            shootingParticles.Stop();
             TurretProjectile newOb = Instantiate(projectile, point.position,Quaternion.identity);
             newOb.GetComponent<Rigidbody>().AddForce(point.forward * 100, ForceMode.Impulse);
             newOb.Init(direct,damage);

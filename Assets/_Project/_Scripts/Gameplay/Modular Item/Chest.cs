@@ -32,7 +32,7 @@ private bool isOpen = false;
         if(isOpen){return;}
         if (other.gameObject.CompareTag("Player"))
         {
-            OpenChest();
+            StartCoroutine(WaitToOpenChest());
         }
     }
 
@@ -44,34 +44,36 @@ private bool isOpen = false;
             {
                 if (Input.GetKeyDown(openKey))
                 {
-                    Harvest(lootedItem);
+                    StartCoroutine(WaitToHarvest(lootedItem));
+
+                  //  Harvest(lootedItem);
                 }
             }
         }
+    }
+
+    private IEnumerator WaitToOpenChest()
+    {
+        OpenAnimation();
+        yield return new WaitForSeconds(1.5f);
+
+        OpenChest();
     }
 
     private void OpenChest()
     {
         isOpen = true;
 
-        OpenAnimation();
-        
         //Play sound
         audioManager?.PlayOneShot("ChestOpen");
-        StartCoroutine(WaitToGenerateIte());
-    }
-
-    IEnumerator WaitToGenerateIte()
-    {
+        
         lootedItem = GetRandomItem();
-
-        yield return new WaitForSeconds(0.5f);
 
         if (lootedItem.model)
         {
-          GameObject go =  Instantiate(lootedItem.model, itemHolder.transform);
-          go.transform.parent = itemHolder.transform;
-          go.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            GameObject go =  Instantiate(lootedItem.model, itemHolder.transform);
+            go.transform.parent = itemHolder.transform;
+            go.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         }
         else
         {
@@ -83,7 +85,8 @@ private bool isOpen = false;
             ConsumableItem consumeItem = lootedItem as ConsumableItem;
             if (consumeItem.storeInInventory)
             {
-                Harvest(consumeItem);
+                StartCoroutine(WaitToHarvest(consumeItem));
+               // Harvest(consumeItem);
             }
             else
             {
@@ -101,13 +104,20 @@ private bool isOpen = false;
         }
     }
 
-    private void Harvest(Item item)
+    IEnumerator WaitToHarvest(Item item)
     {
         //Play sound
         audioManager?.PlayOneShot("ChestHarvest");
-        harvested = true;
         Inventory.Instance.AddItem(item);
+        harvested = true;
+        yield return new WaitForSeconds(0.5f);
         itemHolder.gameObject.SetActive(false);
+
+    }
+    
+
+    private void Harvest(Item item)
+    {
     }
 
     private Item GetRandomItem()

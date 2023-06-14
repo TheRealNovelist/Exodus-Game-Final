@@ -8,10 +8,9 @@ public class Shop : MonoBehaviour
 {
     public ShopUI shopUI;
     public List<PlacedObjectTypeSO> AllItems = new List<PlacedObjectTypeSO>();
-    public static Action<bool> ShopToggle;
+    public Action<bool> ShopToggle;
     public Action<PlacedObjectTypeSO> PurchasedItem;
 
-    public GameObject canvasUI;
     [SerializeField] private GameObject turretCamera;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private AudioManager audioManager;
@@ -55,19 +54,8 @@ public class Shop : MonoBehaviour
     {
         ShopToggle += ToggleCamera;
         ShopToggle += shopUI.ToggleShopPanel;
-
-        
-        PurchasedItem += CoinPurchased;
-        PurchasedItem += (c)=>{canvasUI.SetActive(false);};
         ShopToggle += PlaySound;
-        
-        /*ShopToggle += (b) =>
-       {
-           if (b == false)
-           {
-               canvasUI.SetActive(true);
-           }
-       };*/
+        ShopToggle += PlayerCursor.ToggleCursor;
         
       //  PurchasedItem += so => {ShopToggle?.Invoke(false);};
     }
@@ -76,11 +64,14 @@ public class Shop : MonoBehaviour
     {
         ShopToggle -= ToggleCamera;
         ShopToggle -= shopUI.ToggleShopPanel;
-        PurchasedItem -= (c)=>{canvasUI.SetActive(false);};
+        //PurchasedItem -= (c)=>{shopUI.canvasUI.SetActive(false);};
         ShopToggle -= PlaySound;
-        PurchasedItem -= CoinPurchased;
+        ShopToggle -= PlayerCursor.ToggleCursor;
+
     }
-    
+
+
+
 
     public void CoinPurchased(PlacedObjectTypeSO item)
     {
@@ -88,7 +79,7 @@ public class Shop : MonoBehaviour
         {
             shopUI.shopPanel.SetActive(false);
             PurchasedItem?.Invoke(item);
-            canvasUI.SetActive(false);
+           // canvasUI.SetActive(false);
         }
     }
     

@@ -7,6 +7,9 @@ public class ShopUI : MonoBehaviour
 {
     public Shop _shop;
     public GameObject shopPanel;
+    
+    public GameObject canvasUI;
+
     private List<PlacedObjectTypeSO> _allItems => _shop.AllItems;
    [SerializeField] private List<ShopButton> _shopButtons = new List<ShopButton>();
 
@@ -17,8 +20,7 @@ public class ShopUI : MonoBehaviour
 
     public void CloseShop()
     {
-        Shop.ShopToggle?.Invoke(false);
-        _shop.canvasUI.SetActive(true);
+        _shop.ShopToggle?.Invoke(false);
     }
 
     private void Awake()
@@ -28,6 +30,34 @@ public class ShopUI : MonoBehaviour
         {
             _shopButtons[i].Item = _allItems[i];
         }
+    }
+
+    private void OnEnable()
+    {
+        _shop.ShopToggle += (b) =>
+        {
+            if (b == false)
+            {
+                Debug.Log(canvasUI);
+                canvasUI.SetActive(true);
+            }
+        };
+        
+        _shop.PurchasedItem += (c)=>{canvasUI.SetActive(false);};
+
+    }
+    
+    private void OnDisable()
+    {
+        _shop.ShopToggle -= (b) =>
+        {
+            if (b == false)
+            {
+                canvasUI.SetActive(true);
+            }
+        };
+        
+        _shop.PurchasedItem -= (c)=>{canvasUI.SetActive(false);};
     }
 
     public void ToggleShopPanel(bool show) => shopPanel.SetActive(show);

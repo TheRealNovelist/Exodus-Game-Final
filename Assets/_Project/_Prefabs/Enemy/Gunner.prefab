@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4582410050624745018}
   - component: {fileID: 3237797736334938691}
   - component: {fileID: 6868401392480246405}
+  - component: {fileID: 7337489264312867781}
+  - component: {fileID: 5099174318873806434}
   m_Layer: 6
   m_Name: Gunner
   m_TagString: Untagged
@@ -81,12 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99a7ca35fb43d9459d42e1393587859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   startOnAwake: 1
-  primaryTarget: {fileID: 0}
-  player: {fileID: 0}
-  switchOnAggression: 0
-  target: {fileID: 0}
   audioManager: {fileID: 3237797736334938691}
   reward: 20
   EnemyAnimator: {fileID: 1044271059463608632}
@@ -234,6 +231,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7337489264312867781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4582410050624745012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a19fc19cdd16044aa2995773bf3fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 100
+  baseDamageMultiplier: 1
+  isDamageable: 1
+--- !u!114 &5099174318873806434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4582410050624745012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preferredTargetType: 0
+  switchOnAggression: 0
+  usePulseSearch: 1
+  searchPulseTime: 10
+  searchRadius: 2
+  maxTargetCheck: 10
+  searchMask:
+    serializedVersion: 2
+    m_Bits: 1544
 --- !u!1 &4582410050874651562
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,7 +68,6 @@ public class TurretBuildingSystem : MonoBehaviour
             slot._holdingTurret = placedObjectTypeSO;
             placedObjectTypeSO = null;
 
-            Shop.ShopToggle?.Invoke(false); 
         }
     }
 }
