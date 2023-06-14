@@ -17,14 +17,15 @@ public class BossRoom : MonoBehaviour
 
     private int _defeatedEnemies = 0;
     private int _totalEnemies;
+    private Collider _roomCollider;
+
     [HideInInspector] public bool Locked = false;
-    
+
     private void Start()
     {
         _defeatedEnemies = 0;
         _totalEnemies = enemies.Count;
         Locked = false;
-
         OnEnemyActivated?.Invoke(false);
     }
 
@@ -33,9 +34,9 @@ public class BossRoom : MonoBehaviour
         if (Locked)
         {
             Debug.Log("reloafd");
-          
+
             ResetAllEnemies();
-            
+
             Start();
         }
     }
@@ -45,9 +46,8 @@ public class BossRoom : MonoBehaviour
         OnEnemyDied += UpdateDefeated;
         OnEnemyActivated += ToggleAllEnemies;
         OnRoomPassed += UnlockRoom;
-
+        OnEnemyActivated += (b) => { _roomCollider.enabled = !b; };
         RespawnPlayer.OnPlayerStartRespawn += OffAllEnemies;
-        
         RespawnPlayer.OnPlayerFinishedRespawn += ResetRoom;
     }
 
@@ -56,11 +56,12 @@ public class BossRoom : MonoBehaviour
         OnEnemyDied -= UpdateDefeated;
         OnEnemyActivated -= ToggleAllEnemies;
         OnRoomPassed -= UnlockRoom;
-        
+        OnEnemyActivated -= (b) => { _roomCollider.enabled = !b; };
+
         RespawnPlayer.OnPlayerStartRespawn -= OffAllEnemies;
         RespawnPlayer.OnPlayerFinishedRespawn -= ResetRoom;
 
-     //   RespawnPlayer.OnPlayerFinishedRespawn -= ReloadScene;
+        //   RespawnPlayer.OnPlayerFinishedRespawn -= ReloadScene;
     }
 
     private void UnlockRoom() => Locked = false;
@@ -83,16 +84,18 @@ public class BossRoom : MonoBehaviour
             {
                 enemy.Init(this);
             }
-            else if(e.TryGetComponent(out Juggernaut juggernaut))
+            else if (e.TryGetComponent(out Juggernaut juggernaut))
             {
                 juggernaut.Init(this);
             }
         }
-        
+
         foreach (DoorDoubleSlide door in doors)
         {
             door.Init(this);
         }
+
+        _roomCollider = GetComponent<Collider>();
     }
 
     private void ToggleAllEnemies(bool activate)
@@ -102,7 +105,7 @@ public class BossRoom : MonoBehaviour
             e.SetActive(activate);
         }
     }
-    
+
     private void OffAllEnemies()
     {
         foreach (GameObject e in enemies)
@@ -116,14 +119,13 @@ public class BossRoom : MonoBehaviour
         foreach (GameObject e in enemies)
         {
             e.SetActive(true);
-            
+
             if (e.TryGetComponent(out Enemy enemy))
             {
                 enemy.Reset();
             }
         }
     }
-
 
 
     private void OnTriggerEnter(Collider other)
