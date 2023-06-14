@@ -7398,7 +7398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 100
-  IsDamagable: 0
+  baseDamageMultiplier: 1
+  isDamageable: 1
 --- !u!1 &364452168
 GameObject:
   m_ObjectHideFlags: 0
@@ -9709,7 +9710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 833872724}
   gameWinScreen: {fileID: 477976433}
-  totalBoss: 2
+  totalBoss: 1
   defeatedTmp: {fileID: 1980421977}
 --- !u!1 &456115763
 GameObject:
@@ -15279,7 +15280,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 100
-  IsDamagable: 0
+  baseDamageMultiplier: 1
+  isDamageable: 1
 --- !u!1001 &742647698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24889,6 +24891,8 @@ GameObject:
   - component: {fileID: 1260837189}
   - component: {fileID: 1260837196}
   - component: {fileID: 1260837197}
+  - component: {fileID: 1260837199}
+  - component: {fileID: 1260837198}
   m_Layer: 0
   m_Name: Junggernaunt
   m_TagString: Untagged
@@ -24944,12 +24948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24ceadd587f4ec44a20d9c317872313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
   startOnAwake: 1
-  primaryTarget: {fileID: 0}
-  player: {fileID: 0}
-  switchOnAggression: 0
-  target: {fileID: 0}
   audioManager: {fileID: 1260837196}
   reward: 20
   EnemyAnimator: {fileID: 1260837189}
@@ -25156,6 +25155,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1260837198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260837188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preferredTargetType: 0
+  switchOnAggression: 0
+  usePulseSearch: 1
+  searchPulseTime: 10
+  searchRadius: 2
+  maxTargetCheck: 10
+  searchMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &1260837199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260837188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a19fc19cdd16044aa2995773bf3fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 100
+  baseDamageMultiplier: 1
+  isDamageable: 1
 --- !u!1 &1262793713
 GameObject:
   m_ObjectHideFlags: 0
@@ -25253,7 +25288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 100
-  IsDamagable: 0
+  baseDamageMultiplier: 1
+  isDamageable: 1
 --- !u!1 &1268309249
 GameObject:
   m_ObjectHideFlags: 0
@@ -28947,7 +28983,7 @@ MonoBehaviour:
   _inventoryUI: {fileID: 1868576264}
   equipAbilityEvent: {fileID: 11400000, guid: 714a49a94b5fed448903a60432957b52, type: 2}
   equippedGuns:
-  - {fileID: 11400000, guid: bc1a8d13df2c1db41a84d7455db0e965, type: 2}
+  - {fileID: 11400000, guid: 58f582f17f908da40afc789240afb550, type: 2}
   - {fileID: 0}
   equippedAbilities:
   - {fileID: 0}
@@ -37451,7 +37487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1951218683
 Transform:
   m_ObjectHideFlags: 0
@@ -117895,6 +117931,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bing Chilling Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2614123735741579024, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+      propertyPath: _currentWeapon
+      value: 
+      objectReference: {fileID: 7797187714278439902}
     - target: {fileID: 3056408821999278326, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: maxHealth
       value: 100
@@ -117938,6 +117978,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3056408821999278323, guid: af68437a68d392741bf82c46c73d2382, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+--- !u!114 &7797187714278439902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2614123734408795915, guid: af68437a68d392741bf82c46c73d2382, type: 3}
+  m_PrefabInstance: {fileID: 7797187714278439901}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e3fbf6d6773254382918bd40b6d8f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7905406982668655063
 GameObject:
   m_ObjectHideFlags: 0
