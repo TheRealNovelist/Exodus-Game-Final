@@ -40,7 +40,7 @@ public class RoomVisibility : MonoBehaviour
 
     private void Start()
     {
-        if (disableOnStart)
+        /*if (disableOnStart)
         {
             foreach (GameObject c in connectedGO)
             {
@@ -54,6 +54,6 @@ public class RoomVisibility : MonoBehaviour
             }
             
             gameObject.SetActive(false);
-        }
+        }*/
     }
 }
