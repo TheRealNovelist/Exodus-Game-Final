@@ -17,7 +17,7 @@ namespace WeaponSystem
             muzzleFlash.Play();
             ConsumeAmmo(weapon, consumeAmmo);
 
-            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit))
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out var hit,100,AttackMask))
             {
                 if (hit.collider.gameObject.TryGetComponent(SearchComponentMode.IncludeParent, out IDamageable hitObject))
                 {

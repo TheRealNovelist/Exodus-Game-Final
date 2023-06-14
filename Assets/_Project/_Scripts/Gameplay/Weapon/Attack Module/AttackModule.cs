@@ -6,6 +6,8 @@ namespace WeaponSystem
 {
     public abstract class AttackModule : MonoBehaviour
     {
+        public LayerMask AttackMask;
+
         public virtual void StartAttack(Weapon weapon, bool consumeAmmo = true)
         {
 

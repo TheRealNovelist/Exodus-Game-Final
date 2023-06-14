@@ -11,9 +11,9 @@ public class Chest : MonoBehaviour
 
     [SerializeField] private AudioManager audioManager;
 
-private bool isOpen = false;
+    private bool isOpen = false;
     private bool harvested = false;
-    
+
     private Item lootedItem;
 
 #if UNITY_EDITOR
@@ -23,13 +23,17 @@ private bool isOpen = false;
         {
             gameObject.name = $"Chest {itemList.GetRandom().itemName}";
         }
-    } 
+    }
 #endif
-    
+
 
     private void OnTriggerEnter(Collider other)
-    { 
-        if(isOpen){return;}
+    {
+        if (isOpen)
+        {
+            return;
+        }
+
         if (other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(WaitToOpenChest());
@@ -44,9 +48,7 @@ private bool isOpen = false;
             {
                 if (Input.GetKeyDown(openKey))
                 {
-                    StartCoroutine(WaitToHarvest(lootedItem));
-
-                  //  Harvest(lootedItem);
+                    Harvest(lootedItem);
                 }
             }
         }
@@ -66,12 +68,12 @@ private bool isOpen = false;
 
         //Play sound
         audioManager?.PlayOneShot("ChestOpen");
-        
+
         lootedItem = GetRandomItem();
 
         if (lootedItem.model)
         {
-            GameObject go =  Instantiate(lootedItem.model, itemHolder.transform);
+            GameObject go = Instantiate(lootedItem.model, itemHolder.transform);
             go.transform.parent = itemHolder.transform;
             go.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         }
@@ -85,8 +87,7 @@ private bool isOpen = false;
             ConsumableItem consumeItem = lootedItem as ConsumableItem;
             if (consumeItem.storeInInventory)
             {
-                StartCoroutine(WaitToHarvest(consumeItem));
-               // Harvest(consumeItem);
+                Harvest(consumeItem);
             }
             else
             {
@@ -98,33 +99,36 @@ private bool isOpen = false;
                 {
                     Debug.LogWarning($"Item {consumeItem.name} has no effect event");
                 }
-                
+
+                StartCoroutine(WaitToHarvest());
+
                 harvested = true;
             }
         }
     }
 
-    IEnumerator WaitToHarvest(Item item)
+    private void Harvest(Item item)
     {
         //Play sound
         audioManager?.PlayOneShot("ChestHarvest");
         Inventory.Instance.AddItem(item);
         harvested = true;
+        StartCoroutine(WaitToHarvest());
+    }
+
+
+    IEnumerator WaitToHarvest()
+    {
         yield return new WaitForSeconds(0.5f);
         itemHolder.gameObject.SetActive(false);
-
     }
-    
 
-    private void Harvest(Item item)
-    {
-    }
 
     private Item GetRandomItem()
     {
-       return itemList.GetRandom();
+        return itemList.GetRandom();
     }
-    
+
     public void OpenAnimation()
     {
         _chestAnimator.SetTrigger("openTrigger");
@@ -137,6 +141,4 @@ private bool isOpen = false;
         _chestAnimator.SetTrigger("closeTrigger");
         _chestAnimator.SetBool("isOpen", false);
     }
-    
-
 }

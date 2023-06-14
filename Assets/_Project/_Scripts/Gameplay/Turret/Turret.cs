@@ -7,9 +7,9 @@ public class Turret : MonoBehaviour, IDamageable
 {
     [SerializeField] private float range = 5f;
     [SerializeField] private float turningSpeed = 5f;
-     [FormerlySerializedAs("ShootGap")] [SerializeField] private float shootGap = 3f;
-     [SerializeField] private float scanGap = 3f;
-     [SerializeField] private int damage = 10;
+    [SerializeField] private float shootGap = 3f;
+    [SerializeField] private float scanGap = 3f;
+    [SerializeField] private int damage = 10;
 
     [SerializeField] private Transform weaponPart;
     [SerializeField] private TurretProjectile projectile;
@@ -21,37 +21,40 @@ public class Turret : MonoBehaviour, IDamageable
     private Transform target;
     private float timer = 0;
     private bool waitingToShoot = false;
-    
+
     private GameObject nearestEnemy = null;
     private GameObject currentEnemy = null;
 
-    public float fullHealth = 100;
+    public float fullHealth = 300;
     private float currentHealth;
 
     private void Start()
     {
-        InvokeRepeating(nameof(UpdateTarget),0f,scanGap);
+        InvokeRepeating(nameof(UpdateTarget), 0f, scanGap);
         currentHealth = fullHealth;
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
         //if there is no target
-        if (target == null )
+        if (target == null)
         {
             //turret rotates to orginal rotation
-            if(weaponPart.rotation == Quaternion.identity) {return;}
-            
+            if (weaponPart.rotation == Quaternion.identity)
+            {
+                return;
+            }
+
             RotateYTo(weaponPart, Quaternion.identity, turningSpeed);
             return;
-        } 
-        
+        }
+
         //rotate to target
         Vector3 dir = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        RotateYTo(weaponPart, lookRotation,turningSpeed);
+        RotateYTo(weaponPart, lookRotation, turningSpeed);
 
         if (waitingToShoot)
         {
@@ -66,7 +69,6 @@ public class Turret : MonoBehaviour, IDamageable
                 Shoot(dir);
             }
         }
-        
     }
 
     void Shoot(Vector3 direct)
@@ -74,11 +76,11 @@ public class Turret : MonoBehaviour, IDamageable
         foreach (Transform point in shootPoint)
         {
             shootingParticles.Stop();
-            TurretProjectile newOb = Instantiate(projectile, point.position,Quaternion.identity);
+            TurretProjectile newOb = Instantiate(projectile, point.position, Quaternion.identity);
             newOb.GetComponent<Rigidbody>().AddForce(point.forward * 100, ForceMode.Impulse);
-            newOb.Init(direct,damage);
+            newOb.Init(direct, damage);
         }
-     
+
         //Play sound
         // audioManager?.PlayOneShot("TurretShoot");
         // Play shooting particles
@@ -87,15 +89,15 @@ public class Turret : MonoBehaviour, IDamageable
         waitingToShoot = true;
     }
 
-    private void RotateYTo(Transform rotateObj,Quaternion angle, float speed)
+    private void RotateYTo(Transform rotateObj, Quaternion angle, float speed)
     {
-        Vector3 rotation = Quaternion.Lerp(rotateObj.rotation,angle,Time.deltaTime * speed).eulerAngles;
-        rotateObj.rotation = Quaternion.Euler(0f,rotation.y,0f);
+        Vector3 rotation = Quaternion.Lerp(rotateObj.rotation, angle, Time.deltaTime * speed).eulerAngles;
+        rotateObj.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
-    
+
     private void UpdateTarget()
     {
-        Collider[] enemyInRange = Physics.OverlapSphere(transform.position, range,enemyMask);
+        Collider[] enemyInRange = Physics.OverlapSphere(transform.position, range, enemyMask);
         float shortestDist = Mathf.Infinity;
 
         foreach (var enemy in enemyInRange)
@@ -108,8 +110,8 @@ public class Turret : MonoBehaviour, IDamageable
                 nearestEnemy = enemy.gameObject;
             }
         }
-        
-        if (nearestEnemy != null && shortestDist <range)
+
+        if (nearestEnemy != null && shortestDist < range)
         {
             target = nearestEnemy.transform;
             if (nearestEnemy != currentEnemy)
@@ -134,7 +136,7 @@ public class Turret : MonoBehaviour, IDamageable
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-         if(_turretSlot)   _turretSlot._holdingTurret = null;
+            if (_turretSlot) _turretSlot._holdingTurret = null;
             Destroy(gameObject);
         }
     }

@@ -69,9 +69,10 @@ public class MainRoom : Room
     {
         EnemySpawner.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(300f);
+        yield return new WaitForSeconds(startTime);
         
         EnemySpawner.gameObject.SetActive(true);
+        EnemySpawner.Activate();
     }
 
     private void OnDisable()

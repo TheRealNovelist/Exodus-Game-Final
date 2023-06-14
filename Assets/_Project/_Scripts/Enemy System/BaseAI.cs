@@ -24,7 +24,6 @@ namespace EnemySystem
         private IEnumerator StartWithDelay(IState state, float delay)
         {
             yield return new WaitForSeconds(delay);
-            
             SetState(state);
         }
         

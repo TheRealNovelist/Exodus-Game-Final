@@ -38,7 +38,7 @@ namespace WeaponSystem
                 
                 Debug.Log("call 1");
 
-                if (Physics.Raycast(fpsCam.transform.position, direction, out RaycastHit hit))
+                if (Physics.Raycast(fpsCam.transform.position, direction, out RaycastHit hit,AttackMask))
                 {
                     if (hit.collider.gameObject.TryGetComponent(out IDamageable hitObject))
                     {

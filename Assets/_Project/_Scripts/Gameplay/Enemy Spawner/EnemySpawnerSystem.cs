@@ -41,7 +41,6 @@ public class EnemySpawnerSystem : BaseAI
         base.Awake();
 
         if (spawnOnStart) Activate();
-        
     }
 
     public void Activate()

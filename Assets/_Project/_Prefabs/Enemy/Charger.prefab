@@ -51,7 +51,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.8255816
-  m_Height: 4.066137
+  m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1.5073383, z: 0.058634758}
 --- !u!54 &1529819396297480605
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startOnAwake: 0
   audioManager: {fileID: -600175269993259998}
-  reward: 20
+  reward: 15
   EnemyAnimator: {fileID: 7206278896761223061}
   agent: {fileID: 1529819396297480603}
   rb: {fileID: 0}
@@ -113,7 +113,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.44
   m_BaseOffset: 0.02
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

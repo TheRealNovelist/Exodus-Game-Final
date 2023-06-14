@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class JCharging : IState
 {
-    private readonly BaseEnemy _enemy;
+    private readonly Juggernaut _enemy;
     private readonly float _maxCooldown;
     private float _currentCooldown = 0;
     
     public bool  isCharged = true;
+    public IState NextRandomAttack;
     
-    public JCharging(BaseEnemy enemy, float maxCooldown)
+    public JCharging(Juggernaut enemy, float maxCooldown)
     {
-        Debug.Log("charge ");
-
         _enemy = enemy;
         _maxCooldown = maxCooldown;
     }
@@ -24,25 +23,23 @@ public class JCharging : IState
     {
         if (_currentCooldown <= 0)
         {
+            NextRandomAttack = _enemy.attacks[Random.Range(0, _enemy.attacks.Count - 1)];
+            Debug.Log(NextRandomAttack);
             isCharged = true;
             return;
         }
-        
         _currentCooldown -= Time.deltaTime;
     }
 
     public void OnEnter()
     {
+        Debug.Log("charge ");
+
         _currentCooldown = _maxCooldown;
         isCharged = false;
-        
-        Debug.Log("charge eneter");
     }
 
     public void OnExit()
     {
-        Debug.Log("charge exit");
-
     }
-    
 }

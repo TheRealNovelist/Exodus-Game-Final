@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startOnAwake: 1
   audioManager: {fileID: 4961110774204253262}
-  reward: 20
+  reward: 10
   EnemyAnimator: {fileID: 6701638088901526123}
   agent: {fileID: 3008766600351622016}
   attackRange: 2
@@ -260,11 +260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preferredTargetType: 0
+  preferredTargetType: 2
   switchOnAggression: 1
   usePulseSearch: 1
   searchPulseTime: 10
-  searchRadius: 5
+  searchRadius: 2.5
   maxTargetCheck: 10
   searchMask:
     serializedVersion: 2

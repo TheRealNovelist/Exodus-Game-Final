@@ -38,7 +38,6 @@ public class ShopUI : MonoBehaviour
         {
             if (b == false)
             {
-                Debug.Log(canvasUI);
                 canvasUI.SetActive(true);
             }
         };

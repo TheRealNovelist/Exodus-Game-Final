@@ -6,9 +6,7 @@ using UnityEngine;
 public class Juggernaut : BaseEnemy
 {
     [SerializeField] private float CooldownTime = 10f;
-
     public int DamageDealth = 20;
-
     public float ChargeTime = 4f;
 
     [Header("Blaster")] public Transform BlastPos;
@@ -19,13 +17,22 @@ public class Juggernaut : BaseEnemy
     public float force;
     public LayerMask blastMask;
 
-
     protected BossRoom _bossRoom;
+
+
+    [Header("Throwing")] public Transform ThrowPoint;
+    public float ThrowWaitTime = 3f;
 
     public void Init(BossRoom room)
     {
         _bossRoom = room;
     }
+    
+    public void Reset()
+    {
+        Health.ResetHealth();
+    }
+
 
     public override void OnDeath()
     {
@@ -35,28 +42,33 @@ public class Juggernaut : BaseEnemy
         }
         base.OnDeath();
     }
+    
+    public List<IState> attacks = new List<IState>();
 
     public override void StartStateMachine(float delay = 0f)
     {
         if (IsStateMachineStarted()) return;
 
         var Charging = new JCharging(this, CooldownTime);
-        var Blasting = new JBlasting(this);
+        var Blasting = new JBlasting(this); 
         var Punching = new JPunching();
-        var Throwing = new JThrowing(this);
+       var Throwing = new JThrowing(this);
 
-        initialState = Charging;
 
-        List<IState> attacks = new List<IState>();
-        attacks.Add(Blasting);
-        attacks.Add(Punching);
+       // attacks.Add(Blasting);
+       // attacks.Add(Punching);
         attacks.Add(Throwing);
 
         // AddTransition(Charging, attacks[Random.Range(0, attacks.Count - 1)], () => Charging.isCharged);
-        AddTransition(Charging, Blasting, () => Charging.isCharged);
-        AddTransition(Blasting, Charging, () => Blasting.Blasted);
-
-        base.StartStateMachine(delay);
+       // AddTransition(Charging, Blasting, () => Charging.isCharged && Charging.NextRandomAttack == Blasting);
+        AddTransition(Charging, Throwing, () => Charging.isCharged && Charging.NextRandomAttack == Throwing);
+      //  AddTransition(Blasting, Charging, () => Blasting.Blasted);
+        AddTransition(Throwing, Charging, () => Blasting.Blasted);
+        
+        
+        initialState = Charging;
+        _stateMachine.SetState(Charging);
+        base.StartStateMachine();
     }
     
 }
