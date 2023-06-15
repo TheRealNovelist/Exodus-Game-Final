@@ -21,7 +21,7 @@ namespace WeaponSystem
             {
                 if (hit.collider.gameObject.TryGetComponent(SearchComponentMode.IncludeParent, out IDamageable hitObject))
                 {
-                    hitObject.Damage(weapon.data.damage, TargetLocator.Player);
+                    hitObject.Damage(weapon.data.damage, weapon.owner);
                 }
 
                 Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));

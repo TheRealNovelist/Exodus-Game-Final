@@ -646,11 +646,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Oxygen: {fileID: 0}
+  Player: {fileID: 0}
   preferredTargetType: 2
   switchOnAggression: 1
   usePulseSearch: 1
   searchPulseTime: 10
-  searchRadius: 2.5
+  searchRadius: 10
+  viewDistance: 100
   maxTargetCheck: 10
   searchMask:
     serializedVersion: 2

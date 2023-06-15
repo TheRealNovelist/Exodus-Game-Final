@@ -34,7 +34,8 @@ namespace WeaponSystem
         
         private int _currentAmmo;
         private bool _isReloading;
-        
+        public Transform owner;
+
         #region Properties
         public int CurrentAmmo
         {
@@ -208,6 +209,7 @@ namespace WeaponSystem
         {
             audioManager.PlayOneShot("ChangeGunSound");
             _weaponHandler = weaponHandler;
+            owner = weaponHandler.owner;
             StartCoroutine(_equipRoutine);
         }
 

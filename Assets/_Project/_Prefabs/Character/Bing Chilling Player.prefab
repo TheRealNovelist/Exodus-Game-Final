@@ -923,6 +923,7 @@ MonoBehaviour:
     equipTime: 0.3
     magazineSize: 10
     ammoCostPerBullet: 5
+  owner: {fileID: 0}
 --- !u!114 &2614123734408795912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1165,6 +1166,7 @@ MonoBehaviour:
     equipTime: 0.3
     magazineSize: 20
     ammoCostPerBullet: 1
+  owner: {fileID: 0}
 --- !u!114 &2614123734917537511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,6 +1424,7 @@ MonoBehaviour:
     equipTime: 0.3
     magazineSize: 5
     ammoCostPerBullet: 10
+  owner: {fileID: 0}
 --- !u!114 &2614123735032481816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1631,7 +1634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d3013c28684a744acef947d0af54f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentWeapon: {fileID: 2614123734408795915}
+  owner: {fileID: 9205818919365756249}
+  currentWeapon: {fileID: 2614123734408795915}
   weaponHolder: {fileID: 2614123735741579022}
   maxAmmo: 100
 --- !u!114 &2614123735741579025

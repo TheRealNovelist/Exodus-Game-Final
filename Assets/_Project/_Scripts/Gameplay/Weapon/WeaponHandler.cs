@@ -9,14 +9,15 @@ namespace WeaponSystem
     //Handling weapons by player
     public class WeaponHandler : MonoBehaviour
     {
-        [SerializeField] private Weapon _currentWeapon;
+        public Transform owner;
+        [SerializeField] private Weapon currentWeapon;
         [SerializeField] private Transform weaponHolder;
         [SerializeField] private int maxAmmo = 100;
         
         public event Action<Weapon> OnSwitchingWeapon;
         public event Action<int> OnAmmoChange;
 
-        private bool isWeaponReady => _currentWeapon != null && _currentWeapon.IsWeaponReady;
+        private bool isWeaponReady => currentWeapon != null && currentWeapon.IsWeaponReady;
         private int currentIndex;
 
         private int _ammoPool;
@@ -84,19 +85,19 @@ namespace WeaponSystem
         private void StartAttack(WeaponMode mode)
         {
             if (!isWeaponReady) return;
-            _currentWeapon.StartAttack(mode);
+            currentWeapon.StartAttack(mode);
         }
 
         private void StopAttack(WeaponMode mode)
         {
             if (!isWeaponReady) return;
-            _currentWeapon.StopAttack(mode);
+            currentWeapon.StopAttack(mode);
         }
 
         private void Reload()
         {
             if (!isWeaponReady) return;
-            _currentWeapon.StartReload();
+            currentWeapon.StartReload();
         }
         
         private void ScrollChangeWeapon()
@@ -146,11 +147,11 @@ namespace WeaponSystem
             if (index > Inventory.Instance.EquippedGunsQuantity()-1)  return;
 
             //Unequip previous weapon 
-            if (_currentWeapon != null)
+            if (currentWeapon != null)
             {
-                _currentWeapon.Unequip();
-                _currentWeapon._animator?.SetTrigger("Unequip");
-                _currentWeapon = null;
+                currentWeapon.Unequip();
+                currentWeapon._animator?.SetTrigger("Unequip");
+                currentWeapon = null;
             }
 
             if (index == -1)
@@ -170,10 +171,10 @@ namespace WeaponSystem
                 if (i == index)
                 {
                     weapon.gameObject.SetActive(true);
-                    _currentWeapon = weapon.GetComponent<Weapon>();
-                    _currentWeapon.Equip(this);
-                    _currentWeapon._animator?.SetTrigger("Equip");
-                    OnSwitchingWeapon?.Invoke(_currentWeapon);
+                    currentWeapon = weapon.GetComponent<Weapon>();
+                    currentWeapon.Equip(this);
+                    currentWeapon._animator?.SetTrigger("Equip");
+                    OnSwitchingWeapon?.Invoke(currentWeapon);
                     currentIndex = i;
                 }
                 else
