@@ -2,34 +2,37 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
-namespace EnemySystem.Brute.Charger
+namespace EnemySystem.Charger
 {
-    public class Charger : Brute
+    public class Charger : BaseEnemy
     {
-        [Header("Charger Settings")]
-        [SerializeField] private float damageMultiplier = 0.2f;
-        [SerializeField] private float chargedDamageDealt = 20f;
+        [Header("Components")] 
+        [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private Rigidbody rb;
         
-        public Transform chargeCastOrigin;
-        public float chargeCastRadius;
-        public LayerMask chargeMask;
+        [Header("Settings")]
+        [SerializeField] private float attackRange = 2f;
+        [SerializeField] private float chargingMultiplier = 0.2f;
 
-        [Space]
-        [SerializeField] private float checkInterval = 5f;
-        [SerializeField] private float chargeAttackPercentage = 40f;
+        public float chargeTime = 4f;
+        public float attackCooldown = 5f;
+        public float damageDealt = 10f;
+        
+        private float painMultiplier = 1f;
+        [HideInInspector] public Vector3 attackDirection;
 
-        [SerializeField] public bool initiatedChargeAttack;
-        private float timer;
-
-        private ChargeAttack ChargeAttack;
-
+        [HideInInspector] public bool isAttacking;
+        private bool hasCollided;
+        
         protected override void Awake()
         {
             base.Awake();
-            timer = checkInterval;
+            if (!agent)
+                agent = GetComponent<NavMeshAgent>();
+
+            if (!rb)
+                rb = GetComponent<Rigidbody>();
         }
 
         [Button]
@@ -37,59 +40,42 @@ namespace EnemySystem.Brute.Charger
         {
             if (IsStateMachineStarted()) return;
             
+            var MoveToPlayer = new MoveToTarget(this, agent);
+            var Charging = new ChargingAttack(this);
+            var Attacking = new Attacking(this, rb);
+            var Cooldown = new Cooldown(this, attackCooldown);
+            
+            AddTransition(MoveToPlayer, Charging, TargetInRange());
+            AddTransition(Charging, Attacking, () => Charging.isCharged);
+            AddAnyTransition(Cooldown, () => hasCollided);
+            AddTransition(Cooldown, MoveToPlayer, () => !Cooldown.isCoolingDown);
+
+            initialState = MoveToPlayer;
+            
+            Func<bool> TargetInRange() => () => Vector3.Distance(target.position, transform.position) <= attackRange;
+
             base.StartStateMachine(delay);
-            
-            var Charging = new Charging(this);
-                ChargeAttack = new ChargeAttack(this, agent);
-                
-            AddTransition(MoveToTarget, Charging, () => initiatedChargeAttack);
-        }
-
-        protected override void OnStateMachineUpdate()
-        {
-            base.OnStateMachineUpdate();
-            
-            CheckForChargeAttack();
-        }
-
-        public void FinishCharge()
-        {
-            SetState(ChargeAttack);
-        }
-
-        private void CheckForChargeAttack()
-        {
-            if (initiatedChargeAttack) return;
-
-            if (timer > 0)
-            {
-                timer -= Time.deltaTime;
-            }
-
-            timer = checkInterval;
-            initiatedChargeAttack = Random.Range(0, 100f) <= chargeAttackPercentage;
-        }
-
-        public void ChargedAttack()
-        {
-            if (target.TryGetComponent(out IDamageable targetDamage))
-            {
-                targetDamage.Damage(chargedDamageDealt);
-            }
         }
 
         public void ReduceDamage(bool isReducing)
         {
-            float multiplier = isReducing ? damageMultiplier : 1f;
-            Health.SetDamageMultiplier(multiplier);
+            float damageMultiplier = isReducing ? chargingMultiplier : 1f;
+            Health.SetDamageMultiplier(damageMultiplier);
         }
+        
+        public void ResetCollision() => hasCollided = false;
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (initiatedChargeAttack) return;
+            if (!isAttacking) return;
             
-            EnemyAnimator.SetTrigger("Cooldown");
-            initiatedChargeAttack = false;
+            //Stop completely when collided
+            rb.velocity = Vector3.zero;
+            if (collision.gameObject.GetComponent<IDamageable>() != null)
+            {
+                collision.gameObject.GetComponent<IDamageable>().Damage(damageDealt);
+            }
+            hasCollided = true;
         }
     }
 }

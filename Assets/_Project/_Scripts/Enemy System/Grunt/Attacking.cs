@@ -9,15 +9,16 @@ namespace EnemySystem.Brute
         public Attacking(Brute brute)
         {
             _brute = brute;
+            
         }
         
         public void Update()
         {
             _brute.transform.RotateTowards(_brute.target, freezeX: true, freezeZ: true);
 
-            if (_brute.cooldownTime > 0f) return;
+            if (_brute.cooldown > 0f) return;
             
-            _brute.cooldownTime = _brute.attackCooldown;
+            _brute.cooldown = _brute.attackCooldown;
             
             if (_brute.EnemyAnimator)
             {

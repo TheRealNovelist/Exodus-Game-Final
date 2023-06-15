@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace EnemySystem
 {
-    public class MoveToTarget : IState
+    internal class MoveToTarget : IState
     {
         private readonly BaseEnemy _enemy;
         private readonly NavMeshAgent _agent;
@@ -66,14 +66,14 @@ namespace EnemySystem
 
         public void OnEnter()
         {
-            _agent.isStopped = false;
+            _agent.enabled = true;
         }
 
         public void OnExit()
         {
             //Stop walking animation
             _animator.SetBool("Move", false);
-            _agent.isStopped = true;
+            _agent.enabled = false;
         }
     }
 }
