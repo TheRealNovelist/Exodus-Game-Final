@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace EnemySystem.Brute
 {
     public class Brute : BaseEnemy
     {
         [Header("Components")]
-        [SerializeField] private NavMeshAgent agent;
+        [SerializeField] protected NavMeshAgent agent;
 
         [Header("Settings")]
         [SerializeField] private float attackRange = 5f;
@@ -17,14 +18,16 @@ namespace EnemySystem.Brute
         public float attackCooldown = 5f;
         public float damageDealt = 10f;
 
-        [HideInInspector] public float cooldown;
+        [HideInInspector] public float cooldownTime;
+
+        protected MoveToTarget MoveToTarget;
         
         protected override void Awake()
         {
-            base.Awake();
-            
             if (!agent)
                 agent = GetComponent<NavMeshAgent>();
+
+            base.Awake();
         }
 
         private void OnAnimatorMove()
@@ -40,8 +43,8 @@ namespace EnemySystem.Brute
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;
-            
-            var MoveToTarget = new MoveToTarget(this, agent);
+
+                MoveToTarget = new MoveToTarget(this, agent);
             var Attacking = new Attacking(this);
             var Idle = new Idle(this);
 
@@ -65,9 +68,9 @@ namespace EnemySystem.Brute
         {
             base.OnStateMachineUpdate();
             
-            if (cooldown > 0f)
+            if (cooldownTime > 0f)
             {
-                cooldown -= Time.deltaTime;
+                cooldownTime -= Time.deltaTime;
             }
         }
 

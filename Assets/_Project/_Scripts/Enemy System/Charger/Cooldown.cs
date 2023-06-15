@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnemySystem.Charger
+namespace EnemySystem.Brute.Charger
 {
     internal class Cooldown : IState
     {
@@ -31,9 +31,7 @@ namespace EnemySystem.Charger
         public void OnEnter()
         {
             cooldown = _cooldownTime;
-            _charger.ResetCollision();
             isCoolingDown = true;
-            
             
             if (_charger.EnemyAnimator)
             {
@@ -44,6 +42,7 @@ namespace EnemySystem.Charger
 
         public void OnExit()
         {
+            
         }
     }
 }
