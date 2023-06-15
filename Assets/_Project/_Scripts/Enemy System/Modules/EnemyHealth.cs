@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
@@ -9,6 +10,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [Range(0, 1f), SerializeField] private float baseDamageMultiplier = 1f;
     
     [HideInInspector] public bool isDamageable = true;
+
+    [SerializeField] private MMF_Player feedback;
     
     public float Health { get; private set; }
     public float DamageMultiplier { get; private set; }
@@ -38,6 +41,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (!isDamageable) return;
         
         OnDamaged?.Invoke(source);
+        feedback.PlayFeedbacks();
         
         amount *= baseDamageMultiplier;
         if (Health - amount < 0f)
