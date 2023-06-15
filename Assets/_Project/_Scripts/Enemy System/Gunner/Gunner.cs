@@ -47,9 +47,15 @@ namespace EnemySystem.Gunner
                     
             var MoveToTarget = new MoveToTarget(this, agent);
             var RangedAttack = new RangedAttack(this);
+            var Idle = new Idle(this);
             
             AddTransition(MoveToTarget, RangedAttack, IsShootingRange);
-            AddAnyTransition(MoveToTarget, IsOutOfRange);
+            AddTransition(RangedAttack, MoveToTarget, IsOutOfRange);
+            
+            AddAnyTransition(Idle, () => target == null);
+            
+            AddTransition(Idle, MoveToTarget, () => target != null && !IsShootingRange());
+            AddTransition(Idle, RangedAttack, () => target != null && IsShootingRange());
 
             initialState = MoveToTarget;
             
