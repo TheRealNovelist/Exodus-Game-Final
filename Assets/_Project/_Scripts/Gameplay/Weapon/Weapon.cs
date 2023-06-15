@@ -27,7 +27,7 @@ namespace WeaponSystem
         private WeaponHandler _weaponHandler;
         
         [Space]
-        public WeaponData data; //Internal data
+        [ReadOnly] public WeaponData data; //Internal data
         
         private IEnumerator _reloadRoutine => ReloadRoutine();
         private IEnumerator _equipRoutine => EquipRoutine();

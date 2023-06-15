@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 //TAKE DAMAGE AND HEAL SOUND
@@ -9,6 +10,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
     [SerializeField] float maxHealth;
     public float _playerHealth;
 
+    [SerializeField] private MMF_Player feedback;
+
     private void Awake()
     {
         PlayerFullHealth();
@@ -17,6 +20,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
     
     public void Damage(float amount, Transform source = null)
     {
+        feedback.PlayFeedbacks();
+        
         _playerHealth -= amount;
 
         if (_playerHealth <= 0f)

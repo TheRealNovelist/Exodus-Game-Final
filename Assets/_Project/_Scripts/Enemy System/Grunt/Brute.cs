@@ -17,6 +17,8 @@ namespace EnemySystem.Brute
         public float attackCooldown = 5f;
         public float damageDealt = 10f;
 
+        [HideInInspector] public float cooldown;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -57,6 +59,24 @@ namespace EnemySystem.Brute
             bool TargetOutRange() => Vector3.Distance(target.position, transform.position) > attackRange;
             
             base.StartStateMachine(delay);
+        }
+
+        protected override void OnStateMachineUpdate()
+        {
+            base.OnStateMachineUpdate();
+            
+            if (cooldown > 0f)
+            {
+                cooldown -= Time.deltaTime;
+            }
+        }
+
+        public void Attack()
+        {
+            if (target.TryGetComponent(out IDamageable targetDamage))
+            {
+                targetDamage.Damage(damageDealt);
+            }
         }
 
         private void OnDrawGizmos()

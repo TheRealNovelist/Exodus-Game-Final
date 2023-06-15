@@ -12,7 +12,6 @@ public class HealthDisplayHUD : MonoBehaviour
     void Start()
     {
         playerHealth = GameObject.Find("Character").GetComponent<PlayerHealth>();
-        hpText = GameObject.Find("HP").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame

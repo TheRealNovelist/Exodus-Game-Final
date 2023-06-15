@@ -27,7 +27,16 @@ namespace EnemySystem
             SetState(state);
         }
         
-        private void Update() => _stateMachine.Update();
+        private void Update()
+        {
+            _stateMachine.Update();
+            OnStateMachineUpdate();
+        }
+
+        protected virtual void OnStateMachineUpdate()
+        {
+            
+        }
 
         protected virtual void OnEnable()
         {

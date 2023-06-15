@@ -5,8 +5,6 @@ namespace EnemySystem.Brute
     internal class Attacking : IState
     {
         private readonly Brute _brute;
-
-        private float cooldown = 0f;
         
         public Attacking(Brute brute)
         {
@@ -17,23 +15,14 @@ namespace EnemySystem.Brute
         public void Update()
         {
             _brute.transform.RotateTowards(_brute.target);
+
+            if (_brute.cooldown > 0f) return;
             
-            if (cooldown > 0f)
+            _brute.cooldown = _brute.attackCooldown;
+            
+            if (_brute.EnemyAnimator)
             {
-                cooldown -= Time.deltaTime;
-                return;
-            }
-            
-            cooldown = _brute.attackCooldown;
-            
-            if (_brute.target.TryGetComponent(out IDamageable targetDamage))
-            {
-                targetDamage.Damage(_brute.damageDealt);
-                
-                if (_brute.EnemyAnimator)
-                {
-                    _brute.EnemyAnimator.SetTrigger("Attack");
-                }
+                _brute.EnemyAnimator.SetTrigger("Attack");
             }
         }
 
