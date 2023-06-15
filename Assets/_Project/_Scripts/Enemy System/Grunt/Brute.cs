@@ -12,7 +12,7 @@ namespace EnemySystem.Brute
         [SerializeField] private NavMeshAgent agent;
 
         [Header("Settings")]
-        [SerializeField] private float attackRange = 2f;
+        [SerializeField] private float attackRange = 5f;
 
         public float attackCooldown = 5f;
         public float damageDealt = 10f;

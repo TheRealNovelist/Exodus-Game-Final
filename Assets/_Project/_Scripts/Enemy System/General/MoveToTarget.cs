@@ -71,9 +71,9 @@ namespace EnemySystem
 
         public void OnExit()
         {
+            //Stop walking animation
             _animator.SetBool("Move", false);
             _agent.enabled = false;
-            //Stop walking animation
         }
     }
 }

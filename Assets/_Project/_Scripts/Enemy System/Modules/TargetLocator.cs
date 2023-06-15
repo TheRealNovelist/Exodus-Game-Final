@@ -120,6 +120,13 @@ public class TargetLocator : MonoBehaviour
         {
             foreach (var checkCollider in colliders)
             {
+                //Check if anything in between the collider
+                if (Physics.Raycast(transform.position, checkCollider.transform.position - transform.position,
+                        searchRadius))
+                {
+                    continue;
+                }
+                
                 if (checkCollider.TryGetComponent(out IDamageable damageable))
                 {
                     target = damageable.transform;

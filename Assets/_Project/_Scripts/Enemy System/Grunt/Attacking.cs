@@ -14,7 +14,7 @@ namespace EnemySystem.Brute
         
         public void Update()
         {
-            _brute.transform.RotateTowards(_brute.target);
+            _brute.transform.RotateTowards(_brute.target, freezeX: true, freezeZ: true);
 
             if (_brute.cooldown > 0f) return;
             

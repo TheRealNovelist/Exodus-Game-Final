@@ -10,11 +10,10 @@ namespace EnemySystem.Gunner
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Transform bulletSpawnPoint;
 
-        [Header("Detection Settings")]
-        [SerializeField] private float detectionRadius = 2f;
-        [SerializeField] private float detectionRange = 10f;
-        [SerializeField] private LayerMask detectionMask;
-
+        [Header("Range Settings")]
+        [SerializeField] private float shootingRange = 10f;
+        [SerializeField] private float breakRange = 15f;
+        
         [Header("Weapon Settings")]
         [SerializeField] private GameObject bulletPrefab;
         public float fireRate = 10f;
@@ -31,24 +30,31 @@ namespace EnemySystem.Gunner
             if (!agent)
                 agent = GetComponent<NavMeshAgent>();
         }
+        
+        private void OnAnimatorMove()
+        {
+            Vector3 rootPosition = EnemyAnimator.rootPosition;
+            rootPosition.y = agent.nextPosition.y;
+            
+            transform.position = rootPosition;
+            transform.rotation = EnemyAnimator.rootRotation;
+            agent.nextPosition = rootPosition;
+        }
 
         public override void StartStateMachine(float delay = 0f)
         {
             if (IsStateMachineStarted()) return;
                     
             var MoveToTarget = new MoveToTarget(this, agent);
-            var RotateToTarget = new RotateToTarget(this);
-            var Attacking = new Attacking(this);
+            var RangedAttack = new RangedAttack(this);
             
-            AddAnyTransition(Attacking, () => Detect(target));
-            AddAnyTransition(RotateToTarget, () => !Detect(target));
-
-            //Enemy will move to a different location if the player is not in range, or cannot detect them for more than 5 seconds
-            AddAnyTransition(MoveToTarget, () => !TargetInRange(detectionRange) || _timeSinceLastDetect > 5);
+            AddTransition(MoveToTarget, RangedAttack, IsShootingRange);
+            AddAnyTransition(MoveToTarget, IsOutOfRange);
 
             initialState = MoveToTarget;
             
-            bool TargetInRange(float range) => Vector3.Distance(target.position, transform.position) <= range;
+            bool IsOutOfRange() => Vector3.Distance(transform.position, target.position) > breakRange;
+            bool IsShootingRange() => Vector3.Distance(transform.position, target.position) <= shootingRange;
 
             base.StartStateMachine(delay);
         }
@@ -61,27 +67,12 @@ namespace EnemySystem.Gunner
             Destroy(bullet, 10f);
         }
 
-        private bool Detect(Transform desiredTarget)
+        private void OnDrawGizmosSelected()
         {
-            if (Physics.SphereCast(bulletSpawnPoint.position, detectionRadius,
-                    (desiredTarget.position - bulletSpawnPoint.position).normalized, 
-                    out RaycastHit hit, detectionRange, detectionMask))
-            {
-                Debug.DrawLine(transform.position, hit.point, Color.red);
-                Debug.Log($"{hit.collider.gameObject.name}");
-
-                _timeSinceLastDetect = 0;
-                return hit.transform == desiredTarget;
-            }
-
-            _timeSinceLastDetect += Time.deltaTime;
-            Debug.DrawLine(transform.position, transform.forward * detectionRange, Color.green);
-            return false;
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(transform.position, detectionRange);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, breakRange);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, shootingRange);
         }
     }
 }

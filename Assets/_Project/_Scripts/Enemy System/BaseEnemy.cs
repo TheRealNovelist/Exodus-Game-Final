@@ -36,6 +36,7 @@ namespace EnemySystem
         {
             EnemyAnimator.SetTrigger("Death");
             GetComponent<Collider>().enabled = false;
+            TargetLocator.enabled = false;
             Stop();
             
             audioManager.PlayOneShot("EnemyDieSound");
