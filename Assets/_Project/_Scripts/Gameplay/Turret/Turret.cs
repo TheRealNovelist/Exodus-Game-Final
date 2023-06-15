@@ -54,7 +54,8 @@ public class Turret : MonoBehaviour, IDamageable
         //rotate to target
         Vector3 dir = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        RotateYTo(weaponPart, lookRotation, turningSpeed);
+        
+        RotateYTo(weaponPart, target.transform, turningSpeed);
 
         if (waitingToShoot)
         {
@@ -75,14 +76,15 @@ public class Turret : MonoBehaviour, IDamageable
     {
         foreach (Transform point in shootPoint)
         {
-            shootingParticles.Stop();
+            //Play sound
+            audioManager.PlayOneShot("TurretShoot");
+            shootingParticles.Play();
             TurretProjectile newOb = Instantiate(projectile, point.position, Quaternion.identity);
             newOb.GetComponent<Rigidbody>().AddForce(point.forward * 100, ForceMode.Impulse);
             newOb.Init(direct, damage);
         }
 
-        //Play sound
-        // audioManager?.PlayOneShot("TurretShoot");
+        
         // Play shooting particles
         //shootingParticles.Play();
 
@@ -93,6 +95,11 @@ public class Turret : MonoBehaviour, IDamageable
     {
         Vector3 rotation = Quaternion.Lerp(rotateObj.rotation, angle, Time.deltaTime * speed).eulerAngles;
         rotateObj.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+    }
+    
+    private void RotateYTo(Transform rotateObj, Transform target, float speed)
+    {
+        rotateObj.transform.RotateTowards(target.transform, Time.deltaTime * speed, freezeX: true, freezeZ: true);
     }
 
     private void UpdateTarget()

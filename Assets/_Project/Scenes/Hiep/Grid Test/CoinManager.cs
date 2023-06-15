@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
-
+//Play Audio gain coin
 public class CoinManager : Singleton<CoinManager>
 {
    [SerializeField] private int _coinAmount = 100;

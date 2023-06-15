@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TAKE DAMAGE AND HEAL SOUND
+
 public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
 {
     [SerializeField] float maxHealth;
