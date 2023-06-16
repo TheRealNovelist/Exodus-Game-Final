@@ -10,14 +10,10 @@ public class Juggernaut : BaseEnemy
     public float ChargeTime = 4f;
 
     [Header("Blaster")] public Transform BlastPos;
-    public int pointsCount;
-    public float MaxRadius;
-    public float BlastSpeed;
-    public float startWidth;
-    public float force;
-    public LayerMask blastMask;
-
+    public BlastWave _blastWave;
     protected BossRoom _bossRoom;
+
+    public GameObject Shield;
 
 
     [Header("Throwing")] public Transform ThrowPoint;
@@ -62,7 +58,7 @@ public class Juggernaut : BaseEnemy
         // AddTransition(Charging, attacks[Random.Range(0, attacks.Count - 1)], () => Charging.isCharged);
         AddTransition(Charging, Blasting, () => Charging.isCharged && Charging.NextRandomAttack == Blasting);
       //  AddTransition(Charging, Throwing, () => Charging.isCharged && Charging.NextRandomAttack == Throwing);
-        AddTransition(Blasting, Charging, () => Blasting.Blasted);
+        AddTransition(Blasting, Charging, () => Blasting.WavedShocked);
      //   AddTransition(Throwing, Charging, () => Blasting.Blasted);
         
         

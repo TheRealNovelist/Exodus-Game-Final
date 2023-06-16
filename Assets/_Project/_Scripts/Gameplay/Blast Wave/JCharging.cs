@@ -37,6 +37,7 @@ public class JCharging : IState
 
         _currentCooldown = _maxCooldown;
         isCharged = false;
+        
     }
 
     public void OnExit()
