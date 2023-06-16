@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(MeshCollider))]
 public class BlastWave : MonoBehaviour
 {
     int pointsCount;
@@ -14,6 +15,8 @@ public class BlastWave : MonoBehaviour
     float force;
 
     private LineRenderer lineRenderer;
+    private MeshCollider _meshCollider;
+    
 
     private bool basting = false;
     
@@ -35,15 +38,18 @@ public class BlastWave : MonoBehaviour
         {
             currentRadius += Time.deltaTime * speed;
             Draw(currentRadius);
-            Damage(currentRadius);
+          //  Damage(currentRadius);
             yield return null;
         }
     }
+
 
     private void Start()
     {
         Init(25, 25, 10, 1, 20,10);
         lineRenderer = GetComponent<LineRenderer>();
+        _meshCollider = GetComponent<MeshCollider>();
+        mesh = new Mesh();
         lineRenderer.positionCount = pointsCount + 1;
         basting = false;
         StartCoroutine(Blast());
@@ -69,6 +75,8 @@ public class BlastWave : MonoBehaviour
         }
     }
 
+    Mesh mesh ;
+
     private void Draw(float currentRadius)
     {
         List<Vector2> edges = new List<Vector2>();
@@ -84,13 +92,34 @@ public class BlastWave : MonoBehaviour
         }
 
         lineRenderer.widthMultiplier = Mathf.Lerp(0f, startWidth, 1f - currentRadius / maxRadius);
+        
+        
+        lineRenderer.BakeMesh(mesh);
+        _meshCollider.sharedMesh = mesh;
+      //  Debug.Log($"{_meshCollider.bounds.extents} / {lineRenderer.widthMultiplier}");
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
+        
         if (other.gameObject.CompareTag("Player"))
         {
             if (other.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.Damage(damage);
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.gameObject.TryGetComponent(out IDamageable damageable))
             {
                 damageable.Damage(damage);
             }
