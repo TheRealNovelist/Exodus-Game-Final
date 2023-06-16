@@ -81,7 +81,7 @@ public class Turret : MonoBehaviour, IDamageable
             shootingParticles.Play();
             TurretProjectile newOb = Instantiate(projectile, point.position, Quaternion.identity);
             newOb.GetComponent<Rigidbody>().AddForce(point.forward * 100, ForceMode.Impulse);
-            newOb.Init(direct, damage);
+            newOb.Init(direct, damage, transform);
         }
 
         

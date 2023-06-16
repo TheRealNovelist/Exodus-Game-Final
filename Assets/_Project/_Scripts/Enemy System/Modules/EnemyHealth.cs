@@ -19,6 +19,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public event Action<Transform> OnDamaged;
     public event Action OnDeath;
 
+    private bool _isDead;
+    
     private void Awake()
     {
         Health = baseHealth;
@@ -40,13 +42,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if (!isDamageable) return;
         
+        if (_isDead) return;
+        
         OnDamaged?.Invoke(source);
         feedback.PlayFeedbacks();
         
         amount *= baseDamageMultiplier;
-        if (Health - amount < 0f)
+        if (Health - amount <= 0f)
         {
             Health = 0;
+            _isDead = true;
             OnDeath?.Invoke();
             return;
         }

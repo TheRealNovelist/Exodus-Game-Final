@@ -25026,6 +25026,7 @@ GameObject:
   - component: {fileID: 1260837199}
   - component: {fileID: 1260837198}
   - component: {fileID: 1260837200}
+  - component: {fileID: 1260837201}
   m_Layer: 6
   m_Name: Junggernaunt
   m_TagString: Untagged
@@ -25108,12 +25109,13 @@ MonoBehaviour:
   Oxygen: {fileID: 0}
   Player: {fileID: 0}
   preferredTargetType: 2
+  randomAggression: 0
   switchOnAggression: 0
+  aggressionChance: 50
   usePulseSearch: 1
   searchPulseTime: 10
   searchRadius: 2
   viewDistance: 10
-  maxTargetCheck: 10
   searchMask:
     serializedVersion: 2
     m_Bits: 8
@@ -25153,6 +25155,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &1260837201
+SphereCollider:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260837188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1262793713
 GameObject:
   m_ObjectHideFlags: 0
@@ -28045,11 +28060,11 @@ MonoBehaviour:
   spawnOnStart: 1
   enemies:
     list:
-    - item: {fileID: 1172817287358576985, guid: 4f936be7ced1c504ebe343ae275faadf, type: 3}
+    - item: {fileID: 1172817287358576985, guid: 5046d08ce2017b64e9d3657ee0559fdc, type: 3}
       weight: 2
-    - item: {fileID: 1529819396297480602, guid: 4fcc402eeee41f14ab220bdfb954e3c5, type: 3}
+    - item: {fileID: 1529819396297480602, guid: d35ff782cc6e75d48b951f2d5849f9fa, type: 3}
       weight: 0
-    - item: {fileID: 2502849440052649338, guid: 6288e2baf79daec44a57b0dfc9d2839d, type: 3}
+    - item: {fileID: 2502849440052649338, guid: 17c256d6fcc8b594190ddc1038664688, type: 3}
       weight: 2
   spawners:
   - {fileID: 1461298657}
@@ -37765,7 +37780,7 @@ GameObject:
   - component: {fileID: 1960022903}
   - component: {fileID: 1960022905}
   - component: {fileID: 1960022904}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Main Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118040,7 +118055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3301725827337555995, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 131.1
+      value: -3.9
       objectReference: {fileID: 0}
     - target: {fileID: 3662479324050292462, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: m_AnchorMax.y
@@ -118140,7 +118155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9205818919365756249, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 131.1
+      value: -3.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af68437a68d392741bf82c46c73d2382, type: 3}

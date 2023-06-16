@@ -819,6 +819,7 @@ GameObject:
   - component: {fileID: 3238602008426480965}
   - component: {fileID: 3238602008426480966}
   - component: {fileID: 3238602008426481016}
+  - component: {fileID: 7131762938340056472}
   m_Layer: 6
   m_Name: BossGunner
   m_TagString: Untagged
@@ -973,12 +974,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Oxygen: {fileID: 0}
+  Player: {fileID: 0}
   preferredTargetType: 0
+  randomAggression: 0
   switchOnAggression: 0
+  aggressionChance: 50
   usePulseSearch: 1
   searchPulseTime: 10
   searchRadius: 2
-  maxTargetCheck: 10
+  viewDistance: 10
   searchMask:
     serializedVersion: 2
     m_Bits: 0
@@ -995,6 +1000,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fsmOwner: {fileID: 3238602008426480967}
+--- !u!135 &7131762938340056472
+SphereCollider:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238602008426480972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3238602009230873620
 GameObject:
   m_ObjectHideFlags: 0

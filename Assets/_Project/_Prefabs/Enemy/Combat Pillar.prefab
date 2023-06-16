@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 2044832989890880516}
   - component: {fileID: 2044832989890880520}
   - component: {fileID: 169496423}
+  - component: {fileID: 3237514701083598926}
   m_Layer: 6
   m_Name: Combat Pillar
   m_TagString: Untagged
@@ -205,6 +206,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092f8fa8d4969094e9220e24aed7a182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Oxygen: {fileID: 0}
+  Player: {fileID: 0}
+  preferredTargetType: 2
+  randomAggression: 0
+  switchOnAggression: 0
+  aggressionChance: 50
+  usePulseSearch: 1
+  searchPulseTime: 10
+  searchRadius: 2
+  viewDistance: 10
+  searchMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &169496423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +232,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 100
-  IsDamagable: 0
+  baseDamageMultiplier: 1
+  isDamageable: 1
+  feedback: {fileID: 0}
+--- !u!135 &3237514701083598926
+SphereCollider:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044832989890880517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2044832990108046674
 GameObject:
   m_ObjectHideFlags: 0

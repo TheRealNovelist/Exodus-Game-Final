@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace EnemySystem
 {
-    internal class MoveToTarget : IState
+    internal class MoveToTargetRM : IState
     {
         private readonly BaseEnemy _enemy;
         private readonly NavMeshAgent _agent;
@@ -13,7 +13,7 @@ namespace EnemySystem
         private Vector2 _velocity;
         private Vector2 _smoothDeltaPosition;
         
-        public MoveToTarget(BaseEnemy enemy, NavMeshAgent agent)
+        public MoveToTargetRM(BaseEnemy enemy, NavMeshAgent agent)
         {
             _enemy = enemy;
             _agent = agent;

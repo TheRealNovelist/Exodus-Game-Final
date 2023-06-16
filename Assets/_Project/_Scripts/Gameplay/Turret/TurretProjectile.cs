@@ -9,6 +9,8 @@ public class TurretProjectile : MonoBehaviour
     private int _damage = 10;
     public GameObject particleSystemPrefab;
 
+    private Transform _owner;
+
     // Update is called once per frame
     void Update()
     {
@@ -25,10 +27,11 @@ public class TurretProjectile : MonoBehaviour
         Destroy(gameObject,1f);
     }
 
-    public void Init(Vector3 direct, int damage)
+    public void Init(Vector3 direct, int damage, Transform owner)
     {
         _damage = damage;
         this.shootDirect = direct;
+        _owner = owner;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -43,7 +46,7 @@ public class TurretProjectile : MonoBehaviour
                                                                                   "Player"))
         {
            //Debug.Log($"damage");
-            idamageable.Damage(_damage);
+            idamageable.Damage(_damage, _owner);
         }
 
         Destroy(gameObject);

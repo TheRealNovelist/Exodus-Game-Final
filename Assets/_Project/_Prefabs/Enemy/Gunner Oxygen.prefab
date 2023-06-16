@@ -781,7 +781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385178023405381957, guid: 634693be30a0637429fce8f1566a717a, type: 3}
       propertyPath: m_Name
-      value: Gunner
+      value: Gunner 1
       objectReference: {fileID: 0}
     - target: {fileID: 6385178023405381957, guid: 634693be30a0637429fce8f1566a717a, type: 3}
       propertyPath: m_Layer
@@ -873,6 +873,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!135 &6540502822842559780
+SphereCollider:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8563892516884795306}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &7309560398119730877
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1036,7 +1049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Oxygen: {fileID: 0}
   Player: {fileID: 0}
-  preferredTargetType: 2
+  preferredTargetType: 0
   randomAggression: 0
   switchOnAggression: 1
   aggressionChance: 50
@@ -1085,19 +1098,6 @@ MonoBehaviour:
   baseDamageMultiplier: 1
   isDamageable: 1
   feedback: {fileID: 4906592260847910126}
---- !u!135 &6540502822842559780
-SphereCollider:
-  m_ObjectHideFlags: 8
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8563892516884795306}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &8563892516884894666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6385178023405221157, guid: 634693be30a0637429fce8f1566a717a, type: 3}

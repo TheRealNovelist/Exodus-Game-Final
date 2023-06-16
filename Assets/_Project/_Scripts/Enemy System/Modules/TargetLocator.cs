@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum TargetType
 {
@@ -11,6 +12,7 @@ public enum TargetType
     Any
 }
 
+[RequireComponent(typeof(SphereCollider))]
 public class TargetLocator : MonoBehaviour
 {
     [ReadOnly] public Transform Oxygen;
@@ -19,19 +21,24 @@ public class TargetLocator : MonoBehaviour
 
     [Header("Base Settings")]
     [SerializeField] private TargetType preferredTargetType = TargetType.Any;
-    [SerializeField] private bool switchOnAggression;
+    [SerializeField] private bool randomAggression;
+    [HideIf("randomAggression"), SerializeField] private bool switchOnAggression;
+    [ShowIf("randomAggression"), Range (0, 100), SerializeField] private int aggressionChance = 50;
 
     [Header("Search Settings")] 
     [SerializeField] private bool usePulseSearch = true;
     [SerializeField] private float searchPulseTime = 10f;
     [SerializeField] private float searchRadius = 2f;
     [SerializeField] private float viewDistance = 10f;
-    [SerializeField] private int maxTargetCheck = 10;
     [SerializeField] private LayerMask searchMask;
+    
+    private SphereCollider _searchCollider;
 
     private EnemyHealth health => GetComponent<EnemyHealth>();
+    
+    private List<Transform> _inRangeTargets = new();
 
-    private bool _isPrioritizing;
+    private bool _isAggro;
     private bool _pulse;
 
     private void Awake()
@@ -45,20 +52,22 @@ public class TargetLocator : MonoBehaviour
 
         if (player)
             Player = player.transform;
+
+        if (randomAggression)
+            switchOnAggression = Random.Range(0, 100) < aggressionChance; 
         
         if (switchOnAggression)
         {
-            health.OnDamaged += SetTarget;
+            health.OnDamaged += OnDamagedBy;
         }
     }
 
     private void Update()
     {
-        //If target is no longer found
         if ((!Target || !Target.gameObject.activeInHierarchy) && !_pulse && usePulseSearch)
         {
-            if (_isPrioritizing)
-                _isPrioritizing = false;
+            if (_isAggro)
+                _isAggro = false;
             
             SearchTarget(preferredTargetType);
         }
@@ -103,61 +112,55 @@ public class TargetLocator : MonoBehaviour
 
     private IEnumerator FindTarget()
     {
-        WaitForSeconds wait = new(searchPulseTime);
-        
         _pulse = true;
-        SearchAnyTarget(out Transform target);
-        Target = target;
+        Target = SelectAnyTarget();
         
-        yield return wait;
+        yield return new WaitForSeconds(searchPulseTime);
         
         _pulse = false;
     }
     
     private void OnDestroy()
     {
-        health.OnDamaged -= SetTarget;
+        if (switchOnAggression)
+            health.OnDamaged -= OnDamagedBy;
     }
 
-    private void SetTarget(Transform newTarget)
+    private void OnDamagedBy(Transform newTarget)
     {
-        if (newTarget == Player || !_isPrioritizing)
+        if (!_isAggro)
         {
-            _isPrioritizing = true;
             Target = newTarget;
+            _isAggro = true;
         }
     }
 
-    private bool SearchAnyTarget(out Transform target)
+    private Transform SelectAnyTarget()
     {
-        Collider[] colliders = new Collider[maxTargetCheck];
-        if (Physics.OverlapSphereNonAlloc(transform.position, searchRadius, colliders, searchMask) > 0)
-        {
-            foreach (var checkCollider in colliders)
-            {
-                //Check if anything in between the collider
-                if (!CanSeeTarget(checkCollider.transform))
-                {
-                    continue;
-                }
-
-                if (checkCollider.TryGetComponent(out IDamageable damageable))
-                {
-                    target = damageable.transform;
-                    return true;
-                }
-            }
-        }
-        
-        target = null;
-        return false;
+        return _inRangeTargets.Count > 0 ? _inRangeTargets[Random.Range(0, _inRangeTargets.Count - 1)] : null;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(((1<<collision.gameObject.layer) & searchMask) != 0)
+        if (_inRangeTargets.Contains(collision.transform))
         {
-            SetTarget(collision.transform);
+            OnDamagedBy(collision.transform);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(((1<<other.gameObject.layer) & searchMask) != 0)
+        {
+            _inRangeTargets.Add(other.transform);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(((1<<other.gameObject.layer) & searchMask) != 0)
+        {
+            _inRangeTargets.Remove(other.transform);
         }
     }
 
@@ -166,9 +169,18 @@ public class TargetLocator : MonoBehaviour
         return Physics.Raycast(transform.position, target.position - transform.position, viewDistance);
     }
     
-    private void OnDrawGizmosSelected()
+#if UNITY_EDITOR
+    private void OnValidate()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, searchRadius);
+        if (!_searchCollider)
+            _searchCollider = GetComponent<SphereCollider>();
+        
+        if (_searchCollider)
+        {
+            _searchCollider.hideFlags = HideFlags.NotEditable;
+            _searchCollider.radius = searchRadius;
+            _searchCollider.isTrigger = true;
+        }
     }
+#endif
 }

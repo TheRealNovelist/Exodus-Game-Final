@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public enum SearchComponentMode
 {
@@ -55,4 +57,30 @@ public static class Extension
         component = default;
         return false;
     }
+
+    public static Vector3 GetClosestPoint(this Transform transform, Vector3 position)
+    {
+        var root = transform.root;
+
+        List<Collider> colliders = root.GetComponents<Collider>().ToList();
+
+        colliders = colliders.Union(root.GetComponentsInChildren<Collider>().ToList()) as List<Collider>;
+
+        float closestDist = Mathf.Infinity;
+        Vector3 closestPoint = transform.position;
+
+        if (colliders == null) return transform.position;
+        foreach (var collider in colliders)
+        {
+            var point = collider.ClosestPoint(position);
+            var dist = Vector3.Distance(position, point);
+            if (dist < closestDist)
+            {
+                closestPoint = point;
+                closestDist = dist;
+            }
+        }
+
+        return closestPoint;
+    }   
 }

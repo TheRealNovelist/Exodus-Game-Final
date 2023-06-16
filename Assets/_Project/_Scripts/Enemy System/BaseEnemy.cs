@@ -35,7 +35,13 @@ namespace EnemySystem
         public virtual void OnDeath()
         {
             EnemyAnimator.SetTrigger("Death");
-            GetComponent<Collider>().enabled = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+
+            foreach (var col in GetComponents<Collider>())
+            {
+                col.enabled = false;
+            }
+            
             TargetLocator.enabled = false;
             Stop();
             

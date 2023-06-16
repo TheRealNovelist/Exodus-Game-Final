@@ -45,7 +45,7 @@ namespace EnemySystem.Gunner
         {
             if (IsStateMachineStarted()) return;
                     
-            var MoveToTarget = new MoveToTarget(this, agent);
+            var MoveToTarget = new MoveToTargetRM(this, agent);
             var RangedAttack = new RangedAttack(this);
             var Idle = new Idle(this);
             
@@ -59,8 +59,8 @@ namespace EnemySystem.Gunner
 
             initialState = MoveToTarget;
             
-            bool IsOutOfRange() => Vector3.Distance(transform.position, target.position) > breakRange;
-            bool IsShootingRange() => Vector3.Distance(transform.position, target.position) <= shootingRange;
+            bool IsOutOfRange() => Vector3.Distance(transform.position, target.GetClosestPoint(transform.position)) > breakRange;
+            bool IsShootingRange() => Vector3.Distance(transform.position, target.GetClosestPoint(transform.position)) <= shootingRange;
 
             base.StartStateMachine(delay);
         }

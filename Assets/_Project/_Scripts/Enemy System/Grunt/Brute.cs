@@ -41,7 +41,7 @@ namespace EnemySystem.Brute
         {
             if (IsStateMachineStarted()) return;
             
-            var MoveToTarget = new MoveToTarget(this, agent);
+            var MoveToTarget = new MoveToTargetRM(this, agent);
             var Attacking = new Attacking(this);
             var Idle = new Idle(this);
 
@@ -55,8 +55,8 @@ namespace EnemySystem.Brute
 
             initialState = MoveToTarget;
             
-            bool TargetInRange() => Vector3.Distance(target.position, transform.position) <= attackRange;
-            bool TargetOutRange() => Vector3.Distance(target.position, transform.position) > attackRange;
+            bool TargetInRange() => Vector3.Distance(target.GetClosestPoint(transform.position), transform.position) <= attackRange;
+            bool TargetOutRange() => Vector3.Distance(target.GetClosestPoint(transform.position), transform.position) > attackRange;
             
             base.StartStateMachine(delay);
         }
