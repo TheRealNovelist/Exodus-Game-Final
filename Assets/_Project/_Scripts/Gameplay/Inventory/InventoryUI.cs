@@ -44,27 +44,43 @@ public class InventoryUI : MonoBehaviour
         var itemOfSelectedSlot = Inventory.Instance.slotsByItems.FirstOrDefault(item => item.Value == selectedSlot).Key;
         EquipItem selectedEquipment = itemOfSelectedSlot as EquipItem;
 
-        if (selectedEquipment != null && selectedEquipment.unlocked && selectedEquipment.equipping == false)
+        if (selectedEquipment != null)
         {
-            optionPanel.gameObject.SetActive(show);
-            optionPanel.GetComponent<RectTransform>().position = selectedButton.GetComponent<RectTransform>().position + offset;
-            currentSelecting = itemOfSelectedSlot as EquipItem;
+            if (selectedEquipment.unlocked && selectedEquipment.equipping == false)
+            {
+                optionPanel.gameObject.SetActive(show);
+                optionPanel.GetComponent<RectTransform>().position = selectedButton.GetComponent<RectTransform>().position + offset;
+                currentSelecting = itemOfSelectedSlot as EquipItem;
+            }
+            else
+            {
+                optionPanel.gameObject.SetActive(!show);
+            }  
         }
         else
         {
-            optionPanel.gameObject.SetActive(!show);
-            
+            selectedSlot.UseItem();
+            PopUpNoti(itemOfSelectedSlot,false);
         }
+       
         
     }
 
 
     #endregion
 
-    public void PopUpNoti(Item item)
+    public void PopUpNoti(Item item, bool addToInventory = true)
     {
-        notification.PopUp($"Added {item} to inventory", notiDuration);
+        if (addToInventory)
+        {
+            notification.PopUp($"Added {item} to inventory", notiDuration);
+        }
+        else
+        {
+            notification.PopUp($"Added {item.itemName}", notiDuration);
+        }
     }
+    
 
 
     private void Awake()

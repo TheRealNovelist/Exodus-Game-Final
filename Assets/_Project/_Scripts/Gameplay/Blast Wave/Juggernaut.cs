@@ -55,15 +55,15 @@ public class Juggernaut : BaseEnemy
        var Throwing = new JThrowing(this);
 
 
-       // attacks.Add(Blasting);
+        attacks.Add(Blasting);
        // attacks.Add(Punching);
-        attacks.Add(Throwing);
+       // attacks.Add(Throwing);
 
         // AddTransition(Charging, attacks[Random.Range(0, attacks.Count - 1)], () => Charging.isCharged);
-       // AddTransition(Charging, Blasting, () => Charging.isCharged && Charging.NextRandomAttack == Blasting);
-        AddTransition(Charging, Throwing, () => Charging.isCharged && Charging.NextRandomAttack == Throwing);
-      //  AddTransition(Blasting, Charging, () => Blasting.Blasted);
-        AddTransition(Throwing, Charging, () => Blasting.Blasted);
+        AddTransition(Charging, Blasting, () => Charging.isCharged && Charging.NextRandomAttack == Blasting);
+      //  AddTransition(Charging, Throwing, () => Charging.isCharged && Charging.NextRandomAttack == Throwing);
+        AddTransition(Blasting, Charging, () => Blasting.Blasted);
+     //   AddTransition(Throwing, Charging, () => Blasting.Blasted);
         
         
         initialState = Charging;

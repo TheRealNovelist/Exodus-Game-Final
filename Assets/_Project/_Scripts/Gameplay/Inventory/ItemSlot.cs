@@ -12,21 +12,11 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] private Image imageItem;
     [SerializeField] private Image imageFrame;
     public int amount = 0;
-    [SerializeField]   private TextMeshProUGUI quantityTMP;
-    
-    [SerializeField] private Color32 lockColor = new Color32(90, 90, 90,225);
-    private Color32 unlockColor = new Color32(255, 255, 255,255);
-    private Color32 nullColor = new Color32(0, 0, 0,0);
+    [SerializeField] private TextMeshProUGUI quantityTMP;
 
-
-    private void OnValidate()
-    {
-        imageFrame = transform.GetComponent<Image>(); 
-        imageItem = transform.GetChild(0).GetComponent<Image>();
-                quantityTMP = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-
-
-    }
+    [SerializeField] private Color32 lockColor = new Color32(90, 90, 90, 225);
+    private Color32 unlockColor = new Color32(255, 255, 255, 255);
+    private Color32 nullColor = new Color32(0, 0, 0, 0);
 
 
     public void UpdateSlotUI()
@@ -52,6 +42,11 @@ public class ItemSlot : MonoBehaviour
                 imageItem.color = lockColor;
                 quantityTMP.text = "";
                 break;
+            
+            case ConsumableItem when amount ==0:
+                imageItem.color = lockColor;
+                quantityTMP.text = "";
+                break;
             default:
                 quantityTMP.text = amount.ToString();
                 imageItem.color = unlockColor;
@@ -62,5 +57,18 @@ public class ItemSlot : MonoBehaviour
     public void SetFrameIMG(Sprite sprite)
     {
         imageFrame.sprite = sprite;
+    }
+
+    public void UseItem()
+    {
+        if(amount<=0)  {return;}
+        amount--;
+        UpdateSlotUI();
+        ConsumableItem i = _item as ConsumableItem;
+
+        if (i != null)
+        {
+           i.effect?.Invoke();
+        }
     }
 }

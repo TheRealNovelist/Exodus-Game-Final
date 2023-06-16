@@ -38,11 +38,13 @@ public class RespawnPlayer : MonoBehaviour
     {
         deadScreenUI.alpha = 0;
 
+    }
+
+    private void OnEnable()
+    {
         OnPlayerFinishedRespawn += FinsihedRespawn;
         OnPlayerStartRespawn += StartRespawn;
     }
-    
-    
 
 
     public void fadeInUI()

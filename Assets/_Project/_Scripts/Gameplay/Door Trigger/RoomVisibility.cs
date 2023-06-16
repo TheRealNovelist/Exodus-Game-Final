@@ -38,22 +38,13 @@ public class RoomVisibility : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        previousConnection = new List<GameObject>();
+    }
+
     private void Start()
     {
-        /*if (disableOnStart)
-        {
-            foreach (GameObject c in connectedGO)
-            {
-                if (!c.TryGetComponent(out RoomVisibility room))
-                {
-                    if (c.activeSelf)
-                    {
-                        c.SetActive(false);
-                    }
-                }
-            }
-            
-            gameObject.SetActive(false);
-        }*/
+        
     }
 }

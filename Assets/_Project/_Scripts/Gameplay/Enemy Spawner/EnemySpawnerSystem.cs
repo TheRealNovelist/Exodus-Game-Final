@@ -51,10 +51,21 @@ public class EnemySpawnerSystem : BaseAI
         }
     }
 
+    public void Reset()
+    {
+        Start();
+        EnemyRoom enemyRoom = room as EnemyRoom;
+        if (enemyRoom)
+        {
+            enemyRoom.UnlockRoom?.Invoke();
+        }
+
+        FinishedSpawning = false;
+    }
+
     public override void StartStateMachine(float delay = 0)
     {
         if (IsStateMachineStarted()) return;
-
         var waitingState = new ES_WaitingState(waveCountDownTime);
         var wavingState = new ES_WavingState(this);
         
@@ -68,9 +79,17 @@ public class EnemySpawnerSystem : BaseAI
 
     private void Start()
     {
+        spawned = 0;
+        defeated = 0;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        
         EnemySpawned += SpawnedEnemy;
         EnemyDefeated += DefeatedEnemy;
-
+        
         if (room)
         {
             EnemyRoom enemyRoom = room as EnemyRoom;
@@ -93,7 +112,6 @@ public class EnemySpawnerSystem : BaseAI
     private void SpawnedEnemy(BaseEnemy enemy)
     {
         spawned++;
-
         if (spawned >= totalToSpawn)
         {
             _stateMachine.Stop();
@@ -119,7 +137,6 @@ public class EnemySpawnerSystem : BaseAI
         }
         
         EnemiesInRoom.Remove(enemy);
-
     }
 
     public void Init(Room room)
@@ -133,7 +150,10 @@ public class EnemySpawnerSystem : BaseAI
     {
         foreach (BaseEnemy enemy in EnemiesInRoom)
         {
-            enemy.gameObject.SetActive(false);
+            if (enemy)
+            {
+                Destroy(enemy.gameObject);
+            }
         }
     }
 
@@ -144,5 +164,6 @@ public class EnemySpawnerSystem : BaseAI
             enemy.gameObject.SetActive(true);
         }
     }
+  
 
 }

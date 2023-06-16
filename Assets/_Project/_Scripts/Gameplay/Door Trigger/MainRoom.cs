@@ -36,8 +36,6 @@ public class MainRoom : Room
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerCurrentAt = EnemySpawner;
-
             PlayerInMainRoom?.Invoke(true);
         }
     }
@@ -56,12 +54,9 @@ public class MainRoom : Room
         _mainRoomUI.ToggleWarning(!inRoom);
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        PlayerInMainRoom += PlayerInRoom;
         PlayerInMainRoom?.Invoke(false);
-
         StartCoroutine(WaitToActiveSpawner());
     }
 
@@ -75,8 +70,17 @@ public class MainRoom : Room
         EnemySpawner.Activate();
     }
 
+    private void OnEnable()
+    {
+        PlayerInMainRoom += PlayerInRoom;
+        RespawnPlayer.OnPlayerStartRespawn += EnemySpawner.DisableAllEnemiesInRoom;
+        RespawnPlayer.OnPlayerFinishedRespawn += EnemySpawner.EnableAllEnemiesInRoom;
+    }
+
     private void OnDisable()
     {
+        RespawnPlayer.OnPlayerStartRespawn -= EnemySpawner.DisableAllEnemiesInRoom;
+        RespawnPlayer.OnPlayerFinishedRespawn -= EnemySpawner.EnableAllEnemiesInRoom;
         PlayerInMainRoom -= PlayerInRoom;
     }
 

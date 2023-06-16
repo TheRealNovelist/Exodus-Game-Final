@@ -16,8 +16,9 @@ public class EnemyRoom : Room
     [HideInInspector] public bool roomLocked = false;
     public Action LockRoom, UnlockRoom;
 
-    private void Awake()
+    protected override void Awake()
     {
+base.Awake();        
         if (doors == null || doors.Count == 0)
         {
             return;
@@ -29,10 +30,15 @@ public class EnemyRoom : Room
         }
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         roomLocked = false;
+    }
+
+    private void OnEnable()
+    {
+        RespawnPlayer.OnPlayerStartRespawn += EnemySpawner.DisableAllEnemiesInRoom;
+        RespawnPlayer.OnPlayerFinishedRespawn += EnemySpawner.Reset;
 
         LockRoom += LockDoors;
         UnlockRoom += UnlockDoors;
@@ -42,14 +48,14 @@ public class EnemyRoom : Room
     {
         LockRoom -= LockDoors;
         UnlockRoom -= UnlockDoors;
+        RespawnPlayer.OnPlayerStartRespawn -= EnemySpawner.DisableAllEnemiesInRoom;
+        RespawnPlayer.OnPlayerFinishedRespawn -= EnemySpawner.Reset;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && !EnemySpawner.FinishedSpawning)
         {
-            PlayerCurrentAt = EnemySpawner;
-
             LockRoom?.Invoke();
         }
     }

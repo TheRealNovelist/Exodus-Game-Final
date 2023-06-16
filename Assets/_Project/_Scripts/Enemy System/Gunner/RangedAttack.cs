@@ -35,7 +35,6 @@ namespace EnemySystem.Gunner
                 _gunner.EnemyAnimator.SetTrigger("RangedAttack");
                 
                 _currentAmmo -= 1;
-                Debug.Log("Attacking");
             }
             else
             {

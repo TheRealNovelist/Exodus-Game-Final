@@ -99,9 +99,10 @@ public class Chest : MonoBehaviour
                 {
                     Debug.LogWarning($"Item {consumeItem.name} has no effect event");
                 }
+                
+                Inventory.Instance._inventoryUI.PopUpNoti(consumeItem,false);
 
-                StartCoroutine(WaitToHarvest());
-
+                StartCoroutine(WaitToHideItem());
                 harvested = true;
             }
         }
@@ -113,11 +114,11 @@ public class Chest : MonoBehaviour
         audioManager?.PlayOneShot("ChestHarvest");
         Inventory.Instance.AddItem(item);
         harvested = true;
-        StartCoroutine(WaitToHarvest());
+        StartCoroutine(WaitToHideItem());
     }
 
 
-    IEnumerator WaitToHarvest()
+    IEnumerator WaitToHideItem()
     {
         yield return new WaitForSeconds(0.5f);
         itemHolder.gameObject.SetActive(false);
