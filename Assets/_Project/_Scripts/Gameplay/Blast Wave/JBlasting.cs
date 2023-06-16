@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using EnemySystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class JBlasting : IState
@@ -14,9 +10,12 @@ public class JBlasting : IState
     public bool WavedShocked = false;
     private bool _charging = true;
 
+    private BlastWaveDataSO _blastData;
+
     public JBlasting(Juggernaut enemy)
     {
         _enemy = enemy;
+        _blastData = _enemy.BlastSO;
     }
 
     // Update is called once per frame
@@ -44,7 +43,8 @@ public class JBlasting : IState
 
                             BlastWave newWave = GameObject.Instantiate(_enemy._blastWave, _enemy.BlastPos.position,
                                 _enemy._blastWave.transform.rotation);
-                            newWave.Init(25, 30, 20, 1f, 20, 10);
+                            newWave.Init(_blastData.pointsCount, _blastData.maxRadius, _blastData.speed,
+                                _blastData.startWidth, _blastData.force, _blastData.damage);
                             WavedShocked = true;
                         });
                     });
@@ -61,8 +61,6 @@ public class JBlasting : IState
         _chargeTime = _enemy.ChargeTime;
         WavedShocked = false;
         _enemy.Shield.SetActive(true);
-
-
     }
 
     public void OnExit()

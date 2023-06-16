@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (_isDead) return;
         
         OnDamaged?.Invoke(source);
-        feedback.PlayFeedbacks();
+        feedback?.PlayFeedbacks();
         
         amount *= baseDamageMultiplier;
         if (Health - amount <= 0f)
@@ -55,7 +55,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             OnDeath?.Invoke();
             return;
         }
-        
         Health -= amount;
     }
 

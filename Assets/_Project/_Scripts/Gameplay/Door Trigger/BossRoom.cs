@@ -6,14 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class BossRoom : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private List<DoorDoubleSlide> doors = new List<DoorDoubleSlide>();
 
     public Action OnEnemyDied;
     public Action<bool> OnEnemyActivated;
     public Action OnRoomPassed;
-    public Action OnResetRoom;
 
     private int _defeatedEnemies = 0;
     private int _totalEnemies;
@@ -61,7 +59,6 @@ public class BossRoom : MonoBehaviour
         RespawnPlayer.OnPlayerStartRespawn -= OffAllEnemies;
         RespawnPlayer.OnPlayerFinishedRespawn -= ResetRoom;
 
-        //   RespawnPlayer.OnPlayerFinishedRespawn -= ReloadScene;
     }
 
     private void UnlockRoom() => Locked = false;
@@ -123,6 +120,11 @@ public class BossRoom : MonoBehaviour
             if (e.TryGetComponent(out Enemy enemy))
             {
                 enemy.Reset();
+            }
+            
+            if (e.TryGetComponent(out Juggernaut juggernaut))
+            {
+                juggernaut.Reset();
             }
         }
     }

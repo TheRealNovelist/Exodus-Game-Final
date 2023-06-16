@@ -35,7 +35,11 @@ namespace EnemySystem
         public virtual void OnDeath()
         {
             EnemyAnimator.SetTrigger("Death");
-            GetComponent<Rigidbody>().isKinematic = true;
+
+            if (gameObject.TryGetComponent(out Rigidbody rg))
+            {
+                rg.isKinematic = true;
+            }
 
             foreach (var col in GetComponents<Collider>())
             {
