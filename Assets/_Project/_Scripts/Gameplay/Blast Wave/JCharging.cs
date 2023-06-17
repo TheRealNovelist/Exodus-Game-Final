@@ -23,8 +23,7 @@ public class JCharging : IState
     {
         if (_currentCooldown <= 0)
         {
-            NextRandomAttack = _enemy.attacks[Random.Range(0, _enemy.attacks.Count - 1)];
-            Debug.Log(NextRandomAttack);
+           _enemy.AttackIndex++;
             isCharged = true;
             return;
         }
@@ -33,8 +32,6 @@ public class JCharging : IState
 
     public void OnEnter()
     {
-        Debug.Log("charge ");
-
         _currentCooldown = _maxCooldown;
         isCharged = false;
     }

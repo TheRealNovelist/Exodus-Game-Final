@@ -30,7 +30,7 @@ public class SmallBlaster : MonoBehaviour
     IEnumerator WaitToStart()
     {
         yield return new WaitForSeconds(Random.Range(0, 10));
-        InvokeRepeating(nameof(Wave), 1, Random.Range(gap - 10, gap + 10));
+        InvokeRepeating(nameof(Wave), 1, Random.Range(gap, gap + 10));
     }
 
     private void Wave()

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class SmallBlasterSlot : MonoBehaviour
 {
-   private SmallBlaster _blaster;
-   public void Init(SmallBlaster blaster)
-   {
-      _blaster = blaster;
-   }
+    private SmallBlaster _blaster;
 
-   public void ClearSlot()
-   {
-      _blaster = null;
-   }
+    public void Init(SmallBlaster blaster)
+    {
+        _blaster = blaster;
+    }
 
-   public bool SlotAvailable => _blaster == null;
+    public void ClearSlot()
+    {
+        if (_blaster)
+        {
+            Destroy(_blaster.gameObject);
+        }
+    }
+
+    public bool SlotAvailable => _blaster == null;
 }

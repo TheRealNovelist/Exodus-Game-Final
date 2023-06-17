@@ -30,15 +30,23 @@ public class JThrowing : IState
             if (waitedTime >= _enemy.ThrowWaitTime)
             {
                 _haveRock = false;
-                
-                if (_rock.TryGetComponent(out Rigidbody rg))
-                {
-                    rg.isKinematic = false;
-                }
 
-                _rock.transform.DOMove(_enemy.target.position, 0.2f).OnComplete(() =>
+                _enemy.transform.DOMove(_enemy.transform.position + _enemy.transform.forward * 11, 0.2f).OnComplete(() =>
                 {
-                    Finished = true;
+                    _enemy.EnemyAnimator.SetTrigger("Throw");
+                    
+                    if (_rock.TryGetComponent(out Rock r))
+                    {
+                        r.ActiveRock();
+                    }
+
+                    if (_rock.TryGetComponent(out Rigidbody rg))
+                    {
+                        rg.isKinematic = false;
+                    }
+
+                    var targetPos = _enemy.target.position;
+                    _rock.transform.DOMove(targetPos, 0.16f).OnComplete(() => { Finished = true; });
                 });
             }
         }
@@ -61,19 +69,25 @@ public class JThrowing : IState
             Finished = true;
         }
 
-        var enemToRock = _enemy.transform.DOMove(new Vector3(_rock.position.x,_enemy.transform.position.y,_rock.position.z), 3).OnPlay(() =>
-        {
-            _enemy.transform.LookAt(new Vector3(_rock.position.x, _enemy.transform.position.y, _rock.position.z));
-        });
+        var enemToRock = _enemy.transform
+            .DOMove(new Vector3(_rock.position.x, _enemy.transform.position.y, _rock.position.z), 2).OnPlay(() =>
+            {
+                _enemy.transform.LookAt(
+                    new Vector3(_rock.position.x, _enemy.transform.position.y, _rock.position.z));
+            });
 
         enemToRock.OnComplete(() =>
         {
-            _rock.DOMove(_enemy.ThrowPoint.position, 1.5f);
+            //_enemy.transform.RotateTowards(_enemy.target.transform, Time.deltaTime * 50, freezeX: true, freezeZ: true);
+            _enemy.transform.LookAt(new Vector3(_enemy.target.position.x, _enemy.transform.position.y,
+                _enemy.target.position.z));
+            _enemy.EnemyAnimator.SetTrigger("Pick up");
+            _rock.DOMove(_enemy.ThrowPoint.position, 1f);
             if (_rock.TryGetComponent(out Rigidbody rg))
             {
                 rg.isKinematic = true;
             }
-            
+
             _haveRock = true;
         });
     }

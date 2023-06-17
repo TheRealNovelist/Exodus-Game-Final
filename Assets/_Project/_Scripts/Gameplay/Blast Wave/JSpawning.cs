@@ -16,8 +16,6 @@ public class JSpawning : IState
     {
         Spawned = false;
 
-        Debug.Log("spawn");
-
         Vector3 pos = _enemy.transform.position;
         Vector3 rot = _enemy.transform.eulerAngles;
         _enemy.transform.DOMoveY(pos.y + 5, 1f).OnPlay(() =>
