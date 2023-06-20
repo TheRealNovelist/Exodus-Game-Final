@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
     public float _playerHealth;
 
     [SerializeField] private MMF_Player feedback;
+    [SerializeField] private AudioManager _audioManager;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
     
     public void Damage(float amount, Transform source = null)
     {
+        _audioManager.PlayOneShot("PlayerTakeDamage");
         feedback.PlayFeedbacks();
         
         _playerHealth -= amount;
@@ -27,6 +29,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable, IHeal
         if (_playerHealth <= 0f)
         {
             Debug.Log("Player Died!");
+            _audioManager.PlayOneShot("PlayerRespawn");
             RespawnPlayer.OnPlayerStartRespawn?.Invoke();
             return;
         }

@@ -37695,82 +37695,11 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1934032096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1934032097}
-  - component: {fileID: 1934032098}
-  - component: {fileID: 1934032099}
-  m_Layer: 0
-  m_Name: CoinManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1934032097
+--- !u!4 &1934032097 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+  m_PrefabInstance: {fileID: 9201008100608681254}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934032096}
-  m_LocalRotation: {x: 0.31037262, y: 0.17102201, z: -0.056804046, w: -0.93337756}
-  m_LocalPosition: {x: 218.95993, y: -14.599878, z: -68.23242}
-  m_LocalScale: {x: 4.9332995, y: 4.9333, z: 4.933299}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 213540999}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934032098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934032096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 731bd65c05c31fa4bab77d9d68bda398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coinAmount: 0
-  moneyAmountText: {fileID: 1303615768}
---- !u!114 &1934032099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934032096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2db640e83ea16b46800be1393a426e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: 446b69e07f0f34249800ae206c648ed4, type: 2}
-  stopListeningOnDisable: 1
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1934032098}
-        m_TargetAssemblyTypeName: CoinManager, Assembly-CSharp
-        m_MethodName: GainCoin
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 50
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1942350905
 GameObject:
   m_ObjectHideFlags: 0
@@ -119980,3 +119909,64 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &9201008100608681254
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 213540999}
+    m_Modifications:
+    - target: {fileID: 9201008099849361860, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: moneyAmountText
+      value: 
+      objectReference: {fileID: 1303615768}
+    - target: {fileID: 9201008099849361862, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_Name
+      value: CoinManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 218.95993
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -14.599878
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -68.23242
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.93337756
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.31037262
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.17102201
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.056804046
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201008099849361863, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a83748addaeab13479f91e6c4bfe29e0, type: 3}

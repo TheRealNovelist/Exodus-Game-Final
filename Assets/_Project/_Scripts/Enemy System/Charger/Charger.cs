@@ -10,6 +10,7 @@ namespace EnemySystem.Charger
         [Header("Components")] 
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Rigidbody rb;
+        [SerializeField] private AudioManager _audioManager;
         
         [Header("Settings")]
         [SerializeField] private float attackRange = 2f;
@@ -73,6 +74,7 @@ namespace EnemySystem.Charger
             rb.velocity = Vector3.zero;
             if (collision.gameObject.GetComponent<IDamageable>() != null)
             {
+                _audioManager.PlayOneShot("EnemyDashAttack");
                 collision.gameObject.GetComponent<IDamageable>().Damage(damageDealt);
             }
             hasCollided = true;

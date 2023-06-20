@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 public class CoinManager : Singleton<CoinManager>
 {
    [SerializeField] private int _coinAmount = 100;
+   [SerializeField] private AudioManager _audioManager;
 
     public int CoinAmount
     {
@@ -42,6 +43,7 @@ public class CoinManager : Singleton<CoinManager>
         moneyAmountText.SetText( _coinAmount.ToString());
         
         //Play Audio gain coin
+        _audioManager.PlayOneShot("CoinAddSound");
     }
 
     private void Start()

@@ -9,6 +9,7 @@ namespace EnemySystem.Gunner
         [Header("Components")]
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Transform bulletSpawnPoint;
+        [SerializeField] private AudioManager _audioManager;
 
         [Header("Range Settings")]
         [SerializeField] private float shootingRange = 10f;
@@ -67,6 +68,7 @@ namespace EnemySystem.Gunner
 
         public void Attack()
         {
+            _audioManager.PlayOneShot("EnemyShootAttack");
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             bullet.GetComponent<Bullet>().Init(damageDealt);
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);

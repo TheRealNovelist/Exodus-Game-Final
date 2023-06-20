@@ -10,10 +10,12 @@ namespace EnemySystem.Brute
     {
         [Header("Components")]
         [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private AudioManager _audioManager;
 
         [Header("Settings")]
         [SerializeField] private float attackRange = 5f;
 
+        
         public float attackCooldown = 5f;
         public float damageDealt = 10f;
 
@@ -73,6 +75,7 @@ namespace EnemySystem.Brute
 
         public void Attack()
         {
+           _audioManager.PlayOneShot("EnemyAttack");
             if (target.TryGetComponent(out IDamageable targetDamage))
             {
                 targetDamage.Damage(damageDealt);
