@@ -23,12 +23,13 @@ namespace EnemySystem.Charger
 
             if (_chargeTime <= 0f)
             {
-                isCharged = true;
+                _charger.SetState(_charger.Attacking);
                 
                 if (_charger.EnemyAnimator)
                 {
                     _charger.EnemyAnimator.SetTrigger("FinishedCharging");
                 }
+                
                 return;
             }
 
@@ -42,9 +43,6 @@ namespace EnemySystem.Charger
             _chargeTime = _charger.chargeTime;
             isCharged = false;
             _charger.ReduceDamage(true);
-            // defaultColor = _charger.GetComponent<Renderer>().material.color;
-
-            //_charger.GetComponent<Renderer>().material.color = Color.red;
 
             if (_charger.EnemyAnimator)
             {
@@ -57,8 +55,6 @@ namespace EnemySystem.Charger
         {
             _charger.ReduceDamage(false);
             _charger.attackDirection = _charger.transform.forward;
-            //            _charger.GetComponent<Renderer>().material.color = defaultColor;
-
         }
     }
 }

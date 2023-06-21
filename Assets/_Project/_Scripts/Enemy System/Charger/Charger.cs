@@ -19,21 +19,25 @@ namespace EnemySystem.Charger
         public float chargeTime = 4f;
         public float attackCooldown = 5f;
         public float damageDealt = 10f;
+        public float attackForce = 10f;
         
         private float painMultiplier = 1f;
         [HideInInspector] public Vector3 attackDirection;
 
         [HideInInspector] public bool isAttacking;
         private bool hasCollided;
+
+        public MoveToTarget MoveToTarget;
+        public Attacking Attacking;
         
         protected override void Awake()
         {
-            base.Awake();
             if (!agent)
                 agent = GetComponent<NavMeshAgent>();
 
             if (!rb)
                 rb = GetComponent<Rigidbody>();
+            base.Awake();
         }
 
         [Button]
@@ -41,19 +45,17 @@ namespace EnemySystem.Charger
         {
             if (IsStateMachineStarted()) return;
             
-            var MoveToPlayer = new MoveToTarget(this, agent);
+                MoveToTarget = new MoveToTarget(this, agent);
             var Charging = new ChargingAttack(this);
-            var Attacking = new Attacking(this, rb);
+                Attacking = new Attacking(this, rb);
             var Cooldown = new Cooldown(this, attackCooldown);
             
-            AddTransition(MoveToPlayer, Charging, TargetInRange());
-            AddTransition(Charging, Attacking, () => Charging.isCharged);
+            AddTransition(MoveToTarget, Charging, TargetInRange);
             AddAnyTransition(Cooldown, () => hasCollided);
-            AddTransition(Cooldown, MoveToPlayer, () => !Cooldown.isCoolingDown);
 
-            initialState = MoveToPlayer;
+            initialState = MoveToTarget;
             
-            Func<bool> TargetInRange() => () => Vector3.Distance(target.position, transform.position) <= attackRange;
+            bool TargetInRange() => Vector3.Distance(target.GetClosestPoint(transform.position), transform.position) <= attackRange;
 
             base.StartStateMachine(delay);
         }

@@ -66,7 +66,7 @@ namespace EnemySystem
 
         protected virtual void OnDestroy() => Stop();
 
-        protected void SetState(IState state) => _stateMachine.SetState(state);
+        public void SetState(IState state) => _stateMachine.SetState(state);
 
         protected void AddAnyTransition(IState to, Func<bool> condition) =>
             _stateMachine.AddAnyTransition(to, condition);

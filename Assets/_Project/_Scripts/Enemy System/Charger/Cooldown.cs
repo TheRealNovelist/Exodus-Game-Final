@@ -7,8 +7,6 @@ namespace EnemySystem.Charger
         private readonly Charger _charger;
         private readonly float _cooldownTime;
 
-        public bool isCoolingDown;
-
         private float cooldown;
         
         public Cooldown(Charger charger, float cooldownTime)
@@ -25,21 +23,18 @@ namespace EnemySystem.Charger
                 return;
             }
 
-            isCoolingDown = false;
+            _charger.SetState(_charger.MoveToTarget);
         }
 
         public void OnEnter()
         {
             cooldown = _cooldownTime;
             _charger.ResetCollision();
-            isCoolingDown = true;
-            
-            
+
             if (_charger.EnemyAnimator)
             {
                 _charger.EnemyAnimator.SetTrigger("Cooldown");
             }
-
         }
 
         public void OnExit()

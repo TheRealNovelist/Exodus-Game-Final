@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace EnemySystem
 {
-    internal class MoveToTarget : IState
+    public class MoveToTarget : IState
     {
         private readonly BaseEnemy _enemy;
         private readonly NavMeshAgent _navMeshAgent;

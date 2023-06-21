@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace EnemySystem.Charger
 {
-    internal class Attacking : IState
+    public class Attacking : IState
     {
         private readonly Charger _charger;
         private readonly Rigidbody _rigidbody;
@@ -21,13 +21,7 @@ namespace EnemySystem.Charger
         public void OnEnter()
         {
             _charger.isAttacking = true;
-            _rigidbody.AddForce(_charger.attackDirection * 100f, ForceMode.Impulse);
-
-            if (_charger.EnemyAnimator)
-            {
-                _charger.EnemyAnimator.SetTrigger("MoveToTarget");
-            }
-
+            _rigidbody.AddForce(_charger.attackDirection * (_charger.attackForce * 100f), ForceMode.Impulse);
         }
 
         public void OnExit()
