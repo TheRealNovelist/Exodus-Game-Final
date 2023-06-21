@@ -4,9 +4,10 @@ using UnityEngine.Serialization;
 
 public class PlayerCursor : MonoBehaviour
 {
-
     private Shop _shop;
     private static bool _unlocking = false;
+
+    public bool LockAtStart = false;
 
     // Update is called once per frame
     void Update()
@@ -15,6 +16,7 @@ public class PlayerCursor : MonoBehaviour
         {
             UnlockCursor();
         }
+
     }
 
     private static void UnlockCursor()
@@ -23,7 +25,7 @@ public class PlayerCursor : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            PlayerInputManager.Input.Disable();
+            if(PlayerInputManager.Input!=null)     PlayerInputManager.Input.Disable();
         }
     }
 
@@ -33,8 +35,7 @@ public class PlayerCursor : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            
-            PlayerInputManager.Input.Enable();
+          if(PlayerInputManager.Input!=null)  PlayerInputManager.Input.Enable();
         }
     }
 
@@ -54,9 +55,6 @@ public class PlayerCursor : MonoBehaviour
 
     private void Start()
     {
-        ToggleCursor(false);
-
+        ToggleCursor(LockAtStart);
     }
-
-
 }

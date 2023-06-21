@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     private void SetUpSource()
     {
-        if(source)
+        if(source && audioTable)
         {
             source.outputAudioMixerGroup = audioTable.mixerGroup;
         }

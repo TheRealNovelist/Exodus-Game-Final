@@ -20,7 +20,7 @@ public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
       TurretBuildingSystem.ResetPreview();
    }
 
-   public void OnPointerClick(PointerEventData eventData)
+   public virtual void OnPointerClick(PointerEventData eventData)
    {
       if(!CanPlace) {return;}
       //Hide preview

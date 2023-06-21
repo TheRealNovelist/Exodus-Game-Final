@@ -67,7 +67,6 @@ public class TurretBuildingSystem : MonoBehaviour
             SetLayerRecursive(newTurret.gameObject, 7);
             slot._holdingTurret = placedObjectTypeSO;
             placedObjectTypeSO = null;
-
         }
     }
 }
