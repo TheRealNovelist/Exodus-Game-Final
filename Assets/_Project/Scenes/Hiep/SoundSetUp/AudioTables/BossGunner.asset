@@ -13,4 +13,36 @@ MonoBehaviour:
   m_Name: BossGunner
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: 0}
-  _files: []
+  _files:
+  - audioName: SpinAttack
+    volume: 1
+    pitch: 1
+    looping: 0
+    clips:
+      list:
+      - item: {fileID: 8300000, guid: 4455b23ac819c044c9ed508f707b4da5, type: 3}
+        weight: 2
+  - audioName: CombatPillarUp
+    volume: 1
+    pitch: 1
+    looping: 0
+    clips:
+      list:
+      - item: {fileID: 8300000, guid: d6c1cf64e0a38e44680c4ccd56156dfd, type: 3}
+        weight: 2
+  - audioName: CombatPillarDown
+    volume: 1
+    pitch: 1
+    looping: 0
+    clips:
+      list:
+      - item: {fileID: 8300000, guid: 3b0962f111affb44d9e9ff747eb1275c, type: 3}
+        weight: 2
+  - audioName: CombatPillarShoot
+    volume: 1
+    pitch: 1
+    looping: 0
+    clips:
+      list:
+      - item: {fileID: 8300000, guid: 710edc2b0501f684792d4f2c3e788ee3, type: 3}
+        weight: 2

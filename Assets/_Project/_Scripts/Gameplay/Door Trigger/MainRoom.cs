@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using EnemySystem;
 using UnityEngine;
 
 public class MainRoom : Room
@@ -12,6 +13,8 @@ public class MainRoom : Room
 
     [SerializeField] private float startTime = 300f;
 
+    public List<BaseEnemy> Enemies = new List<BaseEnemy>();
+    private bool enemiesInRoom => Enemies.Count > 0;
     public bool Waving
     {
         get => _waving;
@@ -31,7 +34,7 @@ public class MainRoom : Room
             }
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
