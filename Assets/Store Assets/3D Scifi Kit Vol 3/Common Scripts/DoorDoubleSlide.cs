@@ -33,10 +33,16 @@ public class DoorDoubleSlide : MonoBehaviour
     private float point = 0.0f;
     private bool opening = false;
 
+    [SerializeField] private bool LockOnStart = false;
+    [SerializeField] private GameObject lockIcon;
+    private bool locked;
+
     private bool Locked
     {
         get
         {
+            if (LockOnStart) return locked;
+
             if (_enemyRoom)
             {
                 return _enemyRoom.roomLocked;
@@ -56,6 +62,11 @@ public class DoorDoubleSlide : MonoBehaviour
     //Record initial positions
     void Start()
     {
+        if (LockOnStart)
+        {
+            locked = true;
+        }
+
         if (doorL)
         {
             initialDoorL = doorL.localPosition;
@@ -65,7 +76,32 @@ public class DoorDoubleSlide : MonoBehaviour
         {
             initialDoorR = doorR.localPosition;
         }
+        
+        if (_enemyRoom)
+        {
+            if (Locked)
+            {
+                lockIcon.SetActive(true);
+            }
+            else
+            {
+                lockIcon.SetActive(false);
+            }
+        }
+        else
+        {
+           if(lockIcon) lockIcon.SetActive(false);
+        }
     }
+
+    public void UnlockRoom()
+    {
+        if (LockOnStart)
+        {
+            locked = false;
+        }
+    }
+
 
     //Something approaching? open doors
     void OnTriggerEnter(Collider other)
@@ -83,65 +119,74 @@ public class DoorDoubleSlide : MonoBehaviour
     }
 
     //Something left? close doors
-        void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                opening = false;
+            opening = false;
 
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Play();
-            }
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
         }
-        
-        public void Init(EnemyRoom enemyRoom)
+    }
+
+    public void Init(EnemyRoom enemyRoom)
+    {
+        _enemyRoom = enemyRoom;
+    }
+
+    private BossRoom _bossRoom;
+
+    public void Init(BossRoom bossRoom)
+    {
+        _bossRoom = bossRoom;
+    }
+
+
+    //Open or close doors
+    void Update()
+    {
+        // Direction selection
+        if (directionType == Direction.X)
         {
-            _enemyRoom = enemyRoom;
+            doorDirection = Vector3.right;
+        }
+        else if (directionType == Direction.Y)
+        {
+            doorDirection = Vector3.up;
+        }
+        else if (directionType == Direction.Z)
+        {
+            doorDirection = Vector3.back;
         }
 
-        private BossRoom _bossRoom;
-        public void Init(BossRoom bossRoom)
+        // If opening
+        if (opening)
         {
-            _bossRoom = bossRoom;
+            point = Mathf.Lerp(point, 1.0f, Time.deltaTime * speed);
+        }
+        else
+        {
+            point = Mathf.Lerp(point, 0.0f, Time.deltaTime * speed);
         }
 
-
-        //Open or close doors
-        void Update()
+        // Move doors
+        if (doorL)
         {
-            // Direction selection
-            if (directionType == Direction.X)
-            {
-                doorDirection = Vector3.right;
-            }
-            else if (directionType == Direction.Y)
-            {
-                doorDirection = Vector3.up;
-            }
-            else if (directionType == Direction.Z)
-            {
-                doorDirection = Vector3.back;
-            }
+            doorL.localPosition = initialDoorL + (doorDirection * point * openDistance);
+        }
 
-            // If opening
-            if (opening)
-            {
-                point = Mathf.Lerp(point, 1.0f, Time.deltaTime * speed);
-            }
-            else
-            {
-                point = Mathf.Lerp(point, 0.0f, Time.deltaTime * speed);
-            }
+        if (doorR)
+        {
+            doorR.localPosition = initialDoorR + (-doorDirection * point * openDistance);
+        }
 
-            // Move doors
-            if (doorL)
+        if (_enemyRoom)
+        {
+            if (lockIcon)
             {
-                doorL.localPosition = initialDoorL + (doorDirection * point * openDistance);
-            }
-
-            if (doorR)
-            {
-                doorR.localPosition = initialDoorR + (-doorDirection * point * openDistance);
+                lockIcon.SetActive(Locked);
             }
         }
     }
+}

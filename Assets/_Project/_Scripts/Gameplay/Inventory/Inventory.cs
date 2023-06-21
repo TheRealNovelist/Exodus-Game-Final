@@ -41,7 +41,7 @@ public class Inventory : Singleton<Inventory>
         {
             _inventoryUI.gameObject.SetActive(true);
             PlayerCursor.ToggleCursor(true);
-            PlayerInputManager.Input.Disable();
+          //  PlayerInputManager.Input.Disable();
         }
 
         if (Input.GetKeyUp(KeyCode.Tab))
@@ -49,7 +49,7 @@ public class Inventory : Singleton<Inventory>
             _inventoryUI.gameObject.SetActive(false);
             _inventoryUI.OptionPanelVisible(false);
             PlayerCursor.ToggleCursor(false);
-            PlayerInputManager.Input.Enable();
+           // PlayerInputManager.Input.Enable();
         }
     }
 
