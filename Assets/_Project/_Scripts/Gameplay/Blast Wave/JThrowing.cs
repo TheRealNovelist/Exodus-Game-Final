@@ -47,6 +47,9 @@ public class JThrowing : IState
 
                     var targetPos = _enemy.target.position;
                     _rock.transform.DOMove(targetPos, 0.16f).OnComplete(() => { Finished = true; });
+                }).OnStart(() =>
+                {
+                    //////////////////////PLAY SOUND START TO RUN TO PLAYER
                 });
             }
         }
@@ -82,6 +85,10 @@ public class JThrowing : IState
             _enemy.transform.LookAt(new Vector3(_enemy.target.position.x, _enemy.transform.position.y,
                 _enemy.target.position.z));
             _enemy.EnemyAnimator.SetTrigger("Pick up");
+            
+            //////////////////////PLAY SOUND PICK UP
+            
+            
             _rock.DOMove(_enemy.ThrowPoint.position, 1f);
             if (_rock.TryGetComponent(out Rigidbody rg))
             {

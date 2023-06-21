@@ -23,14 +23,17 @@ public class JSpawning : IState
             _enemy.transform.DORotate(rot + new Vector3(0, 180, 0), 1);
         }).OnComplete(() =>
             {
-                  rot = _enemy.transform.eulerAngles;
+                rot = _enemy.transform.eulerAngles;
                 Spawn();
                 _enemy.transform.DOMoveY(pos.y, 3f).OnPlay(() =>
                 {
                     _enemy.transform.DORotate(rot + new Vector3(0, 180, 0), 3f);
                 }).OnComplete(() => { Spawned = true; });
             }
-        );
+        ).OnStart(() =>
+        {
+            ////////////////////////PLAY LOADING SOUND
+        });
     }
 
     private void Spawn()
@@ -48,6 +51,8 @@ public class JSpawning : IState
         var avaiable = slots.Where(x => x.SlotAvailable).OrderBy(x => Random.value).ToList();
         for (int i = 0; i < slotLeft; i++)
         {
+            ////////////////////////PLAY SPAWN NEW STUFFS
+
             SmallBlaster newBlaster =
                 SmallBlaster.Instantiate(_enemy.SmallBlaster, avaiable[i].transform.position, Quaternion.identity);
 

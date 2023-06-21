@@ -10,6 +10,7 @@ public class Pillar : Enemy
     [SerializeField] private BossProjectileShooter shooter;
     [SerializeField] private float fireRate;
     [SerializeField] private float turnSpeed;
+    
 
     private Transform shooterTransform => shooter.transform;
 

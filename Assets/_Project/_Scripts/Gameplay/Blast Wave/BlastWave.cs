@@ -43,6 +43,8 @@ public class BlastWave : MonoBehaviour
 
     private void Start()
     {
+        ///////////////////////PLAY SOUND SPAWNED
+
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = pointsCount + 1;
         for (int i = 0; i < lineRenderer.positionCount; i++)

@@ -16,6 +16,7 @@ public class Rock : MonoBehaviour
         if(!_activing) {return;}
         if (collision.gameObject.CompareTag("Player"))
         {
+            //////////////////////PLAY SOUND ROCK HIT PLAYER
             if (collision.gameObject.TryGetComponent(out IDamageable damageable))
             {
                 damageable.Damage(damage);

@@ -8,6 +8,7 @@ public class BossPillarController : MonoBehaviour
 {
     [SerializeField] private List<Pillar> pillars;
     [SerializeField] private GameObject shield;
+    [SerializeField] private AudioManager _audioManager;
 
     private void Start()
     {
@@ -22,7 +23,7 @@ public class BossPillarController : MonoBehaviour
     public void StartAttack()
     {
         shield.gameObject.SetActive(true);
-        
+        _audioManager.PlayOneShot("CombatPillarUp");
         foreach (var pillar in pillars)
         {
             pillar.gameObject.SetActive(true);
@@ -37,7 +38,7 @@ public class BossPillarController : MonoBehaviour
     public void StopAttack()
     {
         shield.gameObject.SetActive(false);
-        
+        _audioManager.PlayOneShot("CombatPillarDown");
         foreach (var pillar in pillars)
         {
             if (pillar.gameObject.activeInHierarchy) 

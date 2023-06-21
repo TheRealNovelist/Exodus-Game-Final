@@ -9,7 +9,8 @@ public class BossDoubleBeamEmitter : MonoBehaviour
     [Header("Weapons")] 
     [SerializeField] private BossBeamEmitter rightWeapon;
     [SerializeField] private BossBeamEmitter leftWeapon;
-    
+    [SerializeField] private AudioManager _audioManager;
+     
     [Header("Settings")]
     [SerializeField] private int spinAttackTurns = 3;
     [SerializeField] private float spinRate = 1f;
@@ -20,6 +21,7 @@ public class BossDoubleBeamEmitter : MonoBehaviour
 
     public void StartSpinAttack()
     {
+        _audioManager.Play("SpinAttack", true);
         initialRotation = transform.localRotation.eulerAngles;
         currentAngle = 0;
     }
@@ -44,6 +46,7 @@ public class BossDoubleBeamEmitter : MonoBehaviour
 
     public void EndSpinAttack()
     {
+        _audioManager.Stop();
         transform.DOLocalRotate(initialRotation, 1f);
         
         leftWeapon.StopAttack();

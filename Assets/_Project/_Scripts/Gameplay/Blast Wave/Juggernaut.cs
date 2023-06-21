@@ -23,6 +23,8 @@ public class Juggernaut : BaseEnemy
     [Header("Throwing")] public Transform ThrowPoint;
     public float ThrowWaitTime = 3f;
     private int _attack = 0;
+
+    [SerializeField] private AudioManager _audioManager;
     public int AttackIndex
     {
         get => _attack;

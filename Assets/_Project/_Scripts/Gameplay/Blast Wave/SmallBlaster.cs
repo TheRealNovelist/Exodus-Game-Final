@@ -41,11 +41,15 @@ public class SmallBlaster : MonoBehaviour
         {
             head.transform.DOMoveY(pos.y, 0.15f).OnComplete(() =>
             {
+                //////////SPAWN SMALL WAVE 
                 BlastWave newWave = GameObject.Instantiate(_blastWave, blastPoint.transform.position,
                     _blastWave.transform.rotation);
                 newWave.Init(_blastWaveData.pointsCount, _blastWaveData.maxRadius, _blastWaveData.speed,
                     _blastWaveData.startWidth, _blastWaveData.force, _blastWaveData.damage);
             });
+        }).OnStart(() =>
+        {
+            //////////START JUMPING FOR SMALL THING
         });
     }
 

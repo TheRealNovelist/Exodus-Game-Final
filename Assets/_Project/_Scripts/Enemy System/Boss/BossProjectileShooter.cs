@@ -12,6 +12,7 @@ public class BossProjectileShooter : MonoBehaviour
     public float damage;
 
     private Vector3 initRotation;
+    [SerializeField] private AudioManager _audioManager;
     
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class BossProjectileShooter : MonoBehaviour
     public void Attack()
     {
        // Instantiate(impactEffect, spawnPosition.position, Quaternion.LookRotation(spawnPosition.forward));
+       _audioManager.PlayOneShot("CombatPillarShoot");
         var bullet = Instantiate(bulletPrefab, spawnPosition.transform.position, spawnPosition.transform.rotation);
         bullet.GetComponent<Bullet>().Init(damage);
         bullet.GetComponent<Rigidbody>().AddForce(spawnPosition.transform.forward * speed, ForceMode.Impulse);

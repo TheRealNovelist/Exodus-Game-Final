@@ -34,9 +34,15 @@ public class JBlasting : IState
 
                 Vector3 pos = _enemy.transform.position;
 
-                _enemy.transform.DOMoveY(pos.y + 5, 1.1f).OnStart(() => { _enemy.EnemyAnimator.SetTrigger("Pack"); })
+                _enemy.transform.DOMoveY(pos.y + 5, 1.1f).OnStart(() =>
+                    {
+                        _enemy.EnemyAnimator.SetTrigger("Pack");
+                        ///////////////////////PLAY SOUND START JUMPING UP
+                    })
                     .OnComplete(() =>
                     {
+                        ///////////////////////PLAY SOUND FINISHED JUMPING UP
+
                         _enemy.transform.DOMoveY(pos.y, 0.15f).OnComplete(() =>
                         {
                             _enemy.Shield.SetActive(false);
