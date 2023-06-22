@@ -19,6 +19,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         Input = new PlayerInput();
         Input.Enable();
+        Input.Weapon.Enable();
+        Input.General.Enable();
 
         WeaponHandler.Init();
     }
@@ -96,5 +98,11 @@ public class PlayerInputManager : MonoBehaviour
         
         // Apply inputs to character
         Character.SetInputs(ref characterInputs);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawRay(CharacterCamera.transform.position, CharacterCamera.transform.forward);
     }
 }

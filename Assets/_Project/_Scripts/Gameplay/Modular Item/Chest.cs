@@ -2,14 +2,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Chest : MonoBehaviour
+public class Chest : MonoBehaviour, IInteractable
 {
     [SerializeField] private SpriteRenderer itemHolder;
     [SerializeField] private WeightedRandomList<Item> itemList;
-    [SerializeField] private KeyCode openKey;
     [SerializeField] private Animator _chestAnimator;
 
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private Outline outline;
 
     private bool isOpen = false;
     private bool harvested = false;
@@ -40,18 +40,9 @@ public class Chest : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Awake()
     {
-        if (!harvested && isOpen)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                if (Input.GetKeyDown(openKey))
-                {
-                    Harvest(lootedItem);
-                }
-            }
-        }
+        OnDeselect();
     }
 
     private IEnumerator WaitToOpenChest()
@@ -141,5 +132,25 @@ public class Chest : MonoBehaviour
     {
         _chestAnimator.SetTrigger("closeTrigger");
         _chestAnimator.SetBool("isOpen", false);
+    }
+
+    public void OnSelect()
+    {
+        if (outline)
+            outline.enabled = true;
+    }
+
+    public void OnDeselect()
+    {
+        if (outline)
+            outline.enabled = false;
+    }
+
+    public void Interact()
+    {
+        if (!harvested && isOpen)
+        {
+            Harvest(lootedItem);
+        }
     }
 }

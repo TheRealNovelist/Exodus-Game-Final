@@ -185,9 +185,9 @@ MonoBehaviour:
     list:
     - item: {fileID: 11400000, guid: b580b119a46362948922801fbe1a0db8, type: 2}
       weight: 1
-  openKey: 101
   _chestAnimator: {fileID: 1358110481707564675}
   audioManager: {fileID: 764682471}
+  outline: {fileID: 4552209522982985909}
 --- !u!82 &764682472
 AudioSource:
   m_ObjectHideFlags: 0
@@ -445,6 +445,7 @@ GameObject:
   - component: {fileID: 1025075793491786822}
   - component: {fileID: 5657542183810571665}
   - component: {fileID: 1273571378335013008}
+  - component: {fileID: 4552209522982985909}
   m_Layer: 0
   m_Name: box06_bottom.002
   m_TagString: Untagged
@@ -536,6 +537,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.0735736, y: 6.199164, z: 1.4131553}
   m_Center: {x: 1.2892301, y: -0.11514202, z: 0.7076458}
+--- !u!114 &4552209522982985909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987576436654357269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8321909067719639994
 GameObject:
   m_ObjectHideFlags: 0

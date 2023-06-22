@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Shop : MonoBehaviour
+public class Shop : MonoBehaviour, IInteractable
 {
     public ShopUI shopUI;
     public List<PlacedObjectTypeSO> AllItems = new List<PlacedObjectTypeSO>();
@@ -15,18 +15,29 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private BackGroundMusic backGroundMusic;//the object that have the script referenced is on player name AudioHole
+    [SerializeField] private Outline outline;
 
-    private void OnTriggerEnter(Collider other)
+    public void OnSelect()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            ShopToggle?.Invoke(true);
-        }
+        if (outline)
+            outline.enabled = true;
+    }
+
+    public void OnDeselect()
+    {
+        if (outline)
+            outline.enabled = false;
+    }
+
+    public void Interact()
+    {
+        ShopToggle?.Invoke(true);
     }
 
     private void Start()
     {
         ShopToggle?.Invoke(false);
+        OnDeselect();
     }
 
     private void ToggleCamera(bool cameraTurret)
@@ -69,10 +80,7 @@ public class Shop : MonoBehaviour
         ShopToggle -= PlayerCursor.ToggleCursor;
 
     }
-
-
-
-
+    
     public void CoinPurchased(PlacedObjectTypeSO item)
     {
         if (CoinManager.Instance.SpendCoin(item.price))
@@ -82,6 +90,4 @@ public class Shop : MonoBehaviour
            // canvasUI.SetActive(false);
         }
     }
-    
-    
 }
