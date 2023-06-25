@@ -3640,7 +3640,6 @@ GameObject:
   - component: {fileID: 2053617966}
   - component: {fileID: 2053617967}
   - component: {fileID: 2053617964}
-  - component: {fileID: 2053617973}
   - component: {fileID: 2053617980}
   - component: {fileID: 3371451325131427580}
   m_Layer: 3
@@ -3709,8 +3708,8 @@ MonoBehaviour:
   BonusOrientationMethod: 0
   BonusOrientationSharpness: 10
   Gravity: {x: 0, y: -30, z: 0}
-  MeshRoot: {fileID: 0}
-  CameraFollowPoint: {fileID: 0}
+  MeshRoot: {fileID: 9213962626704697393}
+  CameraFollowPoint: {fileID: 9205365381147751269}
   CrouchedCapsuleHeight: 1
 --- !u!114 &9099723944862406201
 MonoBehaviour:
@@ -3939,20 +3938,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2053617973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9211053750693939531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461cd396e3fc7cc4eb9c92bde05c1b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Character: {fileID: 9099454684007754681}
-  CharacterCamera: {fileID: 3190921827981887643}
 --- !u!114 &2053617980
 MonoBehaviour:
   m_ObjectHideFlags: 0
