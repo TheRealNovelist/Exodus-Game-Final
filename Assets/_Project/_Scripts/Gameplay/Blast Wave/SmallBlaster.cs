@@ -13,6 +13,8 @@ public class SmallBlaster : MonoBehaviour
     [SerializeField] private Transform head;
     private EnemyHealth _enemyHealth => GetComponent<EnemyHealth>();
     private SmallBlasterSlot _slot;
+    [SerializeField] private AudioManager audioManager;
+    
 
     private void Start()
     {
@@ -41,7 +43,8 @@ public class SmallBlaster : MonoBehaviour
         {
             head.transform.DOMoveY(pos.y, 0.15f).OnComplete(() =>
             {
-                //////////SPAWN SMALL WAVE 
+                //////////SPAWN SMALL WAVE
+                audioManager.PlayOneShot("Enemy hit ground");
                 BlastWave newWave = GameObject.Instantiate(_blastWave, blastPoint.transform.position,
                     _blastWave.transform.rotation);
                 newWave.Init(_blastWaveData.pointsCount, _blastWaveData.maxRadius, _blastWaveData.speed,
@@ -50,6 +53,7 @@ public class SmallBlaster : MonoBehaviour
         }).OnStart(() =>
         {
             //////////START JUMPING FOR SMALL THING
+            audioManager.PlayOneShot("Sound of enemy go up");
         });
     }
 

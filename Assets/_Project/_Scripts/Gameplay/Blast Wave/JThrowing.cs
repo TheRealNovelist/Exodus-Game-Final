@@ -13,10 +13,11 @@ public class JThrowing : IState
     private bool _haveRock = false;
     public bool Finished = false;
     private float waitedTime;
+    private AudioManager _audioManager;
 
-    public JThrowing(Juggernaut enemy)
+    public JThrowing(Juggernaut enemy, AudioManager audioManager)
     {
-        _enemy = enemy;
+        _enemy = enemy;_audioManager = audioManager;
     }
 
     public void Update()
@@ -50,6 +51,7 @@ public class JThrowing : IState
                 }).OnStart(() =>
                 {
                     //////////////////////PLAY SOUND START TO RUN TO PLAYER
+                    _audioManager.PlayOneShot("Boss charge");
                 });
             }
         }
@@ -87,7 +89,7 @@ public class JThrowing : IState
             _enemy.EnemyAnimator.SetTrigger("Pick up");
             
             //////////////////////PLAY SOUND PICK UP
-            
+            _audioManager.PlayOneShot("Rock pic up");
             
             _rock.DOMove(_enemy.ThrowPoint.position, 1f);
             if (_rock.TryGetComponent(out Rigidbody rg))

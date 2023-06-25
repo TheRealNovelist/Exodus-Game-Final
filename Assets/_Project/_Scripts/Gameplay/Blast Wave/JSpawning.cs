@@ -6,10 +6,10 @@ public class JSpawning : IState
 {
     private Juggernaut _enemy;
     public bool Spawned = false;
-
-    public JSpawning(Juggernaut enemy)
+    private AudioManager _audioManager;
+    public JSpawning(Juggernaut enemy, AudioManager audioManager)
     {
-        _enemy = enemy;
+        _enemy = enemy;_audioManager = audioManager;
     }
 
     public void OnEnter()
@@ -51,7 +51,7 @@ public class JSpawning : IState
         var avaiable = slots.Where(x => x.SlotAvailable).OrderBy(x => Random.value).ToList();
         for (int i = 0; i < slotLeft; i++)
         {
-            ////////////////////////PLAY SPAWN NEW STUFFS
+            _audioManager.PlayOneShot("Spawn sound");
 
             SmallBlaster newBlaster =
                 SmallBlaster.Instantiate(_enemy.SmallBlaster, avaiable[i].transform.position, Quaternion.identity);

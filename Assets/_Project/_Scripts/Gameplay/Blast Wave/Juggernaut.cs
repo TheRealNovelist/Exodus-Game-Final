@@ -75,9 +75,9 @@ public class Juggernaut : BaseEnemy
         if (IsStateMachineStarted()) return;
 
         var Charging = new JCharging(this, CooldownTime);
-        var Blasting = new JBlasting(this);
-        var Spawning = new JSpawning(this);
-        var Throwing = new JThrowing(this);
+        var Blasting = new JBlasting(this, _audioManager);
+        var Spawning = new JSpawning(this, _audioManager);
+        var Throwing = new JThrowing(this, _audioManager);
 
         attacks.Add(Blasting);
         attacks.Add(Spawning);

@@ -11,11 +11,13 @@ public class JBlasting : IState
     private bool _charging = true;
 
     private BlastWaveDataSO _blastData;
+    private AudioManager _audioManager;
 
-    public JBlasting(Juggernaut enemy)
+    public JBlasting(Juggernaut enemy, AudioManager audioManager)
     {
         _enemy = enemy;
         _blastData = _enemy.BlastSO;
+        _audioManager = audioManager;;
     }
 
     // Update is called once per frame
@@ -38,11 +40,12 @@ public class JBlasting : IState
                     {
                         _enemy.EnemyAnimator.SetTrigger("Pack");
                         ///////////////////////PLAY SOUND START JUMPING UP
+                        _audioManager.PlayOneShot("Boss Go up");
                     })
                     .OnComplete(() =>
                     {
                         ///////////////////////PLAY SOUND FINISHED JUMPING UP
-
+                        _audioManager.PlayOneShot("boss go down hit ground");
                         _enemy.transform.DOMoveY(pos.y, 0.15f).OnComplete(() =>
                         {
                             _enemy.Shield.SetActive(false);
