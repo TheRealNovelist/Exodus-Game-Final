@@ -884,7 +884,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 19.26
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &7309560398119730877
 CapsuleCollider:
@@ -910,10 +910,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: bb217e90ef97a3c459f667a3334f0e16, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.152
+  m_Pitch: 0.64
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1050,13 +1050,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Oxygen: {fileID: 0}
   Player: {fileID: 0}
-  preferredTargetType: 2
+  preferredTargetType: 1
   randomAggression: 0
   switchOnAggression: 1
   aggressionChance: 50
   usePulseSearch: 1
   searchPulseTime: 10
-  searchRadius: 10
+  searchRadius: 19.26
   viewDistance: 100
   searchMask:
     serializedVersion: 2
