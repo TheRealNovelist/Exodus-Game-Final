@@ -29,11 +29,10 @@ public class Inventory : Singleton<Inventory>
     private void Start()
     {
         SetSlotItem();
-
+        CheckEquipmentOnStart(equippedGuns);
         _inventoryUI.RefreshUI();
         _inventoryUI.gameObject.SetActive(false);
-        
-        CheckEquipmentOnStart(equippedGuns);
+
     }
 
     private void Update()
