@@ -13,8 +13,7 @@ public class MainRoom : Room
 
     [SerializeField] private float startTime = 300f;
 
-    public List<BaseEnemy> Enemies = new List<BaseEnemy>();
-    private bool enemiesInRoom => Enemies.Count > 0;
+    private bool enemiesInRoom => EnemySpawner.EnemiesInRoom.Count > 0;
     public bool Waving
     {
         get => _waving;
@@ -34,6 +33,7 @@ public class MainRoom : Room
             }
         }
     }
+    
     
     private void OnTriggerEnter(Collider other)
     {
@@ -75,7 +75,7 @@ public class MainRoom : Room
 
     private void OnEnable()
     {
-        PlayerInMainRoom += PlayerInRoom;
+       // PlayerInMainRoom += PlayerInRoom;
         RespawnPlayer.OnPlayerStartRespawn += EnemySpawner.DisableAllEnemiesInRoom;
         RespawnPlayer.OnPlayerFinishedRespawn += EnemySpawner.EnableAllEnemiesInRoom;
     }
@@ -84,11 +84,16 @@ public class MainRoom : Room
     {
         RespawnPlayer.OnPlayerStartRespawn -= EnemySpawner.DisableAllEnemiesInRoom;
         RespawnPlayer.OnPlayerFinishedRespawn -= EnemySpawner.EnableAllEnemiesInRoom;
-        PlayerInMainRoom -= PlayerInRoom;
+        //PlayerInMainRoom -= PlayerInRoom;
     }
 
     private void Update()
     {
-        Waving = EnemySpawner.IsWaving();
+       // Waving = EnemySpawner.IsWaving();
+
+       _mainRoomUI.ToggleWarning(enemiesInRoom);
+       Debug.Log(enemiesInRoom);
+
+        
     }
 }
