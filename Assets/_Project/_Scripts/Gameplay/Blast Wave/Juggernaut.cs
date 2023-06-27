@@ -64,6 +64,10 @@ public class Juggernaut : BaseEnemy
         {
             slot.ClearSlot();
         }
+        
+        
+        WinLoseCondition.OnBossDefeated?.Invoke();
+
 
         base.OnDeath();
     }

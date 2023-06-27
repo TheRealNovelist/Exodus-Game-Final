@@ -15,6 +15,8 @@ public class LifeForce : MonoBehaviour, IDamageable, IHeal
     public static Action OnLifeTimerChangeToHalf;
     public static Action OnLifeTimerAlmostRunOut;
 
+    [SerializeField] private NotificationText _notificationText;
+
     [SerializeField]  private float maxTime;
 
     // Start is called before the first frame update
@@ -76,7 +78,10 @@ public class LifeForce : MonoBehaviour, IDamageable, IHeal
     public void Damage(float amount, Transform source = null)
     {
         timeValue -= amount;
-
+        
+        Debug.Log(_notificationText);
+        _notificationText.PopUp($"Oxygen is attacked" +
+                                $" -{amount} seconds", 1f);
         //ADD EFFECT AND SOUND
     }
 

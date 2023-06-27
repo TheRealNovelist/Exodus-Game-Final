@@ -23,13 +23,13 @@ public class MainRoom : Room
 
             if (value)
             {
-                _mainRoomUI.WarningActivate(true);
+                //_mainRoomUI.WarningActivate(true);
                 _mainRoomUI.UpdateWaveStats(EnemySpawner);
             }
             else
             {
                 _mainRoomUI.UpdateWaveStats();
-                _mainRoomUI.WarningActivate(false);
+              //  _mainRoomUI.WarningActivate(false);
             }
         }
     }
@@ -54,7 +54,7 @@ public class MainRoom : Room
     private void PlayerInRoom(bool inRoom)
     {
         _mainRoomUI.ToggleStats(inRoom);
-        _mainRoomUI.ToggleWarning(!inRoom);
+      //  _mainRoomUI.ToggleWarning(!inRoom);
     }
 
     private void Start()
@@ -75,7 +75,7 @@ public class MainRoom : Room
 
     private void OnEnable()
     {
-       // PlayerInMainRoom += PlayerInRoom;
+        PlayerInMainRoom += PlayerInRoom;
         RespawnPlayer.OnPlayerStartRespawn += EnemySpawner.DisableAllEnemiesInRoom;
         RespawnPlayer.OnPlayerFinishedRespawn += EnemySpawner.EnableAllEnemiesInRoom;
     }
@@ -84,16 +84,13 @@ public class MainRoom : Room
     {
         RespawnPlayer.OnPlayerStartRespawn -= EnemySpawner.DisableAllEnemiesInRoom;
         RespawnPlayer.OnPlayerFinishedRespawn -= EnemySpawner.EnableAllEnemiesInRoom;
-        //PlayerInMainRoom -= PlayerInRoom;
+        PlayerInMainRoom -= PlayerInRoom;
     }
 
     private void Update()
     {
-       // Waving = EnemySpawner.IsWaving();
+       Waving = EnemySpawner.IsWaving();
 
        _mainRoomUI.ToggleWarning(enemiesInRoom);
-       Debug.Log(enemiesInRoom);
-
-        
     }
 }
