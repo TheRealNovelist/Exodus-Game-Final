@@ -35,8 +35,6 @@ namespace WeaponSystem
                 //this vector, we'll get the spread direction, but as a circle
                 //change direction with the new spread angle 
                 direction += spread.normalized * Random.Range(0, 0.2f);
-                
-                Debug.Log("call 1");
 
                 if (Physics.Raycast(fpsCam.transform.position, direction, out RaycastHit hit,AttackMask))
                 {
