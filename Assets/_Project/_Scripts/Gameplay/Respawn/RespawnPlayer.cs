@@ -42,7 +42,7 @@ public class RespawnPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        OnPlayerFinishedRespawn += FinsihedRespawn;
+        OnPlayerFinishedRespawn += FinishedRespawn;
         OnPlayerStartRespawn += StartRespawn;
     }
 
@@ -69,7 +69,7 @@ public class RespawnPlayer : MonoBehaviour
         StartCoroutine(RespawnDelay()); //start couroutine for a dynamic respawn mechanic
     }
 
-    private void FinsihedRespawn()
+    private void FinishedRespawn()
     {
         motor.SetPosition(spawnPoint.position);
         PlayerInputManager.Input.Enable();
@@ -126,7 +126,7 @@ public class RespawnPlayer : MonoBehaviour
 
     private void OnDisable()
     {
-        OnPlayerFinishedRespawn -= FinsihedRespawn;
+        OnPlayerFinishedRespawn -= FinishedRespawn;
         OnPlayerStartRespawn -= StartRespawn;
     }
 }

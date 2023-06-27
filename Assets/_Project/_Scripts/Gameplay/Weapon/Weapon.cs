@@ -75,7 +75,7 @@ namespace WeaponSystem
            // _animator?.SetTrigger("Switch");
         }
 
-        public void StartAttack(WeaponMode mode)
+        public void StartAttack()
         {
             if (!CanAttack())
             {
@@ -85,55 +85,25 @@ namespace WeaponSystem
             
             
             _animator?.SetTrigger("Shoot");
-            switch (mode)
+            try
             {
-                case WeaponMode.Primary:
-                    try
-                    {
-                        _primaryAttack.StartAttack(this);
-                    }
-                    catch
-                    {
-                        Debug.Log("Primary Attack not found");
-                    }
-                    break;
-                case WeaponMode.Secondary:
-                    try
-                    {
-                        _secondaryAttack.StartAttack(this);
-                    }
-                    catch
-                    {
-                        Debug.Log("Secondary Attack not found");
-                    }
-                    break;
+                _primaryAttack.StartAttack(this);
+            }
+            catch
+            {
+                Debug.Log("Primary Attack not found");
             }
         }
 
-        public void StopAttack(WeaponMode mode)
+        public void StopAttack()
         {
-            switch (mode)
+            try
             {
-                case WeaponMode.Primary:
-                    try
-                    {
-                        _primaryAttack.StopAttack();
-                    }
-                    catch
-                    {
-                        Debug.Log("Primary Attack not found");
-                    }
-                    break;
-                case WeaponMode.Secondary:
-                    try
-                    {
-                        _secondaryAttack.StopAttack();
-                    }
-                    catch
-                    {
-                        Debug.Log("Secondary Attack not found");
-                    }
-                    break;
+                _primaryAttack.StopAttack();
+            }
+            catch
+            {
+                Debug.Log("Primary Attack not found");
             }
         }
 

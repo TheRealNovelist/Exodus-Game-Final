@@ -21,7 +21,7 @@ namespace WeaponSystem
         private int currentIndex;
 
         private int _ammoPool;
-
+        
         public int AmmoPool
         {
             get => _ammoPool;
@@ -39,28 +39,25 @@ namespace WeaponSystem
             if (Inventory.Instance != null) Inventory.Instance.OnGunEquipped += ReorderGunChildren;
         }
         
-        public void Init()
+        public void Awake()
         {
-            PlayerInputManager.Input.Weapon.PrimaryAttack.performed += 
-                (ctx) => StartAttack(WeaponMode.Primary);
-            PlayerInputManager.Input.Weapon.PrimaryAttack.canceled += 
-                (ctx) => StopAttack(WeaponMode.Primary);
-            
-            PlayerInputManager.Input.Weapon.SecondaryAttack.performed += 
-                (ctx) => StartAttack(WeaponMode.Secondary);
-            PlayerInputManager.Input.Weapon.SecondaryAttack.canceled += 
-                (ctx) => StopAttack(WeaponMode.Secondary);
-            
-            PlayerInputManager.Input.Weapon.Reload.performed += 
+            var input = PlayerInputManager.Input;
+
+            input.Weapon.PrimaryAttack.performed += 
+                (ctx) => StartAttack();
+            input.Weapon.PrimaryAttack.canceled += 
+                (ctx) => StopAttack();
+
+            input.Weapon.Reload.performed += 
                 (ctx) => Reload();
             
-            PlayerInputManager.Input.General.ChangeWeapon.performed += 
+            input.General.ChangeWeapon.performed += 
                 (ctx) => ScrollChangeWeapon();
             
-            PlayerInputManager.Input.General.Weapon1.performed += 
+            input.General.Weapon1.performed += 
                 (ctx) => ChangeWeapon(0);
             
-            PlayerInputManager.Input.General.Weapon2.performed +=
+            input.General.Weapon2.performed +=
                 (ctx) => ChangeWeapon(1);
         }
 
@@ -82,16 +79,16 @@ namespace WeaponSystem
         }
         
 
-        private void StartAttack(WeaponMode mode)
+        private void StartAttack()
         {
             if (!isWeaponReady) return;
-            currentWeapon.StartAttack(mode);
+            currentWeapon.StartAttack();
         }
 
-        private void StopAttack(WeaponMode mode)
+        private void StopAttack()
         {
             if (!isWeaponReady) return;
-            currentWeapon.StopAttack(mode);
+            currentWeapon.StopAttack();
         }
 
         private void Reload()

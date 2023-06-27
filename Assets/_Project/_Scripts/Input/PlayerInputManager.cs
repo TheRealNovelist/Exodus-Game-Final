@@ -19,10 +19,6 @@ public class PlayerInputManager : MonoBehaviour
     {
         Input = new PlayerInput();
         Input.Enable();
-        Input.Weapon.Enable();
-        Input.General.Enable();
-
-        WeaponHandler.Init();
     }
 
     private void Start()
