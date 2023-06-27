@@ -93,6 +93,7 @@ public class PlayerInputManager : MonoBehaviour
             // Build the CharacterInputs struct
             MoveAxisForward = Input.General.Move.ReadValue<Vector2>().y,
             MoveAxisRight = Input.General.Move.ReadValue<Vector2>().x,
+            JumpDown = Input.General.Jump.WasPressedThisFrame(),
             CameraRotation = CharacterCamera.Transform.rotation
         };
         
