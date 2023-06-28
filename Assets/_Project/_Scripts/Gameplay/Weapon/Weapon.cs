@@ -115,14 +115,7 @@ namespace WeaponSystem
             }
             catch
             {
-            }
-            
-            try
-            {
-                _secondaryAttack.StopAttack();
-            }
-            catch
-            {
+                Debug.Log("Primary Attack not found");
             }
         }
         
@@ -143,7 +136,7 @@ namespace WeaponSystem
 
         public void StartReload()
         {
-            if (CurrentAmmo == data.magazineSize || !_weaponHandler.CanReload()) return;
+            if (CurrentAmmo == data.magazineSize || !_weaponHandler.CanReload(data)) return;
             audioManager.PlayOneShot("Reloads");
             _animator?.SetTrigger("Reload");
             

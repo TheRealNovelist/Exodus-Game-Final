@@ -10493,6 +10493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 2107567024}
+  _notificationText: {fileID: 0}
   maxTime: 900
 --- !u!1 &628427586
 GameObject:
@@ -13891,6 +13892,10 @@ PrefabInstance:
     - target: {fileID: 9205818919365756249, guid: af68437a68d392741bf82c46c73d2382, type: 3}
       propertyPath: m_LocalPosition.z
       value: -5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1722123279, guid: af68437a68d392741bf82c46c73d2382, type: 3}

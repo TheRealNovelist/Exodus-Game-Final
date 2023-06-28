@@ -115,6 +115,10 @@ namespace WeaponSystem
             int ammo = currentAmmo;
 
             int ammoNeededToReload = data.magazineSize - ammo;
+            
+            //If ammoCost does not consume ammo, return ammo needed to reload
+            if (data.ammoCostPerBullet == 0) return data.magazineSize;
+            
             int ammoCost = ammoNeededToReload * data.ammoCostPerBullet;
 
             if (ammoCost > AmmoPool)
@@ -133,9 +137,11 @@ namespace WeaponSystem
             return ammo;
         }
 
-        public bool CanReload()
+        public WeaponData CurrentWeaponData => currentWeapon.data;
+
+        public bool CanReload(WeaponData data)
         {
-            return _ammoPool > 0;
+            return _ammoPool > 0 || data.ammoCostPerBullet == 0;
         }
 
         private void ChangeWeapon(int index, bool forceChange = false)

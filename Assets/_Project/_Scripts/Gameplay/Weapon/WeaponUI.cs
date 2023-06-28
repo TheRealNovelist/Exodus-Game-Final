@@ -50,6 +50,8 @@ public class WeaponUI : MonoBehaviour
             RegisterWeapon(weapon);
             _currentWeapon = weapon;
         }
+        
+        UpdateAmmoPoolText(_weaponHandler.AmmoPool);
     }
 
     private void RegisterWeapon(Weapon weapon)
@@ -70,7 +72,16 @@ public class WeaponUI : MonoBehaviour
 
     private void UpdateAmmoText(int ammo) => ammoText.text = ammo.ToString();
     
-    private void UpdateAmmoPoolText(int ammo) => ammoPoolText.text = ammo.ToString();
+    private void UpdateAmmoPoolText(int ammo)
+    {
+        if (_weaponHandler.CurrentWeaponData.ammoCostPerBullet == 0)
+        {
+            ammoPoolText.text = "\u221E";
+            return;
+        }
+
+        ammoPoolText.text = ammo.ToString();
+    }
 
     private void UpdateStartReloadText()
     {
