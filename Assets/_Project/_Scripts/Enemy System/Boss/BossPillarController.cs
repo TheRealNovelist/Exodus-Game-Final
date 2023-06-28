@@ -10,7 +10,7 @@ public class BossPillarController : MonoBehaviour
     [SerializeField] private GameObject shield;
     [SerializeField] private AudioManager _audioManager;
 
-    private void Start()
+    private void Awake()
     {
         shield.gameObject.SetActive(false);
         

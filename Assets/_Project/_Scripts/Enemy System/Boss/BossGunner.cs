@@ -13,7 +13,7 @@ public class BossGunner : Enemy
     
     public void OnDeath()
     {
-        _fsmOwner.enabled = false;
+        _fsmOwner.gameObject.SetActive(false);
         if(_bossRoom)     _bossRoom.OnRoomPassed?.Invoke();
         WinLoseCondition.OnBossDefeated?.Invoke();
     }
