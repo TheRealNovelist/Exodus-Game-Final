@@ -10,14 +10,16 @@ public class Pillar : Enemy
     [SerializeField] private BossProjectileShooter shooter;
     [SerializeField] private float fireRate;
     [SerializeField] private float turnSpeed;
-    
-
     private Transform shooterTransform => shooter.transform;
 
-    private TargetLocator _targetLocator => GetComponentInParent<TargetLocator>();
-    private Transform _target => _targetLocator.Target.transform;
+    private Transform _target;
 
     private float _nextTimeToFire;
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+    }
 
     protected override void OnEnable()
     {

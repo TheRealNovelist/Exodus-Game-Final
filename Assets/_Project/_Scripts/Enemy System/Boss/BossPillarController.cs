@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class BossPillarController : MonoBehaviour
 {
+    [SerializeField] private BossGunner gunner;
     [SerializeField] private List<Pillar> pillars;
     [SerializeField] private GameObject shield;
     [SerializeField] private AudioManager _audioManager;
 
-    private void Awake()
+    private void OnEnable()
     {
         shield.gameObject.SetActive(false);
-        
+
         foreach (var pillar in pillars)
         {
             pillar.gameObject.SetActive(false);
+            pillar.SetTarget(gunner.target.transform);
         }
     }
 

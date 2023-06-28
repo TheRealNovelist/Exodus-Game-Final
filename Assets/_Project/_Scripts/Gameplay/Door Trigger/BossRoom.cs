@@ -17,6 +17,8 @@ public class BossRoom : MonoBehaviour
     private int _totalEnemies;
     private Collider _roomCollider;
 
+    private Transform _player;
+
     [HideInInspector] public bool Locked = false;
 
     private void Start()
@@ -129,11 +131,16 @@ public class BossRoom : MonoBehaviour
         }
     }
 
+    public Transform GetTarget()
+    {
+        return _player;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _player = other.gameObject.transform;
             OnEnemyActivated?.Invoke(true);
             Locked = true;
         }

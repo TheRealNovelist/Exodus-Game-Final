@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour
     protected EnemyHealth _enemyHealth => GetComponent<EnemyHealth>();
     protected BossRoom _bossRoom;
 
+    public GameObject target;
+    
+
     public void Init(BossRoom room)
     {
         _bossRoom = room;
@@ -18,6 +21,7 @@ public class Enemy : MonoBehaviour
         if (_bossRoom)
         {
             _enemyHealth.OnDeath += _bossRoom.OnEnemyDied;
+            target = _bossRoom.GetTarget().gameObject;
         }
     }
 

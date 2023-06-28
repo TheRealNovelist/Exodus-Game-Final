@@ -914,6 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab723b854ef630429d488875bd0996a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunner: {fileID: 3238602008426481016}
   pillars:
   - {fileID: 0}
   - {fileID: 0}
@@ -1114,7 +1115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentBlackboard: {fileID: 0}
-  _serializedBlackboard: '{"_variables":{"target":{"_propertyPath":"TargetLocator.Target","_name":"target","_id":"7109465f-eb5a-4090-94c7-d9a5357db90b","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+  _serializedBlackboard: '{"_variables":{"target":{"_propertyPath":"BossGunner.target","_name":"target","_id":"7109465f-eb5a-4090-94c7-d9a5357db90b","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
     UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"health":{"_propertyPath":"EnemyHealth.Health","_name":"health","_id":"7e7c3e5e-8c26-4fca-8be1-88fe064f1a15","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"animator":{"_value":1,"_name":"animator","_id":"44686f74-7172-4e58-b0c8-cdd52a183f00","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Animator,
     UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"mesh":{"_value":2,"_name":"mesh","_id":"89b3970f-1ac5-4aac-8696-30072b30b31d","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Transform,
@@ -1133,7 +1134,7 @@ MonoBehaviour:
   - {fileID: 4635104732115006620}
   - {fileID: 263522746932372770}
   _serializedVariables:
-  - _json: '{"_propertyPath":"TargetLocator.Target","_name":"target","_id":"7109465f-eb5a-4090-94c7-d9a5357db90b","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+  - _json: '{"_propertyPath":"BossGunner.target","_name":"target","_id":"7109465f-eb5a-4090-94c7-d9a5357db90b","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
   - _json: '{"_propertyPath":"EnemyHealth.Health","_name":"health","_id":"7e7c3e5e-8c26-4fca-8be1-88fe064f1a15","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
@@ -1184,7 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a19fc19cdd16044aa2995773bf3fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 120
+  baseHealth: 3000
   baseDamageMultiplier: 1
   isDamageable: 1
   feedback: {fileID: 365630695062294130}
@@ -1212,7 +1213,7 @@ MonoBehaviour:
   viewDistance: 10
   searchMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &3238602008426481016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,6 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d00e3c36645ac48bfd9d6fda3ab294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   _fsmOwner: {fileID: 3238602008426480967}
 --- !u!135 &7131762938340056472
 SphereCollider:
@@ -2846,7 +2848,7 @@ MonoBehaviour:
   _audioManager: {fileID: 2489762627588854597}
   spinAttackTurns: 5
   spinRate: 1
-  damage: 20
+  damage: 10
 --- !u!1 &3238602007837115916 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: 3dacc75312577774f8048f81911bdb4f, type: 3}

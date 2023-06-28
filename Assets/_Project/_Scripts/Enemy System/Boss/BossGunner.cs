@@ -13,9 +13,9 @@ public class BossGunner : Enemy
     
     public void OnDeath()
     {
-        _fsmOwner.gameObject.SetActive(false);
         if(_bossRoom)     _bossRoom.OnRoomPassed?.Invoke();
         WinLoseCondition.OnBossDefeated?.Invoke();
+        gameObject.SetActive(false);
     }
 
     protected override void OnEnable()
