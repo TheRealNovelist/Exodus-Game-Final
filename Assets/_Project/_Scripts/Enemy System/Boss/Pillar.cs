@@ -26,6 +26,7 @@ public class Pillar : Enemy
         baseTower.transform.position = new Vector3(baseTower.transform.position.x, -17, baseTower.transform.position.z);
         baseTower.transform.DOMoveY(0, 7, false).OnComplete(() => { _enemyHealth.isDamageable = true; });
 
+        _enemyHealth.ResetHealth();
         
         _enemyHealth.OnDeath += DisablePillar;
         base.OnEnable();
