@@ -77,7 +77,7 @@ public class Turret : MonoBehaviour, IDamageable
         foreach (Transform point in shootPoint)
         {
             //Play sound
-           // audioManager.PlayOneShot("TurretShoot");
+            audioManager.PlayOneShot("TurretShoot");
             shootingParticles.Play();
             TurretProjectile newOb = Instantiate(projectile, point.position, Quaternion.identity);
             newOb.GetComponent<Rigidbody>().AddForce(point.forward * 100, ForceMode.Impulse);
